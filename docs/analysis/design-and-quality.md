@@ -1,136 +1,142 @@
-# Identità visiva e piano di verifica
+# Visual identity and verification plan
 
-Proposta iniziale approvata. Logo, asset e interfaccia sono implementati. I token effettivi e i risultati degli audit sono in `docs/audits/`; le tabelle seguenti conservano i valori valutati in analisi.
-Metodo: skill Design con dipendenze brand/design-system; SEO Audit locale;
-Accessibility Audit e checklist upstream. Fonti in [skills.md](skills.md).
+Initial proposal approved. The logo, assets and interface are implemented. Actual
+tokens and audit results are in `docs/audits/`; the following tables retain the
+values evaluated during analysis.
+Method: Design skill with brand/design-system dependencies; local SEO Audit;
+Accessibility Audit and upstream checklist. Sources are in [skills.md](skills.md).
 
-## Palette e tipografia
+## Palette and typography
 
-Laboratorio professionale con superfici neutre e accento teal. Ogni stato usa
-anche testo o simboli; il grafo distingue i branch con nomi e stili di linea.
-Token su tre livelli: primitivi, semantici, componente.
+A professional lab with neutral surfaces and a teal accent. Every state also
+uses text or symbols; the graph distinguishes branches with names and line styles.
+Three token levels: primitive, semantic and component.
 
-| Token | Chiaro | Scuro |
+| Token | Light | Dark |
 | --- | --- | --- |
-| Sfondo | `#F7FAFC` | `#0C1822` |
-| Superficie | `#FFFFFF` | `#132735` |
-| Testo | `#142B3D` | `#EDF4F8` |
-| Testo secondario | `#526575` | `#ADBFCC` |
-| Azione/link | `#086F6B` | `#5EEAD4` |
-| Testo su azione | `#FFFFFF` | `#082C2A` |
-| Bordo controllo | `#738797` | `#6C8799` |
+| Background | `#F7FAFC` | `#0C1822` |
+| Surface | `#FFFFFF` | `#132735` |
+| Text | `#142B3D` | `#EDF4F8` |
+| Secondary text | `#526575` | `#ADBFCC` |
+| Action/link | `#086F6B` | `#5EEAD4` |
+| Text on action | `#FFFFFF` | `#082C2A` |
+| Control border | `#738797` | `#6C8799` |
 | Focus | `#005FCC` | `#93C5FD` |
-| Successo | `#166534` | `#86EFAC` |
-| Avviso | `#854D0E` | `#FDE68A` |
-| Errore | `#B42318` | `#FDA4AF` |
+| Success | `#166534` | `#86EFAC` |
+| Warning | `#854D0E` | `#FDE68A` |
+| Error | `#B42318` | `#FDA4AF` |
 
-Contrasti calcolati con luminanza relativa sRGB, linearizzazione a `0.04045` e
-rapporto `(Lmaggiore + 0.05) / (Lminore + 0.05)`:
+Contrast calculated using sRGB relative luminance, linearization at `0.04045`
+and the ratio `(Lhigher + 0.05) / (Llower + 0.05)`:
 
-| Coppia | Chiaro | Scuro |
+| Pair | Light | Dark |
 | --- | ---: | ---: |
-| Testo / superficie | 14,56:1 | 13,80:1 |
-| Secondario / superficie | 6,04:1 | 8,11:1 |
-| Primario / superficie | 6,01:1 | 10,37:1 |
-| Testo CTA / CTA | 6,01:1 | 10,11:1 |
-| Bordo / superficie | 3,72:1 | 4,06:1 |
-| Focus / superficie | 5,98:1 | 8,50:1 |
+| Text / surface | 14.56:1 | 13.80:1 |
+| Secondary / surface | 6.04:1 | 8.11:1 |
+| Primary / surface | 6.01:1 | 10.37:1 |
+| CTA text / CTA | 6.01:1 | 10.11:1 |
+| Border / surface | 3.72:1 | 4.06:1 |
+| Focus / surface | 5.98:1 | 8.50:1 |
 
-Sono misure delle sole coppie proposte, non conformità dell'interfaccia.
-Hover, selezione, evidenziazione del codice e altri abbinamenti vanno misurati.
+These measurements cover only the proposed pairs; they do not establish interface
+conformance. Hover, selection, code highlighting and other combinations must be measured.
 
-Due famiglie: **Inter** per titoli, testo didattico, navigazione, HUD e classifica;
-**JetBrains Mono** per terminale, editor, comandi, hash e branch. WOFF2 self-hosted,
-sole varianti necessarie, licenze OFL distribuite, fallback e `font-display: swap`.
-Testo 16–18 px, interlinea 1,6, larghezza circa 65 caratteri. Terminale/editor
-ridimensionabili da 16 px; ligature disattivate; numeri tabulari per tempi e score.
+Two families: **Inter** for headings, learning content, navigation, HUD and
+leaderboard; **JetBrains Mono** for terminal, editor, commands, hashes and branches.
+Self-hosted WOFF2, only required variants, distributed OFL licenses, fallbacks and
+`font-display: swap`. Text at 16–18 px, line-height 1.6, width around 65 characters.
+Terminal/editor resizable from 16 px; ligatures disabled; tabular numbers for
+times and scores.
 
-## Layout e interazione
+## Layout and interaction
 
-Desktop: griglia iniziale 2×2 con terminale, grafo, editor e portale repository.
-Le finestre sono impilabili, riordinabili, ridimensionabili e minimizzabili anche
-su viewport piccoli. Dock, panoramica e preset permettono di recuperare ogni
-finestra. Nessuna interazione soltanto tramite trascinamento.
-Specifica del [window manager](../window-manager.md), separata dallo stato Git.
+Desktop: initial 2×2 grid with terminal, graph, editor and repository portal.
+Windows can stack, reorder, resize and minimize, including on small viewports.
+A dock, overview and presets allow recovery of every window. No interaction
+relies exclusively on dragging.
+The [window manager specification](../window-manager.md) is separate from Git state.
 
-Home con tier Base/Intermedio/Avanzato e stati testuali Disponibile, In corso,
-Completato, Bloccato. HUD con tier, esercizio, obiettivo, stato sincronizzazione
-e tempo secondo le regole da concordare. Classifica in tabella semantica con
-filtri tier/versione, alias, punteggio e durata; nessuna informazione solo a colore.
+Home shows Base/Intermediate/Advanced tiers with textual states Available,
+In progress, Completed and Locked. The HUD shows tier, exercise, objective,
+synchronization status and time according to rules still to be agreed at this
+stage. Leaderboard uses a semantic table with tier/version filters, aliases,
+score and duration; no information is conveyed by color alone.
 
-Grafo con elenco testuale di commit/parent/refs; nessuna azione solo drag-and-drop.
-Terminale con campo accessibile, log esplorabile e annunci concisi del nuovo esito.
-Editor con modalità testo semplice e senza trappole da tastiera. Riduzione delle
-animazioni e focus conservato quando cambia lo stato del laboratorio.
+The graph includes a textual list of commits/parents/refs; no action relies only
+on drag-and-drop. The terminal has an accessible input, an explorable log and
+concise announcements of the new result. The editor offers plain-text mode
+without keyboard traps. Reduce animations and preserve focus when lab state changes.
 
-## Logo: brief per l'operatività
+## Logo: implementation brief
 
-Pittogramma originale con linea di commit che si biforca e si ricongiunge, tre nodi
-per i livelli, leggibile a 16–24 px. Evitare imitazioni dei marchi Git e delle piattaforme.
-Due varianti per sfondi chiari/scuri e versione monocromatica.
+Original pictogram with a commit line that forks and rejoins, three nodes for
+the levels, legible at 16–24 px. Avoid imitating Git or platform trademarks.
+Two variants for light/dark backgrounds and a monochrome version.
 
-Output richiesto dopo approvazione: SVG nativo trasparente, `viewBox`, tracciati
-originali, niente raster incorporato, sfondo o riferimenti esterni. La trasparenza
-richiesta dall'utente prevale sull'indicazione di sfondo bianco della skill Design.
-Un PNG generato non può essere descritto come SVG vettoriale.
-Derivati: favicon, icone 192/512, header, home e social card 1200×630.
-La social card può avere un proprio sfondo, preservando il logo trasparente.
+Required output after approval: native transparent SVG, `viewBox`, original paths,
+no embedded raster, background or external references. The user's transparency
+requirement overrides the Design skill's white-background instruction.
+A generated PNG cannot be described as vector SVG.
+Derivatives: favicon, 192/512 icons, header, home and 1200×630 social card.
+The social card may have its own background while retaining the transparent logo.
 
-## Lingue e messaggi
+## Languages and messages
 
-i18next per tutte le stringhe UI, errori, dialoghi e alternative accessibili.
-Comandi e output Git canonici distinguibili dalle spiegazioni tradotte.
-Lingua del documento, plurali, numeri e durate corretti; cambio lingua senza
-perdita dello scenario. Italiano e inglese completi al lancio sono confermati:
-lezioni, aiuti, errori, guide OS, messaggi e alternative accessibili, oltre alla UI.
-Le stringhe nuove non tradotte bloccano il rilascio di entrambe le lingue.
+i18next covers all UI strings, errors, dialogs and accessible alternatives.
+Canonical Git commands and output remain distinguishable from translated explanations.
+Correct document language, plurals, numbers and durations; changing language must
+preserve the scenario. Complete Italian and English at launch are confirmed:
+lessons, hints, errors, OS guides, messages and accessible alternatives, as well
+as the UI. New untranslated strings block release of both languages.
 
-Microcopy revisionata con Copy Editing:
+Italian product-copy examples reviewed with Copy Editing:
 
-- «Completa il livello Base per iniziare Intermedio.»
-- «Salvato sul dispositivo. In attesa di sincronizzazione.»
-- «Progressi sincronizzati.»
-- «Il salvataggio non è riuscito. Il tuo lavoro è disponibile su questo dispositivo.»
-- «Il comando non è ancora supportato in questo laboratorio.» Segue, se pertinente, l'alternativa supportata.
+- “Completa il livello Base per iniziare Intermedio.”
+- “Salvato sul dispositivo. In attesa di sincronizzazione.”
+- “Progressi sincronizzati.”
+- “Il salvataggio non è riuscito. Il tuo lavoro è disponibile su questo dispositivo.”
+- “Il comando non è ancora supportato in questo laboratorio.” Where relevant, follow with the supported alternative.
 
-Il completamento locale non viene chiamato definitivo prima della conferma API.
-UI italiana: «Classifica»; etichetta inglese: «Leaderboard».
+Local completion is not described as permanent before API confirmation.
+Italian UI label: “Classifica”; English label: “Leaderboard”.
 
-## SEO: stato e piano
+## SEO: status and plan
 
-**Audit del prodotto non eseguito:** mancano app, HTML applicativo e URL distribuito.
-Non esistono punteggi, dati Search Console o esiti di indicizzazione verificati.
+**Product audit had not been performed at this analysis stage:** the app,
+application HTML and deployed URL were not yet available. No scores, Search
+Console data or indexing outcomes had been verified.
 
-1. Prerender pubblico di home, programma e descrizioni tier; laboratorio e dati personali non indicizzabili.
-2. URL stabili per lingua, self-canonical, hreflang reciproci e sitemap coerente.
-3. Base path Pages, refresh e apertura diretta verificati su ogni pagina distribuita.
-4. Title/description unici, heading coerenti, fonti tecniche e data di revisione; traduzioni complete.
-5. Open Graph con social card effettivamente disponibile; link interni reali.
-6. Eventuale JSON-LD verificato nel DOM renderizzato o con Rich Results Test; niente diagnosi da solo fetch.
-7. Misurare LCP, INP e CLS, distinguendo laboratorio e dati reali dopo rilascio.
-8. Pagine personali e callback non indicizzabili; noindex non sostituisce l'autorizzazione API.
+1. Public prerendering of home, curriculum and tier descriptions; lab and personal data not indexable.
+2. Stable language URLs, self-canonical URLs, reciprocal hreflang and a consistent sitemap.
+3. Verify the Pages base path, refresh and direct access for every deployed page.
+4. Unique title/description, consistent headings, technical sources and review dates; complete translations.
+5. Open Graph with an actually available social card; real internal links.
+6. Verify any JSON-LD in the rendered DOM or with Rich Results Test; do not diagnose from fetch alone.
+7. Measure LCP, INP and CLS, distinguishing lab measurements from real-user data after release.
+8. Personal pages and callbacks not indexable; noindex does not replace API authorization.
 
-Report futuro: problema, evidenza/URL, impatto, correzione, priorità e riesito.
+Future report: issue, evidence/URL, impact, fix, priority and retest result.
 
-## Accessibilità: stato e piano
+## Accessibility: status and plan
 
-**Audit del prodotto non eseguito:** la skill richiede screenshot, URL o markup e
-vieta conclusioni dedotte da una sola descrizione. Nessun criterio dichiarato conforme.
+**Product audit had not been performed at this analysis stage:** the skill requires
+screenshots, a URL or markup and prohibits conclusions drawn from a description
+alone. No criterion was declared conformant.
 
-Campione futuro: home, tier bloccato, laboratorio normale/conflitto/errore/offline,
-login e classifica, in entrambi i temi. Verificare tutti i 18 criteri della checklist
-upstream: ogni criterio termina in rilievo, verifica con prova o non verificabile.
+Future sample: home, locked tier, normal/conflict/error/offline lab, login and
+leaderboard in both themes. Check all 18 upstream checklist criteria: each ends
+in a finding, a verified result with evidence, or an unverified status.
 
-Evidenze: DOM e nomi accessibili; percorso da tastiera; focus visibile/non coperto;
-assenza di trappole; vista a 320 CSS px, testo al 200%; dimensione target secondo
-SC 2.5.8 e relative eccezioni, con obiettivo 44 px sui controlli principali;
-errori associati ai campi; tab con stati corretti; autenticazione accessibile;
-verifica umana con tecnologie assistive. Rilievi P0/P1/P2 con criterio WCAG,
-correzione e nuova verifica. Il risultato non sarà una certificazione legale.
+Evidence: DOM and accessible names; keyboard flow; visible, unobscured focus;
+no traps; 320 CSS px viewport and 200% text; target sizes under SC 2.5.8 and its
+exceptions, with a 44 px goal for primary controls; errors associated with fields;
+correct tab states; accessible authentication; human checks with assistive technology.
+P0/P1/P2 findings include the WCAG criterion, fix and retest.
+The result will not be a legal certification.
 
-## Fonti
+## Sources
 
-- [Design e dipendenze](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/tree/main/.claude/skills)
+- [Design and dependencies](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/tree/main/.claude/skills)
 - [Accessibility Audit](https://github.com/humbleteam/accessibility-audit)
-- [Licenza Inter](https://github.com/rsms/inter/blob/master/LICENSE.txt)
-- [Licenza JetBrains Mono](https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt)
+- [Inter license](https://github.com/rsms/inter/blob/master/LICENSE.txt)
+- [JetBrains Mono license](https://github.com/JetBrains/JetBrainsMono/blob/master/OFL.txt)

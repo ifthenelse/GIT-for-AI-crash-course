@@ -1,107 +1,109 @@
-# Percorso didattico proposto
+# Proposed curriculum
 
-Programma di analisi approvato. Il catalogo implementato e le soluzioni verificate sono in `packages/course-content/src/`; questo documento conserva la mappa iniziale. Italiano e inglese completi al lancio: ogni modulo, guida OS,
-aiuto e messaggio dovrà essere disponibile in entrambe le lingue.
-Ogni modulo alterna spiegazione, previsione, azione e verifica.
-La repository narrativa è un portale con README, catalogo JSON, configurazione YAML
-e pagina HTML: gli esercizi non richiedono conoscenze di sviluppo applicativo.
-Le verifiche controllano obiettivi e stato, accettando sequenze equivalenti corrette.
+Approved analysis curriculum. The implemented catalog and verified solutions are
+in `packages/course-content/src/`; this document retains the initial map. Complete
+Italian and English are required at launch: every module, OS guide, hint and
+message must be available in both languages.
+Each module alternates explanation, prediction, action and verification.
+The narrative repository is a portal with a README, JSON catalog, YAML
+configuration and HTML page: exercises require no application-development knowledge.
+Checks evaluate objectives and state, accepting correct equivalent sequences.
 
 ## Base
 
-| ID | Argomenti e scenario | Evidenza di successo |
+| ID | Topics and scenario | Success evidence |
 | --- | --- | --- |
-| B01 | Cos'è Git, utilità, distribuzione e storia dal 2005; ricostruire versioni di un catalogo | distinguere snapshot, file di lavoro, Git e piattaforme |
-| B02 | Installazione Windows/Linux/macOS 26+ con metodi comuni | interpretare versione, percorso eseguibile e canale di aggiornamento |
-| B03 | Configurazione system/global/local e gerarchia dei file | identità corretta e origine dei valori con `--show-origin --show-scope` |
-| B04 | Clone HTTPS e da VS Code | contenuto, cronologia e `origin` corretti; VS Code non è un protocollo |
-| B05 | Chiavi SSH con passphrase e `.ssh/config` | host alias, hostname, user e IdentityFile corretti; condivisa solo la chiave pubblica |
-| B06 | Agente SSH e clone SSH sui tre sistemi | identità corretta con `ssh-add -l` e remote coerente |
-| B07 | Working tree, staging, status, diff e commit selettivi | committata soltanto la correzione richiesta; resto del lavoro preservato |
-| B08 | HEAD, commit e branching | riferimenti corretti; HEAD normalmente simbolico verso il branch attivo |
-| B09 | `switch` e introduzione a `checkout` | passaggio tra attività con lavoro locale preservato o blocco spiegato |
-| B10 | `fetch`, `pull`, `push` | distinguere aggiornamento remote-tracking, integrazione e pubblicazione |
-| B11 | `.gitignore` | esclusioni corrette; capire perché un file già tracciato resta tale |
-| B12 | Prova finale: pubblicare una modifica isolata | identità, branch, contenuto, remote e stato finale corretti |
+| B01 | What Git is, its purpose, distributed model and history since 2005; reconstruct catalog versions | distinguish snapshots, working files, Git and platforms |
+| B02 | Common installation methods on Windows/Linux/macOS 26+ | interpret version, executable path and update channel |
+| B03 | System/global/local configuration and file precedence | correct identity and value origins shown with `--show-origin --show-scope` |
+| B04 | HTTPS and VS Code cloning | correct content, history and `origin`; recognize that VS Code is not a protocol |
+| B05 | SSH keys with a passphrase and `.ssh/config` | correct host alias, hostname, user and IdentityFile; only the public key is shared |
+| B06 | SSH agent and SSH cloning on all three systems | correct identity shown by `ssh-add -l` and a consistent remote |
+| B07 | Working tree, staging, status, diff and selective commits | only the requested fix is committed; other work is preserved |
+| B08 | HEAD, commits and branching | correct references; HEAD normally points symbolically to the active branch |
+| B09 | `switch` and introduction to `checkout` | switch activities while preserving local work or explaining why switching is blocked |
+| B10 | `fetch`, `pull`, `push` | distinguish remote-tracking updates, integration and publishing |
+| B11 | `.gitignore` | correct exclusions; understand why an already tracked file remains tracked |
+| B12 | Final challenge: publish an isolated change | correct identity, branch, content, remote and final state |
 
-## Intermedio
+## Intermediate
 
-| ID | Argomenti e scenario | Evidenza di successo |
+| ID | Topics and scenario | Success evidence |
 | --- | --- | --- |
-| M01 | `checkout`, `switch`, `restore`, detached HEAD | consultare un vecchio commit e conservare eventuale nuovo lavoro con un riferimento |
-| M02 | `revert`, `reset --soft/--mixed/--hard`, reset di path | distinguere nuovo commit, spostamento riferimenti ed effetti su index/working tree |
-| M03 | Merge, fast-forward e merge commit | parent e grafo corretti; fast-forward senza nuovo merge commit |
-| M04 | Integrazione automatica di modifiche indipendenti | entrambe le intenzioni conservate; assenza di marker non prova correttezza funzionale |
-| M05 | Risoluzione manuale di conflitto | contenuto risolto, marker rimossi, staging e conclusione oppure abort corretti |
-| M06 | Merge, squash e rebase sullo stesso scenario | confronto di contenuto, parent e nuovi identificativi |
-| M07 | PR GitHub e Azure DevOps con revisione | sorgente/destinazione, descrizione, controlli e discussioni corretti |
-| M08 | Remotes e fork GitHub | `origin` sul fork e `upstream` sull'originale; clone/fork/branch distinti |
-| M09 | Branching models: trunk-based, GitHub flow e release branch | scegliere in base a frequenza rilasci e versioni mantenute |
-| M10 | Policy Azure, protected branches e rulesets GitHub | push vietato rifiutato; PR incompleta bloccata; PR conforme accettata |
-| M11 | Tag annotati e release GitHub | commit corretto, tag pubblicato, release con note coerenti |
-| M12 | Prova finale: collaborazione, conflitto e release tramite PR | nessuna modifica persa, contenuto e regole rispettati |
+| M01 | `checkout`, `switch`, `restore`, detached HEAD | inspect an old commit and retain any new work with a reference |
+| M02 | `revert`, `reset --soft/--mixed/--hard`, path reset | distinguish a new commit, reference movement and effects on the index/working tree |
+| M03 | Merge, fast-forward and merge commits | correct parents and graph; fast-forward without a new merge commit |
+| M04 | Automatic integration of independent changes | both intentions preserved; absence of conflict markers does not prove functional correctness |
+| M05 | Manual conflict resolution | resolved content, removed markers, staging and correct completion or abort |
+| M06 | Merge, squash and rebase in the same scenario | compare content, parents and new identifiers |
+| M07 | GitHub and Azure DevOps PRs with review | correct source/target, description, checks and discussions |
+| M08 | Remotes and GitHub forks | `origin` points to the fork and `upstream` to the original; distinguish clone/fork/branch |
+| M09 | Branching models: trunk-based, GitHub flow and release branches | choose based on release frequency and maintained versions |
+| M10 | Azure policies, protected branches and GitHub rulesets | prohibited push rejected; incomplete PR blocked; compliant PR accepted |
+| M11 | Annotated tags and GitHub releases | correct commit, published tag and release with consistent notes |
+| M12 | Final challenge: collaboration, conflict and release through a PR | no lost changes; content and rules respected |
 
-## Avanzato
+## Advanced
 
-| ID | Argomenti e scenario | Evidenza di successo |
+| ID | Topics and scenario | Success evidence |
 | --- | --- | --- |
-| A01 | Interactive rebase: pick, reword, squash, fixup, riordino, drop | storia locale revisionabile con contenuto finale corretto |
-| A02 | Reflog e recupero dopo reset/rebase | riferimento di salvataggio creato senza perdere altro lavoro |
-| A03 | Rollback tramite revert di merge | parent ispezionati, mainline motivata e revert revisionabile |
-| A04 | `.gitattributes`, fine riga, binari e merge driver | normalizzazione separata dalle modifiche funzionali |
-| A05 | `rerere` e limiti della risoluzione automatica | controllare, accettare o scartare risoluzioni riutilizzate |
-| A06 | Worktree rispetto ai branch | due directory con HEAD/index propri e oggetti condivisi; attività preservate |
-| A07 | Dove Git salva file e metadati | working tree, index, blob, tree, commit, refs, HEAD, reflog e packfile distinti |
-| A08 | Git hooks e controlli server | controllo locale funziona, ma bypass e mancata distribuzione automatica sono compresi |
-| A09 | SSH per account multipli e diagnosi agenti | host alias, `IdentitiesOnly`, binario SSH e chiave corretti |
-| A10 | Claude sul codice in cloud | distinguere clone remoto, branch, modifiche, commit, push e revisione umana |
-| A11 | Governance avanzata GitHub/Azure | verificare permessi, bypass, automazioni, hotfix e release |
-| A12 | Prova finale: regressione durante una release | worktree, recupero, rollback e PR conforme conservano il lavoro |
+| A01 | Interactive rebase: pick, reword, squash, fixup, reorder, drop | reviewable local history with correct final content |
+| A02 | Reflog and recovery after reset/rebase | create a recovery reference without losing other work |
+| A03 | Rollback by reverting a merge | inspect parents, justify the mainline and create a reviewable revert |
+| A04 | `.gitattributes`, line endings, binaries and merge drivers | normalization kept separate from functional changes |
+| A05 | `rerere` and limits of automatic resolution | inspect, accept or discard reused resolutions |
+| A06 | Worktrees versus branches | two directories with their own HEAD/index and shared objects; activities preserved |
+| A07 | Where Git stores files and metadata | distinguish working tree, index, blob, tree, commit, refs, HEAD, reflog and packfiles |
+| A08 | Git hooks and server checks | local check works; bypass and lack of automatic distribution are understood |
+| A09 | SSH for multiple accounts and agent diagnosis | correct host alias, `IdentitiesOnly`, SSH executable and key |
+| A10 | Claude working on code in the cloud | distinguish remote clone, branch, changes, commit, push and human review |
+| A11 | Advanced GitHub/Azure governance | verify permissions, bypass, automation, hotfixes and releases |
+| A12 | Final challenge: regression during a release | worktree, recovery, rollback and a compliant PR preserve the work |
 
-## Installazione e SSH per sistema
+## Installation and SSH by system
 
-| Sistema | Metodi da confrontare | Configurazione e agente |
+| System | Methods to compare | Configuration and agent |
 | --- | --- | --- |
-| Windows | Git for Windows, `winget install --id Git.Git -e --source winget`; WSL come Linux separato; Scoop/Chocolatey opzionali | Windows OpenSSH in `%USERPROFILE%\.ssh\config`; Git Bash e agente di sessione rispetto al servizio `ssh-agent`; comandi amministrativi etichettati PowerShell |
-| Linux | APT Debian/Ubuntu, DNF Fedora; sorgenti come approfondimento | `~/.ssh/config`, permessi; `eval "$(ssh-agent -s)"` e `ssh-add`; distinguere sessione shell e integrazione desktop |
-| macOS 26+ | Xcode Command Line Tools, Homebrew, MacPorts; confronto binari e PATH | agente integrato, `AddKeysToAgent`, `UseKeychain`, `/usr/bin/ssh-add --apple-use-keychain`; distinguere strumenti Apple e altri OpenSSH |
+| Windows | Git for Windows, `winget install --id Git.Git -e --source winget`; WSL as a separate Linux environment; optional Scoop/Chocolatey | Windows OpenSSH in `%USERPROFILE%\.ssh\config`; Git Bash and a session agent versus the `ssh-agent` service; administrative commands labeled PowerShell |
+| Linux | APT on Debian/Ubuntu, DNF on Fedora; building from source as further study | `~/.ssh/config`, permissions; `eval "$(ssh-agent -s)"` and `ssh-add`; distinguish shell session and desktop integration |
+| macOS 26+ | Xcode Command Line Tools, Homebrew, MacPorts; compare executables and PATH | built-in agent, `AddKeysToAgent`, `UseKeychain`, `/usr/bin/ssh-add --apple-use-keychain`; distinguish Apple tools and other OpenSSH distributions |
 
-Non consigliare il vecchio installer macOS come opzione mantenuta. Identificare
-sempre gli eseguibili `git` e `ssh` effettivamente utilizzati, soprattutto con WSL,
-Git Bash o più package manager. Le guide reali sono facoltative e non chiedono
-mai di caricare chiavi private o passphrase nel sito.
+Do not recommend the old macOS installer as a maintained option. Always identify
+the `git` and `ssh` executables actually used, especially with WSL, Git Bash or
+multiple package managers. Real-machine guides are optional and never ask users
+to upload private keys or passphrases to the site.
 
-GitHub raccomanda Ed25519; la documentazione corrente Azure Repos indica RSA con
-negoziazione RSA-SHA2. Insegnare coppie/configurazioni distinte o l'opzione RSA
-compatibile. Non riabilitare SHA-1 come soluzione generica agli errori SSH.
+GitHub recommends Ed25519; current Azure Repos documentation specifies RSA with
+RSA-SHA2 negotiation. Teach separate key pairs/configurations or the compatible
+RSA option. Do not re-enable SHA-1 as a general fix for SSH errors.
 
-## Errori concettuali da prevenire
+## Conceptual errors to prevent
 
-- `git add` fotografa il file in quel momento: modifiche successive non aggiornano l'index.
-- HEAD non coincide sempre con l'ultimo commit di tutta la repository.
-- Pull integra dopo fetch secondo opzioni e configurazioni; non è sempre merge.
-- Reset di path non sposta il branch; le modalità di reset hanno effetti differenti.
-- Rebase ricrea commit; la storia condivisa richiede coordinamento e uso motivato di `--force-with-lease`.
-- `git revert -m 1` richiede di verificare il parent mainline; reintrodurre una feature annullata richiede strategia esplicita.
-- `-X ours` e strategia `ours` sono diversi; durante rebase ours/theirs richiede spiegazione contestuale.
-- Reflog è locale e soggetto a scadenza; non recupera automaticamente file mai registrati.
-- `.git` può essere directory o file di collegamento; le worktree condividono parte dei metadati.
-- PR, fork e release appartengono alla piattaforma. Nomi remote `origin` e `upstream` sono convenzioni.
-- Gli agenti cloud non vedono automaticamente il computer locale e non usano necessariamente worktree.
+- `git add` snapshots a file at that moment: later edits do not update the index.
+- HEAD is not always the latest commit across the entire repository.
+- Pull integrates after fetch according to options and configuration; it is not always a merge.
+- Path reset does not move the branch; reset modes have different effects.
+- Rebase recreates commits; shared history requires coordination and justified use of `--force-with-lease`.
+- `git revert -m 1` requires checking the mainline parent; reintroducing a reverted feature requires an explicit strategy.
+- `-X ours` and the `ours` strategy differ; ours/theirs during rebase needs contextual explanation.
+- Reflog is local and expires; it does not automatically recover files that were never recorded.
+- `.git` may be a directory or a linking file; worktrees share some metadata.
+- PRs, forks and releases belong to the platform. Remote names `origin` and `upstream` are conventions.
+- Cloud agents do not automatically see the local computer and do not necessarily use worktrees.
 
-## Valutazione e aggiornamenti
+## Assessment and updates
 
-Durate ipotizzate da validare nel pilota: Base 3–4 ore, Intermedio 4–5, Avanzato
-5–6, suddivise in sessioni brevi. Non costituiscono promesse o dati misurati.
-Ogni modulo dovrà specificare seed, obiettivi, azioni disponibili, evidenza e feedback.
-Punteggio e tempo sono ancora decisioni aperte; nessuna penalità implicita per
-lettura, accessibilità o una soluzione corretta alternativa.
-Fonti di piattaforma e schermate avranno data di revisione e versione del corso.
+Estimated durations to validate in the pilot: Base 3–4 hours, Intermediate 4–5,
+Advanced 5–6, divided into short sessions. These are neither promises nor measured data.
+Every module must specify its seed, objectives, available actions, evidence and feedback.
+Scoring and time remained open decisions at this analysis stage; no implicit
+penalties for reading, accessibility or a correct alternative solution.
+Platform sources and screenshots will carry a review date and course version.
 
-## Fonti primarie
+## Primary sources
 
-- [Git Windows](https://git-scm.com/install/win) e [Git macOS](https://git-scm.com/install/mac)
-- [Chiavi SSH GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-- [SSH Azure Repos](https://learn.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops)
+- [Git Windows](https://git-scm.com/install/win) and [Git macOS](https://git-scm.com/install/mac)
+- [GitHub SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+- [Azure Repos SSH](https://learn.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops)
 - [Git revert](https://git-scm.com/docs/git-revert), [worktree](https://git-scm.com/docs/git-worktree), [repository layout](https://git-scm.com/docs/gitrepository-layout)
-- [Claude Code sul web](https://code.claude.com/docs/en/claude-code-on-the-web)
+- [Claude Code on the web](https://code.claude.com/docs/en/claude-code-on-the-web)

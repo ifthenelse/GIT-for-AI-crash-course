@@ -1,39 +1,40 @@
-# Procedure operative
+# Operational procedures
 
-Il risultato locale è disponibile; non esistono servizi distribuiti o comandi di rilascio pubblico validati. Lo stato
-dell'onboarding e i prerequisiti sono in [deployment.md](../deployment.md).
+The local implementation is available; no deployed services or validated public
+release commands exist. Setup status and prerequisites are documented in
+[deployment.md](../deployment.md).
 
-Prima del rilascio documentare e provare:
+Before release, document and test:
 
-- distribuzione e rollback di frontend/API con compatibilità delle versioni;
-- backup e ripristino dei progressi e completamenti;
-- mancato salvataggio, retry e riconciliazione della coda offline;
-- esaurimento quote o budget CPU del validatore;
-- errore login, rotazione credenziali provider e revoca delle sessioni;
-- isolamento degli utenti e cancellazione account secondo regole approvate.
+- Frontend/API deployment and rollback with version compatibility.
+- Backup and recovery of progress and completions.
+- Failed saves, retries, and offline-queue reconciliation.
+- Exhausted quotas or validator CPU budget.
+- Login failures, provider-credential rotation, and session revocation.
+- User isolation and account deletion under approved rules.
 
-Ogni procedura dovrà indicare owner, prerequisiti, passaggi, verifica e recupero.
-Le credenziali rimangono nei servizi autorizzati, non nella documentazione.
+Each procedure must identify its owner, prerequisites, steps, verification,
+and recovery. Credentials belong in authorized services, not documentation.
 
-## Uso e recupero locale
+## Local use and recovery
 
-Avviare API e Vite come indicato in README.md. Il database di sviluppo è
-`.tmp/progress.sqlite`; la suite browser usa un file differente e lo ricrea.
-Per effettuare una copia consistente locale arrestare l'API, copiare il database
-e gli eventuali WAL/SHM, poi riavviare e accedere nuovamente. I token non vengono
-conservati dal browser: il nuovo login recupera lo stesso utente.
+Start the API and Vite as described in README.md. The development database is
+`.tmp/progress.sqlite`; the browser suite uses a different file and recreates it.
+For a consistent local backup, stop the API, copy the database and any WAL/SHM
+files, then restart and sign in again. The browser does not retain tokens;
+a new sign-in retrieves the same user.
 
-Se un invio resta pendente, mantenere la bozza e ripristinare connettività/API;
-usare Riprova la sincronizzazione. Dopo scadenza accedere di nuovo con la stessa
-identità. La durata ufficiale include l'attesa fino alla ricezione valida.
-Un risultato rifiutato per obiettivi incompleti richiede completare lo scenario;
-reset e undo non cancellano i risultati già confermati.
+If a submission remains pending, keep the draft and restore connectivity or
+API availability; use Retry sync. After session expiry, sign in again with
+the same identity. Official duration includes the wait until valid receipt.
+A result rejected for incomplete objectives requires finishing the scenario;
+reset and undo do not erase results already confirmed.
 
-Per recuperare una finestra usare dock, panoramica o Ripristina disposizione.
-Se il layout locale è corrotto il componente applica un preset dentro il viewport.
-Lo stato Git rimane separato dalle preferenze di disposizione.
+Recover a window using the dock, overview, or Reset window layout. If local
+layout data is corrupted, the component applies a preset within the viewport.
+Git state remains separate from layout preferences.
 
-La CI di verifica prepara Node da `.node-version`, installa il lockfile e controlla
-tipi, test, build e SEO statico; un job separato esegue E2E e axe. Non distribuisce il sito. La configurazione è stata
-verificata anche su GitHub Actions con Node 26; i dettagli e il collegamento al run
-sono in docs/testing.md.
+Verification CI selects Node from `.node-version`, installs from the lockfile,
+and checks types, tests, build, and static SEO; a separate job runs E2E and axe.
+It does not deploy the site. The configuration has also been verified on
+GitHub Actions with Node 26; details and the run link are in docs/testing.md.

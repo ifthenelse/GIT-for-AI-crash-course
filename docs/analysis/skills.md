@@ -1,51 +1,52 @@
-# Inventario delle skill e pulizia
+# Skill inventory and cleanup
 
-Verifica aggiornata al 15 novembre 2026, base del pull `c723660`.
-Inventario iniziale: 94 directory top-level e 101 SKILL.md con i moduli annidati.
-La cancellazione delle skill inutilizzate è autorizzata dall'utente.
+Updated on 15 November 2026, based on the pull at `c723660`.
+Initial inventory: 94 top-level directories and 101 SKILL.md files, including nested modules.
+The user authorized removing unused skills.
 
-## Skill locali conservate
+## Retained local skills
 
-| Skill | Uso o dipendenza necessaria |
+| Skill | Use or required dependency |
 | --- | --- |
-| [cloudflare](../../.agents/skills/cloudflare/SKILL.md) | scelta dei servizi gratuiti per API e archivio |
-| [copy-editing](../../.agents/skills/copy-editing/SKILL.md) | revisione dei testi e dei messaggi IT/EN |
-| [copywriting](../../.agents/skills/copywriting/SKILL.md) | riferimento ai-tells richiesto da Copy Editing |
-| [find-skills](../../.agents/skills/find-skills/SKILL.md) | ricerca delle skill mancanti |
-| [grill-me](../../.agents/skills/grill-me/SKILL.md) | wrapper dell’intervista tecnica richiesta |
-| [seo-audit](../../.agents/skills/seo-audit/SKILL.md) | metodo e piano della verifica sul prodotto |
+| [cloudflare](../../.agents/skills/cloudflare/SKILL.md) | Free-service options for the API and storage |
+| [copy-editing](../../.agents/skills/copy-editing/SKILL.md) | Review of Italian/English copy and messages |
+| [copywriting](../../.agents/skills/copywriting/SKILL.md) | AI-tells reference required by Copy Editing |
+| [find-skills](../../.agents/skills/find-skills/SKILL.md) | Discovery of missing skills |
+| [grill-me](../../.agents/skills/grill-me/SKILL.md) | Wrapper for the requested technical interview |
+| [seo-audit](../../.agents/skills/seo-audit/SKILL.md) | Method and plan for reviewing the product |
 
-Sono conservati tutti i riferimenti delle sei skill rimaste. I Related e i workflow
-alternativi non sono dipendenze obbligatorie. Skill e sessioni di workflow non
-pertinenti al corso pubblico sono state rimosse con l'aggiornamento del perimetro.
+All required references of the six retained skills are preserved. Related skills
+and alternative workflows are not mandatory dependencies. Skills and workflow
+sessions unrelated to the independent public course were removed as its scope
+was updated.
 
-## Skill upstream consultate
+## Upstream skills consulted
 
-Le skill seguenti sono state lette presso le fonti pubbliche. Nessun installer o
-script upstream è stato eseguito. Le copie temporanee sono in
-`/tmp/git-course-skills/`, non installate nella repository. Alla ripresa usare le
-fonti oppure valutare separatamente la distribuzione locale delle sole dipendenze
-necessarie; non ripristinare il catalogo eliminato.
+The following skills were read from public sources. No upstream installer or
+script was executed. Temporary copies are under `/tmp/git-course-skills/`, rather
+than installed in this repository. On resuming, use the sources or separately
+consider distributing only the necessary dependencies locally; do not restore
+the removed catalog.
 
-| Invocazione | Fonte |
+| Invocation | Source |
 | --- | --- |
 | `/system-design` | [Anthropic](https://github.com/anthropics/knowledge-work-plugins/blob/main/engineering/skills/system-design/SKILL.md) |
-| `/gtm-planner:plan` e intake | [RevOps Studio](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin/blob/main/skills/plan/SKILL.md) |
-| market-map e market-researcher | [pacchetto GTM](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin) |
-| positioning e test dei pilastri | [posizionamento GTM](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin/tree/main/skills/positioning) |
-| demand-plan e benchmark-researcher | [piano di diffusione GTM](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin/tree/main/skills/demand-plan) |
-| roadmap e plan-qa | [roadmap GTM](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin/tree/main/skills/roadmap) |
-| deliverables e blueprint snapshot | [artefatti documentali GTM](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin/tree/main/skills/deliverables) |
-| `grilling`, dipendenza del wrapper | [Matt Pocock](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md) |
-| `/design`, brand e design-system | [upstream design](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/tree/main/.claude/skills) |
-| `/accessibility-audit` e checklist | [Humbleteam](https://github.com/humbleteam/accessibility-audit) |
+| `/gtm-planner:plan` and intake | [RevOps Studio](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin/blob/main/skills/plan/SKILL.md) |
+| market-map and market-researcher | [GTM package](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin) |
+| positioning and pillar checks | [GTM positioning](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin/tree/main/skills/positioning) |
+| demand-plan and benchmark-researcher | [Demand plan](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin/tree/main/skills/demand-plan) |
+| roadmap and plan-qa | [GTM roadmap](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin/tree/main/skills/roadmap) |
+| deliverables and blueprint snapshot | [GTM document artifacts](https://github.com/RevOps-Studio/claude-cowork-gtm-planner-plugin/tree/main/skills/deliverables) |
+| `grilling`, a wrapper dependency | [Matt Pocock](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md) |
+| `/design`, brand and design-system | [Upstream design](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/tree/main/.claude/skills) |
+| `/accessibility-audit` and checklist | [Humbleteam](https://github.com/humbleteam/accessibility-audit) |
 
-Il sottoagente di design ha letto ui-styling come riferimento, senza introdurre
-Tailwind/shadcn o dipendenze applicative. Per l'accessibilità è stato usato il
-metodo Humbleteam; nessuno strumento AccessLint è stato installato. Il documento
-HTML GTM segue il design della skill; non sostituisce l'identità visiva dell'app.
+The design agent read ui-styling as a reference without introducing Tailwind/shadcn
+or application dependencies. Accessibility review followed the Humbleteam method;
+no AccessLint tool was installed. The GTM HTML documents follow the skill's design
+and do not replace the application's visual identity.
 
-Impronte SHA-256 dei documenti principali consultati:
+SHA-256 fingerprints of the main consulted documents:
 
 - `system-design/SKILL.md`: `8f28eca99f2208872fc2483fcc93326b628f4f73116e91309a95e05da86a0ab5`.
 - `grilling/SKILL.md`: `a146842ed93ca43d833550fa9adf02e58cb63c83fea9d4b4522995b82242d4e2`.
@@ -61,37 +62,38 @@ Impronte SHA-256 dei documenti principali consultati:
 
 - `gtm-planner/skills/roadmap/SKILL.md`: `9d04a92d6c26164ba198ebd5dcdd42c2dc167f03615472b6f2b2fdf76bfc48bf`.
 
-## Checkpoint
+## Checkpoints
 
-GTM Plan prescrive «Never chain two steps without a checkpoint.» Snapshot, fonti
-e mappa sono confermati dall'utente, come promessa, messaggi e piano di diffusione.
-Roadmap, consolidato e perimetro locale sono approvati dopo plan-qa. Le fonti
-gratuite già autorizzate rimangono valide senza nuove richieste di strumenti a pagamento.
-Stato in [.claude/gtm-planner.local.md](../../.claude/gtm-planner.local.md).
+GTM Plan requires: “Never chain two steps without a checkpoint.” The user confirmed
+the snapshot, sources, market map, promise, messages and demand plan. The roadmap,
+consolidated plan and local implementation scope were approved after plan QA.
+Previously authorized free sources remain valid without requesting paid tools.
+State is recorded in [.claude/gtm-planner.local.md](../../.claude/gtm-planner.local.md).
 
-Grilling: «Do not act on it until the user confirms you have reached a shared understanding.»
-Le risposte del primo round sono registrate; l'approvazione operativa resta distinta.
-Accessibility Audit vieta di inventare un'interfaccia assente: gli audit saranno
-eseguiti sul prodotto renderizzato, senza dichiarare conformità da una specifica.
+Grilling requires: “Do not act on it until the user confirms you have reached a shared understanding.”
+The first-round answers are recorded; operational approval was a separate step.
+Accessibility Audit forbids inventing an interface that does not exist. The
+implemented product was reviewed after rendering; specifications alone were not
+presented as evidence of conformance. See [the audit reports](../audits/README.md).
 
-## Rimozioni
+## Removals
 
-Rimosse **88 directory**, con 1371 file al loro interno.
-Rimossi i due symlink Wrangler e il template SKILL.md alla radice. Nessun
-collegamento a skill locale eliminata è conservato nella documentazione corrente.
+Removed **88 directories** containing 1371 files, the two Wrangler symlinks, and
+the root SKILL.md template. Current documentation retains no links to removed
+local skills.
 
-Directory rimosse:
+Removed directories:
 
 `ab-testing`; `ad-creative`; `ads`; `agents-sdk`; `ai-seo`; `airunway-aks-setup`; `analytics`; `appinsights-instrumentation`; `aso`; `attribution`; `azure-ai`; `azure-aigateway`; `azure-app-onboard`; `azure-app-onboard-prereq`; `azure-cloud-migrate`; `azure-compliance`; `azure-compute`; `azure-deploy`; `azure-diagnostics`; `azure-enterprise-infra-planner`; `azure-kubernetes`; `azure-kusto`; `azure-messaging`; `azure-prepare`; `azure-quotas`; `azure-reliability`; `azure-resource-lookup`; `azure-resource-visualizer`; `azure-storage`; `azure-upgrade`; `azure-validate`; `churn-prevention`; `cloudflare-email-service`; `cloudflare-one`; `cloudflare-one-migrations`; `co-marketing`; `cold-email`; `community-marketing`; `competitor-profiling`; `competitors`; `content-strategy`; `cro`; `customer-research`; `directory-submissions`; `discover-azure-skills`; `domain-modeling`; `durable-objects`; `emails`; `entra-agent-id`; `entra-app-registration`; `events`; `free-tools`; `git-guardrails-claude-code`; `image`; `influencer-marketing`; `launch`; `lead-magnets`; `marketing-council`; `marketing-ideas`; `marketing-loops`; `marketing-plan`; `marketing-psychology`; `microsoft-foundry`; `offers`; `onboarding`; `paywalls`; `popups`; `pricing`; `product-marketing`; `programmatic-seo`; `prospecting`; `public-relations`; `python-appservice-deploy`; `referrals`; `revops`; `sales-enablement`; `schema`; `signup`; `site-architecture`; `sms`; `social`; `tdd`; `turnstile-spin`; `video`; `web-perf`; `wizard`; `workers-best-practices`; `wrangler`.
 
-Gli originali delle skill restano nella storia Git al commit c723660. Rimozioni
-e documentazione sono modifiche locali non committate; nessun push o PR.
-La pulizia non ha modificato skill globali o plugin collegati.
+Original skills remain in Git history at `c723660`. The cleanup is committed in
+[PR #2](https://github.com/ifthenelse/GIT-for-AI-crash-course/pull/2); the application
+and its documentation are in [PR #3](https://github.com/ifthenelse/GIT-for-AI-crash-course/pull/3).
+The cleanup did not change global skills or connected plugins.
 
-## Implementazione locale
+## Local implementation
 
-Roadmap e consolidato sono stati approvati il 15 novembre 2026, insieme al
-perimetro locale. Durante l'integrazione sono state applicate anche le skill
-cloud `vercel:react-best-practices` (componenti, caricamento differito e listener)
-e `vercel:verification` (UI → API → SQLite → risposta → UI). Non sono state
-installate ulteriori skill nella repository.
+The roadmap, consolidated plan and local scope were approved on 15 November 2026.
+Integration also applied the cloud skills `vercel:react-best-practices` (components,
+deferred loading and listeners) and `vercel:verification`
+(UI → API → SQLite → response → UI). No additional skills were installed locally.

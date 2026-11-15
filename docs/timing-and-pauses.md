@@ -1,108 +1,111 @@
-# Tempo ufficiale e pause stimate
+# Official elapsed time and estimated breaks
 
-Requisiti confermati: avvio registrato dal server, tempo trascorso e uso dei
-segnali di visibilità per cercare di stimare interruzioni. Questa è una specifica
-proposta; nessun listener o endpoint è ancora implementato.
+Confirmed requirements: a server-recorded start, elapsed time, and browser
+visibility signals to estimate interruptions. This document specifies their
+behavior; implemented scope and verification evidence are recorded in
+[architecture.md](architecture.md) and [testing.md](testing.md).
 
-## Misure e impiego
+## Measurements and use
 
-| Misura | Origine | Uso |
+| Measurement | Source | Use |
 | --- | --- | --- |
-| `elapsedMs` | ricezione del primo completamento valido meno avvio, entrambi server | durata ufficiale dell'esercizio |
-| `visibleMsEstimated` | intervalli con documento visibile | riepilogo personale stimato |
-| `focusedVisibleMsEstimated` | documento visibile e finestra con focus | tempo di studio stimato, senza prova di attenzione |
-| `hiddenMsEstimated` | intervalli con documento nascosto | pausa stimata |
-| `unfocusedVisibleMsEstimated` | visibile, senza focus | interruzione possibile, distinta dalla pagina nascosta |
-| transizioni | conteggi separati hidden/visible e focus/blur | riepilogo delle interruzioni osservate |
-| `coverage` | continuità della raccolta | `complete`, `partial` o `truncated` |
+| `elapsedMs` | First valid completion receipt minus start, both recorded by the server | Official exercise duration |
+| `visibleMsEstimated` | Intervals with the document visible | Estimated personal summary |
+| `focusedVisibleMsEstimated` | Document visible and browser window focused | Estimated study time, without proof of attention |
+| `hiddenMsEstimated` | Intervals with the document hidden | Estimated break time |
+| `unfocusedVisibleMsEstimated` | Visible but unfocused | Possible interruption, distinct from a hidden page |
+| Transitions | Separate hidden/visible and focus/blur counts | Summary of observed interruptions |
+| `coverage` | Continuity of observations | `complete`, `partial`, or `truncated` |
 
-La durata server comprende letture, pause e attesa fino alla ricezione valida.
-Le stime non vengono sottratte dal tempo ufficiale, non alterano i punti e non
-bloccano sblocchi/completamenti. Una pagina visibile può essere incustodita;
-consultare documentazione in un'altra finestra può essere parte dello studio.
-Nessuna penalità per cambio scheda o uso di strumenti assistivi.
+Server duration includes reading, breaks, and waiting until valid receipt.
+Estimates are not subtracted from official elapsed time, do not change points,
+and do not block unlocks or completions. A visible page can be unattended;
+consulting documentation in another window can be part of studying. There is
+no penalty for switching tabs or using assistive technology.
 
-Il timer «Tempo di studio stimato» si interrompe quando la pagina è nascosta o
-la finestra perde focus e riprende quando è visibile e focalizzata. Gli intervalli
-restano distinguibili nel riepilogo. Non chiamarlo misura dell'attenzione.
+The "Estimated study time" timer pauses when the page is hidden or the window
+loses focus, and resumes when it is visible and focused. The summary keeps
+these intervals separate. Do not describe it as a measurement of attention.
 
-## Eventi e macchina a stati
+## Events and state machine
 
-- Listener principale su **`document`**, evento minuscolo `visibilitychange`;
-  leggere subito `document.visibilityState`.
-- `window.blur`/`window.focus` aggiungono un segnale indipendente. Blur non
-  implica pagina nascosta: può dipendere da browser chrome, dialoghi o schermi affiancati.
-- `pagehide` chiude il segmento del documento; `pageshow` rilegge stato e focus.
-  Quando `event.persisted` è vero, gestire BFCache senza creare un nuovo tentativo server.
-- All'inizio e alla fine campionare lo stato, anche in assenza di transizioni.
-- Deduplicare stati ripetuti. `hidden` seguito da `pagehide` non aggiunge due pause.
-- Focus e selezione tra le quattro finestre simulate sono eventi interni al
-  documento: non devono generare pause o perdite di focus della finestra browser.
+- Attach the main listener to **`document`** for the lowercase event
+  `visibilitychange`; read `document.visibilityState` immediately.
+- `window.blur`/`window.focus` add an independent signal. Blur does not mean
+  the page is hidden: browser chrome, dialogs, or side-by-side displays can cause it.
+- `pagehide` closes the document segment; `pageshow` samples state and focus
+  again. When `event.persisted` is true, handle BFCache without creating a new
+  server attempt.
+- Sample state at the start and end even if no transition occurred.
+- Deduplicate repeated states. `hidden` followed by `pagehide` does not add two breaks.
+- Focus and selection among the four simulated windows happen inside the
+  document; they must not produce breaks or loss of browser-window focus.
 
-Gli stati temporali sono disgiunti: visibile/focalizzato, visibile/non focalizzato,
-nascosto, non osservato. Non sommare blur e hidden come durate sovrapposte.
-Il client non osserva applicazioni, finestre o indirizzi esterni.
+Timing states are disjoint: visible/focused, visible/unfocused, hidden, and
+unobserved. Do not add blur and hidden as overlapping durations. The client
+does not observe external applications, windows, or addresses.
 
-## Orologio, lifecycle e recupero
+## Clock, lifecycle, and recovery
 
-Usare `performance.now()` per gli intervalli nello stesso documento. Reload e
-navigazioni creano segmenti con identificativo diverso: non sottrarre timestamp
-di documenti differenti. I timer ripetuti servono soltanto a ridisegnare la UI;
-non sommare tick, perché le pagine in background possono subire throttling.
+Use `performance.now()` for intervals within one document. Reloads and
+navigations create segments with different identifiers: do not subtract
+timestamps from different documents. Repeating timers only redraw the UI;
+do not add up ticks, because background pages can be throttled.
 
-Sleep, sospensione mobile, chiusura forzata e ultimi eventi persi possono lasciare
-buchi. `performance.now()` durante lo sleep non avanza uniformemente su tutti
-i browser/sistemi: un intervallo visibile lungo non prova attività continuativa.
-I buchi diventano tempo non osservato e copertura parziale, senza inventare
-pause o attenzione. Anche la raccolta completa di eventi non prova attenzione.
+Sleep, mobile suspension, forced closure, and missing final events can leave
+gaps. During sleep, `performance.now()` does not advance consistently across
+browsers and operating systems: a long visible interval does not prove
+continuous activity. Gaps become unobserved time and partial coverage, without
+inventing breaks or attention. Even complete event coverage does not prove attention.
 
-Persistenza locale durante il lavoro e sulle transizioni, con salvataggio
-anticipato dei cambi di scenario. Non affidarsi a `unload`/`beforeunload` o a
-una richiesta di rete eseguita mentre la pagina si chiude. La POST finale resta
-idempotente e ritentabile tramite coda locale.
+Persist locally during work and on transitions, saving scenario changes early.
+Do not rely on `unload`/`beforeunload` or a network request made while the page
+is closing. The final POST remains idempotent and retryable through the local queue.
 
-Se il completamento avviene offline, l'orario client non retrodata il risultato
-ufficiale: il ritardo fino all'accettazione server è incluso e dichiarato nella UI.
-Un retry dopo l'accettazione restituisce il risultato originario senza aumentare il tempo.
+If completion happens offline, the client clock does not backdate the official
+result: the delay until server acceptance is included and stated in the UI.
+A retry after acceptance returns the original result without increasing its duration.
 
-## Protocollo candidato
+## Candidate protocol
 
-Includere nel POST finale un ledger opzionale con versione, copertura, eventi
-omessi e segmenti. Ogni segmento contiene un `documentId`; ogni evento contiene
-sequenza, offset relativo, causa, visibilità, focus e `persisted` quando pertinente.
-Niente heartbeat o endpoint di analytics separati.
+Include an optional ledger in the final POST containing a version, coverage,
+dropped-event count, and segments. Each segment contains a `documentId`; each
+event contains a sequence number, relative offset, cause, visibility, focus,
+and `persisted` where relevant. No heartbeats or separate analytics endpoints.
 
-Limiti proposti da validare: 512 eventi e 32 KiB per tentativo, durate con precisione
-non superiore a quella necessaria, ad esempio arrotondate a 100 ms. Superato il
-limite, contare eventi omessi e indicare `truncated`; l'esercizio rimane completabile.
+Proposed limits to validate: 512 events and 32 KiB per attempt, with duration
+precision limited to what is needed, for example rounding to 100 ms. Above
+that limit, count dropped events and mark coverage `truncated`; the exercise
+must remain completable.
 
-Il server verifica limiti, enum, ordine e valori finiti/non negativi e ricalcola
-gli aggregati. Questi restano dichiarazioni del browser: `event.isTrusted` non
-certifica l'attendibilità del payload HTTP. Telemetria assente o non valida rende
-indisponibili le sole stime; non annulla un esercizio altrimenti verificato.
-Il registro delle azioni Git segue limiti e validazione separati.
+The server checks limits, enums, ordering, and finite, nonnegative values, then
+recalculates aggregates. These remain browser claims: `event.isTrusted` does
+not certify an HTTP payload. Missing or invalid telemetry makes only the
+estimates unavailable; it does not invalidate an otherwise verified exercise.
+The Git action log has separate limits and validation.
 
-## Più schede e privacy
+## Multiple tabs and privacy
 
-Un solo writer locale per tentativo, coordinato tra schede; le altre offrono un
-passaggio esplicito del controllo. Coordinamento e lock browser migliorano la UI,
-non costituiscono una barriera antifrode. Il server conserva proprietà del
-tentativo, unicità e idempotenza anche con dispositivi differenti.
+One local writer per attempt is coordinated across tabs; other tabs offer an
+explicit transfer of control. Browser coordination and locks improve the UI
+but do not provide an anti-cheating boundary. The server maintains attempt
+ownership, uniqueness, and idempotency across different devices as well.
 
-Preferire la conservazione server degli aggregati e della copertura. Eliminare
-il ledger grezzo dopo il calcolo, salvo un breve periodo di diagnosi motivato da
-definire. Mai URL di altre pagine, titoli delle finestre, app aperte, screenshot,
-clipboard o registrazione dei tasti. Pause e cambi focus non sono pubblicati
-nella classifica.
+Prefer storing only aggregates and coverage on the server. Delete the raw
+ledger after calculation unless a justified short diagnostic period is defined.
+Never collect other pages' URLs, window titles, open applications, screenshots,
+clipboard contents, or keystrokes. Breaks and focus changes are not published
+on the leaderboard.
 
-## Verifica prima del rilascio
+## Verification before release
 
-Cambio scheda/app, browser minimizzato, dialoghi, due monitor, passaggio tra pannelli,
-reload, back/forward BFCache, sleep, mobile, eventi duplicati, overflow del ledger,
-storage indisponibile, più schede e completamento offline. Verificare durata
-server invariata dai segnali client e nessuna penalità ai cambi di contesto.
+Test tab/app switching, a minimized browser, dialogs, two monitors, switching
+between panels, reloads, back/forward BFCache, sleep, mobile use, duplicate
+events, ledger overflow, unavailable storage, multiple tabs, and offline
+completion. Verify that client signals leave server duration unchanged and
+that context switching carries no penalty.
 
-Fonti: [Page Visibility](https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API),
+Sources: [Page Visibility](https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API),
 [visibilitychange](https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event),
 [performance.now](https://developer.mozilla.org/en-US/docs/Web/API/Performance/now),
 [pagehide](https://developer.mozilla.org/en-US/docs/Web/API/Window/pagehide_event),

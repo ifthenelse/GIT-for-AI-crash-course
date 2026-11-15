@@ -1,35 +1,38 @@
-# Identità visiva implementata
+# Implemented visual identity
 
-Laboratorio chiaro e leggibile, superfici neutre e accento teal. Il tema scuro
-conserva gli stessi ruoli, con accento più luminoso. I colori effettivi sono token
-CSS in `apps/web/src/styles.css`; gli stati usano anche testo o simboli.
+A clear, readable laboratory with neutral surfaces and a teal accent. The dark
+theme preserves the same roles with a brighter accent. The implemented colors
+are CSS tokens in `apps/web/src/styles.css`; states also use text or symbols.
 
-| Ruolo | Chiaro | Scuro |
+| Role | Light | Dark |
 | --- | --- | --- |
-| Sfondo | #F9FBFA | #101C23 |
-| Superficie | #FFFFFF | #17262F |
-| Testo | #172D39 | #E2EDEA |
-| Secondario | #526570 | #ADC1C5 |
-| Azione | #087568 | #7CE3C3 |
+| Background | #F9FBFA | #101C23 |
+| Surface | #FFFFFF | #17262F |
+| Text | #172D39 | #E2EDEA |
+| Secondary text | #526570 | #ADC1C5 |
+| Action | #087568 | #7CE3C3 |
 | Link | #086257 | #96EBD3 |
-| Superficie evidenziata | #E5F4EF | #203E39 |
-| Bordo decorativo | #D9E3DF | #344B52 |
-| Bordo controllo | #7C8D86 | #78959C |
+| Highlighted surface | #E5F4EF | #203E39 |
+| Decorative border | #D9E3DF | #344B52 |
+| Control border | #7C8D86 | #78959C |
 | Focus | #8F4400 | #FFD28F |
 
-Inter variabile serve titoli, testo didattico, navigazione, HUD e classifica.
-JetBrains Mono serve terminale, file, comandi e identificativi. I WOFF2 sono
-self-hosted con `font-display: swap`, fallback e licenze OFL distribuite. Provenienza,
-dimensioni e SHA-256 in `apps/web/public/fonts/sources.json`.
+Variable Inter is used for headings, lesson text, navigation, the HUD and the
+leaderboard. JetBrains Mono is used for the terminal, files, commands and
+identifiers. WOFF2 files are self-hosted with `font-display: swap`, fallback fonts
+and distributed OFL licenses. Provenance, sizes and SHA-256 hashes are recorded in
+`apps/web/public/fonts/sources.json`.
 
-Il pittogramma originale collega tre nodi con un percorso di branch/merge.
-`logo.svg` e `logo-dark.svg` contengono path e cerchi vettoriali su sfondo
-trasparente, senza raster incorporati. Il concept generativo ha orientato la
-geometria; il file finale è SVG nativo. Il registry è `brand-assets.json`.
+The original pictogram connects three nodes with a branch/merge path. `logo.svg`
+and `logo-dark.svg` contain vector paths and circles on transparent backgrounds,
+with no embedded raster images. The generated concept informed the geometry; the
+final file is native SVG. The asset registry is `brand-assets.json`.
 
-Derivati: favicon.svg, PNG 192/512 con trasparenza, social.svg/social.png e
-social-it.svg/social-it.png da 1200×630. Le social card hanno fondo pieno adatto
-alla condivisione; i loghi rimangono trasparenti. Il marchio viene usato nell'header
-e nella home. La mock repository della hero è decorativa e separata dal laboratorio.
+Derivatives: favicon.svg; transparent 192/512 PNGs; social.svg/social.png and
+social-it.svg/social-it.png at 1200×630. Social cards have a solid background for
+sharing; the logos remain transparent. The mark is used in the header and on the
+home page. The mock repository in the hero is decorative and separate from the
+laboratory.
 
-Contrasti e verifiche dei due temi sono nel [report di accessibilità](accessibility.md).
+Contrast measurements and checks of both themes are in the
+[accessibility report](accessibility.md).

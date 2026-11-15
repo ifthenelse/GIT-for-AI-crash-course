@@ -1,27 +1,27 @@
 # Intent: GIT-for-AI-crash-course
 
-Scopo del prodotto. I dettagli dei requisiti sono in `docs/analysis/`.
+Product purpose. Detailed requirements are in `docs/analysis/`.
 
 ## Business problem
-Engineers, Architects e persone di business con esperienza tecnica devono poter comprendere gli effetti di Git e collaborare su GitHub e Azure DevOps. Un laboratorio con scenari ripetibili permette di osservare contemporaneamente modifiche ai file, staging, cronologia e flusso di revisione.
+Engineers, architects and business professionals with technical experience need to understand Git's effects and collaborate on GitHub and Azure DevOps. A lab with repeatable scenarios lets them observe file changes, staging, history and the review workflow together.
 
 ## Intended outcomes
-- Acquisire autonomia progressiva nei livelli Base, Intermedio e Avanzato.
-- Conservare progressi e completamenti verificati senza perderli ripetendo un esercizio.
-- Pubblicare un corso indipendente aperto a tutti, da repository pubblica, con italiano e inglese completi al lancio.
-- Operare esclusivamente con servizi gratuiti e provider social introducibili per fasi.
+- Build independence progressively across Beginner, Intermediate and Advanced levels.
+- Preserve verified progress and completions when an exercise is repeated.
+- Publish an independent course open to everyone from a public repository, with complete Italian and English content at launch.
+- Use only free services and introduce social login providers in phases.
 
 ## Non-goals
-- Non eseguire shell o codice arbitrario del partecipante sul server.
-- Non utilizzare chiavi SSH private o passphrase reali negli esercizi simulati.
-- Non presentare la classifica come certificazione dell'identità o dell'assenza di aiuti.
+- Execute arbitrary learner shell commands or code on the server.
+- Use real private SSH keys or passphrases in simulated exercises.
+- Present the leaderboard as certification of identity or unaided work.
 
 ## Success measures
 | Measure | Target | Source |
 | --- | --- | --- |
-| Completamento dei livelli | soglia da definire nel pilota | risultati verificati dall'API |
-| Autonomia su uno scenario nuovo | criterio da concordare | prova finale senza istruzioni passo passo |
-| Affidabilità del salvataggio | criterio di rilascio da definire | test di retry, duplicazione e ripresa |
+| Level completion | threshold to define during the pilot | API-verified results |
+| Independence on a new scenario | criterion to agree | final exercise without step-by-step instructions |
+| Save reliability | release criterion to define | retry, duplicate submission and recovery tests |
 
 ## Accountable owners
-- Andrea Collet: owner della repository. Responsabili di contenuti, supporto e servizi pubblici da confermare.
+- Andrea Collet owns the repository. Owners for content, support and public services remain to be confirmed.

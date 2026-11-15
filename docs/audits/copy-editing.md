@@ -1,31 +1,34 @@
-# Revisione dei testi IT/EN
+# IT/EN copy review
 
-Metodo: skill Copy Editing, applicata al copy esistente dopo l'integrazione.
-Input: home, messaggi di accesso, obiettivi, salvataggio, timer, classifica,
-soluzioni e guide del catalogo. La promessa confermata rimane identica nei documenti
-e negli asset social: «Collabora con Git sapendo cosa cambia e come recuperare il
-lavoro.» / “Collaborate with Git knowing what changes and how to recover your work.”
+Method: the Copy Editing skill, applied to existing copy after integration.
+Inputs: the home page, sign-in messages, objectives, saving, timers, leaderboard,
+solutions and catalog guides. The confirmed promise remains identical across
+documents and social assets: «Collabora con Git sapendo cosa cambia e come
+recuperare il lavoro.» / “Collaborate with Git knowing what changes and how to
+recover your work.”
 
-Le passate hanno verificato chiarezza, tono, utilità, prove, precisione,
-coinvolgimento e aspettative prima dell'azione. Sono state corrette forme come
-«100 punteggio / lezione» e «12 lezione», sostituite da «100 punti / lezione» e
-«12 lezioni». Le variabili interpolate e le chiavi UI coincidono fra le lingue.
+The editing passes checked clarity, tone, usefulness, evidence, precision,
+engagement and expectations before taking action. Italian phrases such as
+«100 punteggio / lezione» and «12 lezione» were corrected to «100 punti / lezione»
+and «12 lezioni». Interpolation variables and UI keys match across languages.
 
-La revisione usa tre prospettive editoriali, non interviste o risultati di utenti:
+The review uses three editorial perspectives, rather than interviews or user
+results:
 
-| Prospettiva | Controllo e risultato |
+| Perspective | Check and result |
 | --- | --- |
-| Partecipante tecnico | compito e comandi concreti; concetti distinti da guide sul proprio computer; soluzione consultabile senza penalità |
-| UX writing | pratica locale, richiesta pendente e conferma server hanno messaggi diversi; un errore non viene presentato come successo |
-| Accuratezza Git | parent/mainline, reset/revert, fork/remotes, worktree/branch, clone/VS Code e rerere/staging spiegati separatamente |
+| Technical learner | Concrete tasks and commands; concepts distinguished from guides for the learner's own computer; solutions available without a penalty |
+| UX writing | Distinct messages for local practice, pending requests and server confirmation; errors are not presented as success |
+| Git accuracy | parent/mainline, reset/revert, fork/remotes, worktree/branch, clone/VS Code and rerere/staging explained separately |
 
-Punteggi e durata sono definiti; le pause sono stime private e non attestano
-attenzione. L'accesso di sviluppo è fittizio e dichiarato locale. Il laboratorio
-non chiama Claude o servizi reali: la modifica dell'agente è uno scenario simulato.
-Le guide SSH chiedono passphrase reali solo negli strumenti del proprio computer;
-il terminale del corso richiede esclusivamente valori fittizi.
+Scores and duration are defined; pauses are private estimates and do not establish
+attention. Development sign-in is simulated and explicitly identified as local.
+The laboratory does not call Claude or real services: the agent's code change is
+a simulated scenario. SSH guides ask for real passphrases only in tools on the
+learner's own computer; the course terminal accepts only fictional values.
 
-I test controllano 36 soluzioni eseguibili, obiettivi inizialmente non conclusi,
-testi IT/EN non vuoti e placeholder corrispondenti. Sono verifiche di struttura e
-coerenza operativa, non una certificazione linguistica. Prima del lancio il pilota
-previsto dalla roadmap deve verificare comprensione e naturalezza con persone reali.
+Tests check 36 executable solutions, objectives that are initially unmet,
+non-empty IT/EN text and matching placeholders. These check structure and
+operational consistency; they do not certify linguistic quality. Before launch,
+the pilot specified in the roadmap must assess comprehension and natural wording
+with real people.

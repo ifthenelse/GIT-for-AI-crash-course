@@ -1,17 +1,17 @@
-# Verifiche del prodotto locale
+# Local product verification
 
-Eseguite il 15 novembre 2026 su Node.js 24.22.1 e Chromium di sistema 156.
-Anche i job CI di verifica e browser sono passati su GitHub Actions con Node 26
+Performed on 15 November 2026 using Node.js 24.22.1 and system Chromium 156.
+The verification and browser CI jobs also passed on GitHub Actions using Node 26
 ([run](https://github.com/ifthenelse/GIT-for-AI-crash-course/actions/runs/43713961150)).
-Le evidenze riguardano codice, build e API di prova; non un servizio pubblico.
+The evidence covers the code, build and test API, rather than a public service.
 
-- [Identità visiva](visual-identity.md): palette effettiva, font e asset vettoriali.
-- [SEO](seo.md): dieci pagine prerenderizzate, navigazione e base path Pages.
-- [Accessibilità](accessibility.md): revisione di markup, CSS e stati renderizzati;
-  axe e percorsi da tastiera nei due temi.
-- [Testi](copy-editing.md): revisione IT/EN, terminologia e comunicazione dello stato.
-- [Risultati tecnici](../testing.md): catalogo, motore, API, dati, E2E e limiti.
+- [Visual identity](visual-identity.md): implemented palette, fonts and vector assets.
+- [SEO](seo.md): ten prerendered pages, navigation and the Pages base path.
+- [Accessibility](accessibility.md): review of markup, CSS and rendered states;
+  axe scans and keyboard flows in both themes.
+- [Copy editing](copy-editing.md): IT/EN review, terminology and status messages.
+- [Technical results](../testing.md): catalog, engine, API, data, E2E tests and limitations.
 
-I report Playwright completi sono generati localmente in `playwright-report/`,
-con allegati axe e trace degli errori quando presenti. Screenshot di lavoro in
-`.tmp/screenshots/`. Questi artefatti non vengono pubblicati automaticamente.
+Full Playwright reports are generated locally in `playwright-report/`, with axe
+attachments and failure traces where applicable. Working screenshots are in
+`.tmp/screenshots/`. These artifacts are not published automatically.

@@ -1,6 +1,6 @@
-# Roadmap GTM
+# GTM roadmap
 
-Approvato dall’utente il 15 novembre 2026 insieme all’implementazione locale.
+Approved by the user on November 15, 2026, together with local implementation.
 
-Versione canonica: [documento approvato](../../gtm-plan/05-roadmap.md).
-Le ipotesi e i limiti di capacità rimangono validi.
+Canonical version: [approved document](../../gtm-plan/05-roadmap.md).
+Assumptions and capacity limits remain valid.

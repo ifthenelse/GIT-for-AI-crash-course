@@ -1,7 +1,7 @@
-# Mappa delle alternative
+# Alternatives map
 
-Confermata dall’utente il 15 novembre 2026 insieme alla direzione
-«laboratorio visuale di collaborazione con Git».
+Confirmed by the user on November 15, 2026, together with the direction
+“visual Git collaboration lab.”
 
-Versione canonica: [Market Map confermata](../../gtm-plan/02-market-map.md).
-Le ipotesi di vantaggio didattico restano da validare; non sono fatti misurati.
+Canonical version: [confirmed Market Map](../../gtm-plan/02-market-map.md).
+Proposed learning advantages still require validation; they are not measured facts.

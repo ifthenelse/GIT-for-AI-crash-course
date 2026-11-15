@@ -1,76 +1,78 @@
-# Decisioni confermate e checkpoint rimanenti
+# Confirmed decisions and remaining checkpoints
 
-Aggiornato con le risposte dell'utente del 15 novembre 2026. Metodo di intervista:
-wrapper locale `/grill-me` e dipendenza upstream `grilling`; fonti in [skills.md](skills.md).
+Updated with the user's answers from November 15, 2026. Interview method:
+the local `/grill-me` wrapper and its upstream `grilling` dependency; sources
+are listed in [skills.md](skills.md).
 
-## Primo round: risposte acquisite
+## First round: answers received
 
-| Tema | Decisione |
+| Topic | Decision |
 | --- | --- |
-| Perimetro | solo corso pubblico indipendente, aperto a tutti, repository pubblica; massima priorità a questo rilascio |
-| Motore | simulatore interamente nel browser e guide facoltative sul computer |
-| Durata | avvio server e tempo trascorso; eventi di visibilità/focus per stimare pause e interruzioni |
-| Costo | zero assoluto; provider social introducibili per fasi |
-| Quarta vista | portale GitHub/Azure DevOps con PR, policy, fork e release |
-| Finestre | desktop e viewport piccoli: impilabili, riordinabili e recuperabili come in un window manager |
-| Lingue | italiano e inglese completi al lancio |
-| Ricerca GTM | soltanto fonti pubbliche gratuite; niente traffico inventato o servizi a pagamento |
-| Categoria | mappa delle alternative e direzione «laboratorio visuale di collaborazione con Git» confermate |
-| Posizionamento | promessa IT/EN e messaggi confermati; benefici didattici ancora da validare |
-| Manutenzione post-lancio | budget iniziale di 1–2 ore alla settimana; distinto dallo sviluppo e dalle traduzioni iniziali |
-| Diffusione | tre motori gratuiti e priorità confermati; massimo tre canali iniziali |
+| Scope | independent public course only, open to everyone, with a public repository; this release has the highest priority |
+| Engine | simulator entirely in the browser, with optional guides for the user's own computer |
+| Duration | server start and elapsed time; visibility/focus events to estimate pauses and interruptions |
+| Cost | strictly zero; social providers may be introduced in phases |
+| Fourth view | GitHub/Azure DevOps portal with PRs, policies, forks and releases |
+| Windows | on desktop and small viewports, windows must stack, reorder and be recoverable like a window manager |
+| Languages | complete Italian and English at launch |
+| GTM research | free public sources only; no invented traffic or paid services |
+| Category | alternatives map and “visual Git collaboration lab” direction confirmed |
+| Positioning | IT/EN promise and messaging confirmed; learning benefits still require validation |
+| Post-launch maintenance | initial budget of 1–2 hours per week, separate from initial development and translation |
+| Distribution | three free growth engines and their priorities confirmed; at most three initial channels |
 
-Le scelte estranee al perimetro pubblico non fanno parte dei documenti o dei file
-locali della repository. Le risposte superano le ipotesi della prima bozza.
+Decisions outside the public scope are excluded from this repository's documents
+and local files. These answers supersede the first draft's assumptions.
 
-## Raccomandazioni tecniche reviewabili
+## Technical recommendations ready for review
 
-- Tempo server ufficiale distinto da tempo di studio stimato; nessuna penalità
-  per cambio scheda/finestra o per spostarsi fra i pannelli.
-- Listener `document.visibilitychange`; `window.blur/focus` come segnale separato;
-  lifecycle e gap non osservati trattati esplicitamente.
-- GitHub come primo social login, poi provider compatibili con registrazioni gratuite.
-- Hosting Pages + Workers/D1 Free soltanto dopo benchmark e verifica delle quote;
-  nessun upgrade a pagamento implicito.
-- Layout locale distinto da stato Git/Zundo e da progressi confermati.
+- Keep official server time separate from estimated study time; no penalties for
+  switching browser tabs/windows or moving between panels.
+- Listen to `document.visibilitychange`; treat `window.blur/focus` as a separate
+  signal; handle lifecycle events and unobserved gaps explicitly.
+- Introduce GitHub as the first social login, followed by providers with free registrations.
+- Use Pages + Workers/D1 Free only after benchmarking and checking quotas;
+  no implicit paid upgrade.
+- Keep local layout separate from Git/Zundo state and confirmed progress.
 
-Queste sono proposte di dettaglio dell'implementazione, non codice già approvato.
+At the proposal stage, these were implementation details for review, not
+already approved code.
 
-## Prossimo checkpoint GTM
+## Next GTM checkpoint
 
-Snapshot e [mappa delle alternative](../../gtm-plan/02-market-map.md) sono confermati.
-La categoria scelta è **laboratorio visuale di collaborazione con Git**. Gli altri
-strumenti trattano anche simulazione e grafi: queste caratteristiche da sole non
-sono una promessa di unicità o efficacia. Il [posizionamento](../../gtm-plan/03-positioning.md)
-è confermato, mantenendo espliciti i tre pilastri non verificati. Anche il
-[piano di diffusione](../../gtm-plan/04-demand-plan.md) è confermato.
+The snapshot and [alternatives map](../../gtm-plan/02-market-map.md) are confirmed.
+The chosen category is **visual Git collaboration lab**. Other tools also offer
+simulation and graphs: those features alone do not establish uniqueness or
+learning effectiveness. [Positioning](../../gtm-plan/03-positioning.md) is
+confirmed, with its three unverified pillars explicitly retained. The
+[demand plan](../../gtm-plan/04-demand-plan.md) is also confirmed.
 
-Il prossimo checkpoint è l'approvazione della [roadmap](roadmap.md) e del
-[GTM Plan consolidato](gtm-plan.md), proposti dopo QA. Il
-[perimetro operativo](implementation-proposal.md) esplicita risultato, dipendenze
-e regole della classifica approvati per il lavoro locale il 15 novembre 2026.
+The next checkpoint in the original sequence was approval of the
+[roadmap](roadmap.md) and [consolidated GTM Plan](gtm-plan.md), proposed after QA.
+The [implementation scope](implementation-proposal.md) sets out the result,
+dependencies and leaderboard rules approved for local work on November 15, 2026.
 
-## Decisioni successive
+## Subsequent decisions
 
-- Nome pubblico e licenze di codice/contenuti prima della pubblicazione.
-- Regole di punteggio, aggregazione dei tempi e tentativi ripetuti: una proposta
-  semplice è ora nel perimetro operativo; attende l'approvazione insieme al lavoro locale.
-- Responsabili di sviluppo, traduzione, revisione didattica e manutenzione;
-  capacità iniziale necessaria prima di una data impegnativa. Il budget di
-  manutenzione post-lancio è già confermato: 1–2 ore/settimana.
-- Retention, cancellazione account e trattamento delle versioni del corso.
+- Public name and code/content licenses before publishing.
+- Scoring, time aggregation and repeat attempts: a simple proposal is now included
+  in the implementation scope; at this checkpoint, it awaited approval with local work.
+- Owners for development, translation, learning-content review and maintenance;
+  initial capacity is needed before committing to a date. The post-launch
+  maintenance budget is already confirmed: 1–2 hours per week.
+- Retention, account deletion and treatment of course versions.
 
-Sono decisioni di prodotto/governance; i fatti tecnici reperibili nelle fonti
-rimangono responsabilità dell'analisi e non vanno richiesti di nuovo all'utente.
+These are product/governance decisions. Technical facts available from sources
+remain the responsibility of the analysis and should not be asked of the user again.
 
-## Approvazione dell'operatività
+## Approval of implementation
 
-Chiedere approvazione sul perimetro concreto prima di app, dipendenze, contratti,
-CI/CD e setup dei servizi. Confermare uno snapshot o una mappa GTM non autorizza
-implementazione, spese, registrazioni OAuth, push o deploy.
+Request approval of the concrete scope before app work, dependencies, contracts,
+CI/CD or service setup. Confirming a snapshot or GTM map does not authorize
+implementation, spending, OAuth registrations, pushing or deployment.
 
-## Aggiornamento implementazione
+## Implementation update
 
-Il perimetro locale e le dipendenze sono stati approvati il 15 novembre 2026.
-Le scelte implementate sono registrate in ADR 0002 e docs/architecture.md.
-I checkpoint relativi a servizi reali e pubblicazione rimangono separati.
+Local scope and dependencies were approved on November 15, 2026.
+Implemented decisions are recorded in ADR 0002 and docs/architecture.md.
+Checkpoints for real services and publishing remain separate.

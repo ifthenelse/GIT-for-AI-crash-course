@@ -1,7 +1,7 @@
-# Piano di diffusione
+# Demand plan
 
-Motori gratuiti e priorità confermati dall’utente il 15 novembre 2026.
+The user confirmed the free growth engines and their priorities on November 15, 2026.
 
-Versione canonica: [Demand Plan](../../gtm-plan/04-demand-plan.md).
-La disponibilità post-lancio è 1–2 ore/settimana, distinta dal lavoro iniziale.
-La conferma del piano non ha avviato attività esterne o implementazione.
+Canonical version: [Demand Plan](../../gtm-plan/04-demand-plan.md).
+Post-launch availability is 1–2 hours per week, separate from the initial work.
+Confirming the plan did not start external activities or implementation.

@@ -1,59 +1,64 @@
-# Verifiche dell'implementazione locale
+# Local implementation verification
 
-Ambiente: Node.js **24.22.1**, TypeScript 7, Chromium di sistema **156**.
-`.node-version` rimane 26. Anche la CI GitHub Actions su Node 26 ha superato
-verifiche statiche, test, build/SEO e i 16 scenari browser: [run 43713961150](https://github.com/ifthenelse/GIT-for-AI-crash-course/actions/runs/43713961150),
-commit applicativo `819cead`. Le misure locali sotto rimangono riferite a Node 24.22.1.
-Nessuna prova applicativa usa credenziali reali o crea risorse cloud. La CI definisce
-un job browser per ripetere E2E/axe oltre ai controlli statici.
+Environment: Node.js **24.22.1**, TypeScript 7, system Chromium **156**.
+`.node-version` remains 26. GitHub Actions CI on Node 26 has also passed static
+checks, tests, build/SEO, and all 16 browser scenarios:
+[run 43713961150](https://github.com/ifthenelse/GIT-for-AI-crash-course/actions/runs/43713961150),
+application commit `819cead`. The local measurements below still refer to Node 24.22.1.
+No application test uses real credentials or creates cloud resources. CI defines
+a browser job to repeat E2E/axe alongside static checks.
 
-## Comandi e perimetro
+## Commands and scope
 
-| Comando | Verifica |
+| Command | Checks |
 | --- | --- |
-| `scripts/verify` | controllo tipi e 63 test unitari/integrati |
-| `npm run build` | TypeScript, Vite, 10 pagine statiche IT/EN |
-| `npm run audit:seo` | titoli/descrizioni unici, canonical, hreflang, contenuti, JSON-LD, immagini e sitemap |
-| `npm run test:e2e` | 16 scenari: browser → API locale → SQLite → risposta → UI; axe e tastiera |
+| `scripts/verify` | Type checking and 63 unit/integration tests |
+| `npm run build` | TypeScript, Vite, 10 static IT/EN pages |
+| `npm run audit:seo` | Unique titles/descriptions, canonical links, hreflang, content, JSON-LD, images, and sitemap |
+| `npm run test:e2e` | 16 scenarios: browser → local API → SQLite → response → UI; axe and keyboard checks |
 
-Playwright avvia API 8788 e frontend 4173, usa un database isolato `.tmp/e2e.sqlite`
-che il suo setup ricrea, e rileva `/usr/bin/chromium`. In altri ambienti impostare
-`PLAYWRIGHT_CHROMIUM_EXECUTABLE` oppure installare il browser Playwright compatibile.
-Il download CDN dei browser non era disponibile in questa sessione: la suite ha
-usato con successo Chromium di sistema. Il database di sviluppo resta separato.
+Playwright starts the API on port 8788 and the frontend on 4173, uses the isolated
+`.tmp/e2e.sqlite` database recreated by its setup, and detects `/usr/bin/chromium`.
+In other environments, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` or install the
+compatible Playwright browser. Browser CDN downloads were unavailable in this
+session; the suite ran successfully with system Chromium. The development
+database remains separate.
 
-## Risultati e invarianti
+## Results and invariants
 
-- Catalogo: 36 moduli, 12 per tier, testi IT/EN completi, obiettivo iniziale aperto;
-  tutte le soluzioni passano azione per azione e tramite replay, senza mutare il seed.
-- Motore: staging selettivo, reset soft/mixed/hard e contenuti merge/revert
-  confrontati con Git reale in repository temporanee. Conflitti, rebase, worktree,
-  undo/redo/reset e input ostili verificati; non si promette equivalenza universale.
-- Stato: Zundo e log di replay coincidono; reset svuota la cronologia dello scenario.
-  Nel browser undo dopo un risultato salvato non revoca il completamento.
-- API: proprietà risorse, tier, versione, risultati inventati, scadenza/revoca,
-  idempotenza, concorrenza, opt-in/opt-out, challenge e handoff monouso.
-- Catalogo reale via API/SQLite: tutte le 36 POST finali accettate, tre tier da
-  1.200 punti, sblocco progressivo, primi tempi conservati dopo una ripetizione.
-- Persistenza: archivio chiuso/riaperto, nuovo login e refresh recuperano risultati;
-  richiesta finale pendente offline sincronizzata alla riconnessione.
-- UI: lingua e tema persistenti, finestre recuperabili a 320 px, spostamento e
-  ridimensionamento da tastiera, overview, editor/staging/terminale/grafo coerenti.
-- Accessibilità/SEO: [report con ambito, evidenze e limiti](audits/README.md).
+- Catalog: 36 modules, 12 per tier, complete IT/EN text, and an initially unmet
+  objective. Every solution passes action by action and through replay without
+  mutating its seed.
+- Engine: selective staging, soft/mixed/hard reset, and merge/revert contents
+  compared against real Git in temporary repositories. Conflicts, rebase,
+  worktrees, undo/redo/reset, and hostile input checked; universal equivalence
+  is not claimed.
+- State: Zundo and the replay log agree; reset clears scenario history. In the
+  browser, undo after a saved result does not revoke completion.
+- API: resource ownership, tiers, versions, invented results, expiry/revocation,
+  idempotency, concurrency, opt-in/opt-out, challenge, and single-use handoff.
+- Real catalog through API/SQLite: all 36 final POSTs accepted, three 1,200-point
+  tiers, progressive unlocking, and first durations preserved after repetition.
+- Persistence: closing/reopening the store, signing in again, and refreshing
+  recover results; an offline pending completion syncs on reconnection.
+- UI: persistent language and theme, recoverable windows at 320 px, keyboard
+  movement and resizing, overview, and consistent editor/staging/terminal/graph.
+- Accessibility/SEO: [report with scope, evidence, and limitations](audits/README.md).
 
-È stata provata anche una build con base `/git-practice/` e canonical di fixture
-`https://example.test/git-practice/`: dieci pagine senza JS, corso e laboratorio EN
-idratati, senza asset 404 o errori della pagina. Non è una distribuzione pubblica.
+A build was also tested with base `/git-practice/` and the fixture canonical
+`https://example.test/git-practice/`: ten pages without JS, the English course
+and lab hydrated, with no asset 404s or page errors. This was not a public deployment.
 
-Microbenchmark locale del solo motore: 720 replay delle soluzioni (20×36), mediana
-circa 0,13 ms, p95 circa 0,86 ms, massimo circa 2,29 ms. Esclude avvio moduli,
-autenticazione, API, database e payload avversi: **non certifica il budget Worker
-Free** e non giustifica l'attivazione di risorse pubbliche.
+Local engine-only microbenchmark: 720 solution replays (20×36), median about
+0.13 ms, p95 about 0.86 ms, maximum about 2.29 ms. This excludes module startup,
+authentication, API, database, and adversarial payloads: it **does not certify
+the Worker Free budget** or justify activating public resources.
 
-## Gate prima del lancio
+## Gates before launch
 
-OAuth GitHub reale e navigazione fra origini con cookie terze parti bloccati;
-runtime D1/Worker e CPU sui casi massimi; quote e blocco senza addebiti;
-backup/ripristino pubblico, retention e cancellazione dei dati; pilot con persone
-per comprensione IT/EN e tecnologie assistive. Google, Microsoft e LinkedIn sono
-fasi successive; Apple rimane disabilitato. Le prove locali non coprono tali servizi.
+Real GitHub OAuth and navigation across origins with third-party cookies blocked;
+D1/Worker runtime and CPU on worst supported cases; quotas and blocking without
+charges; public backup/recovery, retention, and data deletion; a pilot with people
+to check IT/EN comprehension and assistive technology. Google, Microsoft, and
+LinkedIn are later phases; Apple remains disabled. Local tests do not cover
+those services.

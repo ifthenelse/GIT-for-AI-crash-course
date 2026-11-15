@@ -1,112 +1,117 @@
-# Architettura del laboratorio Git
+# Git lab architecture
 
-Implementazione locale approvata il 15 novembre 2026. Il prodotto è pubblico,
-indipendente e aperto a tutti. La pubblicazione e la configurazione degli account
-rimangono separate dal lavoro locale. Decisione: [ADR 0002](adr/0002-public-git-lab.md).
+Local implementation was approved on November 15, 2026. The product is public,
+independent, and open to everyone. Publishing and account configuration remain
+separate from local development. Decision: [ADR 0002](adr/0002-public-git-lab.md).
 
-## Componenti implementati
+## Implemented components
 
 ```mermaid
 flowchart LR
-  Web[React + Vite + i18next] --> Views[Terminale · Grafo · Editor · Portale]
+  Web[React + Vite + i18next] --> Views[Terminal · Graph · Editor · Portal]
   Views --> State[Zustand + Zundo]
-  State --> Engine[Motore Git deterministico]
-  State --> Draft[IndexedDB: bozze e invii pendenti]
-  Web --> API[Fetch API autenticata]
-  API --> Auth[Auth.js: GitHub configurabile]
-  API --> Replay[Catalogo + motore condivisi]
-  API --> DB[SQLite locale / adapter D1]
+  State --> Engine[Deterministic Git engine]
+  State --> Draft[IndexedDB: drafts and pending submissions]
+  Web --> API[Authenticated Fetch API]
+  API --> Auth[Auth.js: configurable GitHub login]
+  API --> Replay[Shared catalog and engine]
+  API --> DB[Local SQLite / D1 adapter]
 ```
 
-| Percorso | Responsabilità |
+| Path | Responsibility |
 | --- | --- |
-| `apps/web` | navigazione, IT/EN, temi, finestre, sessione in memoria, persistenza e invii |
-| `packages/contracts` | azioni, scenari e risposte API versionati |
-| `packages/course-content` | 36 moduli, spiegazioni, guide OS/SSH, obiettivi e soluzioni IT/EN |
-| `packages/git-engine` | working tree, index, commit, refs, conflitti e replay puro |
-| `services/progress-api` | autenticazione, autorizzazione, tentativi, risultati e classifica |
+| `apps/web` | Navigation, IT/EN, themes, windows, in-memory session, persistence, and submissions |
+| `packages/contracts` | Versioned actions, scenarios, and API responses |
+| `packages/course-content` | 36 modules, explanations, OS/SSH guides, objectives, and IT/EN solutions |
+| `packages/git-engine` | Working tree, index, commits, refs, conflicts, and pure replay |
+| `services/progress-api` | Authentication, authorization, attempts, results, and leaderboard |
 
-Il browser non esegue subprocessi, installazioni o rete simulata. Terminale Bash,
-GitHub e Azure DevOps sono sottoinsiemi didattici dichiarati; `help` elenca i comandi.
-Le guide per il computer distinguono Windows, Linux e macOS 26+. I file e i comandi
-SSH del laboratorio usano esclusivamente identità fittizie.
+The browser does not run subprocesses, installations, or simulated network operations.
+The Bash terminal, GitHub, and Azure DevOps implement explicitly documented teaching
+subsets; `help` lists the commands. Computer setup guides distinguish Windows, Linux,
+and macOS 26+. SSH files and commands in the lab use fictional identities only.
 
-Zundo conserva soltanto la repository simulata. Il log di azioni registra anche
-undo, redo e reset; il server ne ricostruisce gli effetti. Sessione e progressi
-confermati restano fuori dalla cronologia. L'editor salva una modifica nel modello
-quando lascia il campo: questo raggruppa la digitazione in un'azione annullabile.
+Zundo retains only the simulated repository. The action log also records undo,
+redo, and reset; the server reconstructs their effects. Sessions and confirmed
+progress remain outside history. The editor writes a change to the model when
+the field loses focus, grouping typing into one undoable action.
 
-Il grafo disegna collegamenti fra parent effettivi e offre la stessa informazione
-come elenco testuale. Le quattro finestre supportano spostamento, ridimensionamento,
-minimizzazione, ingrandimento, dock e panoramica, con alternative da tastiera.
-Il layout è una preferenza locale separata per account e fascia di viewport.
-Un lease locale segnala l'apertura dello stesso esercizio in un'altra scheda.
+The graph draws edges between actual parents and provides the same information
+as a text list. The four windows support moving, resizing, minimizing, maximizing,
+a dock, and an overview, with keyboard alternatives. Layout is a local preference
+stored separately by account and viewport class. A local lease indicates when
+the same exercise is open in another tab.
 
-## Progressi e API
+## Progress and API
 
-| Metodo e percorso | Risultato |
+| Method and path | Result |
 | --- | --- |
-| `GET /v1/config` | versione e provider effettivamente disponibili |
-| `GET /v1/me` | identità della sessione |
-| `PATCH /v1/me` | alias e adesione esplicita alla classifica |
-| `GET /v1/me/progress` | completamenti, risultati e tier sbloccati |
-| `POST /v1/attempts/start` | tentativo e orario del server |
-| `POST /v1/attempts/:id/complete` | replay, verifica obiettivi e salvataggio transazionale |
-| `GET /v1/leaderboard?tier=…&courseVersion=…` | primi 100 risultati pubblici per versione e livello |
-| `/auth/*` | sviluppo locale, OAuth, handoff, scambio e logout |
+| `GET /v1/config` | Version and providers actually available |
+| `GET /v1/me` | Session identity |
+| `PATCH /v1/me` | Alias and explicit leaderboard opt-in |
+| `GET /v1/me/progress` | Completions, results, and unlocked tiers |
+| `POST /v1/attempts/start` | Attempt and server start time |
+| `POST /v1/attempts/:id/complete` | Replay, objective checks, and transactional save |
+| `GET /v1/leaderboard?tier=…&courseVersion=…` | First 100 public results by version and tier |
+| `/auth/*` | Local development, OAuth, handoff, exchange, and logout |
 
-Il server controlla proprietà del tentativo, versione, prerequisiti e limiti del
-payload. Ignora punteggio e durata dichiarati dal browser. La POST finale contiene
-azioni e una chiave di idempotenza: una ripetizione identica recupera lo stesso
-risultato; la stessa chiave con dati differenti viene rifiutata.
+The server checks attempt ownership, version, prerequisites, and payload limits.
+It ignores scores and durations claimed by the browser. The final POST contains
+actions and an idempotency key: an identical retry retrieves the same result;
+reusing the key with different data is rejected.
 
-Ogni prima conclusione valida vale 100 punti. Un tier vale 1.200 punti e si conclude
-quando tutti i suoi 12 moduli sono verificati. Il tier seguente viene sbloccato dal
-server. La durata è la somma dei tempi delle prime riuscite, dall'avvio registrato
-alla ricezione valida. Ripetizioni, undo e reset non riscrivono questi risultati.
-La classifica è didattica: replay valido non prova assenza di aiuti o automazione.
+Each first valid completion earns 100 points. A tier earns 1,200 points and is
+complete when all 12 modules are verified. The server unlocks the next tier.
+Tier duration is the sum of the times for the first successful attempts, from
+the recorded start to valid receipt. Repetition, undo, and reset do not overwrite
+these results. The leaderboard is educational: valid replay does not prove
+that a learner worked without assistance or automation.
 
-La bozza e la richiesta pendente vengono conservate in IndexedDB, per identità,
-versione e lezione. La richiesta mantiene la stessa chiave nei retry. Il frontend
-ritenta errori transitori con backoff limitato, rispetta `Retry-After`, offre un
-retry manuale e riprova al ritorno online. I progressi non sono indicati come
-sincronizzati prima della risposta server. Il timer ufficiale include il ritardo.
+Drafts and pending requests are retained in IndexedDB by identity, version,
+and lesson. A request keeps the same key across retries. The frontend retries
+transient errors with bounded backoff, respects `Retry-After`, offers manual
+retry, and retries when connectivity returns. Progress is not shown as synced
+until the server responds. Official elapsed time includes the delay.
 
-`document.visibilitychange`, `window.focus/blur`, `pagehide/pageshow` e un orologio
-monotono alimentano stime private. Copertura incompleta e sospensioni lunghe sono
-segnalate; il server conserva aggregati, scartando il ledger grezzo. Questi dati non
-cambiano punteggio o durata ufficiale e non diventano una prova antifrode.
+`document.visibilitychange`, `window.focus/blur`, `pagehide/pageshow`, and a
+monotonic clock produce private estimates. Incomplete coverage and long suspensions
+are reported; the server retains aggregates and discards the raw ledger. These
+observations do not change scores or official elapsed time and do not constitute
+evidence against cheating.
 
-## Identità e archiviazione
+## Identity and storage
 
-Auth.js gestisce il flusso GitHub con state e PKCE. L'handoff fra domini usa un
-codice applicativo monouso, vincolato alla challenge e allo stato della SPA. Il
-bearer opaco scade dopo 30 minuti, rimane in memoria e viene conservato nel database
-come hash. Il token GitHub non viene restituito al frontend. I refresh richiedono
-un nuovo accesso; identità stabile e progressi vengono recuperati dal server.
+Auth.js handles the GitHub flow with state and PKCE. The handoff between domains
+uses a single-use application code bound to the SPA's challenge and state. The
+opaque bearer token expires after 30 minutes, stays in memory, and is stored as
+a hash in the database. The GitHub token is never returned to the frontend.
+Page refreshes require another sign-in; the server recovers the stable identity
+and its progress.
 
-GitHub compare soltanto con client ID, secret e segreto Auth.js configurati. Il
-provider di sviluppo è esplicitamente fittizio e disabilitato nell'entrypoint Worker
-e con `NODE_ENV=production`. Non esistono password o registrazioni locali.
-Gli altri provider sono fasi future subordinate al costo zero; Apple è disabilitato.
-Il flusso GitHub reale non è stato verificato con credenziali in questa sessione.
+GitHub appears only when its client ID, client secret, and Auth.js secret are
+configured. The development provider is explicitly simulated and is disabled
+in the Worker entrypoint and with `NODE_ENV=production`. There are no passwords
+or local registrations. Other providers are future phases subject to the zero-cost
+constraint; Apple is disabled. Real GitHub login was not verified with credentials
+in this session.
 
-Schema in `database.ts`, adapter Node SQLite con WAL e transazioni, adapter D1 con
-batch atomici. I vincoli unici proteggono tentativi attivi, invii, prime riuscite e
-completamenti dei tier. Il Worker richiede schema già applicato: non effettua
-migrazioni durante le richieste. Non è stata creata alcuna risorsa pubblica.
+The schema is in `database.ts`. The Node SQLite adapter uses WAL and transactions;
+the D1 adapter uses atomic batches. Unique constraints protect active attempts,
+submissions, first successful results, and tier completions. The Worker requires
+the schema to be applied in advance and does not migrate during requests.
+No public resource has been created.
 
-## Limiti e condizioni di rilascio
+## Limits and release conditions
 
-Il motore supporta al massimo 500 azioni, 160 file, 512 commit e file da 32 KiB;
-l'API impone ulteriori limiti ai campi e un corpo di 256.000 byte. Merge testuali
-complessi possono essere segnalati come conflitti. Il rebase supporta linee senza
-merge; il revert con conflitti successivi richiede uno scenario diverso e viene
-rifiutato esplicitamente. Le worktree sono snapshot rappresentati dal modello,
-non filesystem completi; hook e clone usano fixture controllate.
+The engine supports at most 500 actions, 160 files, 512 commits, and 32 KiB per
+file. The API adds field limits and a 256,000-byte request-body limit. Complex
+text merges may be reported as conflicts. Rebase supports histories without merge
+commits; a revert that introduces further conflicts requires a different scenario
+and is explicitly rejected. Worktrees are snapshots represented by the model,
+not complete filesystems; hooks and clone use controlled fixtures.
 
-Il limiter API è per istanza e non sostituisce un controllo globale del provider.
-Budget CPU, quote gratuite, CORS e OAuth fra i domini distribuiti, ripristino D1,
-retention e cancellazione dei dati personali sono gate prima della pubblicazione.
-I test SQLite non certificano il runtime Worker. Fonti, quote e criteri in
-[deployment.md](deployment.md); evidenze in [testing.md](testing.md).
+The API limiter is per instance and does not replace provider-level global
+controls. CPU budget, free quotas, CORS and OAuth across deployed domains, D1
+recovery, retention, and personal-data deletion are gates before publishing.
+SQLite tests do not certify the Worker runtime. Sources, quotas, and criteria
+are in [deployment.md](deployment.md); evidence is in [testing.md](testing.md).

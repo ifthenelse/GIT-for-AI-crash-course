@@ -1,118 +1,120 @@
-# Perimetro operativo proposto
+# Proposed implementation scope
 
-Stato: perimetro approvato il 15 novembre 2026 per l'implementazione locale.
-Il testo seguente conserva il perimetro reviewabile approvato; lo stato attuale
-e le evidenze di verifica sono in README.md e docs/testing.md.
+Status: scope approved on November 15, 2026, for local implementation.
+The text below retains the concrete scope approved for review; current status
+and verification evidence are in README.md and docs/testing.md.
 
-## Risultato dell'implementazione locale
+## Local implementation outcome
 
-Corso pubblico indipendente con tre livelli e 36 moduli, tutti completi in italiano
-e inglese. Quattro finestre sincronizzate e accessibili: terminale Bash simulato,
-DAG Git, editor leggero e portale GitHub/Azure DevOps. Window manager impilabile,
-riordinabile e recuperabile da dock/panoramica anche sui viewport piccoli.
+Independent public course with three levels and 36 modules, all complete in
+Italian and English. Four synchronized, accessible windows: simulated Bash
+terminal, Git DAG, lightweight editor and GitHub/Azure DevOps portal. A window
+manager supports stacking, reordering and recovery through a dock/overview,
+including on small viewports.
 
-Stato immutabile con Zustand, cronologia Zundo limitata allo scenario, bozze e
-invii pendenti persistenti. API con avvio server, replay, POST finale idempotente,
-completamenti non revocati da undo/reset e classifica didattica. Timer ufficiale
-separato da visibilità/focus e pause stimate. Primo provider proposto: GitHub.
+Immutable state with Zustand, Zundo history limited to the scenario, persistent
+drafts and pending submissions. API with server-side start, replay, idempotent
+completion POST, completions unaffected by undo/reset and an educational
+leaderboard. Official timer separate from visibility/focus and estimated pauses.
+Proposed first provider: GitHub.
 
-Identità visiva con temi chiaro/scuro, logo SVG trasparente originale nei due temi,
-icone e social card; testi revisionati, pagine pubbliche prerenderizzate IT/EN,
-verifiche SEO/accessibilità sul prodotto implementato e correzione dei problemi.
+Visual identity with light/dark themes, an original transparent SVG logo for both
+themes, icons and social card; reviewed copy, prerendered IT/EN public pages,
+SEO/accessibility checks on the implemented product and fixes for identified issues.
 
-## Dipendenze candidate comprese nel perimetro
+## Candidate dependencies included in scope
 
-| Area | Pacchetti proposti | Scopo |
+| Area | Proposed packages | Purpose |
 | --- | --- | --- |
-| Frontend | `react`, `react-dom`, `vite`, `@vitejs/plugin-react`, `typescript`, `@types/react`, `@types/react-dom`, `@types/node` | applicazione statica, tipi e build |
-| Stato | `zustand`, `zundo` | store e cronologia selettiva |
-| Lingue | `i18next`, `react-i18next` | interfaccia e contenuti IT/EN |
-| Verifica locale | `vitest`, `jsdom`, `@testing-library/react`, `@testing-library/user-event`, `@playwright/test`, `@axe-core/playwright` | invarianti, interazioni e flussi browser/accessibilità |
-| Runtime API di prova | `@cloudflare/vitest-pool-workers`, `@cloudflare/workers-types`, se compatibili con la toolchain gratuita | test del servizio senza risorse di produzione |
-| SSO | candidato `better-auth` con `drizzle-orm`, oppure `@auth/core` con `@auth/d1-adapter` | confronto nello spike; un solo stack mantenuto e scelta motivata in ADR |
+| Frontend | `react`, `react-dom`, `vite`, `@vitejs/plugin-react`, `typescript`, `@types/react`, `@types/react-dom`, `@types/node` | static application, types and build |
+| State | `zustand`, `zundo` | store and selective history |
+| Languages | `i18next`, `react-i18next` | IT/EN interface and content |
+| Local verification | `vitest`, `jsdom`, `@testing-library/react`, `@testing-library/user-event`, `@playwright/test`, `@axe-core/playwright` | invariants, interactions and browser/accessibility flows |
+| Test API runtime | `@cloudflare/vitest-pool-workers`, `@cloudflare/workers-types`, if compatible with the free toolchain | service tests without production resources |
+| SSO | candidate `better-auth` with `drizzle-orm`, or `@auth/core` with `@auth/d1-adapter` | compare during the spike; maintain only one stack and justify the choice in an ADR |
 
-Se un candidato richiede un adapter ulteriore, esplicitarne nome e ragione prima
-di aggiungerlo. Niente piattaforme di autenticazione a pagamento. Usare versioni
-stabili compatibili verificate al setup e un lockfile generato dal package manager;
-nessun aggiornamento manuale del lockfile. Terminale, grafo ed editor possono
-iniziare con componenti accessibili propri, senza dipendenze pesanti obbligatorie.
+If a candidate needs another adapter, state its name and rationale before adding
+it. No paid authentication platforms. Use compatible stable versions verified
+during setup and a package-manager-generated lockfile; no manual lockfile updates.
+The terminal, graph and editor may start with custom accessible components,
+without mandatory heavy dependencies.
 
-Fonti per i candidati SSO: [Better Auth](https://better-auth.com/docs/installation),
-[Auth.js](https://authjs.dev/), [adapter D1](https://authjs.dev/getting-started/adapters/d1).
-La documentazione non prova ancora la compatibilità del flusso cross-site o il
-budget CPU: entrambi richiedono uno spike. Non installare due stack SSO in produzione.
+Sources for SSO candidates: [Better Auth](https://better-auth.com/docs/installation),
+[Auth.js](https://authjs.dev/), [D1 adapter](https://authjs.dev/getting-started/adapters/d1).
+Documentation alone does not prove cross-site flow compatibility or CPU budget:
+both need a spike. Do not install two SSO stacks in production.
 
-## Prima verifica tecnica e condizioni di prosecuzione
+## Initial technical verification and conditions for continuing
 
-1. Fissare lo schema di azioni versionato e un primo scenario rappresentativo.
-2. Verificare login/handoff fra origini, token in memoria, challenge PKCE e cookie
-   terze parti bloccati, usando prima un provider di prova locale.
-3. Eseguire replay e test del servizio nel runtime candidato, misurando i casi
-   supportati più costosi. La prova locale non certifica i consumi della produzione:
-   prima della pubblicazione servono misure sul servizio gratuito configurato.
-4. Se fattibilità o compatibilità falliscono, correggere o rivedere l'implementazione
-   entro costo zero; registrare il blocco. Non sostituire il requisito con uno
-   store soltanto locale o un upgrade a pagamento senza decisione esplicita.
+1. Establish the versioned action schema and a first representative scenario.
+2. Verify login/handoff across origins, in-memory tokens, PKCE challenges and
+   blocked third-party cookies, using a local test provider first.
+3. Run replay and service tests in the candidate runtime, measuring the most
+   expensive supported cases. Local testing does not certify production usage:
+   measurements on the configured free service are required before publishing.
+4. If feasibility or compatibility fails, fix or revise the implementation within
+   zero cost and record the blocker. Do not substitute local-only storage or a
+   paid upgrade without an explicit decision.
 
-Solo il provider di prova appartiene ai test automatici locali. Login reale richiede
-una registrazione OAuth configurata e un controllo integrato successivo; non
-dichiararlo verificato dal solo mock.
+Only the test provider belongs in local automated tests. Real login requires a
+configured OAuth registration and a subsequent integration check; do not claim
+it was verified by a mock alone.
 
-## Regole iniziali della classifica: proposta semplice
+## Initial leaderboard rules: a simple proposal
 
-- 100 punti per esercizio completato e verificato; 0 per esercizio non completato.
-  Il massimo per un tier di 12 moduli è 1.200 punti. Sono regole proposte,
-  non benchmark né risultati misurati.
-- Tutti i percorsi corretti equivalenti danno gli stessi punti; niente penalità
-  per più comandi, aiuti, accessibilità o cambio finestra.
-- La classifica dei tier conclusi ordina per punti decrescenti e poi durata
-  crescente. A completamento integrale i punti coincidono per costruzione:
-  il tempo distingue i risultati, senza promettere certificazione antifrode.
-- Durata del tier: somma dei tempi ufficiali delle prime riuscite dei suoi
-  esercizi. Ogni tempo va dall'avvio server al primo completamento valido;
-  non comprende altri tentativi. Mostrare questa definizione nell'interfaccia.
-- Le ripetizioni servono alla pratica e possono avere risultati personali
-  separati; non riscrivono completamento e risultato della prima conclusione.
-- Classifiche separate per versione di corso/regole; alias pubblico con adesione
-  esplicita. Le stime di pause e focus non sono dati pubblici della classifica.
+- 100 points for each completed, verified exercise; 0 for an incomplete exercise.
+  A tier of 12 modules has a maximum of 1,200 points. These are proposed rules,
+  not benchmarks or measured results.
+- All correct equivalent paths receive the same points; no penalties for extra
+  commands, hints, accessibility or switching windows.
+- The leaderboard for completed tiers sorts by points descending, then duration
+  ascending. Full completion yields the same points by design: time distinguishes
+  results, without any promise of anti-cheat certification.
+- Tier duration is the sum of official times from the first successful completion
+  of each exercise. Each time runs from server start to the first valid completion;
+  it excludes other attempts. Show this definition in the interface.
+- Repeats support practice and may have separate personal results; they do not
+  rewrite the completion or result of the first successful finish.
+- Separate leaderboards by course/rule version; public alias requires explicit
+  opt-in. Pause and focus estimates are not public leaderboard data.
 
-Questa scelta privilegia verificabilità e semplicità. È inclusa come proposta
-reviewabile; il contratto definitivo dovrà corrispondere alle regole approvate.
+This choice prioritizes verifiability and simplicity. It is included as a proposal
+ready for review; the final contract must match the approved rules.
 
-## Dati: regole prima dello schema
+## Data: rules before schema
 
-Identità con provider/subject stabile, senza unione automatica tramite email.
-Autorizzazione di ogni tentativo e progresso sul server. Completamento append-only
-per utente/tier/versione; una nuova versione non cancella i risultati storici.
-Nessuna migrazione a versioni future o equivalenza di sblocchi viene inventata ora.
+Identity uses a stable provider/subject, without automatic linking by email.
+Authorize each attempt and progress record on the server. Completion is append-only
+per user/tier/version; a new version does not erase historical results. No migration
+to future versions or equivalence of unlocks is invented now.
 
-Conservare aggregati delle pause e copertura; scartare il ledger grezzo dopo il
-calcolo, senza conservarlo per diagnosi nel rilascio iniziale. Per replay e bozze
-definire limiti e cancellazione con lo schema. La richiesta di cancellazione
-account rimuove identità e progressi personali, non può essere descritta come
-semplice reset dell'esercizio e richiede una conferma esplicita nel prodotto.
-Documentare retention, backup e cancellazione effettiva prima del rilascio.
+Retain pause aggregates and coverage; discard the raw ledger after computation,
+without keeping it for diagnostics in the initial release. Define limits and
+deletion for replay and drafts with the schema. Account deletion removes identity
+and personal progress, must not be described as a simple exercise reset and
+requires explicit confirmation in the product.
+Document retention, backup and effective deletion before release.
 
-## Organizzazione e verifica
+## Organization and verification
 
-Struttura candidata: `apps/web` per l'interfaccia, `packages/git-engine` per il
-motore condiviso, `packages/course-content` per scenari e traduzioni,
-`services/progress-api` per il servizio. È una proposta di scaffold, non una
-struttura già creata nella repository.
+Candidate structure: `apps/web` for the interface, `packages/git-engine` for the
+shared engine, `packages/course-content` for scenarios and translations,
+`services/progress-api` for the service. At this proposal stage, this was a
+scaffold proposal, not a structure already created in the repository.
 
-Sottoagenti in worktree separate: motore/replay, window manager e viste,
-API/SSO, contenuti IT/EN, identità e verifiche. Il coordinatore integra contratti,
-test e documentazione. Non assegnare automaticamente ruoli umani non confermati.
+Subagents use separate worktrees: engine/replay, window manager and views,
+API/SSO, IT/EN content, identity and verification. The coordinator integrates
+contracts, tests and documentation. Do not automatically assign unconfirmed human roles.
 
-`scripts/verify` dovrà diventare un controllo reale di tipi, codice e test.
-Verifiche necessarie: confronto del motore con Git reale, undo/completamenti,
-idempotenza/offline/riapertura, autorizzazione, tutte le finestre da tastiera,
-temi e IT/EN, audit SEO/accessibilità sul prodotto renderizzato e recupero dati.
+`scripts/verify` must become a real check of types, code and tests.
+Required checks: engine comparison with real Git; undo/completions;
+idempotency/offline/reopening; authorization; all windows by keyboard;
+themes and IT/EN; SEO/accessibility audits of the rendered product; and data recovery.
 
-## Pubblicazione come passaggio separato
+## Publishing as a separate step
 
-L'approvazione dell'implementazione locale permette di costruire e verificare
-il risultato. Registrazioni OAuth reali, risorse cloud, segreti, CI di distribuzione,
-push/PR e pubblicazione richiederanno il perimetro specifico prima dell'esecuzione.
-Non sono autorizzati implicitamente dalla conferma di un documento GTM.
-Il lancio pubblico resta soggetto a costo zero e ai criteri di prontezza.
+Approval of local implementation permits building and verifying the result.
+Real OAuth registrations, cloud resources, secrets, deployment CI, pushing/PRs
+and publishing require their specific scope before execution. They are not
+implicitly authorized by confirming a GTM document.
+Public launch remains subject to zero cost and the readiness criteria.

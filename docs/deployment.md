@@ -1,193 +1,199 @@
-# Hosting pubblico a costo zero
+# Public hosting at zero cost
 
-Stato: analisi aggiornata il 15 novembre 2026. Questa repository ospita esclusivamente
-il corso pubblico indipendente. L'implementazione locale è approvata e disponibile. Nessun servizio pubblico,
-registrazione OAuth o pipeline di distribuzione è stato configurato.
+Status: analysis updated on November 15, 2026. This repository contains only the
+independent public course. Local implementation is approved and available.
+No public service, OAuth registration, or deployment pipeline has been configured.
 
-## Vincolo economico
+## Cost constraint
 
-**Costo dei servizi zero assoluto.** Non introdurre piani a pagamento, trial a
-scadenza, acquisto obbligatorio di dominio o risorse che possano generare addebiti.
-Le quote gratuite limitano il servizio: al loro esaurimento si riducono disponibilità
-e funzionalità online, senza upgrade automatico. La pratica locale e gli invii
-pendenti non devono essere confusi con un salvataggio server confermato.
+**Service cost must remain strictly zero.** Do not introduce paid plans, expiring
+trials, mandatory domain purchases, or resources that could incur charges.
+Free quotas limit the service: once exhausted, online availability and features
+are reduced, without automatic upgrades. Local practice and pending submissions
+must not be presented as server-confirmed saves.
 
-La repository è pubblica; l'account collegato ha accesso amministrativo. Il piano
-Pro dichiarato non è visibile dal connettore e non è necessario alla proposta:
-Pages per repository pubbliche è disponibile anche su GitHub Free.
+The repository is public and the connected account has administrator access.
+The reported Pro plan is not visible through the connector and is not required
+by this proposal: Pages for public repositories is also available on GitHub Free.
 
-## Proposta tecnica
+## Technical proposal
 
-Frontend statico su GitHub Pages; Cloudflare Workers Free per API e callback OAuth;
-D1 Free per identità applicative, tentativi e progressi. Nessun broker commerciale
-obbligatorio. Il codice include un entrypoint Worker e un adapter D1. La scelta resta condizionata ai benchmark e alla verifica dei termini
-e delle quote correnti sull'account al momento del setup autorizzato.
+Static frontend on GitHub Pages; Cloudflare Workers Free for the API and OAuth
+callbacks; D1 Free for application identities, attempts, and progress. No
+commercial identity broker is required. The code includes a Worker entrypoint
+and a D1 adapter. This choice remains subject to benchmarks and verification
+of current terms and account quotas during authorized setup.
 
-| Componente | Limite gratuito verificato | Condizione di rilascio |
+| Component | Verified free limit | Release condition |
 | --- | --- | --- |
-| GitHub Pages | sito statico; 1 GB pubblicato e limite soft di banda di 100 GB/mese | build, base path, apertura diretta e callback verificati |
-| Workers Free | 100.000 richieste/giorno, 10 ms CPU per richiesta | replay e autenticazione rientrano nei limiti misurati |
-| D1 Free | 5 milioni righe lette/giorno, 100.000 scritte/giorno, 5 GB totali account | verificare anche limite singolo DB, indici e altri consumi account |
-| Identità | provider introdotti per fasi | registrazioni e consensi gratuiti verificati, pulsanti solo se operativi |
-| Dominio | domini predefiniti gratuiti | nessun dominio da acquistare come requisito |
+| GitHub Pages | Static site; 1 GB published and a soft bandwidth limit of 100 GB/month | Build, base path, direct navigation, and callbacks verified |
+| Workers Free | 100,000 requests/day, 10 ms CPU per request | Measured replay and authentication stay within the limits |
+| D1 Free | 5 million rows read/day, 100,000 written/day, 5 GB total per account | Also verify the single-database limit, indexes, and other account usage |
+| Identity | Providers introduced in phases | Free registrations and consent verified; buttons shown only when functional |
+| Domain | Free default domains | No domain purchase required |
 
-La skill Cloudflare corrente indica `cf` per un nuovo progetto; non è stata creata
-una configurazione Wrangler. Confermare la toolchain nella fase di setup, seguendo
-la documentazione corrente senza installare CLI per questa analisi.
+The current Cloudflare skill specifies `cf` for a new project; no Wrangler
+configuration has been created. Confirm the toolchain during setup using
+current documentation, without installing a CLI for this analysis.
 
-## Provider social per fasi
+## Phased social providers
 
-Sequenza approvata per la preparazione locale; le configurazioni reali sono separate:
+This sequence is approved for local preparation; real configuration is separate:
 
-1. **GitHub al lancio:** OAuth app, profilo pubblico e ID stabile. Per il solo
-   accesso non richiedere scope repository o email privata; token del provider
-   e secret restano nel backend.
-2. **Google:** ampliare l'accesso previa configurazione di client e consenso
-   soltanto per identità, senza servizi cloud a pagamento.
-3. **Microsoft e LinkedIn:** dopo verifica di account/registrazioni, consensi e
-   prodotto di login gratuito disponibile. Microsoft social login non richiede
-   di distribuire compute cloud.
-4. **Apple:** disabilitato e fuori dal lancio. Il programma sviluppatori può avere
-   costo e il login web ha prerequisiti specifici; non attivare sottoscrizioni.
-   Introdurlo soltanto se un percorso futuro rispetta il vincolo di costo zero.
+1. **GitHub at launch:** OAuth app, public profile, and stable ID. Login alone
+   must not request repository scopes or private email; provider tokens and
+   secrets stay in the backend.
+2. **Google:** Expand access after configuring a client and consent for identity
+   only, without paid cloud services.
+3. **Microsoft and LinkedIn:** After verifying accounts, registrations, consent,
+   and availability of the free login product. Microsoft social login does not
+   require deploying cloud compute.
+4. **Apple:** Disabled and excluded from launch. The developer program can have
+   a cost and web login has specific prerequisites; do not activate subscriptions.
+   Introduce it only if a future path meets the zero-cost constraint.
 
-Nessuna registrazione con password, email link o credenziali locali. Ogni nuova
-identità sociale crea o recupera il relativo utente; collegamento tra provider
-solo tramite flusso esplicito e autenticato. Le env abilitano provider già configurati,
-non creano automaticamente app OAuth o approvazioni.
+There is no registration through passwords, email links, or local credentials.
+Each social identity creates or retrieves its user; linking providers requires
+an explicit authenticated flow. Environment variables enable providers that
+have already been configured; they do not create OAuth apps or approvals.
 
-## Sessione tra domini gratuiti
+## Sessions across free domains
 
-`github.io` e `workers.dev` sono cross-site: CORS non rimuove i blocchi dei cookie
-terze parti. Spike obbligatorio prima del rilascio: callback backend, codice
-applicativo monouso con challenge PKCE, token dell'app breve in memoria e rinnovo
-con navigazione principale, usando una libreria mantenuta compatibile col runtime.
-Il token GitHub non viene restituito al frontend. Non salvare bearer in localStorage
-né inviarli nell'URL. Nessun dominio a pagamento come soluzione obbligatoria.
+`github.io` and `workers.dev` are cross-site: CORS does not remove third-party
+cookie restrictions. A spike is required before release: backend callback,
+single-use application code bound to a PKCE challenge, a short-lived application
+token in memory, and renewal through top-level navigation, using a maintained
+library compatible with the runtime. The GitHub token is never returned to the
+frontend. Do not store bearer tokens in localStorage or send them in URLs.
+A paid domain must not be the mandatory solution.
 
-Frontend: URL API e identificativi pubblici; backend: secret e credenziali dei soli
-provider abilitati. Le variabili `VITE_*` sono pubbliche. Confermare privacy, redirect
-URI esatti e origin ammessi in ogni ambiente; niente wildcard per dati autenticati.
+Frontend configuration contains the API URL and public identifiers; backend
+configuration contains secrets and credentials for enabled providers only.
+`VITE_*` variables are public. Confirm privacy, exact redirect URIs, and allowed
+origins in each environment; do not use wildcards for authenticated data.
 
-## Pubblicazione e dati
+## Publishing and data
 
-Dopo approvazione: build Vite con base path della repository; home, programma e
-pagine tier prerenderizzati IT/EN; laboratorio con routing compatibile con Pages.
-Verificare refresh, deep link, cambio lingua e login sul sito realmente distribuito.
-L'hosting Pages non applica automaticamente header di un altro provider: verificare
-le protezioni effettivamente disponibili. Nessun segreto nel bundle o nei workflow.
+After approval: build with Vite using the repository base path; prerender the
+home, curriculum, and tier pages in IT/EN; use Pages-compatible routing for the
+lab. Verify refreshes, deep links, language switching, and login on the deployed
+site. Pages does not automatically apply another provider's headers: verify
+which protections are actually available. Keep secrets out of bundles and workflows.
 
-Start e completamento generano richieste; le osservazioni delle pause viaggiano
-nel solo POST finale, senza heartbeat continui. Caching della classifica aggregata,
-query indicizzate, limiti payload e replay e limiti di frequenza evitano sprechi.
-Prima del rilascio verificare quota e comportamento di blocco effettivi; non dedurli
-dalla sola etichetta Free.
+Start and completion each generate requests; break observations travel only in
+the final POST, without continuous heartbeats. Caching the aggregated leaderboard,
+indexed queries, payload and replay limits, and rate limits avoid wasted resources.
+Before release, verify quotas and actual behavior when limits are reached;
+do not infer them from the Free label alone.
 
-Il completamento definitivo non viene cancellato da nuovi esercizi. La capacità
-storage resta finita: backup/export e recupero devono essere provati senza
-introdurre storage a pagamento. Non usare repository pubblica o Issues come backup
-di dati personali. Eventuali file di export per manutenzione rimangono fuori da Git.
+New exercises do not erase permanent completions. Storage capacity remains
+finite: backup/export and recovery must be tested without introducing paid
+storage. Do not use a public repository or Issues as a backup for personal data.
+Maintenance exports must remain outside Git.
 
-## Gate e recupero
+## Gates and recovery
 
-Nessun lancio persistente finché il flusso login → esercizio → verifica → salvataggio
-→ riapertura non passa sui servizi gratuiti. Se il carico supera il budget, ottimizzare
-o limitare l'uso e ritardare il lancio; non introdurre una spesa implicita.
+Do not launch persistent services until login → exercise → verification → save
+→ reopening passes on the free services. If load exceeds the budget, optimize
+or restrict usage and delay launch; do not introduce an implicit charge.
 
-Dopo i controlli approvati, la promozione richiede un artefatto noto e smoke test.
-Rollback frontend/API con versioni compatibili del motore e dei dati; ripristino
-database come procedura distinta. Nessun push o deploy autorizzato da questo documento.
+After approved checks, promotion requires a known artifact and smoke tests.
+Frontend/API rollback must use compatible engine and data versions; database
+recovery is a separate procedure. This document does not authorize a push or deploy.
 
-## Fonti
+## Sources
 
 - [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
-- [Limiti Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)
-- [Workers Free](https://developers.cloudflare.com/workers/platform/limits/) e [prezzi](https://developers.cloudflare.com/workers/platform/pricing/)
+- [Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)
+- [Workers Free](https://developers.cloudflare.com/workers/platform/limits/) and [pricing](https://developers.cloudflare.com/workers/platform/pricing/)
 - [D1](https://developers.cloudflare.com/d1/platform/pricing/)
-- [OAuth GitHub](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app) e [scope](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps)
+- [GitHub OAuth](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app) and [scopes](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps)
 - [Google Identity](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid)
-- [Registrazioni Microsoft](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)
+- [Microsoft app registrations](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)
 - [LinkedIn OIDC](https://learn.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/sign-in-with-linkedin-v2)
-- [Apple Developer Program](https://developer.apple.com/programs/whats-included/) e [login web](https://developer.apple.com/help/account/capabilities/configure-sign-in-with-apple-for-the-web/)
+- [Apple Developer Program](https://developer.apple.com/programs/whats-included/) and [web login](https://developer.apple.com/help/account/capabilities/configure-sign-in-with-apple-for-the-web/)
 
-## Configurazione locale disponibile
+## Available local configuration
 
-`.env.example` elenca i nomi effettivi: `APP_ORIGIN`, `ALLOW_ORIGINS`, `PORT`,
-`DATABASE_PATH`, `VITE_API_URL`, `AUTH_SECRET`, `GITHUB_CLIENT_ID`,
-`GITHUB_CLIENT_SECRET`. Il processo API legge `.env`; Vite espone soltanto
-`VITE_*`. Il provider fittizio locale si disabilita con `NODE_ENV=production`;
-l'entrypoint Worker lo disabilita sempre. Il callback GitHub previsto è
-`https://<origine-api>/auth/callback/github`, da registrare sul provider.
+`.env.example` lists the actual names: `APP_ORIGIN`, `ALLOW_ORIGINS`, `PORT`,
+`DATABASE_PATH`, `VITE_API_URL`, `AUTH_SECRET`, `GITHUB_CLIENT_ID`, and
+`GITHUB_CLIENT_SECRET`. The API process reads `.env`; Vite exposes only `VITE_*`.
+The simulated local provider is disabled with `NODE_ENV=production`; the Worker
+entrypoint always disables it. Register this GitHub callback with the provider:
+`https://<api-origin>/auth/callback/github`.
 
-Una build Pages si prepara senza pubblicarla:
+Prepare a Pages build without publishing it:
 
 ```bash
-PUBLIC_BASE_PATH=/nome-repository/ SITE_URL=https://account.github.io/nome-repository/ npm run build
+PUBLIC_BASE_PATH=/repository-name/ SITE_URL=https://account.github.io/repository-name/ npm run build
 ```
 
-Impostare `VITE_API_URL` all'origine dell'API già configurata. Gli URL sopra sono
-segnaposto di documentazione. `dist/` contiene 10 pagine IT/EN, asset, sitemap e
-robots. La navigazione del laboratorio usa hash compatibili con hosting statico.
-La build senza `SITE_URL` usa localhost ed è intenzionalmente esclusa dai crawler.
+Set `VITE_API_URL` to the origin of the configured API. The URLs above are
+documentation placeholders. `dist/` contains 10 IT/EN pages, assets, a sitemap,
+and robots.txt. Lab navigation uses hashes compatible with static hosting.
+A build without `SITE_URL` uses localhost and is intentionally excluded from crawlers.
 
-L'entrypoint `services/progress-api/src/worker.ts` richiede binding `DB`,
-`APP_ORIGIN`, origin consentiti e segreti dei provider attivi. Lo schema esportato
-da `database.ts` deve essere applicato prima di avviarlo. Nessuna CLI, binding
-pubblico, secret o workflow di deploy è stato configurato da questa implementazione.
+The `services/progress-api/src/worker.ts` entrypoint requires the `DB` binding,
+`APP_ORIGIN`, allowed origins, and secrets for active providers. Apply the schema
+exported by `database.ts` before starting it. This implementation has not
+configured a CLI, public binding, secret, or deployment workflow.
 
-Archivio locale: `.tmp/progress.sqlite`, WAL e SHM quando presenti. Per una copia
-consistente di sviluppo arrestare il server prima di copiare questi file. I test
-usano database temporanei e verificano anche chiusura/riapertura. Un ripristino
-della produzione D1 richiederà una procedura e una prova dedicate.
+Local storage: `.tmp/progress.sqlite`, plus WAL and SHM files when present.
+Stop the server before copying these files to obtain a consistent development
+backup. Tests use temporary databases and verify closing and reopening them.
+Production D1 recovery will need a dedicated procedure and test.
 
-## Variabili GitHub e segreti: configurazione della repository
+## GitHub variables and secrets: repository configuration
 
-Repository: `ifthenelse/GIT-for-AI-crash-course`. In **Settings → Secrets and
-variables → Actions → Variables** preparare:
+Repository: `ifthenelse/GIT-for-AI-crash-course`. Under **Settings → Secrets and
+variables → Actions → Variables**, prepare:
 
-| Nome | Valore |
+| Name | Value |
 | --- | --- |
 | `PUBLIC_BASE_PATH` | `/GIT-for-AI-crash-course/` |
 | `SITE_URL` | `https://ifthenelse.github.io/GIT-for-AI-crash-course/` |
-| `VITE_API_URL` | origine HTTPS reale del Worker, senza `/v1` o `/auth` finali |
+| `VITE_API_URL` | Actual HTTPS Worker origin, without a trailing `/v1` or `/auth` |
 
-Il workflow CI legge queste variabili soltanto per la build. Se non sono
-configurate, produce la preview locale non indicizzabile. Il solo inserimento in
-un file `.env` non imposta necessariamente `PUBLIC_BASE_PATH` per vite.config.ts
-né `SITE_URL` per il processo Node di prerender: usare env del processo come nel
-workflow o il comando inline documentato sopra.
+The CI workflow reads these variables for the build only. If they are unset,
+it produces the local preview excluded from indexing. Adding them only to a
+`.env` file does not necessarily set `PUBLIC_BASE_PATH` for vite.config.ts or
+`SITE_URL` for the Node prerender process: use process environment variables,
+as in the workflow or the inline command above.
 
-**La CI attuale non richiede GitHub Actions secrets.** `GITHUB_TOKEN` è fornito
-automaticamente da GitHub; non creare un PAT o un secret con quel nome. Il workflow
-verifica anche E2E/axe con Chromium, ma non distribuisce Pages o Cloudflare.
-Creare le tre variabili non attiva la pubblicazione né configura il backend.
+**The current CI does not require GitHub Actions secrets.** GitHub provides
+`GITHUB_TOKEN` automatically; do not create a PAT or a secret with that name.
+The workflow also runs E2E/axe with Chromium, but does not deploy Pages or
+Cloudflare. Creating the three variables neither publishes the site nor
+configures the backend.
 
-Le seguenti impostazioni vanno invece nel **runtime Cloudflare Worker**, quando
-sarà autorizzato e predisposto l'ambiente pubblico:
+The following settings belong in the **Cloudflare Worker runtime** once the
+public environment has been authorized and prepared:
 
-| Tipo | Nome | Valore |
+| Type | Name | Value |
 | --- | --- | --- |
 | Variable | `APP_ORIGIN` | `https://ifthenelse.github.io/GIT-for-AI-crash-course/` |
 | Variable | `ALLOW_ORIGINS` | `https://ifthenelse.github.io` |
-| Variable | `GITHUB_CLIENT_ID` | Client ID dell'app OAuth GitHub registrata |
-| Secret | `GITHUB_CLIENT_SECRET` | Client secret dell'app OAuth |
-| Secret | `AUTH_SECRET` | valore casuale forte, ad esempio 32 byte casuali in base64 |
-| Binding D1 | `DB` | database con lo schema applicato |
+| Variable | `GITHUB_CLIENT_ID` | Client ID of the registered GitHub OAuth app |
+| Secret | `GITHUB_CLIENT_SECRET` | OAuth app client secret |
+| Secret | `AUTH_SECRET` | Strong random value, for example 32 random bytes encoded as base64 |
+| D1 binding | `DB` | Database with the schema applied |
 
-`APP_ORIGIN` include percorso della repository e slash finale: è il ritorno OAuth.
-`ALLOW_ORIGINS` contiene l'origine, senza percorso: autorizza le chiamate browser.
-I secret OAuth non devono diventare variabili `VITE_*` né essere inclusi nella
-build Pages. Si può generare `AUTH_SECRET` localmente con `openssl rand -base64 32`
-e salvarlo direttamente nello store del Worker, senza incollarlo in chat o Git.
+`APP_ORIGIN` includes the repository path and trailing slash: it is the OAuth
+return destination. `ALLOW_ORIGINS` contains the origin without a path: it
+authorizes browser requests. OAuth secrets must never become `VITE_*` variables
+or appear in the Pages build. Generate `AUTH_SECRET` locally with
+`openssl rand -base64 32` and save it directly in the Worker's secret store,
+without pasting it into chat or Git.
 
-Nella GitHub OAuth App impostare Homepage URL al SITE_URL sopra e Authorization
-callback URL a `https://<origine-api>/auth/callback/github`. Il callback appartiene
-al backend; il client ID non è il token personale GitHub né l'ID numerico account.
-Google, Microsoft e LinkedIn non hanno env operative in questa versione; Apple
-rimane disabilitato. Non creare secret per provider non implementati.
+In the GitHub OAuth App, set Homepage URL to `SITE_URL` above and Authorization
+callback URL to `https://<api-origin>/auth/callback/github`. The callback belongs
+to the backend; the client ID is neither a personal GitHub token nor the numeric
+account ID. Google, Microsoft, and LinkedIn have no operational environment
+variables in this version; Apple remains disabled. Do not create secrets for
+providers that have not been implemented.
 
-`CLOUDFLARE_API_TOKEN` e `CLOUDFLARE_ACCOUNT_ID` non sono consumati dai workflow
-attuali. Serviranno soltanto se si introdurrà una distribuzione automatica;
-permessi e nomi saranno definiti con quel workflow. Per un futuro deploy Pages
-con le azioni ufficiali basterà il token automatico con permessi specifici: non
-è necessario preparare in anticipo un PAT generale.
+Current workflows do not consume `CLOUDFLARE_API_TOKEN` or `CLOUDFLARE_ACCOUNT_ID`.
+They will be needed only if automated deployment is introduced; permissions
+and names will be defined with that workflow. A future Pages deployment using
+official actions can use the automatically provided token with specific
+permissions; there is no need to prepare a general-purpose PAT in advance.

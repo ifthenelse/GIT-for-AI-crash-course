@@ -1,25 +1,26 @@
-# Confini di fiducia e controlli
+# Trust boundaries and controls
 
-Stato locale del 15 novembre 2026. Le verifiche automatiche coprono i confini
-indicati; configurazione pubblica e provider GitHub reale non sono ancora provati.
+Local status as of November 15, 2026. Automated checks cover the boundaries
+listed below; public configuration and the real GitHub provider have not yet
+been tested.
 
-| Asset / confine | Controllo implementato | Evidenza | Limite residuo |
+| Asset / boundary | Implemented control | Evidence | Remaining limitation |
 | --- | --- | --- | --- |
-| Risultati, browser → API | replay con seed server, obiettivi, proprietà tentativo, tier e versione | unit/integration API, catalogo reale, E2E manipolazione | soluzioni e automazioni possibili; classifica didattica |
-| Completamenti, API → DB | batch atomico, idempotenza, vincoli unici e prima riuscita conservata | concorrenza, retry identico/differente, ripetizione e riapertura SQLite | runtime D1 e ripristino pubblico da provare |
-| Identità, provider → API | Auth.js GitHub con state e PKCE; identità provider/subject, niente linking email | handoff locale con challenge, stato, scadenza e consumo singolo | OAuth GitHub reale richiede credenziali e verifica integrata |
-| Sessioni | bearer opaco breve, hash nel DB, solo memoria frontend, revoca logout | test scadenza/revoca; nessuna persistenza bearer nel client | XSS può agire come utente nella pagina; header Pages da verificare |
-| Dati utente | proprietà verificata prima di operare sul tentativo | fixture con due utenti, risposta non rivelatrice | nuove API richiederanno gli stessi controlli |
-| Pause | limite ledger, soli aggregati conservati, nessun effetto sul ranking | test ledger malformato e tempi server | stime manipolabili o incomplete |
-| Risorse | limiti azioni/file/commit/corpo, rate limiter per istanza | test payload e comandi rifiutati | limite globale e CPU Worker Free da misurare |
-| Segreti | env backend; VITE solo URL pubblico; token provider escluso dal client | ispezione codice, esempio env privo di segreti | configurazione reale e bundle finale da ricontrollare al deploy |
-| Classifica | alias e consenso esplicito; nessuna email o ledger pubblico | test opt-in/opt-out e corso reale | retention e cancellazione account prima del lancio |
-| Computer | nessun subprocesso nell'app; comandi/hook/SSH fittizi con whitelist | test shell injection, traversal, oggetti immutabili | guide OS possono essere eseguite consapevolmente dall'utente |
+| Results, browser → API | Replay with a server seed, objectives, attempt ownership, tier, and version | API unit/integration tests, real catalog, tampering E2E | Solutions and automation remain possible; the leaderboard is educational |
+| Completions, API → DB | Atomic batches, idempotency, unique constraints, and preservation of the first successful result | Concurrency, identical/changed retries, repetition, and SQLite reopening | D1 runtime and public recovery remain untested |
+| Identity, provider → API | Auth.js GitHub with state and PKCE; provider/subject identity, no email linking | Local handoff with challenge, state, expiry, and single use | Real GitHub OAuth requires credentials and integrated verification |
+| Sessions | Short-lived opaque bearer, hash in the DB, frontend memory only, logout revocation | Expiry/revocation tests; no client bearer persistence | XSS can act as the user on the page; Pages headers need verification |
+| User data | Ownership checked before operating on an attempt | Two-user fixture and non-disclosing response | New APIs will require the same checks |
+| Breaks | Ledger limits, only aggregates retained, no effect on ranking | Malformed-ledger and server-timing tests | Estimates can be manipulated or incomplete |
+| Resources | Action/file/commit/body limits and per-instance rate limiter | Rejected-payload and command tests | Global limiting and Worker Free CPU must be measured |
+| Secrets | Backend env; VITE contains only a public URL; provider token excluded from the client | Code inspection and secret-free example env | Recheck real configuration and final bundle at deployment |
+| Leaderboard | Alias and explicit consent; no public email or ledger | Opt-in/opt-out and real-course tests | Retention and account deletion required before launch |
+| Computer | No subprocesses in the app; allowlisted fictional commands/hooks/SSH | Shell-injection, traversal, and immutable-object tests | Users can deliberately run OS guides on their own computers |
 
-La bozza IndexedDB e il layout locale rimangono sul dispositivo, separati per
-identità e versione; logout revoca la sessione senza presentarsi come cancellazione
-dei dati locali o dell'account. Il database locale è escluso da Git.
+IndexedDB drafts and local layout remain on the device, separated by identity
+and version. Logout revokes the session and does not present itself as deletion
+of local data or the account. The local database is excluded from Git.
 
-Prima della pubblicazione definire e provare retention, richiesta di cancellazione,
-backup/ripristino e limiti del servizio gratuito. Nessuna promessa di conservazione
-illimitata o certificazione antifrode deriva dall'immutabilità dello stato.
+Before publishing, define and test retention, deletion requests, backup/recovery,
+and free-service limits. State immutability does not promise unlimited retention
+or certify protection against cheating.

@@ -1,40 +1,40 @@
-# Audit SEO locale
+# Local SEO audit
 
-Metodo: skill SEO Audit. Input: HTML prodotto dalla build, sitemap/robots,
-componenti React e pagine effettivamente aperte in Chromium. Non sono disponibili
-un sito pubblico, Search Console, ranking, dati di traffico o Core Web Vitals reali.
+Method: the SEO Audit skill. Inputs: built HTML, sitemap/robots, React components
+and pages opened in Chromium. A public site, Search Console, rankings, traffic
+data and field Core Web Vitals are not available.
 
-## Esito e correzioni
+## Findings and fixes
 
-| Problema rilevato | Impatto | Correzione ed evidenza |
+| Finding | Impact | Fix and evidence |
 | --- | --- | --- |
-| SPA inizialmente priva di contenuto HTML utile | alto | prerender di home, programma e tre tier in IT/EN: 10 pagine con titoli, sintesi e 36/12 moduli leggibili senza JS |
-| Titoli home IT/EN identici e descrizioni ripetute | medio | titoli e descrizioni unici; controllo con `npm run audit:seo` |
-| Link pubblici disponibili solo come hash | medio | programma e tier hanno URL reali e link nel contenuto statico; navigazione React conserva la sessione |
-| Preview locale potenzialmente indicizzabile | medio | build senza SITE_URL usa localhost e `noindex,nofollow`, robots Disallow |
-| Base path delle repository Pages | alto | build sotto `/git-practice/`, 10 URL senza JS e corso/laboratorio idratati EN: nessun asset 404 o errore pagina |
-| Immagine sociale sempre inglese | basso | social-it.png per italiano e social.png per inglese, con dimensioni 1200×630 |
+| The SPA initially lacked useful HTML content | High | Prerendered home, program and three levels in IT/EN: 10 pages with headings, summaries and 36/12 modules readable without JS |
+| Identical IT/EN home titles and repeated descriptions | Medium | Unique titles and descriptions; checked with `npm run audit:seo` |
+| Public links available only as hash routes | Medium | Program and level pages have real URLs and links in static content; React navigation preserves the session |
+| Local preview could be indexed | Medium | Builds without SITE_URL use localhost, `noindex,nofollow` and robots Disallow |
+| Pages repository base path | High | Build under `/git-practice/`, 10 URLs without JS and hydrated EN course/laboratory: no asset 404s or page errors |
+| Social image always in English | Low | social-it.png for Italian and social.png for English, both 1200×630 |
 
-Ogni pagina pubblica ha canonical, alternates IT/EN reciproci e x-default, lingua
-HTML, una H1, meta description, Open Graph e JSON-LD Course. Il test legge il
-JSON-LD dal documento completo: non usa una rappresentazione che rimuove script.
-La sitemap contiene i dieci URL canonici. Il programma e le tre pagine tier sono
-collegati esplicitamente. Font e asset sono serviti localmente.
+Each public page has a canonical URL, reciprocal IT/EN alternates and x-default,
+an HTML language, one H1, a meta description, Open Graph and Course JSON-LD.
+The test reads JSON-LD from the complete document, without using a representation
+that strips scripts. The sitemap contains the ten canonical URLs. The program and
+three level pages are explicitly linked. Fonts and assets are served locally.
 
-La prova con dominio `example.test` è una fixture locale e non costituisce una
-pubblicazione. Il laboratorio viene caricato in un chunk differito; la build
-misurata comprende circa 139 kB gzip iniziali di JavaScript e 26 kB per il
-laboratorio, oltre a CSS e font. Non sono misure di LCP/INP/CLS o traffico reale.
+The check using `example.test` is a local fixture, not a publication. The
+laboratory loads in a deferred chunk; the measured build includes approximately
+139 kB of initial gzipped JavaScript and 26 kB for the laboratory, plus CSS and
+fonts. These are not LCP/INP/CLS or real traffic measurements.
 
-## Riproduzione e gate pubblici
+## Reproduction and public release gates
 
 ```bash
 npm run build
 npm run audit:seo
 ```
 
-Prima del lancio impostare URL e base path reali, provare risposte HTTP/deep link,
-HTTPS e canonical sul sito distribuito, controllare il bundle senza segreti e
-verificare l'indicizzabilità. Registrazione Search Console e misure sul campo
-rimangono attività esterne da autorizzare. La presenza di Course JSON-LD non
-promette rich results o posizionamenti.
+Before launch, set the real URL and base path, test HTTP responses/deep links,
+HTTPS and canonical URLs on the deployed site, check that the bundle contains no
+secrets and verify indexability. Search Console registration and field
+measurements remain external activities requiring authorization. Course JSON-LD
+does not guarantee rich results or rankings.

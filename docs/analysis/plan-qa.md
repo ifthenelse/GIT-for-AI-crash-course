@@ -1,34 +1,34 @@
-# Verifica trasversale del piano
+# Plan cross-check
 
-Verifica del 15 novembre 2026, eseguita da un sottoagente in sola lettura con il
-ruolo `plan-qa` della skill GTM Planner, prima di assemblare il piano consolidato.
+Review performed on November 15, 2026, by a read-only subagent using the GTM
+Planner skill's `plan-qa` role, before assembling the consolidated plan.
 
-Ambito: quattro output confermati, stato GTM, roadmap candidata e perimetro
-operativo proposto. Nessuna verifica di un'applicazione o di servizi distribuiti.
+Scope: four confirmed outputs, GTM status, candidate roadmap and proposed
+implementation scope. No application or deployed services were verified.
 
-| Controllo | Esito |
+| Check | Result |
 | --- | --- |
-| Integrità categoria → promessa → motori → canali → impegni | coerente con le conferme |
-| Priorità rispetto a mappa/posizionamento | prove didattiche e incidenti collegati alle iniziative |
-| Attivazione di ogni motore | E1/E2/E3 coperti; sei iniziative con ruoli TBD e milestone di risultato |
-| Disciplina dei messaggi | nessuna efficacia o esclusività inventata |
-| Questioni aperte | rischi e P1–P3/G3/G5/G6/G8/G9 conservati nella roadmap |
-| Capacità | calendario condizionale; 1–2 ore/settimana solo post-lancio; I6 dopo una settimana completa |
+| Integrity of category → promise → engines → channels → commitments | consistent with confirmations |
+| Priorities against mapping/positioning | learning evidence and incident scenarios linked to initiatives |
+| Activation of every engine | E1/E2/E3 covered; six initiatives with TBD roles and outcome milestones |
+| Messaging discipline | no invented effectiveness or exclusivity |
+| Open questions | risks and P1–P3/G3/G5/G6/G8/G9 retained in the roadmap |
+| Capacity | conditional schedule; 1–2 hours per week applies only after launch; I6 follows one complete week |
 
-Nessun blocco sostanziale alla presentazione della proposta. Due avvisi
-documentali rilevati e corretti prima della consolidazione: stato di posizionamento
-ormai confermato nella mappa e distinzione fra capacità iniziale ignota e budget
-di manutenzione confermato nello snapshot. Allineate anche le viste HTML.
+There was no substantial blocker to presenting the proposal. Two documentation
+warnings were found and corrected before consolidation: the map now reflects
+confirmed positioning, and the snapshot distinguishes unknown initial capacity
+from the confirmed maintenance budget. HTML views were aligned as well.
 
-Rimangono condizioni di esecuzione: owner e capacità iniziale, test auth/costo zero,
-regole definitive di dati/classifica e validazione didattica. Non sono trasformate
-in capacità già disponibili dal solo superamento della verifica documentale.
+Execution conditions remain: ownership and initial capacity, authentication/zero-cost
+testing, final data/leaderboard rules and learning validation. Passing a document
+review does not turn these into available capabilities.
 
-Il documento consolidato è stato ricontrollato dopo l'assemblaggio: otto sezioni
-complete, ledger P1–P3/G3/G5/G6/G8/G9/T1–T8 conservato e distinzione fra dipendenze,
-regole proposte e attività autorizzate. Nessun blocco o correzione indispensabile
-rilevato in questa seconda verifica.
+The consolidated document was checked again after assembly: all eight sections
+were complete; the P1–P3/G3/G5/G6/G8/G9/T1–T8 ledger was preserved; dependencies,
+proposed rules and authorized activities remained distinct. No blockers or
+required corrections were found in this second review.
 
-La conferma finale e l'approvazione operativa sono ancora richieste.
-`scripts/verify` termina con codice 0, ma il repository non definisce ancora
-test applicativi. I controlli applicativi saranno possibili dopo l'implementazione.
+At this checkpoint, final confirmation and implementation approval were still required.
+`scripts/verify` exited with code 0, but the repository did not yet define
+application tests. Application checks would become possible after implementation.

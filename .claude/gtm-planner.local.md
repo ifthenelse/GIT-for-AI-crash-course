@@ -3,9 +3,9 @@
 ## Company
 
 - **Name:** GIT-for-AI-crash-course
-- **Website:** non ancora distribuito; repository pubblica esistente
-- **One-line description:** corso Git pubblico indipendente, tre livelli, italiano e inglese
-- **Primary market / geography:** Engineers, Architects e persone di business con esperienza tecnica; nessun limite geografico dichiarato
+- **Website:** not deployed yet; public repository exists
+- **One-line description:** independent public Git course, three levels, Italian and English
+- **Primary market / geography:** engineers, architects and business professionals with technical experience; no geographical restriction stated
 
 ## Journey progress
 
@@ -23,43 +23,43 @@ Statuses: `not started` / `draft` / `confirmed`
 
 ### Resolved
 
-- Roadmap, GTM Plan e implementazione locale approvati il 2026-11-15; percorso di analisi completo.
+- Roadmap, GTM Plan and local implementation approved on 2026-11-15; analysis journey complete.
 
-- Tre motori gratuiti e priorità del piano di diffusione confermati il 2026-11-15.
+- Three free demand engines and demand plan priorities confirmed on 2026-11-15.
 
-- Promessa IT/EN e messaggi confermati il 2026-11-15; pilastri mantenuti come ipotesi da validare.
-- Manutenzione dopo il lancio: budget iniziale di 1–2 ore alla settimana confermato dall'utente; distinto da sviluppo e traduzione iniziali.
+- IT/EN promise and messages confirmed on 2026-11-15; pillars remain hypotheses to validate.
+- Post-launch maintenance: initial budget of 1–2 hours per week confirmed by the user; separate from initial development and translation.
 
-- Mappa delle alternative e categoria «laboratorio visuale di collaborazione con Git» confermate il 2026-11-15.
+- Market map and the category "visual Git collaboration lab" confirmed on 2026-11-15.
 
-- Corso pubblico indipendente, aperto a tutti, repository pubblica e priorità al rilascio pubblico.
-- Simulatore browser e guide facoltative sul computer.
-- Avvio server e tempo trascorso; pause e visibilità browser come stime separate.
-- Costo zero assoluto, provider social per fasi.
-- Quarta vista portale e window manager impilabile/riordinabile adattivo.
-- Italiano e inglese completi al lancio.
-- Ricerca: fonti pubbliche gratuite confermate dall'utente, senza strumenti a pagamento o traffico inventato.
+- Independent public course, open to everyone, public repository and priority given to the public release.
+- Browser simulator and optional guides for the learner's computer.
+- Server-recorded start and elapsed time; browser visibility and pauses as separate estimates.
+- Strictly zero service costs, social providers introduced in phases.
+- Fourth view for the repository portal and an adaptive window manager with stacking and rearranging.
+- Complete Italian and English content at launch.
+- Research: free public sources confirmed by the user, without paid tools or invented traffic.
 
 ### Pending
 
-- P1 [unverified-claim, low]: effetto del percorso file→revisione da provare su scenari funzionanti.
-- P2 [unverified-claim, low]: trasferimento GitHub/Azure DevOps da verificare con utenti.
-- P3 [unverified-claim, low]: recupero motivato da validare su problemi nuovi.
+- P1 [unverified-claim, low]: effect of the file-to-review workflow to test on working scenarios.
+- P2 [unverified-claim, low]: transfer between GitHub and Azure DevOps to verify with learners.
+- P3 [unverified-claim, low]: reasoned recovery to validate on new problems.
 
-- G3 [assumption, low]: differenziazione e utilità da validare con utenti.
-- G5 [missing-data, low]: target di adozione e prova di autonomia.
-- G6 [missing-data, low]: owner, capacità di sviluppo/traduzione iniziale e scadenze; manutenzione post-lancio già fissata a 1–2 ore/settimana.
-- G8 [assumption, medium]: GitHub come primo provider gratuito proposto, ordine successivo da validare.
-- G9 [missing-data, low]: nome pubblico, licenza codice/contenuti e canale feedback.
-- T1 [assumption, low]: replay e archivio entro quote gratuite da misurare.
-- T2 [assumption, low]: login cross-site da verificare sui browser previsti.
-- T3 [confirmed, high]: regole di punti e durata approvate nel perimetro locale e implementate:100 punti/esercizio, prime riuscite conservate.
-- T4 [missing-data, low]: retention, cancellazione e recupero da fissare e provare.
-- T5 [missing-data, low]: registrazioni OAuth e configurazione reale non eseguite.
-- T6 [assumption, medium]: carico reale entro 1–2 ore/settimana da osservare dopo il lancio.
-- T7 [missing-data, low]: disponibilità dei volontari del pilota da verificare.
-- T8 [fact, high]: SEO statico e audit di accessibilità locali eseguiti; evidenze e limiti in docs/audits/. Prestazioni e servizi pubblici restano gate separati.
-- Esecuzione e verifica dei gate tecnici; nessuna ipotesi di efficacia diventa fatto con l’approvazione.
+- G3 [assumption, low]: differentiation and usefulness to validate with learners.
+- G5 [missing-data, low]: adoption targets and evidence of independence.
+- G6 [missing-data, low]: owners, initial development/translation capacity and deadlines; post-launch maintenance already set at 1–2 hours per week.
+- G8 [assumption, medium]: GitHub proposed as the first free provider; subsequent order to validate.
+- G9 [missing-data, low]: public name, code/content licenses and feedback channel.
+- T1 [assumption, low]: replay and storage usage within free quotas to measure.
+- T2 [assumption, low]: cross-site login to verify in supported browsers.
+- T3 [confirmed, high]: scoring and duration rules approved within the local scope and implemented: 100 points per exercise, first successful results preserved.
+- T4 [missing-data, low]: retention, deletion and recovery to define and test.
+- T5 [missing-data, low]: OAuth registrations and live configuration not performed.
+- T6 [assumption, medium]: actual workload within 1–2 hours per week to observe after launch.
+- T7 [missing-data, low]: pilot volunteers' availability to verify.
+- T8 [fact, high]: local static SEO and accessibility audits completed; evidence and limits in docs/audits/. Performance and public services remain separate gates.
+- Execute and verify the technical gates; approval does not turn an effectiveness hypothesis into a fact.
 
 ## Deliverables
 
@@ -69,16 +69,20 @@ Statuses: `not started` / `draft` / `confirmed`
 
 ## Connected sources
 
-- HubSpot: non usato; nessun funnel commerciale richiesto
-- Notion: non usato
-- Similarweb: non usato; analisi pubblica gratuita autorizzata
-- Ahrefs: non usato; analisi pubblica gratuita autorizzata
-- Materials provided: requisiti e risposte utente; documentazione della repository
-- Fallback: fonti ufficiali pubbliche; niente volumi di traffico, quote mercato o keyword stimati senza dati
+- HubSpot: not used; no commercial funnel requested
+- Notion: not used
+- Similarweb: not used; free public research authorized
+- Ahrefs: not used; free public research authorized
+- Materials provided: user requirements and responses; repository documentation
+- Fallback: official public sources; no traffic volumes, market shares or keyword estimates without data
 
 ## Notes
 
-Le cinque fasi sono confermate; il percorso GTM è completo. L’utente ha approvato
-l’implementazione locale secondo il perimetro proposto. Account reali, segreti di
-produzione, risorse cloud, push/PR e pubblicazione sono passaggi separati.
-Le questioni aperte di implementazione e validazione restano nel ledger.
+All five steps are confirmed; the GTM journey is complete. The user approved local
+implementation within the proposed scope. Commits, feature-branch pushes and opening
+pull requests were separately authorized on 2026-11-15. Live accounts, production
+secrets, cloud resources, publishing and merging remain separate actions.
+Open implementation and validation questions remain in the ledger.
+
+Developer documentation, code comments, identifiers, pull requests and commits use
+English. Learner-facing UI and course material remain fully bilingual in IT/EN.

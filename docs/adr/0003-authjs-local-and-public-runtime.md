@@ -1,24 +1,26 @@
-# 0003. Auth.js per GitHub e adapter SQL applicativi
+# 0003. Auth.js for GitHub and application SQL adapters
 
 - Status: accepted
 - Date: 2026-11-15
 
-## Decisione
+## Decision
 
-Fra i candidati compresi nell'approvazione locale si usa `@auth/core`.
-Auth.js gestisce OAuth GitHub con state e PKCE. Il backend mantiene un'identità
-applicativa provider/subject e un bearer opaco a breve durata; lo scambio fra
-origini usa una challenge e un codice monouso. Il provider token resta backend.
+Use `@auth/core` from the candidates included in the local approval.
+Auth.js handles GitHub OAuth with state and PKCE. The backend maintains a
+provider/subject application identity and a short-lived opaque bearer token;
+the cross-origin exchange uses a challenge and a single-use code. The provider
+token stays in the backend.
 
-Il corso usa adapter SQL propri per progressi, sessioni e handoff, con una stessa
-interfaccia Fetch per Node/SQLite e Worker/D1. La sessione intermedia Auth.js usa
-JWT cifrato; l'adapter D1 Auth.js candidato non è necessario e non viene mantenuto
-tra le dipendenze. Non si installa un secondo stack di autenticazione.
+The course uses its own SQL adapters for progress, sessions, and handoffs,
+with one Fetch interface for Node/SQLite and Worker/D1. The intermediate
+Auth.js session uses an encrypted JWT; the candidate Auth.js D1 adapter is
+unnecessary and is not retained as a dependency. No second authentication
+stack is installed.
 
-## Conseguenze
+## Consequences
 
-Le prove locali coprono il provider di sviluppo esplicitamente fittizio, i confini
-di autorizzazione e lo scambio monouso. Non dimostrano il login GitHub reale.
-Prima del lancio servono app OAuth registrata, callback, CORS e origini distribuite
-verificati, oltre al budget CPU del piano gratuito. Altri provider rimangono fasi
-successive entro il vincolo di costo zero. Apple resta disabilitato.
+Local tests cover the explicitly simulated development provider, authorization
+boundaries, and single-use exchange. They do not demonstrate real GitHub login.
+Before launch, a registered OAuth app, callbacks, CORS, and deployed origins must
+be verified, along with the free plan's CPU budget. Other providers remain later
+phases within the zero-cost constraint. Apple remains disabled.

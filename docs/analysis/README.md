@@ -1,54 +1,54 @@
-# Analisi del corso Git
+# Git course analysis
 
-Aggiornamento: 15 novembre 2026. Base della ricognizione: commit `c723660`.
+Updated: November 15, 2026. Initial review baseline: commit `c723660`.
 
-L'utente ha approvato roadmap, piano consolidato e implementazione locale il
-15 novembre 2026. Le analisi conservano le motivazioni e le ipotesi di partenza.
-Per il risultato attuale leggere README.md, docs/architecture.md e docs/testing.md.
-Account reali, risorse cloud, segreti e pubblicazione restano passaggi separati.
+The user approved the roadmap, consolidated plan and local implementation on
+November 15, 2026. These analyses retain the original rationale and assumptions.
+For the current result, read README.md, docs/architecture.md and docs/testing.md.
+Real accounts, cloud resources, secrets and publishing remain separate steps.
 
-| Documento | Stato |
+| Document | Status |
 | --- | --- |
-| [Architettura](../architecture.md) | requisiti aggiornati con le risposte utente; implementazione locale approvata |
-| [Programma didattico](curriculum.md) | 36 moduli implementati IT/EN, tutti gli argomenti richiesti coperti |
-| [Design e verifiche](design-and-quality.md) | proposta iniziale; audit del prodotto in docs/audits/ |
-| [Business Snapshot](../../gtm-plan/01-business-snapshot.md) | GTM Planner, fase 1 confermata con correzioni |
-| [Mappa delle alternative](../../gtm-plan/02-market-map.md) | fase 2 GTM confermata; categoria scelta dall'utente |
-| [Posizionamento](../../gtm-plan/03-positioning.md) | fase 3 GTM, promessa IT/EN e messaggi confermati |
-| [Piano di diffusione](../../gtm-plan/04-demand-plan.md) | fase 4 GTM, motori e canali gratuiti confermati |
-| [Roadmap GTM](roadmap.md) | sei iniziative e direzione a 12 mesi approvate |
-| [GTM Plan consolidato](gtm-plan.md) | approvato dopo verifica trasversale; ledger completo |
-| [Perimetro operativo](implementation-proposal.md) | perimetro locale e dipendenze approvati |
-| [Plan QA](plan-qa.md) | controllo trasversale prima della consolidazione |
-| [Decisioni](decision-tree.md) | primo round risolto; prossimi checkpoint evidenziati |
-| [Window manager](../window-manager.md) | finestre impilabili e riordinabili, anche da tastiera |
-| [Tempo e pause](../timing-and-pauses.md) | elapsed server e stime browser separati |
-| [Roadmap tecnica](product-roadmap.md) | sequenza di sviluppo proposta, non GTM consolidato |
-| [Hosting pubblico](../deployment.md) | solo GitHub Pages e backend entro quote gratuite |
-| [Skill](skills.md) | inventario, fonti upstream e pulizia eseguita |
-| [Verifiche](../testing.md) | evidenze applicative e limiti delle verifiche |
+| [Architecture](../architecture.md) | requirements updated with the user's answers; local implementation approved |
+| [Curriculum](curriculum.md) | 36 modules implemented in IT/EN, covering all requested topics |
+| [Design and verification](design-and-quality.md) | initial proposal; product audits in docs/audits/ |
+| [Business Snapshot](../../gtm-plan/01-business-snapshot.md) | GTM Planner step 1 confirmed with corrections |
+| [Alternatives map](../../gtm-plan/02-market-map.md) | GTM step 2 confirmed; category chosen by the user |
+| [Positioning](../../gtm-plan/03-positioning.md) | GTM step 3; IT/EN promise and messaging confirmed |
+| [Demand plan](../../gtm-plan/04-demand-plan.md) | GTM step 4; free growth engines and channels confirmed |
+| [GTM roadmap](roadmap.md) | six initiatives and a 12-month direction approved |
+| [Consolidated GTM Plan](gtm-plan.md) | approved after cross-checking; complete ledger |
+| [Implementation scope](implementation-proposal.md) | local scope and dependencies approved |
+| [Plan QA](plan-qa.md) | cross-check before consolidation |
+| [Decisions](decision-tree.md) | first round resolved; upcoming checkpoints highlighted |
+| [Window manager](../window-manager.md) | stackable, reorderable windows with keyboard support |
+| [Timing and pauses](../timing-and-pauses.md) | server elapsed time and browser estimates kept separate |
+| [Technical roadmap](product-roadmap.md) | proposed development sequence, separate from the consolidated GTM plan |
+| [Public hosting](../deployment.md) | GitHub Pages and backend within free quotas only |
+| [Skills](skills.md) | inventory, upstream sources and completed cleanup |
+| [Verification](../testing.md) | application evidence and verification limits |
 
-Analisi distribuita tra cinque sottoagenti: inventario/dependenze delle skill,
-programma didattico, System Design, percorso GTM, design e piano SEO/accessibilità;
-un ulteriore sottoagente verifica le fonti gratuite del piano di diffusione.
-Scritture della working copy eseguite soltanto dall'agente coordinatore.
+Analysis was divided among five subagents: skills inventory and dependencies,
+curriculum, System Design, the GTM process, and design with SEO/accessibility
+planning. An additional subagent checks the demand plan's free sources.
+Only the coordinating agent wrote to the working copy during analysis.
 
-## Confini e ripresa
+## Boundaries and resuming work
 
-La richiesta di eliminazione delle skill inutilizzate e il pull sono già autorizzati.
-La pulizia è eseguita; l'implementazione locale è verificata.
+Removal of unused skills and pulling changes have already been authorized.
+Cleanup is complete; the local implementation has been verified.
 
-La repository riguarda esclusivamente il corso pubblico indipendente. La documentazione,
-le skill conservate e i file locali sono allineati a questo perimetro.
+This repository covers only the independent public course. Its documentation,
+retained skills and local files follow that scope.
 
-GTM Planner ha completato intake, mappa, posizionamento e diffusione, confermati dall'utente.
-Categoria: «laboratorio visuale di collaborazione con Git». Promessa: «Collabora
-con Git sapendo cosa cambia e come recuperare il lavoro.» Roadmap e piano consolidato
-sono approvati dopo il controllo trasversale.
-Il perimetro operativo permette di approvare il lavoro locale concreto e le relative
-dipendenze, mantenendo separati setup degli account e pubblicazione.
-Le date dipenderanno dalla capacità del team: nessuna data di lancio è stata inventata.
+GTM Planner completed intake, mapping, positioning and demand planning, confirmed
+by the user. Category: “visual Git collaboration lab.” Promise: “Collaborate with
+Git knowing what changes and how to recover your work.” The roadmap and
+consolidated plan were approved after cross-checking.
+The implementation scope provides a concrete basis for approving local work and
+its dependencies, while keeping account setup and publishing separate.
+Dates depend on team capacity: no launch date has been invented.
 
-Logo SVG, asset derivati, app, dipendenze e contratti sono implementati localmente.
-CI/CD di distribuzione e setup cloud restano separati.
-Non sono stati eseguiti push o aperte PR.
+The SVG logo, derived assets, app, dependencies and contracts are implemented
+locally. Deployment CI/CD and cloud setup remain separate.
+At the stage recorded by this analysis, no changes had been pushed or PRs opened.

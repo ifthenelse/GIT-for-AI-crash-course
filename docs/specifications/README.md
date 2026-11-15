@@ -1,16 +1,16 @@
-# Specifiche del corso Git
+# Git course specifications
 
-Il perimetro locale è approvato. I contratti implementati sono in
-`packages/contracts/src/index.ts`; il catalogo eseguibile è in
-`packages/course-content/src/`. Corso versione `1.0.0`, motore versione `1`.
+The local scope is approved. Implemented contracts are in
+`packages/contracts/src/index.ts`; the executable catalog is in
+`packages/course-content/src/`. Course version `1.0.0`, engine version `1`.
 
-- [Architettura e API effettive](../architecture.md).
-- [Mappa iniziale degli argomenti](../analysis/curriculum.md).
-- [Window manager](../window-manager.md) e [tempo e pause](../timing-and-pauses.md).
-- [Test e limiti](../testing.md), [audit](../audits/README.md).
-- [Hosting e gate di pubblicazione](../deployment.md).
+- [Architecture and implemented APIs](../architecture.md).
+- [Initial topic map](../analysis/curriculum.md).
+- [Window manager](../window-manager.md) and [timing and breaks](../timing-and-pauses.md).
+- [Tests and limitations](../testing.md), [audits](../audits/README.md).
+- [Hosting and publishing gates](../deployment.md).
 
-La regola implementata è 100 punti per prima conclusione valida; 12 esercizi
-concludono un tier e sbloccano il successivo. Reset e undo non annullano i risultati.
-I provider reali richiedono configurazione separata; nessun account o servizio
-viene creato automaticamente dalle variabili di ambiente.
+The implemented rule awards 100 points for the first valid completion; 12
+exercises complete a tier and unlock the next. Reset and undo do not revoke
+results. Real providers require separate configuration; environment variables
+do not automatically create accounts or services.

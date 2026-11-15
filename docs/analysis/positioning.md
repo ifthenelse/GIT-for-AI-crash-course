@@ -1,6 +1,6 @@
-# Posizionamento
+# Positioning
 
-Promessa e messaggi confermati dall’utente il 15 novembre 2026.
+The user confirmed the promise and messaging on November 15, 2026.
 
-Versione canonica: [Positioning Architecture](../../gtm-plan/03-positioning.md).
-I tre pilastri rimangono ipotesi da verificare, non risultati didattici dimostrati.
+Canonical version: [Positioning Architecture](../../gtm-plan/03-positioning.md).
+The three pillars remain hypotheses to test, rather than demonstrated learning outcomes.

@@ -1,69 +1,71 @@
-# Roadmap tecnica candidata
+# Candidate technical roadmap
 
-Sequenza di sviluppo per il solo corso pubblico, aggiornata il 15 novembre 2026.
-È parte della progettazione software: non sostituisce il GTM Plan consolidato,
-che richiede i successivi checkpoint della skill. Nessuna data impegnativa è
-possibile senza capacità e responsabili assegnati.
+Development sequence for the public course only, updated November 15, 2026.
+This is part of software design: it does not replace the consolidated GTM Plan,
+which requires the skill's subsequent checkpoints. No committed date is possible
+without assigned capacity and owners.
 
-Per la sola manutenzione dopo il lancio l'utente ha confermato un budget iniziale
-di 1–2 ore alla settimana. Non è una stima delle ore per costruire il simulatore
-o tradurre l'intero percorso prima del lancio.
+For maintenance after launch only, the user confirmed an initial budget of
+1–2 hours per week. This is not an estimate of the work needed to build the
+simulator or translate the full course before launch.
 
-## Milestone e condizioni di uscita
+## Milestones and exit conditions
 
-| Fase | Risultato reviewabile | Condizione per procedere |
+| Phase | Result ready for review | Condition for proceeding |
 | --- | --- | --- |
-| 0. Approvazione e spike | dipendenze candidate, proof login fra domini gratuiti, benchmark validatore | flusso minimo senza cookie terze parti e carico compatibile con Free; niente servizi a pagamento |
-| 1. Nucleo Git | stato puro, parser subset, fixtures, comandi Base e replay condiviso | confronto con Git reale sui casi supportati; azioni equivalenti corrette accettate |
-| 2. Laboratorio | terminale, DAG, editor e portale sincronizzati; window manager adattivo | tastiera/touch, impilamento e recupero finestre, undo/redo senza alterare layout o completamenti |
-| 3. Progressi e sessione | primo provider sociale, avvio/finale server, idempotenza e coda offline | riapertura ripristina progressi; impossibile sbloccare tier dal solo client; tempi ufficiali distinti dalle stime |
-| 4. Copertura del corso | tre livelli, conflitti, PR/policy, rollback, rebase, worktree e scenari finali | ogni argomento della matrice ha spiegazione, azione, criterio di successo e feedback |
-| 5. Parità IT/EN | lezioni, esercizi, aiuti, guide OS, errori, UI e alternative accessibili completi | nessuna stringa o lezione mancante in una lingua; cambio lingua senza perdita dello scenario |
-| 6. Identità e verifica | SVG trasparente nei due temi, icone/social card, classifica, SEO e accessibilità | audit sul prodotto renderizzato, correzione dei blocchi e prove di recupero dati |
-| 7. Rilascio pubblico | artefatto statico su Pages e API gratuita verificata | percorso completo end-to-end, quote compatibili, pubblicazione approvata e rollback provato |
+| 0. Approval and spike | candidate dependencies, login proof across free domains, validator benchmark | minimum flow without third-party cookies and a load compatible with Free; no paid services |
+| 1. Git core | pure state, subset parser, fixtures, Base commands and shared replay | comparison with real Git for supported cases; correct equivalent actions accepted |
+| 2. Lab | synchronized terminal, DAG, editor and portal; adaptive window manager | keyboard/touch support, window stacking and recovery, undo/redo without changing layout or completions |
+| 3. Progress and session | first social provider, server start/completion, idempotency and offline queue | reopening restores progress; the client alone cannot unlock tiers; official time remains distinct from estimates |
+| 4. Course coverage | three levels, conflicts, PRs/policies, rollback, rebase, worktrees and final scenarios | every matrix topic has an explanation, action, success criterion and feedback |
+| 5. IT/EN parity | complete lessons, exercises, hints, OS guides, errors, UI and accessible alternatives | no missing strings or lessons in either language; changing language preserves the scenario |
+| 6. Identity and verification | transparent SVG in both themes, icons/social card, leaderboard, SEO and accessibility | audits of the rendered product, blocker fixes and data-recovery tests |
+| 7. Public release | static artifact on Pages and verified free API | complete end-to-end flow, compatible quotas, approved publishing and tested rollback |
 
-## Parallelizzazione dopo approvazione
+## Parallel work after approval
 
-Sottoagenti in worktree separate: motore/replay; window manager e viste; API/sessione;
-contenuti bilingui; identità visiva e verifiche. Il coordinatore integra contratti
-approvati e revisioni. Mai due agenti che scrivono nella stessa working copy.
-API e motore condividono prima uno schema di azioni versionato per evitare derive.
+Subagents use separate worktrees: engine/replay; window manager and views;
+API/session; bilingual content; visual identity and verification. The coordinator
+integrates approved contracts and reviews. Two agents must never write to the
+same working copy. API and engine first share a versioned action schema to
+prevent divergence.
 
-La scrittura dei contenuti e delle traduzioni può procedere insieme al laboratorio;
-la pubblicazione resta bloccata dalla parità completa dei tre livelli IT/EN.
-Una preview per revisione può contenere un sottoinsieme dichiarato, ma non viene
-presentata come il lancio completo richiesto.
+Content and translation can progress alongside the lab; publishing remains
+blocked until all three levels have complete IT/EN parity. A review preview may
+contain a declared subset, but must not be presented as the requested full launch.
 
-## Scope del primo lancio proposto
+## Proposed first-launch scope
 
-Tre livelli e quattro finestre; scenari deterministici; lezioni e guide IT/EN;
-progressi persistenti, tier progressivi, classifica didattica e timer server;
-pause stimate, pratica locale e ripresa dopo errore; temi e SVG; provider GitHub
-come prima fase proposta. Nessun Bash arbitrario, broker a pagamento, dominio da
-acquistare o provider inattivo mostrato come disponibile.
+Three levels and four windows; deterministic scenarios; IT/EN lessons and guides;
+persistent progress, progressive tiers, educational leaderboard and server timer;
+estimated pauses, local practice and recovery after errors; themes and SVG;
+GitHub as the proposed first provider. No arbitrary Bash, paid broker, purchased
+domain or inactive provider displayed as available.
 
-Google, Microsoft e LinkedIn seguono quando prerequisiti e setup gratuiti sono
-verificati. Apple rimane escluso finché introdurlo contrasta con costo zero.
-L'ordine dei provider è una raccomandazione reviewabile, non una registrazione già eseguita.
+Google, Microsoft and LinkedIn follow once prerequisites and free setup have been
+verified. Apple remains excluded while adding it conflicts with zero cost.
+Provider order is a recommendation for review, not a registration already performed.
 
-## Dipendenze e limiti da risolvere
+## Dependencies and limits to resolve
 
-- Misurare auth e peggiori replay supportati sul runtime gratuito prima di
-  dipendere da esso. Se non rientrano nel budget CPU, ottimizzare o fermare il
-  lancio persistente; nessun upgrade automatico.
-- Definire score, tentativi e aggregazione del tempo per tier prima dello schema
-  definitivo. Le pause client non alterano la durata server.
-- Provare il percorso di ripristino e fissare retention/cancellazione account.
-- Confermare nome pubblico, licenze e canale feedback prima della pubblicazione.
-- Definire un piccolo pilota con persone dei pubblici target per validare
-  comprensione e trasferimento a una repository reale, senza inventare risultati.
+- Measure authentication and the most expensive supported replays on the free
+  runtime before relying on it. If they exceed the CPU budget, optimize or block
+  the persistent launch; no automatic upgrade.
+- Define scoring, attempts and time aggregation per tier before the final schema.
+  Client pause estimates do not alter server duration.
+- Test recovery and establish retention/account deletion.
+- Confirm public name, licenses and feedback channel before publishing.
+- Define a small pilot with people from the target audiences to validate
+  understanding and transfer to a real repository, without inventing results.
 
-## Criterio di prontezza
+## Readiness criterion
 
-Un utente entra con il provider abilitato, completa uno scenario, riceve verifica
-server, chiude il browser, rientra e ritrova il completamento; ripete e annulla
-azioni senza perdere l'esito acquisito. Lo stesso percorso funziona nelle due
-lingue, su viewport diversi e da tastiera. Nessun passaggio richiede un acquisto.
+A user signs in with an enabled provider, completes a scenario, receives server
+verification, closes the browser, returns and finds the completion retained;
+repeating and undoing actions does not remove the acquired result. The same
+flow works in both languages, across viewports and using the keyboard.
+No step requires a purchase.
 
-Questo documento rende il lavoro concreto per la futura approvazione operativa;
-non autorizza dipendenze, schema definitivo, CI/CD, registrazioni OAuth, push o deploy.
+This document makes the work concrete for subsequent implementation approval;
+it does not authorize dependencies, final schema, CI/CD, OAuth registrations,
+pushing or deployment.

@@ -1,76 +1,80 @@
-# Gestore delle finestre del laboratorio
+# Lab window manager
 
-Confermato: terminale, cronologia Git, editor e portale repository sono finestre
-impilabili e riordinabili anche su piccoli viewport. La specifica rimane da
-implementare dopo approvazione.
+Confirmed: the terminal, Git history, editor, and repository portal are stackable,
+reorderable windows, including on small viewports. This document specifies the
+required behavior. See [architecture.md](architecture.md) for implemented scope
+and [testing.md](testing.md) for verification evidence.
 
-## Comportamenti
+## Behavior
 
-| Funzione | Proposta |
+| Feature | Proposal |
 | --- | --- |
-| Desktop iniziale | quattro finestre in griglia 2×2 |
-| Attivazione | click o ingresso del focus portano davanti la finestra |
-| Dock | quattro pulsanti sempre raggiungibili con nome e stato |
-| Minimizza | nasconde la finestra conservando contenuto, cursore e cronologia |
-| Ripristina | recupera posizione e ultimo focus valido |
-| Ingrandisci | occupa l'area del laboratorio, mantenendo HUD, dock e uscita |
-| Sposta/ridimensiona | trascinamento o menu con controlli equivalenti da tastiera |
-| Disponi | preset griglia, affianca, sovrapponi e ripristina disposizione |
-| Panoramica | elenco delle quattro finestre con stato e azioni di recupero |
+| Initial desktop | Four windows in a 2×2 grid |
+| Activation | Clicking or moving focus into a window brings it to the front |
+| Dock | Four always-accessible buttons with names and states |
+| Minimize | Hide the window while preserving its contents, cursor, and history |
+| Restore | Recover its position and last valid focus |
+| Maximize | Fill the lab area while keeping the HUD, dock, and exit available |
+| Move/resize | Dragging or a menu with equivalent keyboard controls |
+| Arrange | Grid, side-by-side, cascade, and reset-layout presets |
+| Overview | List all four windows with their states and recovery actions |
 
-Le finestre principali si minimizzano; non si chiudono accidentalmente.
-Il comando Chiudi riguarda elementi temporanei, come un confronto di file.
-Nessun comando di disposizione distrugge lo stato Git o ricrea l'editor.
+The main windows minimize; they cannot be closed accidentally. Close applies
+to temporary elements such as a file comparison. No layout command destroys
+Git state or recreates the editor.
 
-## Tastiera e accessibilità
+## Keyboard and accessibility
 
-Finestre come regioni titolate non modali, ordine DOM stabile anche se cambia
-lo z-order. Quando il focus entra in una finestra coperta, questa viene mostrata
-prima che il controllo focalizzato possa restare nascosto.
+Represent windows as labeled, non-modal regions, with stable DOM order even
+when their z-order changes. When focus enters a covered window, reveal it
+before the focused control could remain hidden.
 
-Ogni titolo offre un menu con Sposta, Ridimensiona, Minimizza, Ingrandisci e preset.
-In modalità Sposta le frecce muovono, Invio conferma ed Esc annulla; la modalità
-è annunciata e non intercetta le scorciatoie del browser o del sistema operativo.
-Ridimensiona offre valori di larghezza/altezza e pulsanti per modificarli.
-Nessuna operazione richiede soltanto trascinamento.
+Each title provides a menu with Move, Resize, Minimize, Maximize, and presets.
+In Move mode, arrow keys move the window, Enter confirms, and Escape cancels.
+Announce the mode without intercepting browser or operating-system shortcuts.
+Resize offers width and height values with buttons to change them. No operation
+may require dragging as its only input method.
 
-Minimizzando si sposta il focus al pulsante nel dock; i contenuti nascosti sono
-esclusi dall'albero accessibile e dalla tabulazione, mantenendo lo stato in memoria.
-Uscendo dall'ingrandimento si recuperano layout e focus precedenti. Panoramica
-può essere un dialogo con ritorno del focus al comando che l'ha aperta.
-Il terminale e l'editor offrono un percorso di uscita da tastiera documentato;
-nella modalità testo semplice Tab esce dal campo e l'indentazione ha un comando.
+Minimizing moves focus to the dock button; hidden contents are removed from
+the accessibility tree and tab order while retaining their state in memory.
+Leaving maximized mode restores the previous layout and focus. Overview can
+be a dialog that returns focus to its trigger. The terminal and editor provide
+a documented keyboard exit. In plain-text mode, Tab leaves the field and a
+separate command handles indentation.
 
-Gli annunci di spostamento sono concisi, senza leggere coordinate a ogni pixel.
-Con `prefers-reduced-motion` eliminare animazioni di spostamento e zoom.
+Keep movement announcements concise rather than reading coordinates at every
+pixel. Remove movement and zoom animations with `prefers-reduced-motion`.
 
-## Viewport piccolo
+## Small viewports
 
-Usare finestre sovrapposte in cascata con dock e panoramica, non una UI di sole tab.
-La finestra attiva può occupare quasi tutto lo spazio e può essere ingrandita.
-Preset affiancati disponibili solo quando restano leggibili i contenuti.
-Titolo e controlli di recupero rimangono raggiungibili dopo rotazione, resize
-o apertura della tastiera virtuale. Nessun controllo soltanto hover.
+Use cascading overlapping windows with a dock and overview, rather than a
+UI consisting only of tabs. The active window may occupy almost all the space
+and can be maximized. Side-by-side presets are available only when content
+remains readable. Keep titles and recovery controls reachable after rotation,
+resizing, or opening the virtual keyboard. No control may depend on hover alone.
 
-Il viewport della pagina non richiede scroll orizzontale. Codice e grafo possono
-avere scroll interno quando necessario; il grafo dispone anche di elenco testuale.
-Obiettivo per i controlli principali: 44 CSS px, con verifica della disposizione
-reale a 320 CSS px, testo al 200% e zoom al 400%.
+The page viewport must not require horizontal scrolling. Code and graphs may
+scroll internally when needed; the graph also has a text list. Target 44 CSS px
+for primary controls, verifying the rendered layout at 320 CSS px, 200% text
+size, and 400% zoom.
 
-## Persistenza
+## Persistence
 
-Preferenze locali per account, browser/dispositivo e classe di viewport, separate
-dalla repository e dalla cronologia Zundo. Annullare un comando Git non sposta
-le finestre. Non promettere sincronizzazione del layout tra dispositivi.
+Store local preferences by account, browser/device, and viewport class,
+separately from the repository and Zundo history. Undoing a Git command does
+not move windows. Do not promise layout synchronization between devices.
 
-Salvare posizioni normalizzate, dimensioni e stati; validare versione e limiti
-al ripristino. Coordinate fuori area vengono ricondotte a un preset sicuro.
-Ripristina disposizione riguarda le finestre; Ripristina esercizio riguarda
-lo scenario e non cancella un completamento già confermato.
+Save normalized positions, sizes, and states; validate versions and bounds on
+restore. Out-of-bounds coordinates fall back to a safe preset. Reset window
+layout affects windows; Reset exercise affects the scenario and does not
+erase a previously confirmed completion.
 
-## Messaggi IT/EN
+## IT/EN messages
 
-| Italiano | English |
+The following Italian strings are product localization examples; documentation
+and technical identifiers remain in English.
+
+| Italian | English |
 | --- | --- |
 | Ripristina Terminale | Restore Terminal |
 | Ingrandisci finestra | Maximize window |
@@ -83,10 +87,10 @@ lo scenario e non cancella un completamento già confermato.
 | Il timer di studio è in pausa. Il tempo ufficiale continua. | The study timer is paused. Official elapsed time continues. |
 | La stima usa i segnali del browser. Cambiare finestra non modifica il punteggio. | The estimate uses browser signals. Switching windows does not affect your score. |
 
-## Criteri di accettazione
+## Acceptance criteria
 
-Completare lo scenario e tutte le operazioni del gestore con sola tastiera;
-recuperare ogni finestra dopo sovrapposizione, viewport cambiato e dati layout
-obsoleti; preservare focus, selezione e cursore; verificare screen reader, touch,
-entrambi i temi e entrambe le lingue. Passare tra finestre simulate non deve
-attivare una pausa del documento. Audit del prodotto renderizzato prima del lancio.
+Complete the scenario and every window-manager operation using only a keyboard.
+Recover every window after overlap, viewport changes, and stale layout data.
+Preserve focus, selection, and cursor position. Check screen readers, touch,
+both themes, and both languages. Switching between simulated windows must not
+trigger a document pause. Audit the rendered product before launch.
