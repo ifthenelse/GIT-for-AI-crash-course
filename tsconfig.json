@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["node", "vite/client"],
+    "paths": {
+      "@gitcourse/contracts": ["./packages/contracts/src/index.ts"],
+      "@gitcourse/engine": ["./packages/git-engine/src/index.ts"],
+      "@gitcourse/content": ["./packages/course-content/src/index.ts"]
+    }
+  },
+  "include": ["apps", "packages", "services", "tests", "*.ts"]
+}

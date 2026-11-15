@@ -1,5 +1,8 @@
 # <type>(<optional-scope>)!: <description>
 #
+# Write the subject, body and footers in English.
+# Use English identifiers and scopes. Learner-facing content remains IT/EN.
+#
 # Allowed types:
 # build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test
 #

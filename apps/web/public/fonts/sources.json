@@ -1,0 +1,32 @@
+[
+  {
+    "file": "inter-variable.woff2",
+    "source": "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/InterVariable.woff2",
+    "sha256": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3",
+    "bytes": 352240
+  },
+  {
+    "file": "jetbrains-mono-regular.woff2",
+    "source": "https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Regular.woff2",
+    "sha256": "f1a7a03672cdd494ce0d5543fac6e4360fe22403c6de297fdc2e55a815f7baff",
+    "bytes": 92380
+  },
+  {
+    "file": "jetbrains-mono-bold.woff2",
+    "source": "https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/webfonts/JetBrainsMono-Bold.woff2",
+    "sha256": "08863c7964612257a90bd821e3127dc5ccb0b5046f881673a1ade5809eb21d0f",
+    "bytes": 94628
+  },
+  {
+    "file": "Inter-OFL.txt",
+    "source": "https://raw.githubusercontent.com/rsms/inter/master/LICENSE.txt",
+    "sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a",
+    "bytes": 4380
+  },
+  {
+    "file": "JetBrainsMono-OFL.txt",
+    "source": "https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/OFL.txt",
+    "sha256": "a76abf002c49097d146e86740a3105a5d00450b1592e820a1109a8c5680cd697",
+    "bytes": 4399
+  }
+]

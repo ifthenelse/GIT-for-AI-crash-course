@@ -1,0 +1,418 @@
+<!doctype html>
+<!-- Generated from 00-gtm-plan.md by node scripts/render-gtm-docs.mjs. -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="GTM plan for the independent Git Practice Lab. Approved scope, evidence, assumptions and zero-cost release gates."><title>GTM Plan — GIT-for-AI-crash-course</title><style>
+    :root {
+      --ink: #0a0612; --ink-2: #14091f; --ink-3: #1f132e; --ink-4: #2c1d40;
+      --line-dark: #3a2954; --paper: #faf7f2; --paper-2: #f4ede2; --paper-3: #e9dfd0;
+      --line: #d6c9b3; --line-soft: #e6dccb; --fg: #14091f; --fg-2: #4a3d5c; --fg-3: #7a6e8a;
+      --on-dark: #faf7f2; --on-dark-2: #c9bdd6; --on-dark-3: #8a7c9e; --lilac: #a99bbf;
+      --purple-700: #8114b0; --purple-500: #b427a3; --magenta: #e13798; --pink: #fe5688;
+      --coral: #fb9a6a; --yellow: #f7fd3d; --warn: #f8dd4b; --ok: #2dd4a8;
+      --white: #ffffff; --pass: #11624d; --partial: #9a7d00; --warn-border: #d9bf2c;
+      --warn-text: #7a6400; --ok-border: #2aa886;
+      --grad: linear-gradient(135deg, #8114b0 0%, #c129a1 32%, #fe5688 58%, #fb9a6a 78%, #f7fd3d 100%);
+      --grad-bar: linear-gradient(90deg, #b427a3 0%, #e13798 30%, #fe5688 62%, #fb9a6a 100%);
+      --grad-text: linear-gradient(90deg, #d42ea0 0%, #fe5688 45%, #fb9a6a 78%, #f3d64a 100%);
+      --hero-purple: rgba(91,11,135,.55); --hero-pink: rgba(254,86,136,.22);
+      --draft-border: rgba(248,221,75,.45); --tab-bg: rgba(20,9,31,.5);
+      --warn-bg: rgba(248,221,75,.18); --ok-bg: rgba(45,212,168,.12);
+      --blackout-line: rgba(214,201,179,.55); --blackout-bg: rgba(233,223,208,.6);
+      --gap-bg: rgba(254,86,136,.08); --hyp-bg: rgba(180,39,163,.05);
+      --choice-start: rgba(254,86,136,.10); --choice-end: rgba(251,154,106,.05);
+      --toc-bg: rgba(250,247,242,.92);
+      --sans: Manrope, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      --r-sm: 8px; --r-md: 14px; --r-lg: 22px; --r-xl: 30px; --r-pill: 999px;
+      --gutter: clamp(16px, 4.4vw, 86px); --gap: clamp(14px, 1.4vw, 24px);
+      --section-space: clamp(36px, 3.4vw, 56px);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    body { margin: 0; background: var(--paper); color: var(--fg); font: 400 16px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4, p, blockquote { margin: 0; }
+    a { color: var(--purple-700); }
+    a:focus-visible { outline: 2px solid var(--pink); outline-offset: 4px; }
+    .wrap { width: 100%; max-width: 1760px; margin-inline: auto; padding-inline: var(--gutter); }
+    .label { font: 500 12px/1.5 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-3); }
+    .grad { background: var(--grad-text); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .muted { color: var(--lilac); }
+    .hero { overflow: hidden; color: var(--on-dark); background: radial-gradient(ellipse 55% 140% at 92% -10%, var(--hero-purple), transparent 62%), radial-gradient(ellipse 35% 90% at 78% -20%, var(--hero-pink), transparent 60%), var(--ink); }
+    .hero > .wrap { padding-top: clamp(36px,4vw,64px); padding-bottom: clamp(36px,3.6vw,56px); }
+    .hero__top { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 16px; }
+    .eyebrow { font: 500 13px/1.5 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--pink); }
+    .eyebrow span + span::before { content: " · "; color: var(--pink); }
+    .status { display: inline-flex; align-items: center; gap: 10px; color: var(--on-dark-2); border: 1px solid var(--line-dark); border-radius: var(--r-pill); padding: 11px 18px; font: 500 13px/1.5 var(--mono); white-space: nowrap; }
+    .status--ok::before { content: ""; width: 7px; height: 7px; flex: 0 0 7px; border-radius: 50%; background: var(--ok); }
+    .status--draft { color: var(--warn); border-color: var(--draft-border); }
+    .hero__body { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 32px 48px; margin-top: clamp(28px,3vw,44px); }
+    .hero__body > :first-child { flex: 1 1 720px; min-width: 0; }
+    .hero__body > :nth-child(2) { flex: 0 0 auto; }
+    .hero__title { font: 800 clamp(38px,4.3vw,72px)/1.04 var(--sans); letter-spacing: -.035em; max-width: 24ch; overflow-wrap: anywhere; }
+    .hero__title--wide { max-width: none; }
+    .hero__lede { font: 400 clamp(16px,1.25vw,22px)/1.45 var(--sans); color: var(--on-dark-2); max-width: 62ch; margin-top: 18px; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tabs > a, .tabs > span { font: 500 15px/1.5 var(--sans); color: var(--on-dark-2); border: 1px solid var(--line-dark); border-radius: var(--r-pill); padding: 13px 16px; background: var(--tab-bg); text-decoration: none; }
+    .tabs > [aria-current="page"] { background: var(--pink); color: var(--white); font-weight: 600; }
+    .tabs > span { opacity: .4; }
+    .tabs--row { margin-top: clamp(24px,2.4vw,36px); }
+    .chain { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .chain__step { min-width: 96px; padding: 16px 20px; background: var(--ink-2); border: 1px solid var(--line-dark); border-radius: var(--r-md); }
+    .chain__step b { display: block; font: 500 clamp(22px,1.7vw,30px)/1.2 var(--mono); }
+    .chain__step span { display: block; margin-top: 6px; font: 400 15px/1.5 var(--mono); color: var(--on-dark-2); }
+    .chain__arrow { font: 400 14px/1 var(--mono); color: var(--pink); }
+    .chain__step--goal { background: var(--pink); color: var(--ink); }
+    .chain__step--goal span { color: var(--ink); }
+    main.wrap { padding-top: clamp(32px,3.2vw,56px); }
+    .section { margin-bottom: var(--section-space); }
+    .section__head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px 24px; margin-bottom: 22px; }
+    .section__title { font: 700 clamp(22px,1.7vw,30px)/1.2 var(--sans); letter-spacing: -.02em; }
+    .n { display: inline-block; position: relative; top: -.18em; margin-right: .7em; color: var(--purple-700); font: 500 .62em/1 var(--mono); }
+    .section__aside { font-size: 15px; color: var(--fg-3); max-width: 60ch; }
+    .lead { font: 500 clamp(17px,1.25vw,21px)/1.5 var(--sans); max-width: 78ch; }
+    .foot { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px 48px; padding-top: clamp(28px,3vw,56px); padding-bottom: clamp(28px,2.6vw,44px); }
+    .foot__note { max-width: 72ch; font-size: clamp(16px,1.15vw,19px); color: var(--fg-2); }
+    .foot__note strong { color: var(--fg); }
+    .foot__src { font: 400 13px/1.6 var(--mono); color: var(--fg-3); text-align: right; }
+    .credit { display: block; width: 100%; background: var(--ink); color: var(--on-dark-2); text-decoration: none; }
+    .credit > .wrap { display: flex; align-items: center; gap: 14px; padding-block: 16px; }
+    .credit__mark { display: inline-block; flex: 0 0 16px; width: 16px; height: 18px; background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='90 61 212 245'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%238114b0'/%3E%3Cstop offset='.5' stop-color='%23fe5688'/%3E%3Cstop offset='1' stop-color='%23f7fd3d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M301.73 305.99H240.41L196.6 221.75H143.43V305.67H90.1V61.61H213.51C231.13 61.61 246.19 65.02 258.69 71.83 271.19 78.64 280.74 88.15 287.35 100.35 293.96 112.53 297.27 126.78 297.27 143.07 297.27 161 293.25 176.19 285.21 188.64 277.17 201.09 265.67 210.08 250.71 215.61ZM143.43 106.96V176.42H204.76C218.79 176.42 228.87 173.35 235.02 167.21 241.18 161.05 244.26 152.55 244.26 141.69 244.26 130.51 241.1 121.93 234.8 115.94 228.5 109.95 218.48 106.96 204.76 106.96Z'/%3E%3C/svg%3E"); }
+    .credit__text { font-size: 14px; }
+    .credit__text b { color: var(--on-dark); font-weight: 700; }
+    .credit__url { margin-left: auto; font: 500 13px/1.5 var(--mono); color: var(--pink); }
+    .credit:hover .credit__url { text-decoration: underline; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit,minmax(170px,1fr)); gap: clamp(16px,2vw,28px); margin-bottom: clamp(28px,2.6vw,40px); }
+    .kpi { padding-top: 18px; border-top: 2px solid var(--fg); }
+    .kpi b { font: 500 clamp(26px,2.2vw,38px)/1.2 var(--mono); letter-spacing: -.01em; }
+    .kpi span { display: block; margin-top: 10px; color: var(--fg-2); }
+    .kpi--accent { border-color: var(--pink); }
+    .kpi--est .est { display: inline-block; position: relative; top: -.9em; margin-left: 8px; font: 500 11px/1 var(--mono); letter-spacing: .08em; color: var(--fg-3); }
+    .meter { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .meter i { display: block; width: 18px; height: 6px; background: var(--line-dark); border-radius: 4px; }
+    .meter--light i { background: var(--paper-3); }
+    .meter[data-level="1"] i:first-child, .meter[data-level="2"] i:nth-child(-n+2), .meter[data-level="3"] i { background: var(--pink); }
+    .meter b { margin-left: 8px; font: 700 16px/1.5 var(--sans); }
+    .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--grad); }
+    .dot--mid { background: var(--purple-700); }
+    .dot--low { background: transparent; border: 2px solid var(--purple-500); }
+    .grid { display: grid; gap: var(--gap); }
+    .g2 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .g3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    .g4 { grid-template-columns: repeat(4,minmax(0,1fr)); }
+    .g5 { grid-template-columns: repeat(5,minmax(0,1fr)); }
+    .split { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); align-items: start; gap: clamp(18px,2vw,36px); }
+    .split--wide { grid-template-columns: minmax(0,7fr) minmax(0,5fr); }
+    .card { background: var(--paper-2); border-radius: var(--r-lg); padding: clamp(20px,1.7vw,30px); color: var(--fg-2); overflow-wrap: anywhere; }
+    .card__title { font: 700 19px/1.3 var(--sans); color: var(--fg); margin-bottom: 12px; }
+    .num { font: 400 14px/1.3 var(--mono); color: var(--purple-700); }
+    .card--line { background: transparent; border: 1px solid var(--line); }
+    .card--dark { background: var(--ink); color: var(--on-dark-2); }
+    .card--dark .card__title { color: var(--on-dark); }
+    .q-label { font: 500 15px/1.5 var(--mono); color: var(--purple-700); margin-bottom: 12px; }
+    .pill-dark { display: inline-block; background: var(--ink); color: var(--white); font-weight: 600; font-size: 15px; border-radius: var(--r-pill); padding: 10px 16px; margin-top: 12px; }
+    .callout { background: var(--ink); color: var(--on-dark); border-radius: var(--r-md); padding: 16px 20px; font: 600 16px/1.55 var(--sans); }
+    .callout::before { content: "→ "; color: var(--pink); }
+    .more { font: 500 13px/1.5 var(--mono); color: var(--purple-700); text-decoration: none; }
+    .more:hover { text-decoration: underline; }
+    .panel .more { color: var(--pink); }
+    .chip { display: inline-block; font: 500 12.5px/1.5 var(--mono); color: var(--fg-2); border: 1px solid var(--line); border-radius: var(--r-pill); padding: 7px 12px; white-space: nowrap; }
+    .chip--dark { border-color: var(--line-dark); color: var(--on-dark-2); }
+    .chip--pink { background: var(--pink); color: var(--ink); }
+    .chip--warn { border-color: var(--warn-border); color: var(--warn-text); background: var(--warn-bg); }
+    .chip--ok { border-color: var(--ok-border); color: var(--pass); background: var(--ok-bg); }
+    .chip--gap { border: 0; background: var(--grad); color: var(--white); font-weight: 700; }
+    .chip--hyp { border: 1px dashed var(--purple-500); color: var(--purple-700); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tbd { font: 600 14px/1.5 var(--sans); background: var(--pink); color: var(--ink); border-radius: var(--r-sm); padding: 4px 8px; }
+    .src { display: inline-block; font: 500 11.5px/1.5 var(--mono); letter-spacing: .04em; color: var(--fg-3); }
+    .src::before { content: "↳ "; }
+    .src a { color: var(--purple-700); }
+    .panel { background: var(--ink); color: var(--on-dark); border-radius: var(--r-xl); padding: clamp(22px,2.4vw,40px); }
+    .panel .section__title { color: var(--on-dark); }
+    .panel .n { color: var(--pink); }
+    .panel .section__aside { color: var(--on-dark-3); }
+    .table-wrap { max-width: 100%; overflow-x: auto; }
+    .tbl { width: 100%; border-collapse: collapse; font-size: 16px; }
+    .tbl th { padding: 0 16px 16px 0; text-align: left; font: 500 12.5px/1.5 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--fg-3); border-bottom: 1px solid var(--line); white-space: nowrap; }
+    .tbl td { padding: 18px 16px 18px 0; border-bottom: 1px solid var(--line-soft); vertical-align: top; color: var(--fg-2); }
+    .tbl .strong { color: var(--fg); font-weight: 600; }
+    .panel .tbl th { color: var(--on-dark-2); border-color: var(--line-dark); }
+    .panel .tbl td { color: var(--on-dark); border-color: var(--ink-4); }
+    .panel .tbl .soft { color: var(--on-dark-2); }
+    .risk { font: 700 12px/1.5 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--pink); }
+    .gantt { overflow-x: auto; --label: 34%; --weeks: 13; }
+    .gantt__inner { position: relative; min-width: 980px; }
+    .g-row { display: grid; grid-template-columns: var(--label) minmax(0,1fr); align-items: center; min-height: 88px; border-bottom: 1px solid var(--line-soft); }
+    .g-row--head { align-items: end; min-height: 0; border-color: var(--line); padding-bottom: 14px; }
+    .g-track { display: grid; grid-template-columns: repeat(var(--weeks),minmax(0,1fr)); padding-left: 12px; position: relative; z-index: 1; }
+    .g-week { font: 500 13px/1.5 var(--mono); color: var(--fg-3); text-align: center; text-transform: uppercase; letter-spacing: .04em; }
+    .g-week small { display: block; text-transform: none; }
+    .g-label { padding: 16px 24px 16px 0; }
+    .g-label h4 { font: 700 clamp(16px,1.1vw,19px)/1.3 var(--sans); }
+    .g-label .n { color: var(--purple-700); }
+    .g-label p { font-size: 15px; color: var(--fg-2); margin-top: 5px; }
+    .bar { grid-row: 1; height: 36px; border-radius: var(--r-pill); background: var(--grad-bar); display: flex; justify-content: center; align-items: center; padding-inline: 16px; position: relative; }
+    .bar--mid { background: var(--purple-700); }
+    .bar--low { background: var(--lilac); }
+    .ms { position: absolute; left: calc(100% + 14px); white-space: nowrap; font: 500 15px/1.5 var(--sans); color: var(--fg-2); }
+    .ms::before { content: "◆ "; font-size: .85em; }
+    .bar--in .ms { position: static; color: var(--white); font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
+    .bar--low.bar--in .ms { color: var(--ink); }
+    .blackout { position: absolute; top: 0; bottom: 0; left: calc(var(--label) + 12px + (100% - var(--label) - 12px) * (var(--from) - 1) / var(--weeks)); width: calc((100% - var(--label) - 12px) * (var(--to) - var(--from) + 1) / var(--weeks)); border-radius: var(--r-md); background: repeating-linear-gradient(-45deg, var(--blackout-line) 0 2px, transparent 2px 13px), var(--blackout-bg); text-align: center; font: 500 13px/1.5 var(--mono); color: var(--fg-2); }
+    .legend { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 20px; font-size: 15px; color: var(--fg-2); }
+    .legend i { display: inline-block; width: 38px; height: 12px; border-radius: var(--r-pill); margin-right: 10px; background: var(--grad-bar); }
+    .legend i.mid { background: var(--purple-700); }
+    .legend i.low { background: var(--lilac); }
+    .rings { position: relative; width: 100%; max-width: 500px; aspect-ratio: 1; margin-inline: auto; }
+    .ring { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); aspect-ratio: 1; border-radius: 50%; }
+    .ring--3 { width: 100%; background: var(--paper-2); border: 2px dashed var(--pink); color: var(--magenta); }
+    .ring--2 { width: 68%; background: var(--paper-3); color: var(--fg-2); }
+    .ring--1 { width: 37%; background: var(--ink); color: var(--on-dark); display: flex; align-items: center; justify-content: center; }
+    .ring__label { position: absolute; top: 14px; left: 0; width: 100%; text-align: center; font: 500 12.5px/1.5 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .ring--1 .ring__label { position: static; }
+    .layer { border-left: 3px solid var(--ink); padding-left: 18px; margin-bottom: 22px; }
+    .layer--1 { border-color: var(--ink); } .layer--2 { border-color: var(--lilac); } .layer--3 { border-color: var(--pink); }
+    .layer h4 { font: 700 17px/1.4 var(--sans); margin-bottom: 12px; }
+    .layer small { font: 400 12px/1.5 var(--mono); text-transform: uppercase; color: var(--fg-3); }
+    .pmap { position: relative; aspect-ratio: 16/10; background: var(--paper-2); border-radius: var(--r-lg); overflow: hidden; }
+    .pmap::before { content: ""; position: absolute; left: 50%; top: 7%; bottom: 7%; width: 1px; background: var(--line); }
+    .pmap::after { content: ""; position: absolute; top: 50%; left: 5%; right: 5%; height: 1px; background: var(--line); }
+    .ax { position: absolute; font: 500 12px/1.4 var(--mono); letter-spacing: .06em; color: var(--fg-3); max-width: 28%; }
+    .ax--xl { left: 5%; top: 50%; } .ax--xr { right: 5%; top: 50%; text-align: right; }
+    .ax--yt { left: 51%; top: 7%; } .ax--yb { left: 51%; bottom: 7%; }
+    .pt { position: absolute; left: var(--x); bottom: var(--y); transform: translate(-50%,50%); z-index: 2; display: flex; align-items: center; gap: 8px; white-space: nowrap; font: 600 14px/1.4 var(--sans); }
+    .pt::before { content: ""; flex: 0 0 13px; width: 13px; height: 13px; border-radius: 50%; background: var(--ink); }
+    .pt--you { color: var(--magenta); }
+    .pt--you::before { flex-basis: 16px; width: 16px; height: 16px; background: var(--white); border: 3px solid var(--pink); }
+    .pt--right { flex-direction: row-reverse; }
+    .gap { position: absolute; left: var(--x); bottom: var(--y); transform: translate(-50%,50%); width: var(--w,26%); aspect-ratio: 1.6; border-radius: 50%; border: 2px dashed var(--pink); background: var(--gap-bg); display: flex; align-items: center; justify-content: center; }
+    .gap--hyp { border-color: var(--purple-500); background: var(--hyp-bg); }
+    .comp h4 { font: 700 18px/1.4 var(--sans); }
+    .comp .claim { font: 500 13px/1.5 var(--mono); color: var(--purple-700); }
+    .vuln { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px; }
+    .vuln b { display: block; font: 700 12px/1.5 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--magenta); }
+    .promise { position: relative; overflow: hidden; background: var(--ink); color: var(--on-dark); border-radius: var(--r-xl); padding: clamp(28px,3.4vw,60px); }
+    .promise::before { content: ""; position: absolute; inset: auto -10% -60% 40%; height: 120%; background: radial-gradient(ellipse at center, var(--hero-pink), transparent 65%); }
+    .promise > * { position: relative; }
+    .promise blockquote { font: 800 clamp(28px,3.1vw,54px)/1.08 var(--sans); letter-spacing: -.03em; max-width: 24ch; }
+    .fallback { font-size: 17px; color: var(--on-dark-2); }
+    .why { font-size: 15px; color: var(--on-dark-3); max-width: 80ch; }
+    .tbl.matrix th:first-child, .tbl.matrix td:first-child { padding-left: 16px; }
+    .matrix tr.is-chosen td { background: linear-gradient(90deg, var(--choice-start), var(--choice-end)); }
+    .matrix tr.is-chosen td:first-child { box-shadow: inset 3px 0 var(--pink); }
+    .matrix .meter { gap: 4px; } .matrix .meter i { width: 14px; }
+    .matrix small { display: block; margin-top: 6px; font-size: 13px; color: var(--fg-3); }
+    .pillar h4 { font: 700 20px/1.3 var(--sans); }
+    .test { list-style: none; padding: 14px 0 0; margin: 14px 0 0; border-top: 1px solid var(--line); }
+    .test li { display: grid; grid-template-columns: 22px 118px minmax(0,1fr); gap: 6px; margin-top: 9px; }
+    .test .mark { color: var(--pass); } .test .partial { color: var(--partial); } .test .fail { color: var(--magenta); }
+    .test b { font: 500 11.5px/1.5 var(--mono); text-transform: uppercase; color: var(--fg-3); }
+    .test li > span:last-child { font-size: 14.5px; color: var(--fg-2); }
+    .stage { border-top: 3px solid var(--purple-700); padding-top: 16px; }
+    .stage--1 { border-color: var(--purple-700); } .stage--2 { border-color: var(--pink); } .stage--3 { border-color: var(--coral); }
+    .stage .msg { font: 700 clamp(18px,1.35vw,23px)/1.35 var(--sans); }
+    .stage ul { font-size: 15px; }
+    .anti { list-style: none; padding: 0; margin: 0; }
+    .anti li { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); padding-block: 14px; border-bottom: 1px solid var(--line-dark); }
+    .anti s { color: var(--on-dark); font-weight: 600; text-decoration-color: var(--pink); text-decoration-thickness: 2px; }
+    .anti span { font-size: 15px; color: var(--on-dark-2); }
+    .tbl.cov th:not(:first-child), .tbl.cov td:not(:first-child) { text-align: center; }
+    .signal { position: relative; height: 10px; border-radius: 6px; background: var(--paper-3); min-width: 140px; }
+    .signal i { position: absolute; left: var(--from); width: calc(var(--to) - var(--from)); height: 100%; border-radius: inherit; background: var(--grad-bar); }
+    .signal-scale { display: flex; justify-content: space-between; margin-top: 6px; font: 500 11px/1.5 var(--mono); color: var(--fg-3); }
+    .engine h4 { font: 700 19px/1.3 var(--sans); }
+    .engine .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+    .discard { border: 1px dashed var(--line); border-radius: var(--r-md); padding: 16px 18px; }
+    .discard h4 { font: 700 16px/1.4 var(--sans); text-decoration: line-through; text-decoration-color: var(--magenta); text-decoration-thickness: 2px; }
+    .discard p { font-size: 14.5px; color: var(--fg-2); }
+    .phase { background: var(--paper-2); border-radius: var(--r-lg); padding: 22px 24px; }
+    .phase ul { font-size: 15.5px; color: var(--fg-2); }
+    .phase--now { background: var(--ink); color: var(--on-dark-2); }
+    .phase--now ul { color: var(--on-dark-2); } .phase--now .q-label { color: var(--pink); }
+    .dchain { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 10px; }
+    .dchain__step { position: relative; background: var(--ink-2); border: 1px solid var(--line-dark); border-radius: var(--r-md); padding: 18px 18px 20px; }
+    .dchain__step .label { color: var(--pink); }
+    .dchain__step p { font: 600 16px/1.5 var(--sans); color: var(--on-dark); margin-top: 10px; }
+    .dchain__step:not(:last-child)::after { content: "→"; position: absolute; right: -10px; top: 50%; color: var(--pink); }
+    .toc { position: sticky; top: 0; z-index: 3; background: var(--toc-bg); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .toc > .wrap { display: flex; overflow-x: auto; gap: 8px; }
+    .toc a { font-size: 14px; color: var(--fg-2); border-radius: var(--r-pill); padding: 10px 14px; text-decoration: none; white-space: nowrap; }
+    .toc a:hover { background: var(--paper-2); }
+    .toc .n { font-size: 12px; }
+    .chapter { border-top: 1px solid var(--line); padding-top: clamp(28px,2.6vw,44px); }
+    .evidence { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+    .evidence > * { border: 1px solid var(--line-dark); border-radius: var(--r-md); padding: 16px; }
+    .evidence h4 { font: 500 12px/1.5 var(--mono); color: var(--pink); text-transform: uppercase; }
+    .evidence p { font-size: 14.5px; color: var(--on-dark-2); }
+    .ws h4 { font: 700 19px/1.3 var(--sans); }
+    .skip { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px; font-size: 15px; color: var(--fg-2); }
+    .skip b { display: block; font: 700 12px/1.5 var(--mono); text-transform: uppercase; color: var(--magenta); }
+    @media (max-width: 1100px) {
+      .g3, .g4, .g5 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .split, .split--wide { grid-template-columns: minmax(0,1fr); }
+      .dchain, .evidence { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .dchain__step::after { display: none; }
+    }
+    @media (max-width: 680px) {
+      .grid, .g2, .g3, .g4, .g5, .split, .split--wide, .dchain, .evidence { grid-template-columns: minmax(0,1fr); }
+      .hero__top { align-items: flex-start; flex-direction: column; }
+      .status { white-space: normal; }
+      .anti li { grid-template-columns: minmax(0,1fr); }
+      .test li { grid-template-columns: 22px minmax(0,1fr); }
+      .test b, .test li > span:last-child { grid-column: 2; }
+      .credit > .wrap { flex-wrap: wrap; }
+      .credit__url { margin-left: 0; }
+      .foot__src { text-align: left; }
+      .pmap { aspect-ratio: 4/5; }
+      .pt { font-size: 12px; }
+      .ax { font-size: 10.5px; max-width: 42%; }
+      .tbl { min-width: 620px; }
+    }
+    @page { size: A4 landscape; margin: 0; }
+    @media print {
+      body { zoom: .62; }
+      .g2 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .g3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
+      .g4, .evidence { grid-template-columns: repeat(4,minmax(0,1fr)); }
+      .g5, .dchain { grid-template-columns: repeat(5,minmax(0,1fr)); }
+      .split { grid-template-columns: minmax(0,5fr) minmax(0,7fr); }
+      .split--wide { grid-template-columns: minmax(0,7fr) minmax(0,5fr); }
+      .dchain__step:not(:last-child)::after { display: block; }
+      .section, .card, .g-row, .panel, .promise, .phase { break-inside: avoid; }
+      .chapter { break-before: page; }
+      .toc { position: static; }
+      a { text-decoration: none; }
+      .table-wrap, .gantt { overflow: visible; }
+      .tbl { min-width: 0; }
+    }
+  </style></head><body><header class="hero"><div class="wrap"><div class="hero__top"><p class="eyebrow"><span>GTM Planner</span><span>GTM plan</span></p><p class="status status--ok">Go2Rev methodology · 15 November 2026 · Approved by the user</p></div><div class="hero__body"><h1 class="hero__title hero__title--wide">GTM Plan — GIT-for-AI-crash-course</h1></div><nav class="tabs tabs--row" aria-label="Planning documents"><a data-tab="00" href="00-gtm-plan.html" aria-current="page">GTM plan</a><a data-tab="01" href="01-business-snapshot.html">1 Business snapshot</a><a data-tab="02" href="02-market-map.html">2 Market map</a><a data-tab="03" href="03-positioning.html">3 Positioning</a><a data-tab="04" href="04-demand-plan.html">4 Demand plan</a><a data-tab="05" href="05-roadmap.html">5 Roadmap</a></nav></div></header><nav class="toc" aria-label="Plan chapters"><div class="wrap"><a href="#1-executive-summary">1. Executive summary</a><a href="#2-business-snapshot">2. Business snapshot</a><a href="#3-market-map">3. Market map</a><a href="#4-positioning">4. Positioning</a><a href="#5-demand-plan">5. Demand plan</a><a href="#6-roadmap">6. Roadmap</a><a href="#7-assumption-evidence-ledger">7. Assumption &amp; evidence ledger</a><a href="#8-execution-readiness">8. Execution readiness</a><a href="#approval-status">Approval status</a></div></nav><main class="wrap"><section class="section"><header class="section__head"><h2 class="section__title">Indicative 90-day roadmap</h2><p class="section__aside">The bars summarize the stated windows. They are not delivery commitments.</p></header><div class="gantt" role="region" aria-label="Indicative roadmap, scroll horizontally" tabindex="0"><div class="gantt__inner"><div class="g-row g-row--head"><div class="g-label">Initiative and owner</div><div class="g-track"><div class="g-week">W1</div><div class="g-week">W2</div><div class="g-week">W3</div><div class="g-week">W4</div><div class="g-week">W5</div><div class="g-week">W6</div><div class="g-week">W7</div><div class="g-week">W8</div><div class="g-week">W9</div><div class="g-week">W10</div><div class="g-week">W11</div><div class="g-week">W12</div><div class="g-week">W13</div></div></div><div class="g-row"><div class="g-label"><h4><span class="n">I1</span> Free feasibility and initial capacity made verifiable</h4><p>Technical and decision lead <code>[OWNER TBD]</code></p><p>Impact: Blocking · Effort: Medium-high<br>Depends on: Operational approval; owners available.<br>D1–15, indicative.</p></div><div class="g-track"><div class="bar bar--in" style="grid-column:1 / 4"><span class="ms" title="Go/no-go dossier with initial evidence, decisions, and assigned capacity.">Go/no-go dossier with initial evidence, decisions, and assigned capacity.</span></div></div></div><div class="g-row"><div class="g-label"><h4><span class="n">I2</span> Representative incident understandable and reproducible in IT/EN</h4><p>Learning scenario lead <code>[OWNER TBD]</code></p><p>Impact: High · Effort: High<br>Depends on: Favorable I1 outcome.<br>D16–35, if sustainable.</p></div><div class="g-track"><div class="bar bar--in" style="grid-column:3 / 6"><span class="ms" title="Verified case spanning files, history, review, and recovery in both contexts.">Verified case spanning files, history, review, and recovery in both contexts.</span></div></div></div><div class="g-row"><div class="g-label"><h4><span class="n">I3</span> Learning hypotheses tested against voluntary observations</h4><p>Learning validation lead <code>[OWNER TBD]</code></p><p>Impact: High · Effort: Medium<br>Depends on: I2, available participants, rubrics.<br>D36–50, subject to the pilot.</p></div><div class="g-track"><div class="bar bar--in" style="grid-column:6 / 9"><span class="ms" title="Test record with difficulties and reasoned scenario/claim decisions.">Test record with difficulties and reasoned scenario/claim decisions.</span></div></div></div><div class="g-row"><div class="g-label"><h4><span class="n">I4</span> Release candidate complete across three tiers and both languages</h4><p>Release readiness lead <code>[OWNER TBD]</code></p><p>Impact: Blocking · Effort: High<br>Depends on: I1–I3, initial capacity confirmed.<br>D51–75 if compatible; otherwise beyond D90.</p></div><div class="g-track"><div class="bar bar--in" style="grid-column:8 / 12"><span class="ms" title="Complete artifact passing correctness, access, persistence, recovery, and usability criteria.">Complete artifact passing correctness, access, persistence, recovery, and usability criteria.</span></div></div></div><div class="g-row"><div class="g-label"><h4><span class="n">I5</span> Complete course reachable with the three engines connected</h4><p>Publishing maintainer <code>[OWNER TBD]</code></p><p>Impact: High · Effort: Medium<br>Depends on: I4, approved setup and publication, free conditions.<br>D76–85 only if all gates pass.</p></div><div class="g-track"><div class="bar bar--in" style="grid-column:11 / 14"><span class="ms" title="Public path from pages, repository, and example with usable feedback.">Public path from pages, repository, and example with usable feedback.</span></div></div></div><div class="g-row"><div class="g-label"><h4><span class="n">I6</span> First maintenance cycle compared with budget</h4><p>Course and feedback maintainer <code>[OWNER TBD]</code></p><p>Impact: High · Effort: Low-medium<br>Depends on: I5, one complete observable week.<br>First complete post-launch week; may extend beyond D90.</p></div><div class="g-track"><p style="grid-column:1 / 14">First complete post-launch week; may extend beyond D90. Actual workload report and decisions to remain within 1–2 hours/week.</p></div></div></div></div></section><section class="section"><div class="grid">
+<p style="max-width:90ch"><em>Go2Rev methodology · 15 November 2026 · Approved by the user</em></p>
+<p style="max-width:90ch">All five steps are confirmed; the roadmap and consolidation were approved after the cross-document <a href="../docs/analysis/plan-qa.md">plan-qa</a> check. This document does not claim completed implementation or authorize publication, outreach, or services.</p>
+</div></section>
+<section class="section chapter" id="1-executive-summary"><header class="section__head"><h2 class="section__title">1. Executive summary</h2></header><div class="grid">
+<p style="max-width:90ch">The independent public course is positioned as a <strong>visual Git collaboration lab</strong>. Confirmed promise, <strong>IT:</strong> <span lang="it">«Collabora con Git sapendo cosa cambia e come recuperare il lavoro.»</span> EN: “Collaborate with Git knowing what changes and how to recover your work.” The path connects changes, commits, review, policies, and recovery through three complete tiers in Italian and English.</p>
+<p style="max-width:90ch">Confirmed distribution uses three engines: useful scenarios for discovery, a worked example for choosing/starting the course, and voluntary feedback for correcting the path. Zero-cost services, at most three initial channels, and post-launch maintenance of 1–2 hours/week are constraints, not effectiveness forecasts.</p>
+<p style="max-width:90ch">The first 90 days organize six initiatives dependent on capacity and evidence: feasibility, representative case, private review, complete release candidate, authorized release, and first maintenance cycle. The schedule is indicative; if time or evidence is insufficient, release moves. Do not reduce tiers or languages or buy a plan to bypass blockers.</p>
+</div></section>
+<section class="section chapter" id="2-business-snapshot"><header class="section__head"><h2 class="section__title">2. Business snapshot</h2></header><div class="grid">
+<p style="max-width:90ch">Public project at the analysis stage, from a public repository. Participants: Engineers, Architects, and business professionals with practical technical experience; no stated geographic restriction. Access without a sales process or required payment. No baseline for traffic, starts, or learning is available.</p>
+<p style="max-width:90ch">Frontend planned on Pages; React/Vite, TypeScript, Zustand/Zundo, and i18next; free external API for identity, validation, and progress. Social SSO in phases, with GitHub proposed first. Complete Italian and English content is a launch requirement.</p>
+<p style="max-width:90ch">Andrea Collet owns the repository; this does not automatically assign operational roles. Initial capacity and owners remain undefined; 1–2 hours/week is confirmed only after launch. Full text: <a href="01-business-snapshot.md">snapshot</a>.</p>
+</div></section>
+<section class="section chapter" id="3-market-map"><header class="section__head"><h2 class="section__title">3. Market map</h2></header><div class="grid">
+<p style="max-width:90ch">Three layers of alternatives: interactive simulators; real-platform practice and technical references; mentoring or research when a problem occurs. Choice frequencies and market shares are unknown.</p>
+<ul><li><a href="https://github.com/pcottle/learnGitBranching">LearnGitBranching</a>: graph, sandbox, levels, and commands in the browser. Visualizing Git alone does not demonstrate how the course differs.</li><li><a href="https://ohmygit.org/">Oh My Git!</a>: game with visualized structures and real Git; advertised desktop path and stated limited maintenance. These do not prove inferior quality.</li><li><a href="https://github.com/skills">GitHub Skills</a>: exercises in the participant&#39;s repository and platform feedback, an alternative based on real practice.</li><li><a href="https://learn.microsoft.com/en-us/training/modules/intro-to-git/">Microsoft Learn</a> and <a href="https://learn.microsoft.com/en-us/azure/devops/repos/git/?view=azure-devops">Azure Repos</a>: training and documentation on concepts, PRs, and policies, with distinct prerequisites and resources.</li><li><a href="https://git-scm.com/book/en/v2">Pro Git</a>: progressive reference on basics, workflows, and internals; the Italian edition shows uneven translation according to the page consulted.</li></ul>
+<p style="max-width:90ch">Qualitative axes: simulation/real practice; mental model/collaboration; exercise/reference. The course&#39;s position is designed, not measured. <strong>GAP HYPOTHESIS:</strong> follow an incident from file to policy; explain recovery through visible consequences. Relevance, an unclaimed position, and feasibility are unproven. <a href="02-market-map.md">Complete map and sources</a>.</p>
+</div></section>
+<section class="section chapter" id="4-positioning"><header class="section__head"><h2 class="section__title">4. Positioning</h2></header><div class="grid">
+<p style="max-width:90ch">Excerpt from confirmed positioning; <code>unverified-claim</code> labels remain.</p>
+<h3 id="2-category-decision">2. Category decision</h3>
+<p style="max-width:90ch">Qualitative comparison of directions from the <a href="02-market-map.md">confirmed map</a>. Market size and demand are unmeasured; no numerical scores are invented.</p>
+<div class="table-wrap"><table class="tbl"><thead><tr><th scope="col">Candidate category</th><th scope="col">Observable space and competition</th><th scope="col">Fit and appeal</th></tr></thead><tbody><tr><td>Visual Git collaboration lab, confirmed choice</td><td>Connects commands and shared work; overlaps with simulators and real practice.</td><td>Consistent with designed scenarios; audience appeal needs validation.</td></tr><tr><td>Git recovery practice lab</td><td>Narrower need; alternatives already cover recovery and conflicts.</td><td>Covers part of the curriculum; risks appearing useful only during an incident.</td></tr><tr><td>Practical IT/EN path</td><td>Size unknown; languages and progression do not demonstrate exclusivity.</td><td>Fits requirements; relevance needs testing in both languages.</td></tr></tbody></table></div>
+<p style="max-width:90ch">The choice requires explaining collaboration and consequences beyond syntax, distinguishing simulation from real operations, and evaluating learning. Existing resources remain useful alternatives and possible further reading.</p>
+<h3 id="3-core-promise">3. Core promise</h3>
+<p style="max-width:90ch"><strong>IT:</strong> <span lang="it">«Collabora con Git sapendo cosa cambia e come recuperare il lavoro.»</span></p>
+<p style="max-width:90ch"><strong>EN:</strong> “Collaborate with Git knowing what changes and how to recover your work.”</p>
+<p style="max-width:90ch">**Fallback <strong>IT:</strong> <span lang="it">«Scegli come collaborare e recuperare con Git, vedendo cosa cambia nella repository.»</span></p>
+<p style="max-width:90ch"><strong>Fallback EN:</strong> “Choose how to collaborate and recover with Git, seeing what changes in the repository.”</p>
+<p style="max-width:90ch">The promise concerns independence and understanding and matches the specified scenarios. It becomes a demonstrated capability only after unguided tests on new problems. A project page must clearly state that the course is being designed, without describing the outcome as already available.</p>
+<h3 id="4-pillars">4. Pillars</h3>
+<h4 id="p1-from-file-to-review">P1 — From file to review</h4>
+<ul><li>Candidate claim: connect a change to its effects on history and shared review.</li><li>Relevant: plausible for the stated audiences; no direct evidence is available yet.</li><li>Differentiated: hypothesis against LearnGitBranching&#39;s graph emphasis and GitHub Skills&#39; real-work emphasis; no exclusivity demonstrated.</li><li>Defensible: not yet passed; synchronized views are specified, without observable implementation.</li><li>Evidence needed: working scenario and a participant who can explain files, index, commits, and PRs. Status: <code>unverified-claim P1</code>.</li></ul>
+<h4 id="p2-the-same-problem-two-contexts">P2 — The same problem, two contexts</h4>
+<ul><li>Candidate claim: recognize common Git principles and operational differences between GitHub and Azure DevOps.</li><li>Relevant: consistent with the audience; frequency of the need is unknown.</li><li>Differentiated: hypothesis against paths emphasizing one platform; uniqueness unestablished.</li><li>Defensible: not yet passed; coverage is a requirement, not an implemented capability.</li><li>Evidence needed: corresponding scenarios verified against sources and independent transfer between contexts. Status: <code>unverified-claim P2</code>.</li></ul>
+<h4 id="p3-reasoned-recovery">P3 — Reasoned recovery</h4>
+<ul><li>Candidate claim: choose a recovery strategy and explain its effect on shared work.</li><li>Relevant: plausible need to validate.</li><li>Differentiated: alternatives already cover conflicts and recovery; the hypothesis concerns evaluating the reasoning.</li><li>Defensible: not yet passed; simulator and learning results are unavailable.</li><li>Evidence needed: rubrics evaluating choice, consequences, and preservation of others&#39; work in a new incident. Status: <code>unverified-claim P3</code>.</li></ul>
+<p style="max-width:90ch">None of these candidates is presented as a validated pillar. Confirming the messaging architecture does not mean passing the pillar test.</p>
+<h3 id="5-segment-translations">5. Segment translations</h3>
+<div class="table-wrap"><table class="tbl"><thead><tr><th scope="col">Audience</th><th scope="col">Translation of the same promise</th><th scope="col">Emphasis and vocabulary</th></tr></thead><tbody><tr><td>Engineers</td><td><strong>IT:</strong> <span lang="it">«Integra modifiche e recupera comprendendo la storia condivisa.»</span> EN: “Integrate changes and recover with an understanding of shared history.”</td><td>P1/P3; branch, diff, commit, conflict.</td></tr><tr><td>Architects</td><td><strong>IT:</strong> <span lang="it">«Valuta integrazione e recupero comprendendone gli effetti sulla collaborazione.»</span> EN: “Evaluate integration and recovery by understanding their effects on collaboration.”</td><td>P2/P3; policy, shared history, integration, rollback.</td></tr><tr><td>Business professionals with technical experience</td><td><strong>IT:</strong> <span lang="it">«Collabora sulle modifiche e recupera una versione comprendendo il lavoro del gruppo.»</span> EN: “Collaborate on changes and recover a version while understanding the group&#39;s work.”</td><td>P1/P3; change, review, version, restore.</td></tr></tbody></table></div>
+<p style="max-width:90ch">These are translations of one product and promise. Vocabulary and depth change with the participant&#39;s context.</p>
+<h3 id="6-messages-per-funnel-stage">6. Messages per funnel stage</h3>
+<p style="max-width:90ch">Discovery → choice → start, without assuming a sale. These are candidate messages for when the product is available, rather than descriptions of its current state.</p>
+<div class="table-wrap"><table class="tbl"><thead><tr><th scope="col">Stage</th><th scope="col">Main message</th><th scope="col">Variants</th></tr></thead><tbody><tr><td>Discovery</td><td><strong>IT:</strong> <span lang="it">«Un laboratorio visuale per collaborare con Git.»</span> EN: “A visual lab for collaborating with Git.”</td><td><strong>IT:</strong> <span lang="it">«Dalla modifica alla pull request: comprendi cosa cambia.»</span> EN: “From change to pull request: understand what changes.” / <strong>IT:</strong> <span lang="it">«Esplora le conseguenze delle decisioni Git.»</span> EN: “Explore the consequences of Git decisions.”</td></tr><tr><td>Choice</td><td><strong>IT:</strong> <span lang="it">«Segui lo stesso scenario tra file, commit e revisione.»</span> EN: “Follow one scenario through files, commits, and review.”</td><td><strong>IT:</strong> <span lang="it">«Confronta le decisioni su GitHub e Azure DevOps.»</span> EN: “Compare decisions on GitHub and Azure DevOps.” / <strong>IT:</strong> <span lang="it">«Guarda il percorso: basi, collaborazione e recupero.»</span> EN: “Explore the path: basics, collaboration, and recovery.”</td></tr><tr><td>Start</td><td><strong>IT:</strong> <span lang="it">«Inizia dal livello Base, in italiano o inglese.»</span> EN: “Start at the Base tier, in Italian or English.”</td><td><strong>IT:</strong> <span lang="it">«Accedi con un provider disponibile e avvia il primo esercizio.»</span> EN: “Sign in with an available provider and start your first exercise.” / <strong>IT:</strong> <span lang="it">«Riprendi dall&#39;ultimo progresso salvato.»</span> EN: “Resume from your last saved progress.”</td></tr></tbody></table></div>
+<h3 id="7-anti-messages-bank">7. Anti-messages bank</h3>
+<p style="max-width:90ch"><strong>Wording to avoid:</strong> <strong>IT:</strong> <span lang="it">«Git per tutti»</span>, «soluzione completa», «impara senza fatica», «diventa esperto rapidamente». EN equivalents: “Git for everyone”, “complete solution”, “learn effortlessly”, “become an expert quickly”. Replace these with a specific action or outcome from the path, without generic promises or unverified time claims.</p>
+<p style="max-width:90ch"><strong>Frames not to imitate:</strong> visualization as the exclusive promise of <a href="https://github.com/pcottle/learnGitBranching">LearnGitBranching</a>, learning GitHub inside GitHub as the frame of <a href="https://github.com/skills">GitHub Skills</a>, and a game with real Git as the frame of <a href="https://ohmygit.org/">Oh My Git!</a>.</p>
+<p style="max-width:90ch"><strong>Unsupported claims:</strong> <strong>IT:</strong> <span lang="it">«riduce gli errori»</span>, «garantisce autonomia», «più efficace», «accessibile a tutti». EN equivalents: “reduces errors”, “guarantees independence”, “more effective”, “accessible to everyone”. These respectively require observed results, transfer tests, appropriate comparisons, and accessibility checks. Do not use them as facts; they remain <code>unverified-claim</code>.</p>
+<h3 id="8-what-this-changes-tomorrow">8. What this changes tomorrow</h3>
+<p style="max-width:90ch">Headline during design, <strong>IT:</strong> <span lang="it">«Un laboratorio visuale di collaborazione con Git, in progettazione.»</span> EN: “A visual Git collaboration lab, currently in design.” Subheading, <strong>IT:</strong> <span lang="it">«Scenari su GitHub e Azure DevOps per comprendere modifiche, revisioni e recupero. Percorso previsto in italiano e inglese.»</span> EN: “Scenarios on GitHub and Azure DevOps to understand changes, review, and recovery. A path planned in Italian and English.”</p>
+<p style="max-width:90ch">The presentation explains the need, scenario, and consequences to understand, distinguishing design from demonstrated capability. Suitable themes: review, conflicts, recovery, and operational differences. A leaderboard as evidence of competence or the internal stack as an educational benefit does not support the positioning. The demand plan must respect free services, no paid campaigns, and the confirmed post-launch maintenance budget of 1–2 hours/week.</p>
+</div></section>
+<section class="section chapter" id="5-demand-plan"><header class="section__head"><h2 class="section__title">5. Demand plan</h2></header><div class="grid">
+<p style="max-width:90ch">Consolidated from the confirmed demand plan, without new forecasts.</p>
+<h3 id="starting-point">Starting point</h3>
+<p style="max-width:90ch">No baseline for visits, starts, completions, or learning is available. Strictly zero service cost, an independent public course, three tiers, and complete Italian/English content at launch are confirmed. Social providers may be introduced in phases consistent with the budget constraint.</p>
+<p style="max-width:90ch">An example used in a private project review is not a partial launch. This plan does not execute publication, invitations, campaigns, or service changes.</p>
+<h3 id="design-principles">Design principles</h3>
+<ol><li>A concrete problem leads to the course: a useful explanation and a link to the relevant exercise, without pages created only to capture searches.</li><li>Observable evidence precedes a claim: examples and feedback explain what the course offers; independence and effectiveness remain hypotheses to test.</li><li>Maintenance limits distribution: IT/EN content and corrections come first, followed by any additional channels.</li></ol>
+<p style="max-width:90ch">Google recommends content useful to people. Organic presence does not require payment, but crawling, indexing, and ranking are not guaranteed. <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content">People-first content</a>, <a href="https://developers.google.com/search/docs/essentials">Search Essentials</a>.</p>
+<h3 id="engine-architecture">Engine architecture</h3>
+<p style="max-width:90ch">E1: Git problem → verified IT/EN explanation → curriculum → E2.</p>
+<p style="max-width:90ch">E2: worked example → understanding the method → tier choice → first exercise → E3.</p>
+<p style="max-width:90ch">E3: observed difficulty → reasoned IT/EN correction → possible voluntary return; recurring cases update E1 and E2.</p>
+<p style="max-width:90ch">E1 supports discovery; E2 evaluation and starting; E3 fit and return visits. Qualification means understanding whom the path serves and which problems it addresses, rather than evaluating sales leads. Engines are repeatable activities, not a channel list.</p>
+<h4 id="candidate-screening">Candidate screening</h4>
+<div class="table-wrap"><table class="tbl"><thead><tr><th scope="col">Candidate</th><th scope="col">Positioning fit</th><th scope="col">Operational viability</th><th scope="col">First signal and decision</th></tr></thead><tbody><tr><td>Searchable practical scenarios</td><td>Aligned with positioning.</td><td>Content review within the IT/EN time allowance.</td><td>Acquisition unpredictable; selected as E1.</td></tr><tr><td>Worked example linked to the course</td><td>Shows the method.</td><td>Reuses verified scenarios, reducing duplication.</td><td>Observable once testable; selected as E2.</td></tr><tr><td>Feedback → revision → return</td><td>Supports learning.</td><td>Triage owner and priorities within 1–2 hours/week.</td><td>First pilot feedback can be planned; selected as E3.</td></tr><tr><td>Paid amplification</td><td>Can spread the message.</td><td>Incompatible with zero cost.</td><td>Rejected.</td></tr><tr><td>Ongoing outreach</td><td>Weak fit.</td><td>Requires contacts, messages, and additional work.</td><td>Excluded from the plan.</td></tr><tr><td>Ongoing newsletter</td><td>Possible return visits.</td><td>Editorial calendar and subscriber management beyond the minimum.</td><td>Rejected until capacity is demonstrated.</td></tr><tr><td>New owned community</td><td>Possible discussion.</td><td>Ongoing moderation is not planned.</td><td>Rejected; use a limited feedback surface.</td></tr></tbody></table></div>
+<p style="max-width:90ch">Post-launch capacity is confirmed as a budget, not a guarantee that every problem can be solved. Initial production remains part of the development project.</p>
+<h3 id="engine-detail">Engine detail</h3>
+<h4 id="e1-searchable-practical-scenarios">E1 — Searchable practical scenarios</h4>
+<p style="max-width:90ch">Input: correct exercises, IT/EN explanations, sources, and links to the curriculum. Mechanism: a problem generates a useful page; observed questions guide revisions. Output: relevant visits to the path, if the page is discovered. Indicators: impressions, clicks, query relevance, curriculum visits where measurable, and requested corrections. Requirements: technical and linguistic review, accessible pages. First signal: an impression or click after discovery, without a guaranteed date. <a href="https://support.google.com/webmasters/answer/7576553?hl=en">Search Console metrics</a> define impressions/clicks/CTR; these data do not demonstrate learning.</p>
+<h4 id="e2-worked-example-course">E2 — Worked example → course</h4>
+<p style="max-width:90ch">Input: a representative case spanning change, history, and review, with an explained outcome. Mechanism: the participant evaluates the method and finds a starting point. Output: an informed exercise start. Indicators: understanding of the task, verified starts, first completion, access barriers, and IT/EN differences. Requirements: verified example and a link to the path. First signal: a person tries the example; before launch, only during a private review.</p>
+<h4 id="e3-feedback-revision-return">E3 — Feedback → revision → return</h4>
+<p style="max-width:90ch">Input: voluntary observations, reproducible errors, and test results. Mechanism: classify difficulties, correct material/translations, and explain the update; the participant chooses whether to return or share the course. Output: a corrected path and new voluntary opportunities to use it. Indicators: reproducible problems, resolutions, recurrence after correction, independent tests on new cases, and observable returns without extra tracking. Requirements: triage owner and revision capacity. First plannable signal: pilot feedback within the initial 90-day horizon, if people and material are available. This is not a promise to obtain users or results by a date.</p>
+<h3 id="channel-mix">Channel mix</h3>
+<div class="table-wrap"><table class="tbl"><thead><tr><th scope="col">Candidate channel</th><th scope="col">Engine</th><th scope="col">Primary function</th><th scope="col">Weight</th><th scope="col">Activation</th></tr></thead><tbody><tr><td>Organic search leading to Pages</td><td>E1</td><td>Capture an existing need.</td><td>Medium</td><td>Complete release.</td></tr><tr><td>Repository, README, and feedback space</td><td>E2/E3</td><td>Evaluation.</td><td>High</td><td>Project status already explicit; course after release.</td></tr><tr><td>Example and internal links</td><td>E2</td><td>Start.</td><td>High</td><td>Private first; public with the complete course.</td></tr><tr><td>Organic posts in existing communities</td><td>E1/E2</td><td>Discovery.</td><td>Low</td><td>Only later, with authorization and capacity.</td></tr></tbody></table></div>
+<p style="max-width:90ch">Every channel is organic; advertising and additional service spend: <strong>0 €</strong>. No purchase or trial is a prerequisite. At most three channels are active in the first planning horizon; do not add the fourth if it exceeds maintenance capacity.</p>
+<ul><li>Search/Pages copy, <strong>IT:</strong> <span lang="it">«Dalla modifica alla pull request: comprendi cosa cambia»</span>; EN: “From change to pull request: understand what changes.” Monitor impressions, clicks, relevant queries, and available curriculum visits.</li><li>Repository: confirmed promise and actual status; monitor reported barriers, recurring questions, reproducibility, and classified/corrected reports.</li><li>Example/course copy, <strong>IT:</strong> <span lang="it">«Inizia dal livello Base, in italiano o inglese»</span>; EN: “Start at the Base tier, in Italian or English.” Monitor starts, first completions, access errors, and understanding of the outcome.</li><li>Community: useful case and contextual link; relevant feedback, attributable visits where available, and observable starts, without expected volumes.</li></ul>
+<p style="max-width:90ch">Pages is static and does not replace the API/store. README introduces usefulness, getting started, and support; it does not prove traffic. Discussions requires enabling and moderation; Issues/Discussions on a public repository make feedback public. Do not ask for email, secrets, private logs, or unnecessary personal data. Form configuration and channel opening are later operational tasks requiring approval.</p>
+<h3 id="activation-sequence">Activation sequence</h3>
+<ol><li>After operational approval: prepare the example and minimal feedback collection, assign the owner, and test them privately.</li><li>Before launch: resolve blockers and verify all three tiers and IT/EN parity.</li><li>At the complete release: connect pages, repository, and example, with no more than three channels in the initial 90-day horizon.</li><li>Later: consider community activity only if maintenance and feedback remain sustainable.</li></ol>
+<p style="max-width:90ch">The 90 days are a horizon, not a delivery date or traffic commitment.</p>
+<h3 id="operating-requirements">Operating requirements</h3>
+<p style="max-width:90ch">Responsibility for content, IT/EN review, and triage, possibly held by one person; no assignment is automatic. Confirmed post-launch human budget: <strong>1–2 hours/week in total</strong> to read signals, triage, and make small revisions. Larger corrections need planning and may pause additional distribution. The budget does not estimate pre-launch development or translation.</p>
+<p style="max-width:90ch">Use only reliable aggregate data or documented pilot observations; no dashboard justifies paid services or collecting additional personal data. Search Console and feedback tools have not yet been set up.</p>
+<h3 id="what-this-plan-does-not-solve">What this plan does not solve</h3>
+<p style="max-width:90ch">It does not implement the simulator, SSO, persistence, measurement, or accessibility. It does not prove effectiveness or set adoption targets. CPL and commercial conversion rates are not relevant: advertising mechanisms were not selected. Start, completion, and learning baselines must be collected without invented ranges.</p>
+</div></section>
+<section class="section chapter" id="6-roadmap"><header class="section__head"><h2 class="section__title">6. Roadmap</h2></header><div class="grid">
+<h3 id="schedule-and-capacity">Schedule and capacity</h3>
+<p style="max-width:90ch">D1–D90 are indicative windows. D1 starts after operational approval, owner assignment, and declared initial availability. The confirmed 1–2 hours/week covers post-launch maintenance only: it does not size development or translation.</p>
+<p style="max-width:90ch">If work exceeds the horizon, move the release. Zero service cost, three complete tiers, and IT/EN parity remain mandatory. This document promises no launch date.</p>
+<h3 id="candidates-impact-and-effort">Candidates, impact, and effort</h3>
+<div class="table-wrap"><table class="tbl"><thead><tr><th scope="col">Candidate</th><th scope="col">Indicative impact / effort</th><th scope="col">Destination</th></tr></thead><tbody><tr><td>C1 — Verifiable login across free domains</td><td>Blocking / medium-high</td><td>I1: launch dependency.</td></tr><tr><td>C2 — Replay/store within free quotas</td><td>Blocking / medium-high</td><td>I1; complete verification in I4.</td></tr><tr><td>C3 — Capacity, data, score, providers, name, and licenses defined</td><td>Blocking / medium</td><td>I1: decisions before the corresponding steps.</td></tr><tr><td>C4 — Testable IT/EN incident spanning repository and review</td><td>High / high</td><td>I2: material for E2.</td></tr><tr><td>C5 — Hypotheses tested against a voluntary pilot</td><td>High / medium</td><td>I3: activates E3.</td></tr><tr><td>C6 — Three complete tiers, lab, and progress in IT/EN</td><td>Blocking / high</td><td>I4: launch scope.</td></tr><tr><td>C7 — Identity, accessibility, SEO, and recovery verified</td><td>Blocking / medium-high</td><td>I4: readiness.</td></tr><tr><td>C8 — Complete path reachable through selected channels</td><td>High / medium</td><td>I5: public E1/E2/E3.</td></tr><tr><td>C9 — Measured maintenance cycle</td><td>High / low-medium</td><td>I6: sustainability.</td></tr><tr><td>C10 — Additional free social providers</td><td>Medium / medium-high</td><td>After launch, with verified prerequisites and need.</td></tr><tr><td>C11 — Cases shared in existing communities</td><td>Medium / medium</td><td>Deferred: spare capacity and authorization.</td></tr><tr><td>C12 — Ongoing newsletter</td><td>Uncertain / medium</td><td>Parked: calendar/subscriber management unnecessary.</td></tr><tr><td>C13 — Arbitrary server-side shells</td><td>Out of scope / high</td><td>Excluded: changes simulation and operational requirements.</td></tr><tr><td>C14 — Purchased campaigns, domains, or services</td><td>Incompatible / variable</td><td>Excluded by zero cost.</td></tr><tr><td>C15 — Advanced competitive leaderboard</td><td>Uncertain / high</td><td>Parked: initial leaderboard is educational.</td></tr><tr><td>C16 — Content beyond the curriculum</td><td>Uncertain / high</td><td>Deferred until supported by observed problems.</td></tr></tbody></table></div>
+<h3 id="first-90-days-six-initiatives">First 90 days: six initiatives</h3>
+<div class="table-wrap"><table class="tbl"><thead><tr><th scope="col">#</th><th scope="col">Initiative (result-phrased)</th><th scope="col">Source step</th><th scope="col">Impact</th><th scope="col">Effort</th><th scope="col">Owner</th><th scope="col">Depends on</th><th scope="col">Milestone</th><th scope="col">When</th></tr></thead><tbody><tr><td>I1</td><td>Free feasibility and initial capacity made verifiable</td><td>Snapshot, Demand Plan; C1–C3</td><td>Blocking</td><td>Medium-high</td><td>Technical and decision lead <code>[OWNER TBD]</code></td><td>Operational approval; owners available.</td><td>Go/no-go dossier with initial evidence, decisions, and assigned capacity.</td><td>D1–15, indicative.</td></tr><tr><td>I2</td><td>Representative incident understandable and reproducible in IT/EN</td><td>Market Map, Positioning, E2; C4</td><td>High</td><td>High</td><td>Learning scenario lead <code>[OWNER TBD]</code></td><td>Favorable I1 outcome.</td><td>Verified case spanning files, history, review, and recovery in both contexts.</td><td>D16–35, if sustainable.</td></tr><tr><td>I3</td><td>Learning hypotheses tested against voluntary observations</td><td>P1–P3, E3; C5</td><td>High</td><td>Medium</td><td>Learning validation lead <code>[OWNER TBD]</code></td><td>I2, available participants, rubrics.</td><td>Test record with difficulties and reasoned scenario/claim decisions.</td><td>D36–50, subject to the pilot.</td></tr><tr><td>I4</td><td>Release candidate complete across three tiers and both languages</td><td>Snapshot, technical roadmap; C6–C7</td><td>Blocking</td><td>High</td><td>Release readiness lead <code>[OWNER TBD]</code></td><td>I1–I3, initial capacity confirmed.</td><td>Complete artifact passing correctness, access, persistence, recovery, and usability criteria.</td><td>D51–75 if compatible; otherwise beyond D90.</td></tr><tr><td>I5</td><td>Complete course reachable with the three engines connected</td><td>Demand Plan E1/E2/E3; C8</td><td>High</td><td>Medium</td><td>Publishing maintainer <code>[OWNER TBD]</code></td><td>I4, approved setup and publication, free conditions.</td><td>Public path from pages, repository, and example with usable feedback.</td><td>D76–85 only if all gates pass.</td></tr><tr><td>I6</td><td>First maintenance cycle compared with budget</td><td>Demand Plan E3; C9</td><td>High</td><td>Low-medium</td><td>Course and feedback maintainer <code>[OWNER TBD]</code></td><td>I5, one complete observable week.</td><td>Actual workload report and decisions to remain within 1–2 hours/week.</td><td>First complete post-launch week; may extend beyond D90.</td></tr></tbody></table></div>
+<p style="max-width:90ch">One person may hold several roles after capacity is checked. I2/I3 are a private review, not a reduced public launch. I4 preserves the entire scope. Initial I1 evidence does not replace the complete real-world I4 test.</p>
+<h3 id="engine-activation">Engine activation</h3>
+<ul><li>E1, searchable scenarios: material in I4 and public links in I5. Impressions and visits when available; no guaranteed indexing date.</li><li>E2, example → course: private I2/I3 test, public I5 start. Observe whether a person understands the task and reaches the relevant exercise.</li><li>E3, feedback → revision → return: first I3 cycle, continuing in I5/I6. Document difficulty, reasoned decision, and verification of the correction.</li></ul>
+<p style="max-width:90ch">No invented volumes, conversion rates, or learning improvements. Absent observations mean missing evidence, not automatic success or failure.</p>
+<h3 id="related-risks-and-questions">Related risks and questions</h3>
+<div class="table-wrap"><table class="tbl"><thead><tr><th scope="col">Item</th><th scope="col">Initiatives</th><th scope="col">Evidence or condition</th></tr></thead><tbody><tr><td>P1 — file → review</td><td>I2/I3</td><td>Observed explanation and actions, not an advance claim.</td></tr><tr><td>P2 — transfer between platforms</td><td>I2/I3</td><td>Distinguish Git from portals in an unguided case.</td></tr><tr><td>P3 — reasoned recovery</td><td>I2/I3</td><td>Explained choice and preserved shared work.</td></tr><tr><td>G3 — usefulness/differentiation</td><td>I3/I6</td><td>Audience observations; no presumed exclusivity.</td></tr><tr><td>G5 — success/independence</td><td>I1/I3/I6</td><td>Rubrics before tests; baselines afterward.</td></tr><tr><td>G6 — owners/capacity/deadlines</td><td>I1/all</td><td>Roles and availability before the schedule.</td></tr><tr><td>G8 — providers</td><td>I1/I4, C10</td><td>First verified free path; buttons for working providers only.</td></tr><tr><td>G9 — name/licenses/feedback</td><td>I1/I4</td><td>Decisions before publication.</td></tr><tr><td>Cross-site auth</td><td>I1/I4</td><td>Complete flow on free domains without third-party cookies.</td></tr><tr><td>CPU and quotas</td><td>I1/I4/I6</td><td>Measure runtime; optimize or block if incompatible.</td></tr><tr><td>Score/attempts/elapsed time</td><td>I1/I4</td><td>Transparent server rules; estimated breaks separate.</td></tr><tr><td>Retention/deletion/recovery</td><td>I1/I4/I6</td><td>Explicit rules and tested restoration.</td></tr></tbody></table></div>
+<p style="max-width:90ch">A negative authentication, quota, correctness, or recovery result blocks launch; it does not authorize purchases. Initial candidate rules are in the <a href="../docs/analysis/implementation-proposal.md">operational scope</a>, approved for local work.</p>
+<h3 id="twelve-month-outline">Twelve-month outline</h3>
+<ul><li>Months 1–3: address the six initiatives in dependency order, with a conditional schedule. Continue beyond the quarter if requirements remain unmet.</li><li>Months 4–6: after launch, consolidate correctness, IT/EN, and sustainability; consider C10 only for an observed barrier and with free prerequisites. If launch is blocked, complete the initial scope first.</li><li>Months 7–9: consider C11 only with spare capacity and authorization. Do not add a fourth channel if maintenance cannot sustain it.</li><li>Months 10–12: reassess C16 using collected problems and tests; update the roadmap before new formats. C12/C15 remain parked without demonstrated need.</li></ul>
+</div></section>
+<section class="section chapter" id="7-assumption-evidence-ledger"><header class="section__head"><h2 class="section__title">7. Assumption &amp; evidence ledger</h2></header><div class="grid">
+<h3 id="open-questions">Open questions</h3>
+<p style="max-width:90ch">Confidence concerns the working answer, not the project&#39;s value. Category, ICP, and engines are explicit confirmed choices; effectiveness and technical conditions have not thereby become evidence. No baseline is invented.</p>
+<div class="table-wrap"><table class="tbl"><thead><tr><th scope="col">ID / type</th><th scope="col">Question and why it matters</th><th scope="col">Confidence</th><th scope="col">Available evidence</th><th scope="col">Recommendation</th></tr></thead><tbody><tr><td>P1 / unverified-claim</td><td>Does connecting files and review improve understanding?</td><td>Low</td><td>Specifications; no app or test.</td><td>Working scenario and observed explanation, I2/I3.</td></tr><tr><td>P2 / unverified-claim</td><td>Independent transfer between GitHub/Azure?</td><td>Low</td><td>Coverage required, not demonstrated.</td><td>Unguided case in both contexts, I2/I3.</td></tr><tr><td>P3 / unverified-claim</td><td>Reasoned recovery of shared work?</td><td>Low</td><td>Rubrics still to implement.</td><td>Observe choice and consequences, I2/I3.</td></tr><tr><td>G3 / assumption</td><td>Actual usefulness and differentiation.</td><td>Low</td><td>Public map and user choice; no proven exclusivity.</td><td>Pilot and claim review, I3/I6.</td></tr><tr><td>G5 / missing-data</td><td>Adoption targets and evidence of independence.</td><td>Low</td><td>Metrics requested; no baseline.</td><td>Rubrics before tests; collect results without fictional rates.</td></tr><tr><td>G6 / missing-data</td><td>Owners, initial capacity, and actual schedule.</td><td>Low</td><td>Repository owner known; only maintenance quantified.</td><td>Assign roles/capacity before D1; reschedule.</td></tr><tr><td>G8 / assumption</td><td>GitHub as first provider and subsequent order.</td><td>Medium</td><td>Design fit and provider documentation.</td><td>Verify in the spike; show working providers only.</td></tr><tr><td>G9 / missing-data</td><td>Public name, licenses, and feedback channel.</td><td>Low</td><td>Repository title and scope; no chosen license.</td><td>Decide before publication; distinguish code/content/assets.</td></tr><tr><td>T1 / assumption</td><td>Replay and store fit within free quotas.</td><td>Low</td><td>Documented limits; no application benchmark.</td><td>Measure locally, then in the real environment; optimize or block launch.</td></tr><tr><td>T2 / assumption</td><td>SSO works cross-site in target browsers.</td><td>Low</td><td>Proposed architecture; no spike.</td><td>Maintained provider, handoff, and test with third-party cookies blocked.</td></tr><tr><td>T3 / assumption</td><td>Scoring/time rules and repeated attempts.</td><td>Medium</td><td>Simple proposed definition, not yet approved.</td><td>Evaluate operational scope before the final contract.</td></tr><tr><td>T4 / missing-data</td><td>Retention, deletion, and recovery.</td><td>Low</td><td>Documented principles; schema inactive.</td><td>Explicit policies and restoration before release.</td></tr><tr><td>T5 / missing-data</td><td>OAuth registrations and real configuration.</td><td>Low</td><td>No accounts/secrets touched.</td><td>Separately authorized setup; a mock is not a real-login test.</td></tr><tr><td>T6 / assumption</td><td>Maintenance workload fits within 1–2 hours/week.</td><td>Medium</td><td>Human budget confirmed; no observed workload.</td><td>Measure the first complete week in I6; reduce channels if necessary.</td></tr><tr><td>T7 / missing-data</td><td>Volunteers available for the pilot.</td><td>Low</td><td>No recruitment performed.</td><td>Prepare test and consent after authorization without promising participants.</td></tr><tr><td>T8 / unverified-claim</td><td>Actual SEO/accessibility/performance.</td><td>Low</td><td>Calculated palette and audit plans; no app.</td><td>Audit the rendered product and correct findings, I4.</td></tr></tbody></table></div>
+<p style="max-width:90ch">No advertising benchmark is required: CPL and commercial conversions are not selected mechanisms. Learning data will be collected, not replaced with convenient ranges. Usage-cost assumptions must be distinguished from a plan&#39;s nominal free status and shared account quotas.</p>
+<h3 id="evidence-map">Evidence map</h3>
+<div class="table-wrap"><table class="tbl"><thead><tr><th scope="col">Origin</th><th scope="col">What it supports</th><th scope="col">Limitation</th></tr></thead><tbody><tr><td>User statements</td><td>Scope, audiences, IT/EN, simulator, timer, zero cost, category, promise, engines, and maintenance budget.</td><td>Confirm choices, not results.</td></tr><tr><td>Repository documentation</td><td>Architecture, curriculum, work status, and document checks.</td><td>Does not demonstrate implementation.</td></tr><tr><td>Official public sources</td><td>Alternatives, Google/GitHub mechanisms, and service quotas.</td><td>Do not measure course effectiveness or actual workload.</td></tr><tr><td>Design inferences</td><td>Six initiatives, windows, dependencies, and test hypotheses.</td><td>Approved as a direction; people and operational dates are not already assigned.</td></tr><tr><td>Connected tools</td><td>Verified repository access and metadata.</td><td>No CRM, commercial analytics, or paid source used.</td></tr></tbody></table></div>
+<p style="max-width:90ch">Main sources and their limitations: <a href="02-market-map.md">Market Map</a>, <a href="04-demand-plan.md">Demand Plan</a>, <a href="../docs/deployment.md">hosting</a>.</p>
+</div></section>
+<section class="section chapter" id="8-execution-readiness"><header class="section__head"><h2 class="section__title">8. Execution readiness</h2></header><div class="grid">
+<h3 id="81-conversion-design-from-discovery-to-learning">8.1 Conversion design: from discovery to learning</h3>
+<p style="max-width:90ch">Pages/example → tier → first exercise → outcome → resume. Define objectives, rubrics, feedback, and tier transitions. Without this work, visits and starts do not demonstrate understanding. It requires instructional design, UX, and testing with participants, rather than a sales process or CRM.</p>
+<h3 id="82-deployment-activation-and-maintenance">8.2 Deployment: activation and maintenance</h3>
+<p style="max-width:90ch">Build and verify the product; prepare IT/EN content, feedback, and procedures before activating channels. Required capabilities include TypeScript/Git, authentication, data, accessibility, translation, and maintenance. The 1–2 hours/week is the post-launch budget only. If the initial scope remains incomplete, postpone release; do not reduce languages/tiers or activate paid services.</p>
+<p style="max-width:90ch">Maintenance covers triage and small revisions, not a guarantee of every fix. Major incidents may require pausing distribution or the online service while planning a correction. No commercial SLA is promised.</p>
+<h3 id="83-measurement-sources-review-and-decisions">8.3 Measurement: sources, review, and decisions</h3>
+<p style="max-width:90ch">API for confirmed starts/completions; voluntary observations for rubrics and problems; Search Console signals only when configured and available. No invented traffic or new personal trackers merely to complete a dashboard. The maintainer role must periodically read signals and decide which corrections or channels are sustainable. Without this routine, an outcome cannot be attributed to an engine or the workload budget confirmed.</p>
+<h3 id="capacity-and-operational-start">Capacity and operational start</h3>
+<p style="max-width:90ch">The plan requires no paid supplier or hire. Human roles remain to be assigned, without assuming availability from the repository owner&#39;s name alone.</p>
+<p style="max-width:90ch">The <a href="../docs/analysis/implementation-proposal.md">reviewable operational scope</a> specifies the outcome, candidate dependencies, initial leaderboard rules, and publication boundary. After approval, local implementation may start through subagents in separate worktrees, with checks and documentation updates. Account/secret setup, resources, deployment CI, pushes/PRs, and publication are specific later steps, not authorized by GTM-document confirmation alone.</p>
+</div></section>
+<section class="section chapter" id="approval-status"><header class="section__head"><h2 class="section__title">Approval status</h2></header><div class="grid">
+<p style="max-width:90ch">The user approved the roadmap, consolidated plan, and local implementation on 15 November 2026. Approval does not turn learning hypotheses into evidence or authorize real accounts, external resources, or publication. Implementation has started; checks and results are reported in the current technical documentation.</p>
+</div></section></main><a class="credit" href="https://rev-ops.studio/gtm-planner" target="_blank" rel="noopener noreferrer"><div class="wrap"><span class="credit__mark" aria-hidden="true"></span><span class="credit__text">Created with <b>GTM Planner</b>, a free Claude plugin by RevOps Studio</span><span class="credit__url">rev-ops.studio/gtm-planner →</span></div></a></body></html>
