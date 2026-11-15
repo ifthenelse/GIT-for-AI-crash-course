@@ -1,7 +1,9 @@
 # Verifiche dell'implementazione locale
 
 Ambiente: Node.js **24.22.1**, TypeScript 7, Chromium di sistema **156**.
-`.node-version` rimane 26: la suite non è stata eseguita su Node 26 in questa sessione.
+`.node-version` rimane 26. Anche la CI GitHub Actions su Node 26 ha superato
+verifiche statiche, test, build/SEO e i 16 scenari browser: [run 43713961150](https://github.com/ifthenelse/GIT-for-AI-crash-course/actions/runs/43713961150),
+commit applicativo `819cead`. Le misure locali sotto rimangono riferite a Node 24.22.1.
 Nessuna prova applicativa usa credenziali reali o crea risorse cloud. La CI definisce
 un job browser per ripetere E2E/axe oltre ai controlli statici.
 

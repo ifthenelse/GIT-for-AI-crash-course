@@ -8,7 +8,7 @@ L'implementazione locale è stata approvata il 15 novembre 2026. La pubblicazion
 
 ## Avvio locale
 
-Servono Node.js 24.15+ della serie 24 oppure Node.js 26+, npm e Git. La versione indicata dalla repository in `.node-version` è 26; le verifiche di questa implementazione usano Node.js 24.22.1.
+Servono Node.js 24.15+ della serie 24 oppure Node.js 26+, npm e Git. La versione indicata dalla repository in `.node-version` è 26; le verifiche locali usano Node.js 24.22.1; anche la CI su Node.js 26 è passata.
 
 ```bash
 npm ci

@@ -34,5 +34,6 @@ Se il layout locale è corrotto il componente applica un preset dentro il viewpo
 Lo stato Git rimane separato dalle preferenze di disposizione.
 
 La CI di verifica prepara Node da `.node-version`, installa il lockfile e controlla
-tipi, test, build e SEO statico; un job separato esegue E2E e axe. Non distribuisce il sito. È una configurazione
-preparata localmente; il runner remoto e Node 26 non sono stati eseguiti qui.
+tipi, test, build e SEO statico; un job separato esegue E2E e axe. Non distribuisce il sito. La configurazione è stata
+verificata anche su GitHub Actions con Node 26; i dettagli e il collegamento al run
+sono in docs/testing.md.

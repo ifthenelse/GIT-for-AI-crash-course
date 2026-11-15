@@ -1,7 +1,9 @@
 # Verifiche del prodotto locale
 
 Eseguite il 15 novembre 2026 su Node.js 24.22.1 e Chromium di sistema 156.
-Le evidenze riguardano il codice locale e la build; non un servizio pubblico.
+Anche i job CI di verifica e browser sono passati su GitHub Actions con Node 26
+([run](https://github.com/ifthenelse/GIT-for-AI-crash-course/actions/runs/43713961150)).
+Le evidenze riguardano codice, build e API di prova; non un servizio pubblico.
 
 - [Identità visiva](visual-identity.md): palette effettiva, font e asset vettoriali.
 - [SEO](seo.md): dieci pagine prerenderizzate, navigazione e base path Pages.
