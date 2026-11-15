@@ -2,6 +2,13 @@
 
 Applies to humans and coding agents alike.
 
+## Language
+Write developer documentation, code comments, variable names and other identifiers in English.
+Pull request titles, descriptions and review comments, and commit subjects and bodies, must also be in English.
+Learner-facing UI and course material remain fully bilingual in Italian and English. Localized strings and
+explicitly labelled bilingual product examples are intentional exceptions. Preserve commands, URLs,
+external API identifiers and quoted source material when translating surrounding prose.
+
 ## Workflow
 1. Branch from `main` (or use a git worktree per task; never share one working copy between two agents).
 2. Make a focused change; keep unrelated refactors out.
