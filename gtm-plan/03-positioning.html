@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Posizionamento — GIT-for-AI-crash-course</title>
+  <meta name="description" content="Categoria, promessa italiano/inglese e messaggi confermati per GIT-for-AI-crash-course. I pilastri restano candidati da verificare.">
+  <style>
+    :root {
+      --ink: #0a0612; --ink-2: #14091f; --ink-3: #1f132e; --ink-4: #2c1d40;
+      --line-dark: #3a2954; --paper: #faf7f2; --paper-2: #f4ede2; --paper-3: #e9dfd0;
+      --line: #d6c9b3; --line-soft: #e6dccb; --fg: #14091f; --fg-2: #4a3d5c; --fg-3: #7a6e8a;
+      --on-dark: #faf7f2; --on-dark-2: #c9bdd6; --on-dark-3: #8a7c9e; --lilac: #a99bbf;
+      --purple-700: #8114b0; --purple-500: #b427a3; --magenta: #e13798; --pink: #fe5688;
+      --coral: #fb9a6a; --yellow: #f7fd3d; --warn: #f8dd4b; --ok: #2dd4a8;
+      --white: #ffffff; --pass: #11624d; --partial: #9a7d00; --warn-border: #d9bf2c;
+      --warn-text: #7a6400; --ok-border: #2aa886;
+      --grad: linear-gradient(135deg, #8114b0 0%, #c129a1 32%, #fe5688 58%, #fb9a6a 78%, #f7fd3d 100%);
+      --grad-bar: linear-gradient(90deg, #b427a3 0%, #e13798 30%, #fe5688 62%, #fb9a6a 100%);
+      --grad-text: linear-gradient(90deg, #d42ea0 0%, #fe5688 45%, #fb9a6a 78%, #f3d64a 100%);
+      --hero-purple: rgba(91,11,135,.55); --hero-pink: rgba(254,86,136,.22);
+      --draft-border: rgba(248,221,75,.45); --tab-bg: rgba(20,9,31,.5);
+      --warn-bg: rgba(248,221,75,.18); --ok-bg: rgba(45,212,168,.12);
+      --blackout-line: rgba(214,201,179,.55); --blackout-bg: rgba(233,223,208,.6);
+      --gap-bg: rgba(254,86,136,.08); --hyp-bg: rgba(180,39,163,.05);
+      --choice-start: rgba(254,86,136,.10); --choice-end: rgba(251,154,106,.05);
+      --toc-bg: rgba(250,247,242,.92);
+      --sans: Manrope, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      --r-sm: 8px; --r-md: 14px; --r-lg: 22px; --r-xl: 30px; --r-pill: 999px;
+      --gutter: clamp(16px, 4.4vw, 86px); --gap: clamp(14px, 1.4vw, 24px);
+      --section-space: clamp(36px, 3.4vw, 56px);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    body { margin: 0; background: var(--paper); color: var(--fg); font: 400 16px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4, p, blockquote { margin: 0; }
+    a { color: var(--purple-700); }
+    a:focus-visible { outline: 2px solid var(--pink); outline-offset: 4px; }
+    .wrap { width: 100%; max-width: 1760px; margin-inline: auto; padding-inline: var(--gutter); }
+    .label { font: 500 12px/1.5 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-3); }
+    .grad { background: var(--grad-text); background-clip: text; -webkit-background-clip: text; color: transparent; }
+    .muted { color: var(--lilac); }
+    .hero { overflow: hidden; color: var(--on-dark); background: radial-gradient(ellipse 55% 140% at 92% -10%, var(--hero-purple), transparent 62%), radial-gradient(ellipse 35% 90% at 78% -20%, var(--hero-pink), transparent 60%), var(--ink); }
+    .hero > .wrap { padding-top: clamp(36px,4vw,64px); padding-bottom: clamp(36px,3.6vw,56px); }
+    .hero__top { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 16px; }
+    .eyebrow { font: 500 13px/1.5 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--pink); }
+    .eyebrow span + span::before { content: " · "; color: var(--pink); }
+    .status { display: inline-flex; align-items: center; gap: 10px; color: var(--on-dark-2); border: 1px solid var(--line-dark); border-radius: var(--r-pill); padding: 11px 18px; font: 500 13px/1.5 var(--mono); white-space: nowrap; }
+    .status--ok::before { content: ""; width: 7px; height: 7px; flex: 0 0 7px; border-radius: 50%; background: var(--ok); }
+    .status--draft { color: var(--warn); border-color: var(--draft-border); }
+    .hero__body { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 32px 48px; margin-top: clamp(28px,3vw,44px); }
+    .hero__body > :first-child { flex: 1 1 720px; min-width: 0; }
+    .hero__body > :nth-child(2) { flex: 0 0 auto; }
+    .hero__title { font: 800 clamp(38px,4.3vw,72px)/1.04 var(--sans); letter-spacing: -.035em; max-width: 24ch; overflow-wrap: anywhere; }
+    .hero__title--wide { max-width: none; }
+    .hero__lede { font: 400 clamp(16px,1.25vw,22px)/1.45 var(--sans); color: var(--on-dark-2); max-width: 62ch; margin-top: 18px; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tabs > a, .tabs > span { font: 500 15px/1.5 var(--sans); color: var(--on-dark-2); border: 1px solid var(--line-dark); border-radius: var(--r-pill); padding: 13px 16px; background: var(--tab-bg); text-decoration: none; }
+    .tabs > [aria-current="page"] { background: var(--pink); color: var(--white); font-weight: 600; }
+    .tabs > span { opacity: .4; }
+    .tabs--row { margin-top: clamp(24px,2.4vw,36px); }
+    .chain { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .chain__step { min-width: 96px; padding: 16px 20px; background: var(--ink-2); border: 1px solid var(--line-dark); border-radius: var(--r-md); }
+    .chain__step b { display: block; font: 500 clamp(22px,1.7vw,30px)/1.2 var(--mono); }
+    .chain__step span { display: block; margin-top: 6px; font: 400 15px/1.5 var(--mono); color: var(--on-dark-2); }
+    .chain__arrow { font: 400 14px/1 var(--mono); color: var(--pink); }
+    .chain__step--goal { background: var(--pink); color: var(--ink); }
+    .chain__step--goal span { color: var(--ink); }
+    main.wrap { padding-top: clamp(32px,3.2vw,56px); }
+    .section { margin-bottom: var(--section-space); }
+    .section__head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px 24px; margin-bottom: 22px; }
+    .section__title { font: 700 clamp(22px,1.7vw,30px)/1.2 var(--sans); letter-spacing: -.02em; }
+    .n { display: inline-block; position: relative; top: -.18em; margin-right: .7em; color: var(--purple-700); font: 500 .62em/1 var(--mono); }
+    .section__aside { font-size: 15px; color: var(--fg-3); max-width: 60ch; }
+    .lead { font: 500 clamp(17px,1.25vw,21px)/1.5 var(--sans); max-width: 78ch; }
+    .foot { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px 48px; padding-top: clamp(28px,3vw,56px); padding-bottom: clamp(28px,2.6vw,44px); }
+    .foot__note { max-width: 72ch; font-size: clamp(16px,1.15vw,19px); color: var(--fg-2); }
+    .foot__note strong { color: var(--fg); }
+    .foot__src { font: 400 13px/1.6 var(--mono); color: var(--fg-3); text-align: right; }
+    .credit { display: block; width: 100%; background: var(--ink); color: var(--on-dark-2); text-decoration: none; }
+    .credit > .wrap { display: flex; align-items: center; gap: 14px; padding-block: 16px; }
+    .credit__mark { display: inline-block; flex: 0 0 16px; width: 16px; height: 18px; background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='90 61 212 245'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='1' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%238114b0'/%3E%3Cstop offset='.5' stop-color='%23fe5688'/%3E%3Cstop offset='1' stop-color='%23f7fd3d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M301.73 305.99H240.41L196.6 221.75H143.43V305.67H90.1V61.61H213.51C231.13 61.61 246.19 65.02 258.69 71.83 271.19 78.64 280.74 88.15 287.35 100.35 293.96 112.53 297.27 126.78 297.27 143.07 297.27 161 293.25 176.19 285.21 188.64 277.17 201.09 265.67 210.08 250.71 215.61ZM143.43 106.96V176.42H204.76C218.79 176.42 228.87 173.35 235.02 167.21 241.18 161.05 244.26 152.55 244.26 141.69 244.26 130.51 241.1 121.93 234.8 115.94 228.5 109.95 218.48 106.96 204.76 106.96Z'/%3E%3C/svg%3E"); }
+    .credit__text { font-size: 14px; }
+    .credit__text b { color: var(--on-dark); font-weight: 700; }
+    .credit__url { margin-left: auto; font: 500 13px/1.5 var(--mono); color: var(--pink); }
+    .credit:hover .credit__url { text-decoration: underline; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit,minmax(170px,1fr)); gap: clamp(16px,2vw,28px); margin-bottom: clamp(28px,2.6vw,40px); }
+    .kpi { padding-top: 18px; border-top: 2px solid var(--fg); }
+    .kpi b { font: 500 clamp(26px,2.2vw,38px)/1.2 var(--mono); letter-spacing: -.01em; }
+    .kpi span { display: block; margin-top: 10px; color: var(--fg-2); }
+    .kpi--accent { border-color: var(--pink); }
+    .kpi--est .est { display: inline-block; position: relative; top: -.9em; margin-left: 8px; font: 500 11px/1 var(--mono); letter-spacing: .08em; color: var(--fg-3); }
+    .meter { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .meter i { display: block; width: 18px; height: 6px; background: var(--line-dark); border-radius: 4px; }
+    .meter--light i { background: var(--paper-3); }
+    .meter[data-level="1"] i:first-child, .meter[data-level="2"] i:nth-child(-n+2), .meter[data-level="3"] i { background: var(--pink); }
+    .meter b { margin-left: 8px; font: 700 16px/1.5 var(--sans); }
+    .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--grad); }
+    .dot--mid { background: var(--purple-700); }
+    .dot--low { background: transparent; border: 2px solid var(--purple-500); }
+    .grid { display: grid; gap: var(--gap); }
+    .g2 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .g3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    .g4 { grid-template-columns: repeat(4,minmax(0,1fr)); }
+    .g5 { grid-template-columns: repeat(5,minmax(0,1fr)); }
+    .split { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); align-items: start; gap: clamp(18px,2vw,36px); }
+    .split--wide { grid-template-columns: minmax(0,7fr) minmax(0,5fr); }
+    .card { background: var(--paper-2); border-radius: var(--r-lg); padding: clamp(20px,1.7vw,30px); color: var(--fg-2); overflow-wrap: anywhere; }
+    .card__title { font: 700 19px/1.3 var(--sans); color: var(--fg); margin-bottom: 12px; }
+    .num { font: 400 14px/1.3 var(--mono); color: var(--purple-700); }
+    .card--line { background: transparent; border: 1px solid var(--line); }
+    .card--dark { background: var(--ink); color: var(--on-dark-2); }
+    .card--dark .card__title { color: var(--on-dark); }
+    .q-label { font: 500 15px/1.5 var(--mono); color: var(--purple-700); margin-bottom: 12px; }
+    .pill-dark { display: inline-block; background: var(--ink); color: var(--white); font-weight: 600; font-size: 15px; border-radius: var(--r-pill); padding: 10px 16px; margin-top: 12px; }
+    .callout { background: var(--ink); color: var(--on-dark); border-radius: var(--r-md); padding: 16px 20px; font: 600 16px/1.55 var(--sans); }
+    .callout::before { content: "→ "; color: var(--pink); }
+    .more { font: 500 13px/1.5 var(--mono); color: var(--purple-700); text-decoration: none; }
+    .more:hover { text-decoration: underline; }
+    .panel .more { color: var(--pink); }
+    .chip { display: inline-block; font: 500 12.5px/1.5 var(--mono); color: var(--fg-2); border: 1px solid var(--line); border-radius: var(--r-pill); padding: 7px 12px; white-space: nowrap; }
+    .chip--dark { border-color: var(--line-dark); color: var(--on-dark-2); }
+    .chip--pink { background: var(--pink); color: var(--ink); }
+    .chip--warn { border-color: var(--warn-border); color: var(--warn-text); background: var(--warn-bg); }
+    .chip--ok { border-color: var(--ok-border); color: var(--pass); background: var(--ok-bg); }
+    .chip--gap { border: 0; background: var(--grad); color: var(--white); font-weight: 700; }
+    .chip--hyp { border: 1px dashed var(--purple-500); color: var(--purple-700); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tbd { font: 600 14px/1.5 var(--sans); background: var(--pink); color: var(--ink); border-radius: var(--r-sm); padding: 4px 8px; }
+    .src { display: inline-block; font: 500 11.5px/1.5 var(--mono); letter-spacing: .04em; color: var(--fg-3); }
+    .src::before { content: "↳ "; }
+    .src a { color: var(--purple-700); }
+    .panel { background: var(--ink); color: var(--on-dark); border-radius: var(--r-xl); padding: clamp(22px,2.4vw,40px); }
+    .panel .section__title { color: var(--on-dark); }
+    .panel .n { color: var(--pink); }
+    .panel .section__aside { color: var(--on-dark-3); }
+    .table-wrap { max-width: 100%; overflow-x: auto; }
+    .tbl { width: 100%; border-collapse: collapse; font-size: 16px; }
+    .tbl th { padding: 0 16px 16px 0; text-align: left; font: 500 12.5px/1.5 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--fg-3); border-bottom: 1px solid var(--line); white-space: nowrap; }
+    .tbl td { padding: 18px 16px 18px 0; border-bottom: 1px solid var(--line-soft); vertical-align: top; color: var(--fg-2); }
+    .tbl .strong { color: var(--fg); font-weight: 600; }
+    .panel .tbl th { color: var(--on-dark-2); border-color: var(--line-dark); }
+    .panel .tbl td { color: var(--on-dark); border-color: var(--ink-4); }
+    .panel .tbl .soft { color: var(--on-dark-2); }
+    .risk { font: 700 12px/1.5 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--pink); }
+    .gantt { overflow-x: auto; --label: 34%; --weeks: 13; }
+    .gantt__inner { position: relative; min-width: 980px; }
+    .g-row { display: grid; grid-template-columns: var(--label) minmax(0,1fr); align-items: center; min-height: 88px; border-bottom: 1px solid var(--line-soft); }
+    .g-row--head { align-items: end; min-height: 0; border-color: var(--line); padding-bottom: 14px; }
+    .g-track { display: grid; grid-template-columns: repeat(var(--weeks),minmax(0,1fr)); padding-left: 12px; position: relative; z-index: 1; }
+    .g-week { font: 500 13px/1.5 var(--mono); color: var(--fg-3); text-align: center; text-transform: uppercase; letter-spacing: .04em; }
+    .g-week small { display: block; text-transform: none; }
+    .g-label { padding: 16px 24px 16px 0; }
+    .g-label h4 { font: 700 clamp(16px,1.1vw,19px)/1.3 var(--sans); }
+    .g-label .n { color: var(--purple-700); }
+    .g-label p { font-size: 15px; color: var(--fg-2); margin-top: 5px; }
+    .bar { grid-row: 1; height: 36px; border-radius: var(--r-pill); background: var(--grad-bar); display: flex; justify-content: center; align-items: center; padding-inline: 16px; position: relative; }
+    .bar--mid { background: var(--purple-700); }
+    .bar--low { background: var(--lilac); }
+    .ms { position: absolute; left: calc(100% + 14px); white-space: nowrap; font: 500 15px/1.5 var(--sans); color: var(--fg-2); }
+    .ms::before { content: "◆ "; font-size: .85em; }
+    .bar--in .ms { position: static; color: var(--white); font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
+    .bar--low.bar--in .ms { color: var(--ink); }
+    .blackout { position: absolute; top: 0; bottom: 0; left: calc(var(--label) + 12px + (100% - var(--label) - 12px) * (var(--from) - 1) / var(--weeks)); width: calc((100% - var(--label) - 12px) * (var(--to) - var(--from) + 1) / var(--weeks)); border-radius: var(--r-md); background: repeating-linear-gradient(-45deg, var(--blackout-line) 0 2px, transparent 2px 13px), var(--blackout-bg); text-align: center; font: 500 13px/1.5 var(--mono); color: var(--fg-2); }
+    .legend { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 20px; font-size: 15px; color: var(--fg-2); }
+    .legend i { display: inline-block; width: 38px; height: 12px; border-radius: var(--r-pill); margin-right: 10px; background: var(--grad-bar); }
+    .legend i.mid { background: var(--purple-700); }
+    .legend i.low { background: var(--lilac); }
+    .rings { position: relative; width: 100%; max-width: 500px; aspect-ratio: 1; margin-inline: auto; }
+    .ring { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); aspect-ratio: 1; border-radius: 50%; }
+    .ring--3 { width: 100%; background: var(--paper-2); border: 2px dashed var(--pink); color: var(--magenta); }
+    .ring--2 { width: 68%; background: var(--paper-3); color: var(--fg-2); }
+    .ring--1 { width: 37%; background: var(--ink); color: var(--on-dark); display: flex; align-items: center; justify-content: center; }
+    .ring__label { position: absolute; top: 14px; left: 0; width: 100%; text-align: center; font: 500 12.5px/1.5 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .ring--1 .ring__label { position: static; }
+    .layer { border-left: 3px solid var(--ink); padding-left: 18px; margin-bottom: 22px; }
+    .layer--1 { border-color: var(--ink); } .layer--2 { border-color: var(--lilac); } .layer--3 { border-color: var(--pink); }
+    .layer h4 { font: 700 17px/1.4 var(--sans); margin-bottom: 12px; }
+    .layer small { font: 400 12px/1.5 var(--mono); text-transform: uppercase; color: var(--fg-3); }
+    .pmap { position: relative; aspect-ratio: 16/10; background: var(--paper-2); border-radius: var(--r-lg); overflow: hidden; }
+    .pmap::before { content: ""; position: absolute; left: 50%; top: 7%; bottom: 7%; width: 1px; background: var(--line); }
+    .pmap::after { content: ""; position: absolute; top: 50%; left: 5%; right: 5%; height: 1px; background: var(--line); }
+    .ax { position: absolute; font: 500 12px/1.4 var(--mono); letter-spacing: .06em; color: var(--fg-3); max-width: 28%; }
+    .ax--xl { left: 5%; top: 50%; } .ax--xr { right: 5%; top: 50%; text-align: right; }
+    .ax--yt { left: 51%; top: 7%; } .ax--yb { left: 51%; bottom: 7%; }
+    .pt { position: absolute; left: var(--x); bottom: var(--y); transform: translate(-50%,50%); z-index: 2; display: flex; align-items: center; gap: 8px; white-space: nowrap; font: 600 14px/1.4 var(--sans); }
+    .pt::before { content: ""; flex: 0 0 13px; width: 13px; height: 13px; border-radius: 50%; background: var(--ink); }
+    .pt--you { color: var(--magenta); }
+    .pt--you::before { flex-basis: 16px; width: 16px; height: 16px; background: var(--white); border: 3px solid var(--pink); }
+    .pt--right { flex-direction: row-reverse; }
+    .gap { position: absolute; left: var(--x); bottom: var(--y); transform: translate(-50%,50%); width: var(--w,26%); aspect-ratio: 1.6; border-radius: 50%; border: 2px dashed var(--pink); background: var(--gap-bg); display: flex; align-items: center; justify-content: center; }
+    .gap--hyp { border-color: var(--purple-500); background: var(--hyp-bg); }
+    .comp h4 { font: 700 18px/1.4 var(--sans); }
+    .comp .claim { font: 500 13px/1.5 var(--mono); color: var(--purple-700); }
+    .vuln { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px; }
+    .vuln b { display: block; font: 700 12px/1.5 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--magenta); }
+    .promise { position: relative; overflow: hidden; background: var(--ink); color: var(--on-dark); border-radius: var(--r-xl); padding: clamp(28px,3.4vw,60px); }
+    .promise::before { content: ""; position: absolute; inset: auto -10% -60% 40%; height: 120%; background: radial-gradient(ellipse at center, var(--hero-pink), transparent 65%); }
+    .promise > * { position: relative; }
+    .promise blockquote { font: 800 clamp(28px,3.1vw,54px)/1.08 var(--sans); letter-spacing: -.03em; max-width: 24ch; }
+    .fallback { font-size: 17px; color: var(--on-dark-2); }
+    .why { font-size: 15px; color: var(--on-dark-3); max-width: 80ch; }
+    .tbl.matrix th:first-child, .tbl.matrix td:first-child { padding-left: 16px; }
+    .matrix tr.is-chosen td { background: linear-gradient(90deg, var(--choice-start), var(--choice-end)); }
+    .matrix tr.is-chosen td:first-child { box-shadow: inset 3px 0 var(--pink); }
+    .matrix .meter { gap: 4px; } .matrix .meter i { width: 14px; }
+    .matrix small { display: block; margin-top: 6px; font-size: 13px; color: var(--fg-3); }
+    .pillar h4 { font: 700 20px/1.3 var(--sans); }
+    .test { list-style: none; padding: 14px 0 0; margin: 14px 0 0; border-top: 1px solid var(--line); }
+    .test li { display: grid; grid-template-columns: 22px 118px minmax(0,1fr); gap: 6px; margin-top: 9px; }
+    .test .mark { color: var(--pass); } .test .partial { color: var(--partial); } .test .fail { color: var(--magenta); }
+    .test b { font: 500 11.5px/1.5 var(--mono); text-transform: uppercase; color: var(--fg-3); }
+    .test li > span:last-child { font-size: 14.5px; color: var(--fg-2); }
+    .stage { border-top: 3px solid var(--purple-700); padding-top: 16px; }
+    .stage--1 { border-color: var(--purple-700); } .stage--2 { border-color: var(--pink); } .stage--3 { border-color: var(--coral); }
+    .stage .msg { font: 700 clamp(18px,1.35vw,23px)/1.35 var(--sans); }
+    .stage ul { font-size: 15px; }
+    .anti { list-style: none; padding: 0; margin: 0; }
+    .anti li { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); padding-block: 14px; border-bottom: 1px solid var(--line-dark); }
+    .anti s { color: var(--on-dark); font-weight: 600; text-decoration-color: var(--pink); text-decoration-thickness: 2px; }
+    .anti span { font-size: 15px; color: var(--on-dark-2); }
+    .tbl.cov th:not(:first-child), .tbl.cov td:not(:first-child) { text-align: center; }
+    .signal { position: relative; height: 10px; border-radius: 6px; background: var(--paper-3); min-width: 140px; }
+    .signal i { position: absolute; left: var(--from); width: calc(var(--to) - var(--from)); height: 100%; border-radius: inherit; background: var(--grad-bar); }
+    .signal-scale { display: flex; justify-content: space-between; margin-top: 6px; font: 500 11px/1.5 var(--mono); color: var(--fg-3); }
+    .engine h4 { font: 700 19px/1.3 var(--sans); }
+    .engine .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+    .discard { border: 1px dashed var(--line); border-radius: var(--r-md); padding: 16px 18px; }
+    .discard h4 { font: 700 16px/1.4 var(--sans); text-decoration: line-through; text-decoration-color: var(--magenta); text-decoration-thickness: 2px; }
+    .discard p { font-size: 14.5px; color: var(--fg-2); }
+    .phase { background: var(--paper-2); border-radius: var(--r-lg); padding: 22px 24px; }
+    .phase ul { font-size: 15.5px; color: var(--fg-2); }
+    .phase--now { background: var(--ink); color: var(--on-dark-2); }
+    .phase--now ul { color: var(--on-dark-2); } .phase--now .q-label { color: var(--pink); }
+    .dchain { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 10px; }
+    .dchain__step { position: relative; background: var(--ink-2); border: 1px solid var(--line-dark); border-radius: var(--r-md); padding: 18px 18px 20px; }
+    .dchain__step .label { color: var(--pink); }
+    .dchain__step p { font: 600 16px/1.5 var(--sans); color: var(--on-dark); margin-top: 10px; }
+    .dchain__step:not(:last-child)::after { content: "→"; position: absolute; right: -10px; top: 50%; color: var(--pink); }
+    .toc { position: sticky; top: 0; z-index: 3; background: var(--toc-bg); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .toc > .wrap { display: flex; overflow-x: auto; gap: 8px; }
+    .toc a { font-size: 14px; color: var(--fg-2); border-radius: var(--r-pill); padding: 10px 14px; text-decoration: none; white-space: nowrap; }
+    .toc a:hover { background: var(--paper-2); }
+    .toc .n { font-size: 12px; }
+    .chapter { border-top: 1px solid var(--line); padding-top: clamp(28px,2.6vw,44px); }
+    .evidence { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+    .evidence > * { border: 1px solid var(--line-dark); border-radius: var(--r-md); padding: 16px; }
+    .evidence h4 { font: 500 12px/1.5 var(--mono); color: var(--pink); text-transform: uppercase; }
+    .evidence p { font-size: 14.5px; color: var(--on-dark-2); }
+    .ws h4 { font: 700 19px/1.3 var(--sans); }
+    .skip { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px; font-size: 15px; color: var(--fg-2); }
+    .skip b { display: block; font: 700 12px/1.5 var(--mono); text-transform: uppercase; color: var(--magenta); }
+    @media (max-width: 1100px) {
+      .g3, .g4, .g5 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .split, .split--wide { grid-template-columns: minmax(0,1fr); }
+      .dchain, .evidence { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .dchain__step::after { display: none; }
+    }
+    @media (max-width: 680px) {
+      .grid, .g2, .g3, .g4, .g5, .split, .split--wide, .dchain, .evidence { grid-template-columns: minmax(0,1fr); }
+      .hero__top { align-items: flex-start; flex-direction: column; }
+      .status { white-space: normal; }
+      .anti li { grid-template-columns: minmax(0,1fr); }
+      .test li { grid-template-columns: 22px minmax(0,1fr); }
+      .test b, .test li > span:last-child { grid-column: 2; }
+      .credit > .wrap { flex-wrap: wrap; }
+      .credit__url { margin-left: 0; }
+      .foot__src { text-align: left; }
+      .pmap { aspect-ratio: 4/5; }
+      .pt { font-size: 12px; }
+      .ax { font-size: 10.5px; max-width: 42%; }
+      .tbl { min-width: 620px; }
+    }
+    @page { size: A4 landscape; margin: 0; }
+    @media print {
+      body { zoom: .62; }
+      .g2 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .g3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
+      .g4, .evidence { grid-template-columns: repeat(4,minmax(0,1fr)); }
+      .g5, .dchain { grid-template-columns: repeat(5,minmax(0,1fr)); }
+      .split { grid-template-columns: minmax(0,5fr) minmax(0,7fr); }
+      .split--wide { grid-template-columns: minmax(0,7fr) minmax(0,5fr); }
+      .dchain__step:not(:last-child)::after { display: block; }
+      .section, .card, .g-row, .panel, .promise, .phase { break-inside: avoid; }
+      .chapter { break-before: page; }
+      .toc { position: static; }
+      a { text-decoration: none; }
+      .table-wrap, .gantt { overflow: visible; }
+      .tbl { min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero__top">
+        <p class="eyebrow"><span>GTM Planner</span><span>Posizionamento</span><span>GIT-for-AI-crash-course</span></p>
+        <p class="status status--ok">Confermato · 15 novembre 2026</p>
+      </div>
+      <div class="hero__body">
+        <div>
+          <h1 class="hero__title">Un laboratorio visuale <span class="grad">di collaborazione con Git</span></h1>
+          <p class="hero__lede">Categoria, promessa e messaggi confermati. Il corso è in progettazione; efficacia e pilastri restano da verificare.</p>
+        </div>
+        <nav class="tabs" aria-label="Documenti del piano">
+          <a data-tab="01" href="01-business-snapshot.html">1 Quadro iniziale</a>
+          <a data-tab="02" href="02-market-map.html">2 Mercato</a>
+          <a data-tab="03" href="03-positioning.html" aria-current="page">3 Posizionamento</a>
+          <a data-tab="04" href="04-demand-plan.html">4 Domanda</a>
+          <span data-tab="05">5 Roadmap</span>
+          <span data-tab="00">Piano GTM</span>
+        <a href="05-roadmap.html">05 Roadmap</a><a href="00-gtm-plan.html">Piano completo</a></nav>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="section" aria-labelledby="category-title">
+      <div class="section__head">
+        <h2 class="section__title" id="category-title"><span class="n">01</span> Scelta della categoria</h2>
+        <p class="section__aside">Confronto qualitativo. Domanda, dimensione e favorevolezza non hanno punteggi misurati.</p>
+      </div>
+      <div class="table-wrap" role="region" aria-label="Categorie candidate, tabella scorrevole" tabindex="0">
+        <table class="tbl matrix">
+          <thead><tr><th scope="col">Categoria candidata</th><th scope="col">Spazio e concorrenza osservabili</th><th scope="col">Aderenza e interesse</th></tr></thead>
+          <tbody>
+            <tr class="is-chosen">
+              <td class="strong">Laboratorio visuale di collaborazione con Git<br><span class="chip chip--pink">Scelta confermata</span></td>
+              <td><span class="meter meter--light" data-level="0"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><b>Non valutato</b></span><small>Collega comandi e lavoro condiviso; sovrapposizione con simulatori e pratica reale.</small></td>
+              <td><span class="meter meter--light" data-level="0"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><b>Non valutato</b></span><small>Coerente con gli scenari progettati; interesse dei pubblici da validare.</small></td>
+            </tr>
+            <tr>
+              <td class="strong">Palestra di recupero Git</td>
+              <td><span class="meter meter--light" data-level="0"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><b>Non valutato</b></span><small>Bisogno più circoscritto; recupero e conflitti già presenti nelle alternative.</small></td>
+              <td><span class="meter meter--light" data-level="0"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><b>Non valutato</b></span><small>Copre una parte del programma; rischio di apparire utile solo quando c’è un incidente.</small></td>
+            </tr>
+            <tr>
+              <td class="strong">Percorso pratico IT/EN</td>
+              <td><span class="meter meter--light" data-level="0"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><b>Non valutato</b></span><small>Dimensione ignota; lingue e progressione non dimostrano esclusività.</small></td>
+              <td><span class="meter meter--light" data-level="0"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><b>Non valutato</b></span><small>Aderente ai requisiti; rilevanza da verificare nelle due lingue.</small></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lead">La scelta impone di spiegare collaborazione e conseguenze oltre alla sintassi, distinguere simulazione e operazioni reali e verificare l’apprendimento. Visualizzazione, livelli e interattività da soli non dimostrano differenziazione. Le risorse esistenti restano alternative utili e possibili approfondimenti.</p>
+    </section>
+    <section class="section promise" aria-labelledby="promise-title">
+      <p class="eyebrow" id="promise-title">Promessa principale · Obiettivo didattico da verificare</p>
+      <blockquote lang="it" data-promise="it">Collabora con Git sapendo cosa cambia <span class="grad">e come recuperare il lavoro.</span></blockquote>
+      <p class="fallback" lang="en" data-promise="en">Collaborate with Git knowing what changes and how to recover your work.</p>
+      <p class="fallback" data-fallback="it"><strong>Alternativa IT:</strong> Scegli come collaborare e recuperare con Git, vedendo cosa cambia nella repository.</p>
+      <p class="fallback" lang="en" data-fallback="en"><strong lang="it">Alternativa EN:</strong> Choose how to collaborate and recover with Git, seeing what changes in the repository.</p>
+      <p class="why">La promessa riguarda autonomia e comprensione ed è coerente con gli scenari specificati. Diventerà una capacità dimostrata solo dopo prove su problemi nuovi svolti senza guida. Il corso è in progettazione.</p>
+    </section>
+    <section class="section" aria-labelledby="pillars-title">
+      <div class="section__head">
+        <h2 class="section__title" id="pillars-title"><span class="n">02</span> Pilastri candidati da validare</h2>
+        <p class="section__aside">Nessun pilastro validato. Rilevanza e differenziazione sono ipotesi; la prova manca. Nessun candidato viene mostrato come già verificato.</p>
+      </div>
+      <div class="grid g3">
+        <article class="card pillar" data-pillar="P1">
+          <p class="label">P1 · Candidato</p>
+          <span class="chip chip--warn" lang="en">unverified-claim P1</span>
+          <h4 aria-level="3">Dal file alla revisione</h4>
+          <p>Ipotesi: collegare una modifica ai suoi effetti sulla storia e sulla revisione condivisa.</p>
+          <ul class="test">
+            <li><span class="partial" aria-hidden="true">◐</span><b>Rilevanza</b><span>Plausibile per i pubblici dichiarati; riscontri diretti assenti.</span></li>
+            <li><span class="partial" aria-hidden="true">◐</span><b>Differenza</b><span>Ipotesi rispetto a LearnGitBranching e GitHub Skills; esclusività non dimostrata.</span></li>
+            <li><span class="partial" aria-hidden="true">◐</span><b>Prova</b><span>Non ancora superata: viste specificate, implementazione non osservabile.</span></li>
+          </ul>
+        </article>
+        <article class="card pillar" data-pillar="P2">
+          <p class="label">P2 · Candidato</p>
+          <span class="chip chip--warn" lang="en">unverified-claim P2</span>
+          <h4 aria-level="3">Lo stesso problema, due contesti</h4>
+          <p>Ipotesi: riconoscere principi Git comuni e differenze operative fra GitHub e Azure DevOps.</p>
+          <ul class="test">
+            <li><span class="partial" aria-hidden="true">◐</span><b>Rilevanza</b><span>Coerente con il pubblico; frequenza del bisogno ignota.</span></li>
+            <li><span class="partial" aria-hidden="true">◐</span><b>Differenza</b><span>Ipotesi rispetto a percorsi che enfatizzano una piattaforma; unicità non accertata.</span></li>
+            <li><span class="partial" aria-hidden="true">◐</span><b>Prova</b><span>Non ancora superata: copertura richiesta, capacità non realizzata.</span></li>
+          </ul>
+        </article>
+        <article class="card pillar" data-pillar="P3">
+          <p class="label">P3 · Candidato</p>
+          <span class="chip chip--warn" lang="en">unverified-claim P3</span>
+          <h4 aria-level="3">Recupero motivato</h4>
+          <p>Ipotesi: scegliere una strategia di recupero spiegandone l’effetto sul lavoro condiviso.</p>
+          <ul class="test">
+            <li><span class="partial" aria-hidden="true">◐</span><b>Rilevanza</b><span>Bisogno plausibile da verificare.</span></li>
+            <li><span class="partial" aria-hidden="true">◐</span><b>Differenza</b><span>Recupero e conflitti già esistono nelle alternative; da verificare la motivazione delle scelte.</span></li>
+            <li><span class="partial" aria-hidden="true">◐</span><b>Prova</b><span>Non ancora superata: simulatore e risultati di apprendimento mancanti.</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="segments-title">
+      <div class="section__head">
+        <h2 class="section__title" id="segments-title"><span class="n">03</span> La promessa per ogni pubblico</h2>
+        <p class="section__aside">Stessa promessa, lessico e approfondimento adattati al contesto del partecipante.</p>
+      </div>
+      <div class="grid g3">
+        <article class="card">
+          <p class="label">Engineers</p>
+          <h3 class="card__title">Integra modifiche e recupera comprendendo la storia condivisa</h3>
+          <p>Enfasi candidata: P1/P3.</p>
+          <div class="chips"><span class="chip">branch</span><span class="chip">diff</span><span class="chip">commit</span><span class="chip">conflitto</span></div>
+        </article>
+        <article class="card card--line">
+          <p class="label">Architects</p>
+          <h3 class="card__title">Valuta integrazione e recupero comprendendone gli effetti sulla collaborazione</h3>
+          <p>Enfasi candidata: P2/P3.</p>
+          <div class="chips"><span class="chip">policy</span><span class="chip">storia condivisa</span><span class="chip">integrazione</span><span class="chip">rollback</span></div>
+        </article>
+        <article class="card card--line">
+          <p class="label">Business con esperienza tecnica</p>
+          <h3 class="card__title">Collabora sulle modifiche e recupera una versione comprendendo il lavoro del gruppo</h3>
+          <p>Enfasi candidata: P1/P3.</p>
+          <div class="chips"><span class="chip">modifica</span><span class="chip">revisione</span><span class="chip">versione</span><span class="chip">ripristino</span></div>
+        </article>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="messages-title">
+      <div class="section__head">
+        <h2 class="section__title" id="messages-title"><span class="n">04</span> Messaggi nel percorso</h2>
+        <p class="section__aside">Testi candidati per quando il prodotto sarà disponibile. Il corso attuale è in progettazione.</p>
+      </div>
+      <div class="grid g3">
+        <article class="stage stage--1" data-stage="discovery">
+          <p class="label">Scoperta</p>
+          <h3 class="msg">Un laboratorio visuale per collaborare con Git.</h3>
+          <ul><li>Dalla modifica alla pull request: comprendi cosa cambia.</li><li>Esplora le conseguenze delle decisioni Git.</li></ul>
+        </article>
+        <article class="stage stage--2" data-stage="choice">
+          <p class="label">Scelta</p>
+          <h3 class="msg">Segui lo stesso scenario tra file, commit e revisione.</h3>
+          <ul><li>Confronta le decisioni su GitHub e Azure DevOps.</li><li>Guarda il percorso: basi, collaborazione e recupero.</li></ul>
+        </article>
+        <article class="stage stage--3" data-stage="start">
+          <p class="label">Avvio</p>
+          <h3 class="msg">Inizia dal livello Base, in italiano o inglese.</h3>
+          <ul><li>Accedi con un provider disponibile e avvia il primo esercizio.</li><li>Riprendi dall’ultimo progresso salvato.</li></ul>
+        </article>
+      </div>
+    </section>
+    <section class="section panel" aria-labelledby="anti-title">
+      <div class="section__head">
+        <h2 class="section__title" id="anti-title"><span class="n">05</span> Messaggi da evitare</h2>
+        <p class="section__aside">Promesse generiche, cornici da non imitare e affermazioni senza prove.</p>
+      </div>
+      <ul class="anti">
+        <li><s>«Git per tutti», «soluzione completa», «impara senza fatica», «diventa esperto rapidamente»</s><span>Sostituire con un’azione o un risultato specifico del percorso; evitare tempi non verificati.</span></li>
+        <li><s>Visualizzazione come promessa esclusiva</s><span>Cornice già riconoscibile in LearnGitBranching.</span></li>
+        <li><s>Imparare GitHub dentro GitHub</s><span>Cornice di GitHub Skills da non imitare.</span></li>
+        <li><s>Gioco con Git reale</s><span>Cornice di Oh My Git! da non imitare.</span></li>
+        <li><s>«Riduce gli errori»</s><span>Affermazione non verificata: richiede risultati osservati.</span></li>
+        <li><s>«Garantisce autonomia»</s><span>Affermazione non verificata: richiede prove di trasferimento.</span></li>
+        <li><s>«Più efficace»</s><span>Affermazione non verificata: richiede confronti appropriati.</span></li>
+        <li><s>«Accessibile a tutti»</s><span>Affermazione non verificata: richiede verifiche di accessibilità.</span></li>
+      </ul>
+      <span class="chip chip--dark" lang="en">unverified-claim</span>
+    </section>
+    <section class="section" aria-labelledby="tomorrow-title">
+      <div class="section__head">
+        <h2 class="section__title" id="tomorrow-title"><span class="n">06</span> Cosa cambia nei messaggi</h2>
+        <p class="section__aside">Il piano di diffusione deve rispettare servizi gratuiti e il budget di manutenzione post-lancio confermato di 1–2 ore/settimana.</p>
+      </div>
+      <div class="grid g3">
+        <article class="card">
+          <h3 class="card__title">Titolo della home in progettazione</h3>
+          <p>«Un laboratorio visuale di collaborazione con Git, in progettazione.»</p>
+          <p>«Scenari su GitHub e Azure DevOps per comprendere modifiche, revisioni e recupero. Percorso previsto in italiano e inglese.»</p>
+        </article>
+        <article class="card">
+          <h3 class="card__title">Presentazione del progetto</h3>
+          <p>Spiegare bisogno, scenario e conseguenze da comprendere. Distinguere progetto e capacità dimostrate.</p>
+        </article>
+        <article class="card">
+          <h3 class="card__title">Contenuti coerenti e incoerenti</h3>
+          <p><strong>Coerenti:</strong> revisioni, conflitti, recupero e differenze operative.</p>
+          <p><strong>Incoerenti:</strong> classifica come prova di competenza e stack interno come beneficio didattico.</p>
+        </article>
+      </div>
+    </section>
+    <section class="section panel" aria-labelledby="questions-title">
+      <div class="section__head">
+        <h2 class="section__title" id="questions-title"><span class="n">07</span> Questioni aperte e prove mancanti</h2>
+        <p class="section__aside">La conferma dei messaggi non supera il test dei pilastri. Nessun dato sufficiente per dichiarare un vantaggio rispetto alle alternative.</p>
+      </div>
+      <div class="table-wrap" role="region" aria-label="Prove mancanti per i pilastri candidati, tabella scorrevole" tabindex="0">
+        <table class="tbl">
+          <thead><tr><th scope="col">Stato</th><th scope="col">Questione aperta</th><th scope="col">Confidenza</th><th scope="col">Prova necessaria</th></tr></thead>
+          <tbody>
+            <tr data-open="P1"><td><span class="chip chip--dark" lang="en">unverified-claim P1</span></td><td>Rilevanza plausibile; differenza ed esclusività non dimostrate; viste senza implementazione osservabile.</td><td><span class="meter" data-level="0"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><b>Non valutata</b></span></td><td class="soft">Scenario funzionante e partecipante capace di spiegare file, index, commit e PR.</td></tr>
+            <tr data-open="P2"><td><span class="chip chip--dark" lang="en">unverified-claim P2</span></td><td>Frequenza del bisogno ignota; unicità non accertata; copertura ancora richiesta.</td><td><span class="meter" data-level="0"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><b>Non valutata</b></span></td><td class="soft">Scenari corrispondenti verificati sulle fonti e trasferimento autonomo fra GitHub e Azure DevOps.</td></tr>
+            <tr data-open="P3"><td><span class="chip chip--dark" lang="en">unverified-claim P3</span></td><td>Bisogno e verifica della motivazione da provare; simulatore e risultati mancanti.</td><td><span class="meter" data-level="0"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><b>Non valutata</b></span></td><td class="soft">Rubriche su scelta, conseguenze e conservazione del lavoro altrui in un incidente nuovo.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <footer class="foot">
+      <p class="foot__note"><strong>Passaggio di fase:</strong> categoria, promessa IT/EN e messaggi sono confermati. P1–P3 restano ipotesi. La conferma consente il passo di analisi successivo e non dichiara efficacia, capacità già realizzate o approvazione operativa.</p>
+      <p class="foot__src">Fonti: quadro iniziale e mappa di mercato confermati<br>Requisiti e conferma dell’utente · 15 novembre 2026<br>Metodologia Go2Rev · Fase 3 di 5</p>
+    </footer>
+  </main>
+  <a class="credit" href="https://rev-ops.studio/gtm-planner">
+    <div class="wrap"><span class="credit__mark" aria-hidden="true"></span>
+      <span class="credit__text">Creato con <b>GTM Planner</b>, un plugin gratuito per Claude di RevOps Studio</span>
+      <span class="credit__url">rev-ops.studio/gtm-planner →</span></div>
+  </a>
+</body>
+</html>
