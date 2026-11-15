@@ -19,6 +19,12 @@
 ## Commands
 - Verify everything: `scripts/verify`
 
+## Language
+- Write repository-authored developer documentation, code comments, variable names and other identifiers in English.
+- Write pull request titles, descriptions and review comments, and commit subjects and bodies, in English. Commit messages must also follow Conventional Commits.
+- Learner-facing UI and course material must remain complete in both Italian and English. Localized strings and explicitly labelled bilingual product examples are intentional exceptions to the documentation language rule.
+- Preserve commands, URLs, external API identifiers and quoted source material when translating surrounding prose.
+
 ## Verification
 - Run `scripts/verify` before handing work back; it must pass. CI runs the same command and is the authoritative gate.
 - Add or update tests for behaviour you change. Live or state-changing tests must be opt-in.
