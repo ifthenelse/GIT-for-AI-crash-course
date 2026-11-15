@@ -4,12 +4,14 @@ build/
 dist/
 target/
 coverage/
+test-results/
+playwright-report/
 *.log
 .tmp/
 # env
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 # OS / editors
 .DS_Store
 # Xcode
