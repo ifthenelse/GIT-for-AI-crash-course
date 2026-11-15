@@ -1,104 +1,105 @@
-# Roadmap GTM candidata
+# Proposed GTM Roadmap
 
-*Go2Rev GTM Planner · Fase 5 di 5 · Approvata dall’utente · 15 novembre 2026*
+*Go2Rev GTM Planner · Step 5 of 5 · Approved by the user · 15 November 2026*
 
-Deriva dai quattro documenti GTM confermati e dalla [roadmap tecnica](../docs/analysis/product-roadmap.md).
-Impatto ed effort sono giudizi qualitativi, non ore misurate o previsioni di ricavo.
-La verifica trasversale precede la presentazione del piano consolidato.
+Derived from the four confirmed GTM documents and the [technical roadmap](../docs/analysis/product-roadmap.md).
+Impact and effort are qualitative judgments, not measured hours or revenue
+forecasts. The cross-document consistency check precedes the consolidated plan's
+presentation.
 
-## Calendario e capacità
+## Schedule and capacity
 
-D1–D90 sono finestre orientative. D1 inizia dopo approvazione operativa, assegnazione
-dei responsabili e disponibilità iniziale dichiarata. Le 1–2 ore/settimana confermate
-sono soltanto manutenzione post-lancio: non dimensionano sviluppo e traduzioni.
+D1–D90 are indicative windows. D1 starts after operational approval, owner
+assignment, and declared initial availability. The confirmed 1–2 hours/week
+covers post-launch maintenance only: it does not size development or translation.
 
-Se il lavoro supera l'orizzonte, slitta il rilascio. Costo dei servizi zero,
-tre livelli completi e parità IT/EN rimangono obbligatori. Nessuna data di lancio
-è promessa da questo documento.
+If work exceeds the horizon, move the release. Zero service cost, three complete
+tiers, and IT/EN parity remain mandatory. This document promises no launch date.
 
-## Candidati, impatto ed effort
+## Candidates, impact, and effort
 
-| Candidato | Impatto / effort indicativi | Destinazione |
+| Candidate | Indicative impact / effort | Destination |
 | --- | --- | --- |
-| C1 — Login fra domini gratuiti verificabile | bloccante / medio-alto | I1: dipendenza del lancio |
-| C2 — Replay/archivio entro quote gratuite | bloccante / medio-alto | I1, verifica completa I4 |
-| C3 — Capacità, dati, score, provider, nome e licenze definiti | bloccante / medio | I1: decisioni prima dei rispettivi passaggi |
-| C4 — Incidente IT/EN fra repository e revisione provabile | alto / alto | I2: materiale per E2 |
-| C5 — Ipotesi confrontate con pilota volontario | alto / medio | I3: attiva E3 |
-| C6 — Tre livelli, laboratorio e progressi IT/EN completi | bloccante / alto | I4: scope del lancio |
-| C7 — Identità, accessibilità, SEO e ripristino verificati | bloccante / medio-alto | I4: prontezza |
-| C8 — Percorso completo raggiungibile dai canali selezionati | alto / medio | I5: E1/E2/E3 pubblici |
-| C9 — Ciclo di manutenzione misurato | alto / basso-medio | I6: sostenibilità |
-| C10 — Altri provider social gratuiti | medio / medio-alto | dopo lancio, prerequisiti e bisogno verificati |
-| C11 — Casi diffusi in community esistenti | medio / medio | rinviato: capacità residua e autorizzazione |
-| C12 — Newsletter continuativa | incerto / medio | parcheggiata: calendario/iscritti non necessari |
-| C13 — Shell arbitrarie sul server | fuori perimetro / alto | esclusa: cambia simulazione e fabbisogno operativo |
-| C14 — Campagne, domini o servizi acquistati | incompatibile / variabile | esclusi dal costo zero |
-| C15 — Classifica competitiva avanzata | incerto / alto | parcheggiata: classifica iniziale didattica |
-| C16 — Nuovi contenuti oltre il programma | incerto / alto | rinviati ai problemi osservati |
+| C1 — Verifiable login across free domains | Blocking / medium-high | I1: launch dependency. |
+| C2 — Replay/store within free quotas | Blocking / medium-high | I1; complete verification in I4. |
+| C3 — Capacity, data, score, providers, name, and licenses defined | Blocking / medium | I1: decisions before the corresponding steps. |
+| C4 — Testable IT/EN incident spanning repository and review | High / high | I2: material for E2. |
+| C5 — Hypotheses tested against a voluntary pilot | High / medium | I3: activates E3. |
+| C6 — Three complete tiers, lab, and progress in IT/EN | Blocking / high | I4: launch scope. |
+| C7 — Identity, accessibility, SEO, and recovery verified | Blocking / medium-high | I4: readiness. |
+| C8 — Complete path reachable through selected channels | High / medium | I5: public E1/E2/E3. |
+| C9 — Measured maintenance cycle | High / low-medium | I6: sustainability. |
+| C10 — Additional free social providers | Medium / medium-high | After launch, with verified prerequisites and need. |
+| C11 — Cases shared in existing communities | Medium / medium | Deferred: spare capacity and authorization. |
+| C12 — Ongoing newsletter | Uncertain / medium | Parked: calendar/subscriber management unnecessary. |
+| C13 — Arbitrary server-side shells | Out of scope / high | Excluded: changes simulation and operational requirements. |
+| C14 — Purchased campaigns, domains, or services | Incompatible / variable | Excluded by zero cost. |
+| C15 — Advanced competitive leaderboard | Uncertain / high | Parked: initial leaderboard is educational. |
+| C16 — Content beyond the curriculum | Uncertain / high | Deferred until supported by observed problems. |
 
-## Primi 90 giorni: sei iniziative
+## First 90 days: six initiatives
 
 | # | Initiative (result-phrased) | Source step | Impact | Effort | Owner | Depends on | Milestone | When |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| I1 | Fattibilità gratuita e capacità iniziale verificabili | Snapshot, Demand Plan; C1–C3 | bloccante | medio-alto | Responsabile tecnico e decisioni `[OWNER TBD]` | approvazione operativa; responsabili disponibili | dossier go/no-go con prove iniziali, decisioni e capacità assegnata | D1–15 orientativo |
-| I2 | Incidente rappresentativo comprensibile e riproducibile IT/EN | Market Map, Positioning, E2; C4 | alto | alto | Responsabile scenari didattici `[OWNER TBD]` | I1 favorevole | caso verificato tra file, storia, revisione e recupero nei due contesti | D16–35 se sostenibile |
-| I3 | Ipotesi didattiche confrontate con osservazioni volontarie | P1–P3, E3; C5 | alto | medio | Responsabile verifica didattica `[OWNER TBD]` | I2, partecipanti disponibili, rubriche | registro delle prove con difficoltà e decisioni motivate su scenari/claim | D36–50 subordinato al pilota |
-| I4 | Release candidate completa nei tre livelli e nelle due lingue | Snapshot, roadmap tecnica; C6–C7 | bloccante | alto | Responsabile prontezza del rilascio `[OWNER TBD]` | I1–I3, capacità iniziale confermata | artefatto completo che supera correttezza, accesso, persistenza, ripristino e fruibilità | D51–75 se compatibile; altrimenti oltre D90 |
-| I5 | Corso completo raggiungibile con i tre motori collegati | Demand Plan E1/E2/E3; C8 | alto | medio | Maintainer pubblicazione `[OWNER TBD]` | I4, setup e pubblicazione approvati, condizioni gratuite | percorso pubblico da pagine, repository ed esempio con feedback utilizzabile | D76–85 solo se tutti i gate passano |
-| I6 | Primo ciclo di manutenzione confrontato col budget | Demand Plan E3; C9 | alto | basso-medio | Maintainer corso e feedback `[OWNER TBD]` | I5, una settimana completa osservabile | rapporto del carico effettivo e decisioni per restare entro 1–2 ore/settimana | prima settimana completa post-lancio; può oltrepassare D90 |
+| I1 | Free feasibility and initial capacity made verifiable | Snapshot, Demand Plan; C1–C3 | Blocking | Medium-high | Technical and decision lead `[OWNER TBD]` | Operational approval; owners available. | Go/no-go dossier with initial evidence, decisions, and assigned capacity. | D1–15, indicative. |
+| I2 | Representative incident understandable and reproducible in IT/EN | Market Map, Positioning, E2; C4 | High | High | Learning scenario lead `[OWNER TBD]` | Favorable I1 outcome. | Verified case spanning files, history, review, and recovery in both contexts. | D16–35, if sustainable. |
+| I3 | Learning hypotheses tested against voluntary observations | P1–P3, E3; C5 | High | Medium | Learning validation lead `[OWNER TBD]` | I2, available participants, rubrics. | Test record with difficulties and reasoned scenario/claim decisions. | D36–50, subject to the pilot. |
+| I4 | Release candidate complete across three tiers and both languages | Snapshot, technical roadmap; C6–C7 | Blocking | High | Release readiness lead `[OWNER TBD]` | I1–I3, initial capacity confirmed. | Complete artifact passing correctness, access, persistence, recovery, and usability criteria. | D51–75 if compatible; otherwise beyond D90. |
+| I5 | Complete course reachable with the three engines connected | Demand Plan E1/E2/E3; C8 | High | Medium | Publishing maintainer `[OWNER TBD]` | I4, approved setup and publication, free conditions. | Public path from pages, repository, and example with usable feedback. | D76–85 only if all gates pass. |
+| I6 | First maintenance cycle compared with budget | Demand Plan E3; C9 | High | Low-medium | Course and feedback maintainer `[OWNER TBD]` | I5, one complete observable week. | Actual workload report and decisions to remain within 1–2 hours/week. | First complete post-launch week; may extend beyond D90. |
 
-Uno stesso responsabile può coprire più ruoli dopo verifica della capacità.
-I2/I3 sono una verifica privata, non un lancio pubblico ridotto. I4 conserva
-l'intero scope. Le prove iniziali I1 non sostituiscono il test reale completo I4.
+One person may hold several roles after capacity is checked. I2/I3 are a private
+review, not a reduced public launch. I4 preserves the entire scope.
+Initial I1 evidence does not replace the complete real-world I4 test.
 
-## Attivazione dei motori
+## Engine activation
 
-- E1, scenari cercabili: materiale in I4 e collegamenti pubblici in I5.
-  Impressioni e visite quando disponibili; nessuna data garantita di indicizzazione.
-- E2, esempio → corso: prova privata I2/I3, avvio pubblico I5. Osservare se
-  una persona comprende il compito e raggiunge l'esercizio pertinente.
-- E3, feedback → revisione → ritorno: primo ciclo I3, prosecuzione I5/I6.
-  Documentare difficoltà, decisione motivata e verifica della correzione.
+- E1, searchable scenarios: material in I4 and public links in I5.
+  Impressions and visits when available; no guaranteed indexing date.
+- E2, example → course: private I2/I3 test, public I5 start. Observe whether
+  a person understands the task and reaches the relevant exercise.
+- E3, feedback → revision → return: first I3 cycle, continuing in I5/I6.
+  Document difficulty, reasoned decision, and verification of the correction.
 
-Nessun volume, tasso di conversione o miglioramento didattico inventato.
-Assenza di osservazioni è evidenza mancante, non successo o fallimento automatico.
+No invented volumes, conversion rates, or learning improvements.
+Absent observations mean missing evidence, not automatic success or failure.
 
-## Rischi e questioni collegate
+## Related risks and questions
 
-| Voce | Iniziative | Prova o condizione |
+| Item | Initiatives | Evidence or condition |
 | --- | --- | --- |
-| P1 — file → revisione | I2/I3 | spiegazione e azioni osservate, non claim anticipato |
-| P2 — trasferimento fra piattaforme | I2/I3 | distinguere Git e portali su un caso non guidato |
-| P3 — recupero motivato | I2/I3 | scelta spiegata e lavoro condiviso conservato |
-| G3 — utilità/differenziazione | I3/I6 | osservazioni dei pubblici, nessuna esclusività presunta |
-| G5 — successo/autonomia | I1/I3/I6 | rubriche prima delle prove; baseline dopo |
-| G6 — owner/capacità/scadenze | I1/tutte | ruoli e disponibilità prima del calendario |
-| G8 — provider | I1/I4, C10 | primo percorso gratuito verificato; pulsanti solo operativi |
-| G9 — nome/licenze/feedback | I1/I4 | decisioni prima della pubblicazione |
-| Auth cross-site | I1/I4 | flusso completo sui domini gratuiti senza cookie terzi |
-| CPU e quote | I1/I4/I6 | misurare runtime; ottimizzare o bloccare se incompatibile |
-| Score/tentativi/durata | I1/I4 | regole trasparenti e server; pause stimate separate |
-| Retention/cancellazione/recupero | I1/I4/I6 | regole esplicite e ripristino provato |
+| P1 — file → review | I2/I3 | Observed explanation and actions, not an advance claim. |
+| P2 — transfer between platforms | I2/I3 | Distinguish Git from portals in an unguided case. |
+| P3 — reasoned recovery | I2/I3 | Explained choice and preserved shared work. |
+| G3 — usefulness/differentiation | I3/I6 | Audience observations; no presumed exclusivity. |
+| G5 — success/independence | I1/I3/I6 | Rubrics before tests; baselines afterward. |
+| G6 — owners/capacity/deadlines | I1/all | Roles and availability before the schedule. |
+| G8 — providers | I1/I4, C10 | First verified free path; buttons for working providers only. |
+| G9 — name/licenses/feedback | I1/I4 | Decisions before publication. |
+| Cross-site auth | I1/I4 | Complete flow on free domains without third-party cookies. |
+| CPU and quotas | I1/I4/I6 | Measure runtime; optimize or block if incompatible. |
+| Score/attempts/elapsed time | I1/I4 | Transparent server rules; estimated breaks separate. |
+| Retention/deletion/recovery | I1/I4/I6 | Explicit rules and tested restoration. |
 
-Un esito negativo su autenticazione, quota, correttezza o recupero blocca il lancio;
-non autorizza acquisti. Le regole iniziali candidate sono nel
-[perimetro operativo](../docs/analysis/implementation-proposal.md), approvato per il lavoro locale.
+A negative authentication, quota, correctness, or recovery result blocks launch;
+it does not authorize purchases. Initial candidate rules are in the
+[operational scope](../docs/analysis/implementation-proposal.md), approved for local work.
 
-## Orizzonte di dodici mesi
+## Twelve-month outline
 
-- Mesi 1–3: affrontare le sei iniziative secondo dipendenze, con calendario
-  condizionato. Proseguire oltre il trimestre se i requisiti non sono soddisfatti.
-- Mesi 4–6: dopo il lancio, consolidare correttezza, IT/EN e sostenibilità;
-  valutare C10 soltanto per un ostacolo osservato e con prerequisiti gratuiti.
-  Se il lancio è bloccato, completare prima lo scope iniziale.
-- Mesi 7–9: considerare C11 soltanto con capacità residua e autorizzazione.
-  Non aggiungere un quarto canale se la manutenzione non lo sostiene.
-- Mesi 10–12: riesaminare C16 usando problemi e prove raccolte; aggiornare la
-  roadmap prima di nuovi formati. C12/C15 restano parcheggiati senza bisogno dimostrato.
+- Months 1–3: address the six initiatives in dependency order, with a conditional
+  schedule. Continue beyond the quarter if requirements remain unmet.
+- Months 4–6: after launch, consolidate correctness, IT/EN, and sustainability;
+  consider C10 only for an observed barrier and with free prerequisites.
+  If launch is blocked, complete the initial scope first.
+- Months 7–9: consider C11 only with spare capacity and authorization.
+  Do not add a fourth channel if maintenance cannot sustain it.
+- Months 10–12: reassess C16 using collected problems and tests; update the
+  roadmap before new formats. C12/C15 remain parked without demonstrated need.
 
-## Stato
+## Status
 
-Roadmap e perimetro di implementazione locale approvati dall’utente il 15 novembre
-2026. Setup di account, risorse esterne e pubblicazione restano passaggi separati.
-Le ipotesi, i ruoli non assegnati e le prove ancora necessarie restano espliciti.
+The user approved the roadmap and local implementation scope on
+15 November 2026. Account setup, external resources, and publication remain
+separate steps. Hypotheses, unassigned roles, and outstanding evidence remain
+explicit.

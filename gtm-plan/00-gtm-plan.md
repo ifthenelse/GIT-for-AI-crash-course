@@ -1,87 +1,94 @@
 # GTM Plan — GIT-for-AI-crash-course
-*Go2Rev methodology · 15 novembre 2026 · Approvato dall’utente*
+*Go2Rev methodology · 15 November 2026 · Approved by the user*
 
-Le cinque fasi sono confermate; roadmap e consolidamento sono approvati dopo la
-verifica trasversale [plan-qa](../docs/analysis/plan-qa.md). Il documento non dichiara completata
-l'implementazione e non autorizza pubblicazioni, contatti o servizi.
+All five steps are confirmed; the roadmap and consolidation were approved after
+the cross-document [plan-qa](../docs/analysis/plan-qa.md) check. This document does not
+claim completed implementation or authorize publication, outreach, or services.
 
 ## 1. Executive summary
 
-Il corso pubblico indipendente si posiziona come **laboratorio visuale di
-collaborazione con Git**. Promessa confermata: «Collabora con Git sapendo cosa
-cambia e come recuperare il lavoro.» Il percorso collega modifiche, commit,
-revisione, policy e recupero, attraverso tre livelli completi in italiano e inglese.
+The independent public course is positioned as a **visual Git collaboration lab**.
+Confirmed promise, IT: «Collabora con Git sapendo cosa cambia e come recuperare
+il lavoro.» EN: “Collaborate with Git knowing what changes and how to recover
+your work.” The path connects changes, commits, review, policies, and recovery
+through three complete tiers in Italian and English.
 
-La diffusione confermata usa tre motori: scenari utili per farsi trovare, esempio
-svolto per scegliere/avviare il corso e feedback volontario per correggere il
-percorso. Servizi a costo zero, massimo tre canali iniziali e manutenzione
-post-lancio di 1–2 ore/settimana sono vincoli, non previsioni di efficacia.
+Confirmed distribution uses three engines: useful scenarios for discovery,
+a worked example for choosing/starting the course, and voluntary feedback for
+correcting the path. Zero-cost services, at most three initial channels, and
+post-launch maintenance of 1–2 hours/week are constraints, not effectiveness
+forecasts.
 
-I primi 90 giorni organizzano sei iniziative dipendenti da capacità e prove:
-fattibilità, caso rappresentativo, verifica privata, release candidate completa,
-rilascio autorizzato e primo ciclo di manutenzione. Il calendario è orientativo;
-se non bastano tempo o evidenze, il rilascio slitta. Non si riducono livelli o
-lingue e non si acquista un piano per aggirare i blocchi.
+The first 90 days organize six initiatives dependent on capacity and evidence:
+feasibility, representative case, private review, complete release candidate,
+authorized release, and first maintenance cycle. The schedule is indicative;
+if time or evidence is insufficient, release moves. Do not reduce tiers or
+languages or buy a plan to bypass blockers.
 
 ## 2. Business snapshot
 
-Progetto pubblico in fase di analisi, da repository pubblica. Partecipanti:
-Engineers, Architects e persone di business con esperienza tecnica pratica;
-nessun limite geografico dichiarato. Accesso senza processo commerciale o pagamento
-richiesto. Nessuna baseline di traffico, avvii o apprendimento disponibile.
+Public project at the analysis stage, from a public repository. Participants:
+Engineers, Architects, and business professionals with practical technical
+experience; no stated geographic restriction. Access without a sales process
+or required payment. No baseline for traffic, starts, or learning is available.
 
-Frontend previsto su Pages; React/Vite, TypeScript, Zustand/Zundo e i18next;
-API esterna gratuita per identità, validazione e progressi. SSO sociale per fasi,
-con GitHub proposto per primo. Italiano e inglese completi sono requisiti del lancio.
+Frontend planned on Pages; React/Vite, TypeScript, Zustand/Zundo, and i18next;
+free external API for identity, validation, and progress. Social SSO in phases,
+with GitHub proposed first. Complete Italian and English content is a launch
+requirement.
 
-Andrea Collet è owner della repository, non un'assegnazione automatica dei ruoli
-operativi. Capacità iniziale e responsabili da definire; 1–2 ore/settimana confermate
-solo dopo il lancio. Testo completo: [snapshot](01-business-snapshot.md).
+Andrea Collet owns the repository; this does not automatically assign operational
+roles. Initial capacity and owners remain undefined; 1–2 hours/week is confirmed
+only after launch. Full text: [snapshot](01-business-snapshot.md).
 
 ## 3. Market map
 
-Tre livelli di alternative: simulatori interattivi; pratica su piattaforme reali
-e riferimenti tecnici; affiancamento o ricerca al momento del problema. Non sono
-note frequenze di scelta o quote di mercato.
+Three layers of alternatives: interactive simulators; real-platform practice and
+technical references; mentoring or research when a problem occurs. Choice
+frequencies and market shares are unknown.
 
-- [LearnGitBranching](https://github.com/pcottle/learnGitBranching): grafo, sandbox,
-  livelli e comandi nel browser. Visualizzare Git non dimostra da solo una differenza del corso.
-- [Oh My Git!](https://ohmygit.org/): gioco con strutture visualizzate e Git reale;
-  percorso pubblicizzato desktop e manutenzione ridotta dichiarata. Non sono prove di qualità inferiore.
-- [GitHub Skills](https://github.com/skills): esercizi in repository del partecipante
-  e feedback di piattaforma, alternativa di pratica reale.
+- [LearnGitBranching](https://github.com/pcottle/learnGitBranching): graph, sandbox,
+  levels, and commands in the browser. Visualizing Git alone does not demonstrate
+  how the course differs.
+- [Oh My Git!](https://ohmygit.org/): game with visualized structures and real Git;
+  advertised desktop path and stated limited maintenance. These do not prove
+  inferior quality.
+- [GitHub Skills](https://github.com/skills): exercises in the participant's
+  repository and platform feedback, an alternative based on real practice.
 - [Microsoft Learn](https://learn.microsoft.com/en-us/training/modules/intro-to-git/)
-  e [Azure Repos](https://learn.microsoft.com/en-us/azure/devops/repos/git/?view=azure-devops):
-  formazione e documentazione su concetti, PR e policy, con prerequisiti e risorse distinti.
-- [Pro Git](https://git-scm.com/book/en/v2): riferimento progressivo su basi,
-  workflow e internals; l'edizione italiana mostra una traduzione non uniforme secondo la pagina consultata.
+  and [Azure Repos](https://learn.microsoft.com/en-us/azure/devops/repos/git/?view=azure-devops):
+  training and documentation on concepts, PRs, and policies, with distinct
+  prerequisites and resources.
+- [Pro Git](https://git-scm.com/book/en/v2): progressive reference on basics,
+  workflows, and internals; the Italian edition shows uneven translation
+  according to the page consulted.
 
-Assi qualitativi: simulazione/pratica reale; modello mentale/collaborazione;
-esercizio/consultazione. La posizione del corso è progettata, non misurata.
-**GAP HYPOTHESIS:** seguire un incidente dal file alla policy; spiegare il recupero
-attraverso conseguenze visibili. Rilevanza, apertura della posizione e realizzabilità
-non sono dimostrate. [Mappa completa e fonti](02-market-map.md).
+Qualitative axes: simulation/real practice; mental model/collaboration;
+exercise/reference. The course's position is designed, not measured.
+**GAP HYPOTHESIS:** follow an incident from file to policy; explain recovery
+through visible consequences. Relevance, an unclaimed position, and feasibility
+are unproven. [Complete map and sources](02-market-map.md).
 
 ## 4. Positioning
 
-Estratto del posizionamento confermato; le etichette `unverified-claim` rimangono.
+Excerpt from confirmed positioning; `unverified-claim` labels remain.
 
-### Category decision
+### 2. Category decision
 
-Confronto qualitativo delle direzioni emerse dalla [mappa confermata](02-market-map.md).
-Dimensione e domanda del mercato non sono misurate; nessun punteggio numerico inventato.
+Qualitative comparison of directions from the [confirmed map](02-market-map.md).
+Market size and demand are unmeasured; no numerical scores are invented.
 
-| Categoria candidata | Spazio e concorrenza osservabili | Aderenza e interesse |
+| Candidate category | Observable space and competition | Fit and appeal |
 | --- | --- | --- |
-| Laboratorio visuale di collaborazione con Git, scelta confermata | collega comandi e lavoro condiviso; sovrapposizione con simulatori e pratica reale | coerente con gli scenari progettati; interesse dei pubblici da validare |
-| Palestra di recupero Git | bisogno più circoscritto; recupero e conflitti già presenti nelle alternative | copre una parte del programma; rischio di apparire utile solo quando c'è un incidente |
-| Percorso pratico IT/EN | dimensione ignota; lingue e progressione non dimostrano esclusività | aderente ai requisiti, rilevanza da verificare nelle due lingue |
+| Visual Git collaboration lab, confirmed choice | Connects commands and shared work; overlaps with simulators and real practice. | Consistent with designed scenarios; audience appeal needs validation. |
+| Git recovery practice lab | Narrower need; alternatives already cover recovery and conflicts. | Covers part of the curriculum; risks appearing useful only during an incident. |
+| Practical IT/EN path | Size unknown; languages and progression do not demonstrate exclusivity. | Fits requirements; relevance needs testing in both languages. |
 
-La scelta impone di spiegare collaborazione e conseguenze oltre alla sintassi,
-distinguere simulazione e operazioni reali e verificare l'apprendimento. Le risorse
-esistenti restano alternative utili e possibili approfondimenti.
+The choice requires explaining collaboration and consequences beyond syntax,
+distinguishing simulation from real operations, and evaluating learning.
+Existing resources remain useful alternatives and possible further reading.
 
-### Core promise
+### 3. Core promise
 
 **IT:** «Collabora con Git sapendo cosa cambia e come recuperare il lavoro.»
 
@@ -91,423 +98,433 @@ esistenti restano alternative utili e possibili approfondimenti.
 
 **Fallback EN:** “Choose how to collaborate and recover with Git, seeing what changes in the repository.”
 
-La promessa riguarda autonomia e comprensione; è coerente con gli scenari
-specificati. Diventerà una capacità dimostrata solo dopo prove su problemi nuovi
-svolti senza guida. In una pagina di progetto deve essere chiaro che il corso
-è in progettazione, senza descrivere il risultato come già disponibile.
+The promise concerns independence and understanding and matches the specified
+scenarios. It becomes a demonstrated capability only after unguided tests on new
+problems. A project page must clearly state that the course is being designed,
+without describing the outcome as already available.
 
-### Pillars
+### 4. Pillars
 
-#### P1 — Dal file alla revisione
+#### P1 — From file to review
 
-- Claim candidato: collegare una modifica ai suoi effetti sulla storia e sulla revisione condivisa.
-- Relevant: plausibile per i pubblici dichiarati, senza riscontri diretti ancora disponibili.
-- Differentiated: ipotesi rispetto all'enfasi sul grafo di LearnGitBranching e sul lavoro reale di GitHub Skills; nessuna esclusività dimostrata.
-- Defensible: non ancora superato; viste sincronizzate specificate, senza implementazione osservabile.
-- Prova necessaria: scenario funzionante e partecipante capace di spiegare file, index, commit e PR. Stato: `unverified-claim P1`.
+- Candidate claim: connect a change to its effects on history and shared review.
+- Relevant: plausible for the stated audiences; no direct evidence is available yet.
+- Differentiated: hypothesis against LearnGitBranching's graph emphasis and GitHub Skills' real-work emphasis; no exclusivity demonstrated.
+- Defensible: not yet passed; synchronized views are specified, without observable implementation.
+- Evidence needed: working scenario and a participant who can explain files, index, commits, and PRs. Status: `unverified-claim P1`.
 
-#### P2 — Lo stesso problema, due contesti
+#### P2 — The same problem, two contexts
 
-- Claim candidato: riconoscere principi Git comuni e differenze operative fra GitHub e Azure DevOps.
-- Relevant: coerente con il pubblico, frequenza del bisogno ancora ignota.
-- Differentiated: ipotesi rispetto ai percorsi che enfatizzano una piattaforma; unicità non accertata.
-- Defensible: non ancora superato; la copertura è un requisito, non una capacità già realizzata.
-- Prova necessaria: scenari corrispondenti verificati sulle fonti e trasferimento autonomo fra contesti. Stato: `unverified-claim P2`.
+- Candidate claim: recognize common Git principles and operational differences between GitHub and Azure DevOps.
+- Relevant: consistent with the audience; frequency of the need is unknown.
+- Differentiated: hypothesis against paths emphasizing one platform; uniqueness unestablished.
+- Defensible: not yet passed; coverage is a requirement, not an implemented capability.
+- Evidence needed: corresponding scenarios verified against sources and independent transfer between contexts. Status: `unverified-claim P2`.
 
-#### P3 — Recupero motivato
+#### P3 — Reasoned recovery
 
-- Claim candidato: scegliere una strategia di recupero spiegandone l'effetto sul lavoro condiviso.
-- Relevant: bisogno plausibile da verificare.
-- Differentiated: conflitti e recupero già esistono nelle alternative; l'ipotesi riguarda la verifica della motivazione.
-- Defensible: non ancora superato; mancano simulatore e risultati di apprendimento.
-- Prova necessaria: rubriche che valutino scelta, conseguenze e conservazione del lavoro altrui su un incidente nuovo. Stato: `unverified-claim P3`.
+- Candidate claim: choose a recovery strategy and explain its effect on shared work.
+- Relevant: plausible need to validate.
+- Differentiated: alternatives already cover conflicts and recovery; the hypothesis concerns evaluating the reasoning.
+- Defensible: not yet passed; simulator and learning results are unavailable.
+- Evidence needed: rubrics evaluating choice, consequences, and preservation of others' work in a new incident. Status: `unverified-claim P3`.
 
-Nessuno dei tre candidati è presentato come pilastro già validato. Confermare
-l'architettura dei messaggi non equivale a superare il test dei pilastri.
+None of these candidates is presented as a validated pillar. Confirming the
+messaging architecture does not mean passing the pillar test.
 
-### Segment translations
+### 5. Segment translations
 
-| Pubblico | Traduzione della stessa promessa | Enfasi e lessico |
+| Audience | Translation of the same promise | Emphasis and vocabulary |
 | --- | --- | --- |
-| Engineers | integra modifiche e recupera comprendendo la storia condivisa | P1/P3; branch, diff, commit, conflitto |
-| Architects | valuta integrazione e recupero comprendendone gli effetti sulla collaborazione | P2/P3; policy, storia condivisa, integrazione, rollback |
-| Business con esperienza tecnica | collabora sulle modifiche e recupera una versione comprendendo il lavoro del gruppo | P1/P3; modifica, revisione, versione, ripristino |
+| Engineers | IT: «Integra modifiche e recupera comprendendo la storia condivisa.» EN: “Integrate changes and recover with an understanding of shared history.” | P1/P3; branch, diff, commit, conflict. |
+| Architects | IT: «Valuta integrazione e recupero comprendendone gli effetti sulla collaborazione.» EN: “Evaluate integration and recovery by understanding their effects on collaboration.” | P2/P3; policy, shared history, integration, rollback. |
+| Business professionals with technical experience | IT: «Collabora sulle modifiche e recupera una versione comprendendo il lavoro del gruppo.» EN: “Collaborate on changes and recover a version while understanding the group's work.” | P1/P3; change, review, version, restore. |
 
-Non sono tre prodotti o promesse incompatibili; termini e approfondimento cambiano
-con il contesto del partecipante.
+These are translations of one product and promise. Vocabulary and depth change
+with the participant's context.
 
-### Messages per funnel stage
+### 6. Messages per funnel stage
 
-Percorso scoperta → scelta → avvio, senza presupporre una vendita. Sono testi
-candidati per quando il prodotto sarà disponibile, non una descrizione dello stato attuale.
+Discovery → choice → start, without assuming a sale. These are candidate messages
+for when the product is available, rather than descriptions of its current state.
 
-| Momento | Messaggio principale | Varianti |
+| Stage | Main message | Variants |
 | --- | --- | --- |
-| Scoperta | Un laboratorio visuale per collaborare con Git. | Dalla modifica alla pull request: comprendi cosa cambia. / Esplora le conseguenze delle decisioni Git. |
-| Scelta | Segui lo stesso scenario tra file, commit e revisione. | Confronta le decisioni su GitHub e Azure DevOps. / Guarda il percorso: basi, collaborazione e recupero. |
-| Avvio | Inizia dal livello Base, in italiano o inglese. | Accedi con un provider disponibile e avvia il primo esercizio. / Riprendi dall'ultimo progresso salvato. |
+| Discovery | IT: «Un laboratorio visuale per collaborare con Git.» EN: “A visual lab for collaborating with Git.” | IT: «Dalla modifica alla pull request: comprendi cosa cambia.» EN: “From change to pull request: understand what changes.” / IT: «Esplora le conseguenze delle decisioni Git.» EN: “Explore the consequences of Git decisions.” |
+| Choice | IT: «Segui lo stesso scenario tra file, commit e revisione.» EN: “Follow one scenario through files, commits, and review.” | IT: «Confronta le decisioni su GitHub e Azure DevOps.» EN: “Compare decisions on GitHub and Azure DevOps.” / IT: «Guarda il percorso: basi, collaborazione e recupero.» EN: “Explore the path: basics, collaboration, and recovery.” |
+| Start | IT: «Inizia dal livello Base, in italiano o inglese.» EN: “Start at the Base tier, in Italian or English.” | IT: «Accedi con un provider disponibile e avvia il primo esercizio.» EN: “Sign in with an available provider and start your first exercise.” / IT: «Riprendi dall'ultimo progresso salvato.» EN: “Resume from your last saved progress.” |
 
-### Anti-messages bank
+### 7. Anti-messages bank
 
-**Formulazioni da evitare:** «Git per tutti», «soluzione completa», «impara senza
-fatica», «diventa esperto rapidamente». Sostituirle con un'azione o un risultato
-specifico del percorso, senza promesse generiche o tempi non verificati.
+**Wording to avoid:** IT: «Git per tutti», «soluzione completa», «impara senza
+fatica», «diventa esperto rapidamente». EN equivalents: “Git for everyone”,
+“complete solution”, “learn effortlessly”, “become an expert quickly”. Replace
+these with a specific action or outcome from the path, without generic promises
+or unverified time claims.
 
-**Cornici da non imitare:** visualizzazione come promessa esclusiva di
-[LearnGitBranching](https://github.com/pcottle/learnGitBranching), imparare GitHub
-dentro GitHub come cornice di [GitHub Skills](https://github.com/skills), gioco con
-Git reale come cornice di [Oh My Git!](https://ohmygit.org/).
+**Frames not to imitate:** visualization as the exclusive promise of
+[LearnGitBranching](https://github.com/pcottle/learnGitBranching), learning GitHub
+inside GitHub as the frame of [GitHub Skills](https://github.com/skills), and a
+game with real Git as the frame of [Oh My Git!](https://ohmygit.org/).
 
-**Claim non difendibili:** «riduce gli errori», «garantisce autonomia», «più efficace»,
-«accessibile a tutti». Richiedono rispettivamente risultati osservati, prove di
-trasferimento, confronti appropriati e verifiche di accessibilità. Non usarli come
-fatti; restano `unverified-claim`.
+**Unsupported claims:** IT: «riduce gli errori», «garantisce autonomia», «più
+efficace», «accessibile a tutti». EN equivalents: “reduces errors”, “guarantees
+independence”, “more effective”, “accessible to everyone”. These respectively
+require observed results, transfer tests, appropriate comparisons, and
+accessibility checks. Do not use them as facts; they remain `unverified-claim`.
 
-### What this changes tomorrow
+### 8. What this changes tomorrow
 
-Titolo durante la progettazione: «Un laboratorio visuale di collaborazione con
-Git, in progettazione.» Sottotitolo: «Scenari su GitHub e Azure DevOps per comprendere
-modifiche, revisioni e recupero. Percorso previsto in italiano e inglese.»
+Headline during design, IT: «Un laboratorio visuale di collaborazione con Git,
+in progettazione.» EN: “A visual Git collaboration lab, currently in design.”
+Subheading, IT: «Scenari su GitHub e Azure DevOps per comprendere modifiche,
+revisioni e recupero. Percorso previsto in italiano e inglese.» EN: “Scenarios
+on GitHub and Azure DevOps to understand changes, review, and recovery.
+A path planned in Italian and English.”
 
-La presentazione spiega bisogno, scenario e conseguenze da comprendere, distinguendo
-progetto e capacità dimostrate. Temi coerenti: revisioni, conflitti, recupero e
-differenze operative. Classifica come prova di competenza e stack interno come
-beneficio didattico non sostengono il posizionamento.
-Il piano di diffusione dovrà rispettare servizi gratuiti, assenza di campagne
-a pagamento e budget di manutenzione post-lancio confermato di 1–2 ore/settimana.
+The presentation explains the need, scenario, and consequences to understand,
+distinguishing design from demonstrated capability. Suitable themes: review,
+conflicts, recovery, and operational differences. A leaderboard as evidence of
+competence or the internal stack as an educational benefit does not support
+the positioning. The demand plan must respect free services, no paid campaigns,
+and the confirmed post-launch maintenance budget of 1–2 hours/week.
 
 ## 5. Demand plan
 
-Consolidato dal piano di diffusione confermato, senza nuove previsioni.
+Consolidated from the confirmed demand plan, without new forecasts.
 
 ### Starting point
 
-Nessuna baseline di visite, avvii, completamenti o apprendimento è disponibile.
-Sono confermati costo dei servizi zero assoluto, corso pubblico indipendente,
-tre livelli e italiano/inglese completi al lancio. Provider social per fasi
-compatibili con il vincolo economico.
+No baseline for visits, starts, completions, or learning is available.
+Strictly zero service cost, an independent public course, three tiers, and
+complete Italian/English content at launch are confirmed. Social providers may
+be introduced in phases consistent with the budget constraint.
 
-Un esempio usato in una verifica privata del progetto non costituisce un lancio
-parziale. Nessuna pubblicazione, invito, campagna o modifica dei servizi viene
-eseguita con questo piano.
+An example used in a private project review is not a partial launch. This plan
+does not execute publication, invitations, campaigns, or service changes.
 
 ### Design principles
 
-1. Un problema concreto conduce al percorso: spiegazione utile e collegamento
-   all'esercizio pertinente, senza pagine create solo per intercettare ricerche.
-2. Una prova osservabile precede un claim: esempi e feedback spiegano cosa offre
-   il corso; autonomia ed efficacia rimangono ipotesi da verificare.
-3. La manutenzione limita la diffusione: prima contenuti IT/EN e correzioni,
-   poi eventuali canali ulteriori.
+1. A concrete problem leads to the course: a useful explanation and a link to
+   the relevant exercise, without pages created only to capture searches.
+2. Observable evidence precedes a claim: examples and feedback explain what
+   the course offers; independence and effectiveness remain hypotheses to test.
+3. Maintenance limits distribution: IT/EN content and corrections come first,
+   followed by any additional channels.
 
-Google raccomanda contenuti utili alle persone. La presenza organica non richiede
-pagamento, ma crawl, indicizzazione e ranking non sono garantiti.
+Google recommends content useful to people. Organic presence does not require
+payment, but crawling, indexing, and ranking are not guaranteed.
 [People-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content),
 [Search Essentials](https://developers.google.com/search/docs/essentials).
 
 ### Engine architecture
 
-E1: problema Git → spiegazione IT/EN verificata → programma → E2.
+E1: Git problem → verified IT/EN explanation → curriculum → E2.
 
-E2: esempio svolto → comprensione del metodo → scelta del livello → primo esercizio → E3.
+E2: worked example → understanding the method → tier choice → first exercise → E3.
 
-E3: difficoltà osservata → correzione motivata IT/EN → possibile ritorno volontario;
-i casi ricorrenti aggiornano E1 ed E2.
+E3: observed difficulty → reasoned IT/EN correction → possible voluntary return;
+recurring cases update E1 and E2.
 
-E1 sostiene scoperta; E2 valutazione e avvio; E3 aderenza e ritorno. Qualificazione
-significa capire per chi e per quali problemi il percorso funziona, senza valutare
-contatti commerciali. I motori sono attività ripetibili, non una lista di canali.
+E1 supports discovery; E2 evaluation and starting; E3 fit and return visits.
+Qualification means understanding whom the path serves and which problems it
+addresses, rather than evaluating sales leads. Engines are repeatable activities,
+not a channel list.
 
-#### Screening dei candidati
+#### Candidate screening
 
-| Candidato | Coerenza | Operatività | Primo segnale e scelta |
+| Candidate | Positioning fit | Operational viability | First signal and decision |
 | --- | --- | --- | --- |
-| Scenari pratici cercabili | allineati al posizionamento | revisione dei contenuti entro slot IT/EN | acquisizione non prevedibile; selezionato E1 |
-| Esempio svolto collegato al corso | mostra il metodo | riusa scenari verificati, riducendo duplicazioni | osservabile quando provabile; selezionato E2 |
-| Feedback → revisione → ritorno | sostiene apprendimento | owner di triage e priorità entro 1–2 ore/settimana | primo riscontro del pilota pianificabile; selezionato E3 |
-| Amplificazione a pagamento | può diffondere | incompatibile con costo zero | scartata |
-| Outreach continuativo | aderenza debole | richiede contatti, messaggi e ulteriore lavoro | scartato dal piano |
-| Newsletter continuativa | possibile ritorno | calendario e gestione iscritti oltre il minimo | scartata finché capacità non dimostrata |
-| Nuova community proprietaria | possibile confronto | moderazione continuativa non prevista | scartata; feedback su superficie circoscritta |
+| Searchable practical scenarios | Aligned with positioning. | Content review within the IT/EN time allowance. | Acquisition unpredictable; selected as E1. |
+| Worked example linked to the course | Shows the method. | Reuses verified scenarios, reducing duplication. | Observable once testable; selected as E2. |
+| Feedback → revision → return | Supports learning. | Triage owner and priorities within 1–2 hours/week. | First pilot feedback can be planned; selected as E3. |
+| Paid amplification | Can spread the message. | Incompatible with zero cost. | Rejected. |
+| Ongoing outreach | Weak fit. | Requires contacts, messages, and additional work. | Excluded from the plan. |
+| Ongoing newsletter | Possible return visits. | Editorial calendar and subscriber management beyond the minimum. | Rejected until capacity is demonstrated. |
+| New owned community | Possible discussion. | Ongoing moderation is not planned. | Rejected; use a limited feedback surface. |
 
-La capacità post-lancio è confermata come budget, non come garanzia di poter
-risolvere ogni problema. La produzione iniziale resta nel progetto di sviluppo.
+Post-launch capacity is confirmed as a budget, not a guarantee that every problem
+can be solved. Initial production remains part of the development project.
 
 ### Engine detail
 
-#### E1 — Scenari pratici cercabili
+#### E1 — Searchable practical scenarios
 
-Input: esercizi corretti, spiegazioni IT/EN, fonti e collegamenti al programma.
-Meccanismo: un problema genera una pagina utile; i dubbi osservati guidano le revisioni.
-Output: accessi pertinenti al percorso, se la pagina viene scoperta.
-Indicatori: impressioni, clic, pertinenza delle query, passaggi al programma se
-misurabili e correzioni richieste. Requisiti: revisione tecnica e linguistica,
-pagine accessibili. Primo segnale: impressione o clic dopo scoperta, senza data
-garantita. [Metriche Search Console](https://support.google.com/webmasters/answer/7576553?hl=en)
-definisce impressioni/clic/CTR; questi dati non provano apprendimento.
+Input: correct exercises, IT/EN explanations, sources, and links to the curriculum.
+Mechanism: a problem generates a useful page; observed questions guide revisions.
+Output: relevant visits to the path, if the page is discovered.
+Indicators: impressions, clicks, query relevance, curriculum visits where
+measurable, and requested corrections. Requirements: technical and linguistic
+review, accessible pages. First signal: an impression or click after discovery,
+without a guaranteed date. [Search Console metrics](https://support.google.com/webmasters/answer/7576553?hl=en)
+define impressions/clicks/CTR; these data do not demonstrate learning.
 
-#### E2 — Esempio svolto → corso
+#### E2 — Worked example → course
 
-Input: caso rappresentativo fra modifica, storia e revisione, con esito spiegato.
-Meccanismo: il partecipante valuta il metodo e trova il punto da cui iniziare.
-Output: avvio consapevole di un esercizio. Indicatori: comprensione del compito,
-avvii verificati, primo completamento, ostacoli di accesso e differenze IT/EN.
-Requisiti: esempio verificato e collegamento al percorso. Primo segnale: una
-persona prova l'esempio; prima del lancio solo come verifica privata.
+Input: a representative case spanning change, history, and review, with an
+explained outcome. Mechanism: the participant evaluates the method and finds a
+starting point. Output: an informed exercise start. Indicators: understanding
+of the task, verified starts, first completion, access barriers, and IT/EN
+differences. Requirements: verified example and a link to the path. First signal:
+a person tries the example; before launch, only during a private review.
 
-#### E3 — Feedback → revisione → ritorno
+#### E3 — Feedback → revision → return
 
-Input: osservazioni volontarie, errori riproducibili e risultati delle prove.
-Meccanismo: classificare difficoltà, correggere materiale/traduzioni e spiegare
-l'aggiornamento; il partecipante sceglie se tornare o condividere il corso.
-Output: percorso corretto e nuove occasioni volontarie di utilizzo.
-Indicatori: problemi riproducibili, risoluzioni, ricorrenza dopo correzione, prove
-autonome su casi nuovi e ritorni osservabili senza tracciamento aggiuntivo.
-Requisiti: owner del triage e capacità di revisione. Primo segnale pianificabile:
-riscontro del pilota nell'orizzonte iniziale di 90 giorni, se persone e materiale
-sono disponibili. Non è una promessa di ottenere utenti o risultati entro una data.
+Input: voluntary observations, reproducible errors, and test results.
+Mechanism: classify difficulties, correct material/translations, and explain
+the update; the participant chooses whether to return or share the course.
+Output: a corrected path and new voluntary opportunities to use it.
+Indicators: reproducible problems, resolutions, recurrence after correction,
+independent tests on new cases, and observable returns without extra tracking.
+Requirements: triage owner and revision capacity. First plannable signal: pilot
+feedback within the initial 90-day horizon, if people and material are available.
+This is not a promise to obtain users or results by a date.
 
 ### Channel mix
 
-| Canale candidato | Motore | Funzione primaria | Peso | Attivazione |
+| Candidate channel | Engine | Primary function | Weight | Activation |
 | --- | --- | --- | --- | --- |
-| Ricerca organica verso Pages | E1 | intercettare un bisogno | medio | rilascio completo |
-| Repository, README e spazio feedback | E2/E3 | valutazione | alto | stato del progetto già esplicito; corso dopo il rilascio |
-| Esempio e collegamenti interni | E2 | avvio | alto | privato prima; pubblico col corso completo |
-| Post organici in community esistenti | E1/E2 | scoperta | basso | solo successivamente, con autorizzazione e capacità |
+| Organic search leading to Pages | E1 | Capture an existing need. | Medium | Complete release. |
+| Repository, README, and feedback space | E2/E3 | Evaluation. | High | Project status already explicit; course after release. |
+| Example and internal links | E2 | Start. | High | Private first; public with the complete course. |
+| Organic posts in existing communities | E1/E2 | Discovery. | Low | Only later, with authorization and capacity. |
 
-Ogni canale è organico; spesa pubblicitaria e servizi aggiuntivi: **0 €**.
-Nessun acquisto o trial come requisito. Massimo tre canali attivi nel primo
-orizzonte di pianificazione; il quarto non si aggiunge se supera la manutenzione.
+Every channel is organic; advertising and additional service spend: **0 €**.
+No purchase or trial is a prerequisite. At most three channels are active in the
+first planning horizon; do not add the fourth if it exceeds maintenance capacity.
 
-- Ricerca/Pages: «Dalla modifica alla pull request: comprendi cosa cambia»;
-  controllare impressioni, clic, query pertinenti e passaggi al programma disponibili.
-- Repository: promessa confermata e stato reale; controllare ostacoli segnalati,
-  domande ricorrenti, riproducibilità e segnalazioni classificate/corrette.
-- Esempio/corso: «Inizia dal livello Base, in italiano o inglese»; controllare
-  avvii, primi completamenti, errori di accesso e comprensione dell'esito.
-- Community: caso utile e collegamento contestuale; feedback pertinente, accessi
-  attribuibili se disponibili e avvii osservabili, senza volumi attesi.
+- Search/Pages copy, IT: «Dalla modifica alla pull request: comprendi cosa cambia»;
+  EN: “From change to pull request: understand what changes.” Monitor impressions,
+  clicks, relevant queries, and available curriculum visits.
+- Repository: confirmed promise and actual status; monitor reported barriers,
+  recurring questions, reproducibility, and classified/corrected reports.
+- Example/course copy, IT: «Inizia dal livello Base, in italiano o inglese»;
+  EN: “Start at the Base tier, in Italian or English.” Monitor starts, first
+  completions, access errors, and understanding of the outcome.
+- Community: useful case and contextual link; relevant feedback, attributable
+  visits where available, and observable starts, without expected volumes.
 
-Pages è statico e non sostituisce API/archivio. README introduce utilità, inizio
-e assistenza; non prova traffico. Discussions richiede abilitazione e moderazione;
-Issues/Discussions su repository pubblica rendono il feedback pubblico. Non
-chiedere email, segreti, log privati o dati personali non necessari. Configurazione
-di moduli e apertura di canali sono attività operative successive da approvare.
+Pages is static and does not replace the API/store. README introduces usefulness,
+getting started, and support; it does not prove traffic. Discussions requires
+enabling and moderation; Issues/Discussions on a public repository make feedback
+public. Do not ask for email, secrets, private logs, or unnecessary personal data.
+Form configuration and channel opening are later operational tasks requiring
+approval.
 
 ### Activation sequence
 
-1. Dopo approvazione operativa: preparare esempio e raccolta minima del feedback,
-   assegnare il responsabile e verificarli privatamente.
-2. Prima del lancio: chiudere blocchi e verificare tre livelli e parità IT/EN.
-3. Al rilascio completo: collegare pagine, repository ed esempio, con massimo
-   tre canali nell'orizzonte iniziale dei 90 giorni.
-4. In seguito: valutare community solo se manutenzione e feedback sono sostenibili.
+1. After operational approval: prepare the example and minimal feedback
+   collection, assign the owner, and test them privately.
+2. Before launch: resolve blockers and verify all three tiers and IT/EN parity.
+3. At the complete release: connect pages, repository, and example, with no
+   more than three channels in the initial 90-day horizon.
+4. Later: consider community activity only if maintenance and feedback remain
+   sustainable.
 
-I 90 giorni sono un orizzonte, non una data di consegna né un impegno di traffico.
+The 90 days are a horizon, not a delivery date or traffic commitment.
 
 ### Operating requirements
 
-Responsabilità per contenuti, revisione IT/EN e triage, anche nella stessa persona;
-nessun incarico è assegnato automaticamente. Budget umano post-lancio confermato:
-**1–2 ore/settimana complessive** per lettura dei segnali, triage e piccole revisioni.
-Correzioni più ampie richiedono pianificazione e possono sospendere la diffusione
-aggiuntiva. Il budget non stima lo sviluppo e la traduzione prima del lancio.
+Responsibility for content, IT/EN review, and triage, possibly held by one person;
+no assignment is automatic. Confirmed post-launch human budget:
+**1–2 hours/week in total** to read signals, triage, and make small revisions.
+Larger corrections need planning and may pause additional distribution.
+The budget does not estimate pre-launch development or translation.
 
-Usare solo dati aggregati affidabili o osservazioni documentate del pilota;
-nessuna dashboard giustifica servizi a pagamento o nuova raccolta di dati personali.
-Il setup di Search Console e degli strumenti di feedback non è ancora avvenuto.
+Use only reliable aggregate data or documented pilot observations; no dashboard
+justifies paid services or collecting additional personal data.
+Search Console and feedback tools have not yet been set up.
 
 ### What this plan does not solve
 
-Non implementa simulatore, SSO, persistenza, misurazione o accessibilità. Non prova
-efficacia né stabilisce target di adozione. CPL e tassi commerciali non sono
-pertinenti: i meccanismi pubblicitari non sono selezionati. Le baseline di avvio,
-completamento e apprendimento sono da raccogliere, senza intervalli inventati.
+It does not implement the simulator, SSO, persistence, measurement, or accessibility.
+It does not prove effectiveness or set adoption targets. CPL and commercial
+conversion rates are not relevant: advertising mechanisms were not selected.
+Start, completion, and learning baselines must be collected without invented ranges.
 
 ## 6. Roadmap
 
-### Calendario e capacità
+### Schedule and capacity
 
-D1–D90 sono finestre orientative. D1 inizia dopo approvazione operativa, assegnazione
-dei responsabili e disponibilità iniziale dichiarata. Le 1–2 ore/settimana confermate
-sono soltanto manutenzione post-lancio: non dimensionano sviluppo e traduzioni.
+D1–D90 are indicative windows. D1 starts after operational approval, owner
+assignment, and declared initial availability. The confirmed 1–2 hours/week
+covers post-launch maintenance only: it does not size development or translation.
 
-Se il lavoro supera l'orizzonte, slitta il rilascio. Costo dei servizi zero,
-tre livelli completi e parità IT/EN rimangono obbligatori. Nessuna data di lancio
-è promessa da questo documento.
+If work exceeds the horizon, move the release. Zero service cost, three complete
+tiers, and IT/EN parity remain mandatory. This document promises no launch date.
 
-### Candidati, impatto ed effort
+### Candidates, impact, and effort
 
-| Candidato | Impatto / effort indicativi | Destinazione |
+| Candidate | Indicative impact / effort | Destination |
 | --- | --- | --- |
-| C1 — Login fra domini gratuiti verificabile | bloccante / medio-alto | I1: dipendenza del lancio |
-| C2 — Replay/archivio entro quote gratuite | bloccante / medio-alto | I1, verifica completa I4 |
-| C3 — Capacità, dati, score, provider, nome e licenze definiti | bloccante / medio | I1: decisioni prima dei rispettivi passaggi |
-| C4 — Incidente IT/EN fra repository e revisione provabile | alto / alto | I2: materiale per E2 |
-| C5 — Ipotesi confrontate con pilota volontario | alto / medio | I3: attiva E3 |
-| C6 — Tre livelli, laboratorio e progressi IT/EN completi | bloccante / alto | I4: scope del lancio |
-| C7 — Identità, accessibilità, SEO e ripristino verificati | bloccante / medio-alto | I4: prontezza |
-| C8 — Percorso completo raggiungibile dai canali selezionati | alto / medio | I5: E1/E2/E3 pubblici |
-| C9 — Ciclo di manutenzione misurato | alto / basso-medio | I6: sostenibilità |
-| C10 — Altri provider social gratuiti | medio / medio-alto | dopo lancio, prerequisiti e bisogno verificati |
-| C11 — Casi diffusi in community esistenti | medio / medio | rinviato: capacità residua e autorizzazione |
-| C12 — Newsletter continuativa | incerto / medio | parcheggiata: calendario/iscritti non necessari |
-| C13 — Shell arbitrarie sul server | fuori perimetro / alto | esclusa: cambia simulazione e fabbisogno operativo |
-| C14 — Campagne, domini o servizi acquistati | incompatibile / variabile | esclusi dal costo zero |
-| C15 — Classifica competitiva avanzata | incerto / alto | parcheggiata: classifica iniziale didattica |
-| C16 — Nuovi contenuti oltre il programma | incerto / alto | rinviati ai problemi osservati |
+| C1 — Verifiable login across free domains | Blocking / medium-high | I1: launch dependency. |
+| C2 — Replay/store within free quotas | Blocking / medium-high | I1; complete verification in I4. |
+| C3 — Capacity, data, score, providers, name, and licenses defined | Blocking / medium | I1: decisions before the corresponding steps. |
+| C4 — Testable IT/EN incident spanning repository and review | High / high | I2: material for E2. |
+| C5 — Hypotheses tested against a voluntary pilot | High / medium | I3: activates E3. |
+| C6 — Three complete tiers, lab, and progress in IT/EN | Blocking / high | I4: launch scope. |
+| C7 — Identity, accessibility, SEO, and recovery verified | Blocking / medium-high | I4: readiness. |
+| C8 — Complete path reachable through selected channels | High / medium | I5: public E1/E2/E3. |
+| C9 — Measured maintenance cycle | High / low-medium | I6: sustainability. |
+| C10 — Additional free social providers | Medium / medium-high | After launch, with verified prerequisites and need. |
+| C11 — Cases shared in existing communities | Medium / medium | Deferred: spare capacity and authorization. |
+| C12 — Ongoing newsletter | Uncertain / medium | Parked: calendar/subscriber management unnecessary. |
+| C13 — Arbitrary server-side shells | Out of scope / high | Excluded: changes simulation and operational requirements. |
+| C14 — Purchased campaigns, domains, or services | Incompatible / variable | Excluded by zero cost. |
+| C15 — Advanced competitive leaderboard | Uncertain / high | Parked: initial leaderboard is educational. |
+| C16 — Content beyond the curriculum | Uncertain / high | Deferred until supported by observed problems. |
 
-### Primi 90 giorni: sei iniziative
+### First 90 days: six initiatives
 
 | # | Initiative (result-phrased) | Source step | Impact | Effort | Owner | Depends on | Milestone | When |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| I1 | Fattibilità gratuita e capacità iniziale verificabili | Snapshot, Demand Plan; C1–C3 | bloccante | medio-alto | Responsabile tecnico e decisioni `[OWNER TBD]` | approvazione operativa; responsabili disponibili | dossier go/no-go con prove iniziali, decisioni e capacità assegnata | D1–15 orientativo |
-| I2 | Incidente rappresentativo comprensibile e riproducibile IT/EN | Market Map, Positioning, E2; C4 | alto | alto | Responsabile scenari didattici `[OWNER TBD]` | I1 favorevole | caso verificato tra file, storia, revisione e recupero nei due contesti | D16–35 se sostenibile |
-| I3 | Ipotesi didattiche confrontate con osservazioni volontarie | P1–P3, E3; C5 | alto | medio | Responsabile verifica didattica `[OWNER TBD]` | I2, partecipanti disponibili, rubriche | registro delle prove con difficoltà e decisioni motivate su scenari/claim | D36–50 subordinato al pilota |
-| I4 | Release candidate completa nei tre livelli e nelle due lingue | Snapshot, roadmap tecnica; C6–C7 | bloccante | alto | Responsabile prontezza del rilascio `[OWNER TBD]` | I1–I3, capacità iniziale confermata | artefatto completo che supera correttezza, accesso, persistenza, ripristino e fruibilità | D51–75 se compatibile; altrimenti oltre D90 |
-| I5 | Corso completo raggiungibile con i tre motori collegati | Demand Plan E1/E2/E3; C8 | alto | medio | Maintainer pubblicazione `[OWNER TBD]` | I4, setup e pubblicazione approvati, condizioni gratuite | percorso pubblico da pagine, repository ed esempio con feedback utilizzabile | D76–85 solo se tutti i gate passano |
-| I6 | Primo ciclo di manutenzione confrontato col budget | Demand Plan E3; C9 | alto | basso-medio | Maintainer corso e feedback `[OWNER TBD]` | I5, una settimana completa osservabile | rapporto del carico effettivo e decisioni per restare entro 1–2 ore/settimana | prima settimana completa post-lancio; può oltrepassare D90 |
+| I1 | Free feasibility and initial capacity made verifiable | Snapshot, Demand Plan; C1–C3 | Blocking | Medium-high | Technical and decision lead `[OWNER TBD]` | Operational approval; owners available. | Go/no-go dossier with initial evidence, decisions, and assigned capacity. | D1–15, indicative. |
+| I2 | Representative incident understandable and reproducible in IT/EN | Market Map, Positioning, E2; C4 | High | High | Learning scenario lead `[OWNER TBD]` | Favorable I1 outcome. | Verified case spanning files, history, review, and recovery in both contexts. | D16–35, if sustainable. |
+| I3 | Learning hypotheses tested against voluntary observations | P1–P3, E3; C5 | High | Medium | Learning validation lead `[OWNER TBD]` | I2, available participants, rubrics. | Test record with difficulties and reasoned scenario/claim decisions. | D36–50, subject to the pilot. |
+| I4 | Release candidate complete across three tiers and both languages | Snapshot, technical roadmap; C6–C7 | Blocking | High | Release readiness lead `[OWNER TBD]` | I1–I3, initial capacity confirmed. | Complete artifact passing correctness, access, persistence, recovery, and usability criteria. | D51–75 if compatible; otherwise beyond D90. |
+| I5 | Complete course reachable with the three engines connected | Demand Plan E1/E2/E3; C8 | High | Medium | Publishing maintainer `[OWNER TBD]` | I4, approved setup and publication, free conditions. | Public path from pages, repository, and example with usable feedback. | D76–85 only if all gates pass. |
+| I6 | First maintenance cycle compared with budget | Demand Plan E3; C9 | High | Low-medium | Course and feedback maintainer `[OWNER TBD]` | I5, one complete observable week. | Actual workload report and decisions to remain within 1–2 hours/week. | First complete post-launch week; may extend beyond D90. |
 
-Uno stesso responsabile può coprire più ruoli dopo verifica della capacità.
-I2/I3 sono una verifica privata, non un lancio pubblico ridotto. I4 conserva
-l'intero scope. Le prove iniziali I1 non sostituiscono il test reale completo I4.
+One person may hold several roles after capacity is checked. I2/I3 are a private
+review, not a reduced public launch. I4 preserves the entire scope.
+Initial I1 evidence does not replace the complete real-world I4 test.
 
-### Attivazione dei motori
+### Engine activation
 
-- E1, scenari cercabili: materiale in I4 e collegamenti pubblici in I5.
-  Impressioni e visite quando disponibili; nessuna data garantita di indicizzazione.
-- E2, esempio → corso: prova privata I2/I3, avvio pubblico I5. Osservare se
-  una persona comprende il compito e raggiunge l'esercizio pertinente.
-- E3, feedback → revisione → ritorno: primo ciclo I3, prosecuzione I5/I6.
-  Documentare difficoltà, decisione motivata e verifica della correzione.
+- E1, searchable scenarios: material in I4 and public links in I5.
+  Impressions and visits when available; no guaranteed indexing date.
+- E2, example → course: private I2/I3 test, public I5 start. Observe whether
+  a person understands the task and reaches the relevant exercise.
+- E3, feedback → revision → return: first I3 cycle, continuing in I5/I6.
+  Document difficulty, reasoned decision, and verification of the correction.
 
-Nessun volume, tasso di conversione o miglioramento didattico inventato.
-Assenza di osservazioni è evidenza mancante, non successo o fallimento automatico.
+No invented volumes, conversion rates, or learning improvements.
+Absent observations mean missing evidence, not automatic success or failure.
 
-### Rischi e questioni collegate
+### Related risks and questions
 
-| Voce | Iniziative | Prova o condizione |
+| Item | Initiatives | Evidence or condition |
 | --- | --- | --- |
-| P1 — file → revisione | I2/I3 | spiegazione e azioni osservate, non claim anticipato |
-| P2 — trasferimento fra piattaforme | I2/I3 | distinguere Git e portali su un caso non guidato |
-| P3 — recupero motivato | I2/I3 | scelta spiegata e lavoro condiviso conservato |
-| G3 — utilità/differenziazione | I3/I6 | osservazioni dei pubblici, nessuna esclusività presunta |
-| G5 — successo/autonomia | I1/I3/I6 | rubriche prima delle prove; baseline dopo |
-| G6 — owner/capacità/scadenze | I1/tutte | ruoli e disponibilità prima del calendario |
-| G8 — provider | I1/I4, C10 | primo percorso gratuito verificato; pulsanti solo operativi |
-| G9 — nome/licenze/feedback | I1/I4 | decisioni prima della pubblicazione |
-| Auth cross-site | I1/I4 | flusso completo sui domini gratuiti senza cookie terzi |
-| CPU e quote | I1/I4/I6 | misurare runtime; ottimizzare o bloccare se incompatibile |
-| Score/tentativi/durata | I1/I4 | regole trasparenti e server; pause stimate separate |
-| Retention/cancellazione/recupero | I1/I4/I6 | regole esplicite e ripristino provato |
+| P1 — file → review | I2/I3 | Observed explanation and actions, not an advance claim. |
+| P2 — transfer between platforms | I2/I3 | Distinguish Git from portals in an unguided case. |
+| P3 — reasoned recovery | I2/I3 | Explained choice and preserved shared work. |
+| G3 — usefulness/differentiation | I3/I6 | Audience observations; no presumed exclusivity. |
+| G5 — success/independence | I1/I3/I6 | Rubrics before tests; baselines afterward. |
+| G6 — owners/capacity/deadlines | I1/all | Roles and availability before the schedule. |
+| G8 — providers | I1/I4, C10 | First verified free path; buttons for working providers only. |
+| G9 — name/licenses/feedback | I1/I4 | Decisions before publication. |
+| Cross-site auth | I1/I4 | Complete flow on free domains without third-party cookies. |
+| CPU and quotas | I1/I4/I6 | Measure runtime; optimize or block if incompatible. |
+| Score/attempts/elapsed time | I1/I4 | Transparent server rules; estimated breaks separate. |
+| Retention/deletion/recovery | I1/I4/I6 | Explicit rules and tested restoration. |
 
-Un esito negativo su autenticazione, quota, correttezza o recupero blocca il lancio;
-non autorizza acquisti. Le regole iniziali candidate sono nel
-[perimetro operativo](../docs/analysis/implementation-proposal.md), approvato per il lavoro locale.
+A negative authentication, quota, correctness, or recovery result blocks launch;
+it does not authorize purchases. Initial candidate rules are in the
+[operational scope](../docs/analysis/implementation-proposal.md), approved for local work.
 
-### Orizzonte di dodici mesi
+### Twelve-month outline
 
-- Mesi 1–3: affrontare le sei iniziative secondo dipendenze, con calendario
-  condizionato. Proseguire oltre il trimestre se i requisiti non sono soddisfatti.
-- Mesi 4–6: dopo il lancio, consolidare correttezza, IT/EN e sostenibilità;
-  valutare C10 soltanto per un ostacolo osservato e con prerequisiti gratuiti.
-  Se il lancio è bloccato, completare prima lo scope iniziale.
-- Mesi 7–9: considerare C11 soltanto con capacità residua e autorizzazione.
-  Non aggiungere un quarto canale se la manutenzione non lo sostiene.
-- Mesi 10–12: riesaminare C16 usando problemi e prove raccolte; aggiornare la
-  roadmap prima di nuovi formati. C12/C15 restano parcheggiati senza bisogno dimostrato.
+- Months 1–3: address the six initiatives in dependency order, with a conditional
+  schedule. Continue beyond the quarter if requirements remain unmet.
+- Months 4–6: after launch, consolidate correctness, IT/EN, and sustainability;
+  consider C10 only for an observed barrier and with free prerequisites.
+  If launch is blocked, complete the initial scope first.
+- Months 7–9: consider C11 only with spare capacity and authorization.
+  Do not add a fourth channel if maintenance cannot sustain it.
+- Months 10–12: reassess C16 using collected problems and tests; update the
+  roadmap before new formats. C12/C15 remain parked without demonstrated need.
 
 ## 7. Assumption & evidence ledger
 
-### Questioni aperte
+### Open questions
 
-La confidenza riguarda la risposta di lavoro, non il valore del progetto. Categoria,
-ICP e motori sono scelte esplicite confermate; efficacia e condizioni tecniche non
-sono diventate evidenze per questo motivo. Nessuna baseline è inventata.
+Confidence concerns the working answer, not the project's value. Category, ICP,
+and engines are explicit confirmed choices; effectiveness and technical
+conditions have not thereby become evidence. No baseline is invented.
 
-| ID / tipo | Questione e perché conta | Confidenza | Evidenza disponibile | Raccomandazione |
+| ID / type | Question and why it matters | Confidence | Available evidence | Recommendation |
 | --- | --- | --- | --- | --- |
-| P1 / unverified-claim | collegare file e revisione migliora comprensione? | bassa | specifiche, nessuna app o prova | scenario funzionante e spiegazione osservata, I2/I3 |
-| P2 / unverified-claim | trasferimento autonomo fra GitHub/Azure? | bassa | copertura richiesta, non dimostrata | caso non guidato nei due contesti, I2/I3 |
-| P3 / unverified-claim | recupero motivato del lavoro condiviso? | bassa | rubriche ancora da implementare | osservare scelta e conseguenze, I2/I3 |
-| G3 / assumption | utilità e differenziazione effettive | bassa | mappa pubblica e scelta utente, nessuna esclusività provata | pilota e revisione dei claim, I3/I6 |
-| G5 / missing-data | target di adozione e prova di autonomia | bassa | metriche richieste, nessuna baseline | rubriche prima delle prove; raccogliere risultati senza tassi fittizi |
-| G6 / missing-data | owner, capacità iniziale e calendario reale | bassa | owner repository noto; solo manutenzione quantificata | assegnare ruoli/capacità prima di D1, ricalendarizzare |
-| G8 / assumption | GitHub primo provider e ordine successivo | media | compatibilità di progetto e documentazione provider | verificare nello spike; mostrare solo provider operativi |
-| G9 / missing-data | nome pubblico, licenze e canale feedback | bassa | titolo repository e perimetro, nessuna licenza scelta | decidere prima della pubblicazione, distinguere codice/contenuti/asset |
-| T1 / assumption | replay e archivio rientrano nelle quote gratuite | bassa | limiti documentati, nessun benchmark dell'app | misura locale e poi reale; ottimizza o blocca il lancio |
-| T2 / assumption | SSO funziona cross-site nei browser previsti | bassa | architettura proposta, nessuno spike | provider mantenuto, handoff e prova con cookie terzi bloccati |
-| T3 / assumption | regole punti/tempi e tentativi ripetuti | media | definizione semplice proposta, non ancora approvata | valutare il perimetro operativo prima del contratto definitivo |
-| T4 / missing-data | retention, cancellazione e recupero | bassa | principi documentati, schema non attivo | politiche esplicite e ripristino prima del rilascio |
-| T5 / missing-data | registrazioni OAuth e configurazione reale | bassa | nessun account/secret toccato | setup separato autorizzato; mock non vale come test di login reale |
-| T6 / assumption | carico manutenzione entro 1–2 ore/settimana | media | budget umano confermato, nessun carico osservato | misurare prima settimana completa in I6, ridurre canali se necessario |
-| T7 / missing-data | volontari disponibili per il pilota | bassa | nessun reclutamento eseguito | predisporre prova e consenso dopo autorizzazione, senza promettere partecipanti |
-| T8 / unverified-claim | SEO/accessibilità/prestazioni effettive | bassa | palette calcolata e piani di audit; app assente | audit sul prodotto renderizzato e correzioni, I4 |
+| P1 / unverified-claim | Does connecting files and review improve understanding? | Low | Specifications; no app or test. | Working scenario and observed explanation, I2/I3. |
+| P2 / unverified-claim | Independent transfer between GitHub/Azure? | Low | Coverage required, not demonstrated. | Unguided case in both contexts, I2/I3. |
+| P3 / unverified-claim | Reasoned recovery of shared work? | Low | Rubrics still to implement. | Observe choice and consequences, I2/I3. |
+| G3 / assumption | Actual usefulness and differentiation. | Low | Public map and user choice; no proven exclusivity. | Pilot and claim review, I3/I6. |
+| G5 / missing-data | Adoption targets and evidence of independence. | Low | Metrics requested; no baseline. | Rubrics before tests; collect results without fictional rates. |
+| G6 / missing-data | Owners, initial capacity, and actual schedule. | Low | Repository owner known; only maintenance quantified. | Assign roles/capacity before D1; reschedule. |
+| G8 / assumption | GitHub as first provider and subsequent order. | Medium | Design fit and provider documentation. | Verify in the spike; show working providers only. |
+| G9 / missing-data | Public name, licenses, and feedback channel. | Low | Repository title and scope; no chosen license. | Decide before publication; distinguish code/content/assets. |
+| T1 / assumption | Replay and store fit within free quotas. | Low | Documented limits; no application benchmark. | Measure locally, then in the real environment; optimize or block launch. |
+| T2 / assumption | SSO works cross-site in target browsers. | Low | Proposed architecture; no spike. | Maintained provider, handoff, and test with third-party cookies blocked. |
+| T3 / assumption | Scoring/time rules and repeated attempts. | Medium | Simple proposed definition, not yet approved. | Evaluate operational scope before the final contract. |
+| T4 / missing-data | Retention, deletion, and recovery. | Low | Documented principles; schema inactive. | Explicit policies and restoration before release. |
+| T5 / missing-data | OAuth registrations and real configuration. | Low | No accounts/secrets touched. | Separately authorized setup; a mock is not a real-login test. |
+| T6 / assumption | Maintenance workload fits within 1–2 hours/week. | Medium | Human budget confirmed; no observed workload. | Measure the first complete week in I6; reduce channels if necessary. |
+| T7 / missing-data | Volunteers available for the pilot. | Low | No recruitment performed. | Prepare test and consent after authorization without promising participants. |
+| T8 / unverified-claim | Actual SEO/accessibility/performance. | Low | Calculated palette and audit plans; no app. | Audit the rendered product and correct findings, I4. |
 
-Nessun benchmark pubblicitario richiesto: CPL e conversioni commerciali non sono
-meccanismi selezionati. I dati di apprendimento vengono raccolti, non sostituiti
-con intervalli di comodo. Le ipotesi di costo d'uso vanno separate dalla gratuità
-nominale del piano e dalle quote condivise dell'account.
+No advertising benchmark is required: CPL and commercial conversions are not
+selected mechanisms. Learning data will be collected, not replaced with
+convenient ranges. Usage-cost assumptions must be distinguished from a plan's
+nominal free status and shared account quotas.
 
 ### Evidence map
 
-| Origine | Cosa sostiene | Limite |
+| Origin | What it supports | Limitation |
 | --- | --- | --- |
-| Dichiarazioni utente | perimetro, pubblici, IT/EN, simulatore, timer, costo zero, categoria, promessa, motori e budget manutenzione | confermano scelte, non risultati |
-| Documentazione repository | architettura, programma, stato dei lavori e verifiche documentali | non dimostra implementazione |
-| Fonti pubbliche ufficiali | alternative, meccanismi Google/GitHub e quote dei servizi | non misura efficacia del corso o carico reale |
-| Inferenze di progetto | sei iniziative, finestre, dipendenze e ipotesi di prova | approvate come direzione; persone e date operative non sono già assegnate |
-| Strumenti connessi | accesso e metadati del repository verificati | nessun CRM, analytics commerciale o fonte a pagamento usata |
+| User statements | Scope, audiences, IT/EN, simulator, timer, zero cost, category, promise, engines, and maintenance budget. | Confirm choices, not results. |
+| Repository documentation | Architecture, curriculum, work status, and document checks. | Does not demonstrate implementation. |
+| Official public sources | Alternatives, Google/GitHub mechanisms, and service quotas. | Do not measure course effectiveness or actual workload. |
+| Design inferences | Six initiatives, windows, dependencies, and test hypotheses. | Approved as a direction; people and operational dates are not already assigned. |
+| Connected tools | Verified repository access and metadata. | No CRM, commercial analytics, or paid source used. |
 
-Fonti principali e relativi limiti: [Market Map](02-market-map.md),
+Main sources and their limitations: [Market Map](02-market-map.md),
 [Demand Plan](04-demand-plan.md), [hosting](../docs/deployment.md).
 
 ## 8. Execution readiness
 
-### 8.1 Conversion design: dalla scoperta all'apprendimento
+### 8.1 Conversion design: from discovery to learning
 
-Percorso pagine/esempio → livello → primo esercizio → esito → ripresa.
-Definire obiettivi, rubriche, feedback e passaggio fra livelli. Se si salta questo
-lavoro, visite e avvii non dimostrano comprensione. Servono progettazione didattica,
-UX e verifica con partecipanti; non un processo di vendita o CRM.
+Pages/example → tier → first exercise → outcome → resume.
+Define objectives, rubrics, feedback, and tier transitions. Without this work,
+visits and starts do not demonstrate understanding. It requires instructional
+design, UX, and testing with participants, rather than a sales process or CRM.
 
-### 8.2 Deployment: attivazione e manutenzione
+### 8.2 Deployment: activation and maintenance
 
-Costruire e verificare il prodotto, preparare contenuti IT/EN, feedback e procedure
-prima di attivare i canali. Servono competenze TypeScript/Git, autenticazione,
-dati, accessibilità, traduzione e manutenzione. Le 1–2 ore/settimana sono soltanto
-il budget post-lancio. Se lo scope iniziale resta incompleto, rinviare il rilascio;
-non ridurre lingue/livelli né attivare servizi a pagamento.
+Build and verify the product; prepare IT/EN content, feedback, and procedures
+before activating channels. Required capabilities include TypeScript/Git,
+authentication, data, accessibility, translation, and maintenance. The
+1–2 hours/week is the post-launch budget only. If the initial scope remains
+incomplete, postpone release; do not reduce languages/tiers or activate paid
+services.
 
-La manutenzione comprende triage e piccole revisioni, non garantisce ogni correzione.
-Incidenti importanti possono richiedere sospensione della diffusione o del servizio
-online mentre si pianifica la correzione. Nessuno SLA commerciale è promesso.
+Maintenance covers triage and small revisions, not a guarantee of every fix.
+Major incidents may require pausing distribution or the online service while
+planning a correction. No commercial SLA is promised.
 
-### 8.3 Measurement: fonti, revisione e decisioni
+### 8.3 Measurement: sources, review, and decisions
 
-API per avvii/completamenti confermati; osservazioni volontarie per rubriche e
-problemi; segnali Search Console solo quando configurati e disponibili. Niente
-traffico inventato o nuovi tracker personali per completare una dashboard.
-Il ruolo manutentore deve leggere periodicamente i segnali e decidere quali
-correzioni o canali siano sostenibili. Senza questa routine non si può attribuire
-un risultato a un motore o confermare il budget di lavoro.
+API for confirmed starts/completions; voluntary observations for rubrics and
+problems; Search Console signals only when configured and available. No invented
+traffic or new personal trackers merely to complete a dashboard.
+The maintainer role must periodically read signals and decide which corrections
+or channels are sustainable. Without this routine, an outcome cannot be
+attributed to an engine or the workload budget confirmed.
 
-### Capacità e avvio operativo
+### Capacity and operational start
 
-Nessun fornitore o assunzione a pagamento richiesti dal piano. I ruoli umani sono
-ancora da assegnare, senza presumere disponibilità dal solo nome dell'owner.
+The plan requires no paid supplier or hire. Human roles remain to be assigned,
+without assuming availability from the repository owner's name alone.
 
-Il [perimetro operativo reviewabile](../docs/analysis/implementation-proposal.md) specifica risultato,
-dipendenze candidate, regole iniziali di classifica e confine della pubblicazione.
-Dopo approvazione si può iniziare l'implementazione locale per sottoagenti in
-worktree separate, con verifiche e aggiornamento della documentazione. Setup di
-account/segreti, risorse, CI di distribuzione, push/PR e pubblicazione sono passaggi
-specifici successivi, non autorizzati dalla sola conferma del documento GTM.
+The [reviewable operational scope](../docs/analysis/implementation-proposal.md)
+specifies the outcome, candidate dependencies, initial leaderboard rules, and
+publication boundary. After approval, local implementation may start through
+subagents in separate worktrees, with checks and documentation updates.
+Account/secret setup, resources, deployment CI, pushes/PRs, and publication are
+specific later steps, not authorized by GTM-document confirmation alone.
 
-## Stato dell’approvazione
+## Approval status
 
-Roadmap, consolidato e implementazione locale approvati dall’utente il 15 novembre
-2026. L’approvazione non trasforma ipotesi didattiche in prove né autorizza
-account reali, risorse esterne o pubblicazione. L’implementazione è iniziata;
-verifiche e risultati sono riportati nella documentazione tecnica corrente.
+The user approved the roadmap, consolidated plan, and local implementation on
+15 November 2026. Approval does not turn learning hypotheses into evidence or
+authorize real accounts, external resources, or publication. Implementation has
+started; checks and results are reported in the current technical documentation.

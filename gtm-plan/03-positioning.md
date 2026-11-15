@@ -1,33 +1,33 @@
 # Positioning Architecture — GIT-for-AI-crash-course
 
-*Go2Rev GTM Planner · Fase 3 di 5 · Confermato dall’utente · 15 novembre 2026*
+*Go2Rev GTM Planner · Step 3 of 5 · Confirmed by the user · 15 November 2026*
 
 ## 1. Executive summary
 
-Categoria confermata: **laboratorio visuale di collaborazione con Git**. Il corso
-vuole aiutare a scegliere come collaborare e recuperare dagli errori comprendendo
-le conseguenze sulla repository. La proposta collega modifiche, storia, PR e policy
-nello stesso scenario; visualizzazione, livelli e interattività da soli non provano
-una differenza rispetto alle alternative.
+Confirmed category: **visual Git collaboration lab**. The course aims to help
+participants choose how to collaborate and recover from mistakes while
+understanding the consequences for their repository. The proposal connects
+changes, history, PRs, and policies in one scenario; visualization, levels, and
+interactivity alone do not demonstrate a difference from alternatives.
 
-La promessa è un obiettivo didattico da verificare. I tre pilastri sono candidati
-`unverified-claim`: requisiti e documentazione dimostrano un'intenzione progettuale,
-non l'efficacia di un'applicazione ancora da implementare.
+The promise is an educational objective to validate. The three pillars are
+`unverified-claim` candidates: requirements and documentation demonstrate design
+intent, not the effectiveness of an application still to be implemented.
 
 ## 2. Category decision
 
-Confronto qualitativo delle direzioni emerse dalla [mappa confermata](02-market-map.md).
-Dimensione e domanda del mercato non sono misurate; nessun punteggio numerico inventato.
+Qualitative comparison of directions from the [confirmed map](02-market-map.md).
+Market size and demand are unmeasured; no numerical scores are invented.
 
-| Categoria candidata | Spazio e concorrenza osservabili | Aderenza e interesse |
+| Candidate category | Observable space and competition | Fit and appeal |
 | --- | --- | --- |
-| Laboratorio visuale di collaborazione con Git, scelta confermata | collega comandi e lavoro condiviso; sovrapposizione con simulatori e pratica reale | coerente con gli scenari progettati; interesse dei pubblici da validare |
-| Palestra di recupero Git | bisogno più circoscritto; recupero e conflitti già presenti nelle alternative | copre una parte del programma; rischio di apparire utile solo quando c'è un incidente |
-| Percorso pratico IT/EN | dimensione ignota; lingue e progressione non dimostrano esclusività | aderente ai requisiti, rilevanza da verificare nelle due lingue |
+| Visual Git collaboration lab, confirmed choice | Connects commands and shared work; overlaps with simulators and real practice. | Consistent with designed scenarios; audience appeal needs validation. |
+| Git recovery practice lab | Narrower need; alternatives already cover recovery and conflicts. | Covers part of the curriculum; risks appearing useful only during an incident. |
+| Practical IT/EN path | Size unknown; languages and progression do not demonstrate exclusivity. | Fits requirements; relevance needs testing in both languages. |
 
-La scelta impone di spiegare collaborazione e conseguenze oltre alla sintassi,
-distinguere simulazione e operazioni reali e verificare l'apprendimento. Le risorse
-esistenti restano alternative utili e possibili approfondimenti.
+The choice requires explaining collaboration and consequences beyond syntax,
+distinguishing simulation from real operations, and evaluating learning.
+Existing resources remain useful alternatives and possible further reading.
 
 ## 3. Core promise
 
@@ -39,97 +39,104 @@ esistenti restano alternative utili e possibili approfondimenti.
 
 **Fallback EN:** “Choose how to collaborate and recover with Git, seeing what changes in the repository.”
 
-La promessa riguarda autonomia e comprensione; è coerente con gli scenari
-specificati. Diventerà una capacità dimostrata solo dopo prove su problemi nuovi
-svolti senza guida. In una pagina di progetto deve essere chiaro che il corso
-è in progettazione, senza descrivere il risultato come già disponibile.
+The promise concerns independence and understanding and matches the specified
+scenarios. It becomes a demonstrated capability only after unguided tests on new
+problems. A project page must clearly state that the course is being designed,
+without describing the outcome as already available.
 
 ## 4. Pillars
 
-### P1 — Dal file alla revisione
+### P1 — From file to review
 
-- Claim candidato: collegare una modifica ai suoi effetti sulla storia e sulla revisione condivisa.
-- Relevant: plausibile per i pubblici dichiarati, senza riscontri diretti ancora disponibili.
-- Differentiated: ipotesi rispetto all'enfasi sul grafo di LearnGitBranching e sul lavoro reale di GitHub Skills; nessuna esclusività dimostrata.
-- Defensible: non ancora superato; viste sincronizzate specificate, senza implementazione osservabile.
-- Prova necessaria: scenario funzionante e partecipante capace di spiegare file, index, commit e PR. Stato: `unverified-claim P1`.
+- Candidate claim: connect a change to its effects on history and shared review.
+- Relevant: plausible for the stated audiences; no direct evidence is available yet.
+- Differentiated: hypothesis against LearnGitBranching's graph emphasis and GitHub Skills' real-work emphasis; no exclusivity demonstrated.
+- Defensible: not yet passed; synchronized views are specified, without observable implementation.
+- Evidence needed: working scenario and a participant who can explain files, index, commits, and PRs. Status: `unverified-claim P1`.
 
-### P2 — Lo stesso problema, due contesti
+### P2 — The same problem, two contexts
 
-- Claim candidato: riconoscere principi Git comuni e differenze operative fra GitHub e Azure DevOps.
-- Relevant: coerente con il pubblico, frequenza del bisogno ancora ignota.
-- Differentiated: ipotesi rispetto ai percorsi che enfatizzano una piattaforma; unicità non accertata.
-- Defensible: non ancora superato; la copertura è un requisito, non una capacità già realizzata.
-- Prova necessaria: scenari corrispondenti verificati sulle fonti e trasferimento autonomo fra contesti. Stato: `unverified-claim P2`.
+- Candidate claim: recognize common Git principles and operational differences between GitHub and Azure DevOps.
+- Relevant: consistent with the audience; frequency of the need is unknown.
+- Differentiated: hypothesis against paths emphasizing one platform; uniqueness unestablished.
+- Defensible: not yet passed; coverage is a requirement, not an implemented capability.
+- Evidence needed: corresponding scenarios verified against sources and independent transfer between contexts. Status: `unverified-claim P2`.
 
-### P3 — Recupero motivato
+### P3 — Reasoned recovery
 
-- Claim candidato: scegliere una strategia di recupero spiegandone l'effetto sul lavoro condiviso.
-- Relevant: bisogno plausibile da verificare.
-- Differentiated: conflitti e recupero già esistono nelle alternative; l'ipotesi riguarda la verifica della motivazione.
-- Defensible: non ancora superato; mancano simulatore e risultati di apprendimento.
-- Prova necessaria: rubriche che valutino scelta, conseguenze e conservazione del lavoro altrui su un incidente nuovo. Stato: `unverified-claim P3`.
+- Candidate claim: choose a recovery strategy and explain its effect on shared work.
+- Relevant: plausible need to validate.
+- Differentiated: alternatives already cover conflicts and recovery; the hypothesis concerns evaluating the reasoning.
+- Defensible: not yet passed; simulator and learning results are unavailable.
+- Evidence needed: rubrics evaluating choice, consequences, and preservation of others' work in a new incident. Status: `unverified-claim P3`.
 
-Nessuno dei tre candidati è presentato come pilastro già validato. Confermare
-l'architettura dei messaggi non equivale a superare il test dei pilastri.
+None of these candidates is presented as a validated pillar. Confirming the
+messaging architecture does not mean passing the pillar test.
 
 ## 5. Segment translations
 
-| Pubblico | Traduzione della stessa promessa | Enfasi e lessico |
+| Audience | Translation of the same promise | Emphasis and vocabulary |
 | --- | --- | --- |
-| Engineers | integra modifiche e recupera comprendendo la storia condivisa | P1/P3; branch, diff, commit, conflitto |
-| Architects | valuta integrazione e recupero comprendendone gli effetti sulla collaborazione | P2/P3; policy, storia condivisa, integrazione, rollback |
-| Business con esperienza tecnica | collabora sulle modifiche e recupera una versione comprendendo il lavoro del gruppo | P1/P3; modifica, revisione, versione, ripristino |
+| Engineers | IT: «Integra modifiche e recupera comprendendo la storia condivisa.» EN: “Integrate changes and recover with an understanding of shared history.” | P1/P3; branch, diff, commit, conflict. |
+| Architects | IT: «Valuta integrazione e recupero comprendendone gli effetti sulla collaborazione.» EN: “Evaluate integration and recovery by understanding their effects on collaboration.” | P2/P3; policy, shared history, integration, rollback. |
+| Business professionals with technical experience | IT: «Collabora sulle modifiche e recupera una versione comprendendo il lavoro del gruppo.» EN: “Collaborate on changes and recover a version while understanding the group's work.” | P1/P3; change, review, version, restore. |
 
-Non sono tre prodotti o promesse incompatibili; termini e approfondimento cambiano
-con il contesto del partecipante.
+These are translations of one product and promise. Vocabulary and depth change
+with the participant's context.
 
 ## 6. Messages per funnel stage
 
-Percorso scoperta → scelta → avvio, senza presupporre una vendita. Sono testi
-candidati per quando il prodotto sarà disponibile, non una descrizione dello stato attuale.
+Discovery → choice → start, without assuming a sale. These are candidate messages
+for when the product is available, rather than descriptions of its current state.
 
-| Momento | Messaggio principale | Varianti |
+| Stage | Main message | Variants |
 | --- | --- | --- |
-| Scoperta | Un laboratorio visuale per collaborare con Git. | Dalla modifica alla pull request: comprendi cosa cambia. / Esplora le conseguenze delle decisioni Git. |
-| Scelta | Segui lo stesso scenario tra file, commit e revisione. | Confronta le decisioni su GitHub e Azure DevOps. / Guarda il percorso: basi, collaborazione e recupero. |
-| Avvio | Inizia dal livello Base, in italiano o inglese. | Accedi con un provider disponibile e avvia il primo esercizio. / Riprendi dall'ultimo progresso salvato. |
+| Discovery | IT: «Un laboratorio visuale per collaborare con Git.» EN: “A visual lab for collaborating with Git.” | IT: «Dalla modifica alla pull request: comprendi cosa cambia.» EN: “From change to pull request: understand what changes.” / IT: «Esplora le conseguenze delle decisioni Git.» EN: “Explore the consequences of Git decisions.” |
+| Choice | IT: «Segui lo stesso scenario tra file, commit e revisione.» EN: “Follow one scenario through files, commits, and review.” | IT: «Confronta le decisioni su GitHub e Azure DevOps.» EN: “Compare decisions on GitHub and Azure DevOps.” / IT: «Guarda il percorso: basi, collaborazione e recupero.» EN: “Explore the path: basics, collaboration, and recovery.” |
+| Start | IT: «Inizia dal livello Base, in italiano o inglese.» EN: “Start at the Base tier, in Italian or English.” | IT: «Accedi con un provider disponibile e avvia il primo esercizio.» EN: “Sign in with an available provider and start your first exercise.” / IT: «Riprendi dall'ultimo progresso salvato.» EN: “Resume from your last saved progress.” |
 
 ## 7. Anti-messages bank
 
-**Formulazioni da evitare:** «Git per tutti», «soluzione completa», «impara senza
-fatica», «diventa esperto rapidamente». Sostituirle con un'azione o un risultato
-specifico del percorso, senza promesse generiche o tempi non verificati.
+**Wording to avoid:** IT: «Git per tutti», «soluzione completa», «impara senza
+fatica», «diventa esperto rapidamente». EN equivalents: “Git for everyone”,
+“complete solution”, “learn effortlessly”, “become an expert quickly”. Replace
+these with a specific action or outcome from the path, without generic promises
+or unverified time claims.
 
-**Cornici da non imitare:** visualizzazione come promessa esclusiva di
-[LearnGitBranching](https://github.com/pcottle/learnGitBranching), imparare GitHub
-dentro GitHub come cornice di [GitHub Skills](https://github.com/skills), gioco con
-Git reale come cornice di [Oh My Git!](https://ohmygit.org/).
+**Frames not to imitate:** visualization as the exclusive promise of
+[LearnGitBranching](https://github.com/pcottle/learnGitBranching), learning GitHub
+inside GitHub as the frame of [GitHub Skills](https://github.com/skills), and a
+game with real Git as the frame of [Oh My Git!](https://ohmygit.org/).
 
-**Claim non difendibili:** «riduce gli errori», «garantisce autonomia», «più efficace»,
-«accessibile a tutti». Richiedono rispettivamente risultati osservati, prove di
-trasferimento, confronti appropriati e verifiche di accessibilità. Non usarli come
-fatti; restano `unverified-claim`.
+**Unsupported claims:** IT: «riduce gli errori», «garantisce autonomia», «più
+efficace», «accessibile a tutti». EN equivalents: “reduces errors”, “guarantees
+independence”, “more effective”, “accessible to everyone”. These respectively
+require observed results, transfer tests, appropriate comparisons, and
+accessibility checks. Do not use them as facts; they remain `unverified-claim`.
 
 ## 8. What this changes tomorrow
 
-Titolo durante la progettazione: «Un laboratorio visuale di collaborazione con
-Git, in progettazione.» Sottotitolo: «Scenari su GitHub e Azure DevOps per comprendere
-modifiche, revisioni e recupero. Percorso previsto in italiano e inglese.»
+Headline during design, IT: «Un laboratorio visuale di collaborazione con Git,
+in progettazione.» EN: “A visual Git collaboration lab, currently in design.”
+Subheading, IT: «Scenari su GitHub e Azure DevOps per comprendere modifiche,
+revisioni e recupero. Percorso previsto in italiano e inglese.» EN: “Scenarios
+on GitHub and Azure DevOps to understand changes, review, and recovery.
+A path planned in Italian and English.”
 
-La presentazione spiega bisogno, scenario e conseguenze da comprendere, distinguendo
-progetto e capacità dimostrate. Temi coerenti: revisioni, conflitti, recupero e
-differenze operative. Classifica come prova di competenza e stack interno come
-beneficio didattico non sostengono il posizionamento.
-Il piano di diffusione dovrà rispettare servizi gratuiti, assenza di campagne
-a pagamento e budget di manutenzione post-lancio confermato di 1–2 ore/settimana.
+The presentation explains the need, scenario, and consequences to understand,
+distinguishing design from demonstrated capability. Suitable themes: review,
+conflicts, recovery, and operational differences. A leaderboard as evidence of
+competence or the internal stack as an educational benefit does not support
+the positioning. The demand plan must respect free services, no paid campaigns,
+and the confirmed post-launch maintenance budget of 1–2 hours/week.
 
 ## 9. Open questions
 
-P1–P3 rimangono ipotesi. Prima di pubblicare claim di efficacia servono scenari
-funzionanti, rubriche e prove con rappresentanti dei tre pubblici. Non esistono
-ancora dati sufficienti per dichiarare un vantaggio rispetto alle alternative.
+P1–P3 remain hypotheses. Working scenarios, rubrics, and tests with representatives
+of all three audiences are needed before publishing effectiveness claims.
+Evidence is insufficient to claim an advantage over alternatives.
 
-Promessa IT/EN e messaggi sono stati confermati dall’utente il 15 novembre 2026.
-I pilastri restano ipotesi non verificate: la conferma autorizza il passo di analisi
-successivo, non dichiara efficacia, capacità già realizzate o approvazione operativa.
+The user confirmed the IT/EN promise and messages on 15 November 2026.
+The pillars remain unverified hypotheses: confirmation authorizes the next
+analysis step, not claims of effectiveness, implemented capability, or
+operational approval.

@@ -1,180 +1,184 @@
 # Demand Plan — GIT-for-AI-crash-course
 
-*Go2Rev GTM Planner · Fase 4 di 5 · Confermato dall’utente · 15 novembre 2026*
+*Go2Rev GTM Planner · Step 4 of 5 · Confirmed by the user · 15 November 2026*
 
-Fonti utilizzate: requisiti, snapshot e posizionamento confermati; documentazione
-ufficiale gratuita Google/GitHub. Fonti pubbliche autorizzate anche per questa fase.
-Nessun CRM, strumento a pagamento o benchmark di traffico e conversione.
+Sources used: confirmed requirements, snapshot, and positioning; free official
+Google/GitHub documentation. Public sources are authorized for this step too.
+No CRM, paid tool, or traffic and conversion benchmark.
 
 ## Executive summary
 
-Tre motori collegati: **scenari utili per farsi trovare**, **esempi svolti per
-scegliere e avviare il corso**, **feedback per migliorare il percorso e favorire
-il ritorno**. Accompagnano scoperta, valutazione, avvio e verifica dell'aderenza
-ai partecipanti, senza processo commerciale.
+Three connected engines: **useful scenarios that help people find the course**,
+**worked examples for choosing and starting it**, and **feedback for improving
+the path and encouraging return visits**. They support discovery, evaluation,
+starting, and assessing fit for participants, without a sales process.
 
-L'utente ha confermato un budget iniziale di **1–2 ore alla settimana dopo il
-lancio**. Non comprende sviluppo, traduzioni e produzione iniziale. Le attività
-aggiuntive si riducono se il carico di correzioni e feedback supera questo spazio;
-serve un responsabile prima dell'attivazione, senza presumere personale assegnato.
+The user confirmed an initial budget of **1–2 hours/week after launch**. This does
+not include development, translation, or initial production. Reduce additional
+activities if corrections and feedback exceed that allowance; assign an owner
+before activation rather than assuming staff are available.
 
 ## Starting point
 
-Nessuna baseline di visite, avvii, completamenti o apprendimento è disponibile.
-Sono confermati costo dei servizi zero assoluto, corso pubblico indipendente,
-tre livelli e italiano/inglese completi al lancio. Provider social per fasi
-compatibili con il vincolo economico.
+No baseline for visits, starts, completions, or learning is available.
+Strictly zero service cost, an independent public course, three tiers, and
+complete Italian/English content at launch are confirmed. Social providers may
+be introduced in phases consistent with the budget constraint.
 
-Un esempio usato in una verifica privata del progetto non costituisce un lancio
-parziale. Nessuna pubblicazione, invito, campagna o modifica dei servizi viene
-eseguita con questo piano.
+An example used in a private project review is not a partial launch. This plan
+does not execute publication, invitations, campaigns, or service changes.
 
 ## Design principles
 
-1. Un problema concreto conduce al percorso: spiegazione utile e collegamento
-   all'esercizio pertinente, senza pagine create solo per intercettare ricerche.
-2. Una prova osservabile precede un claim: esempi e feedback spiegano cosa offre
-   il corso; autonomia ed efficacia rimangono ipotesi da verificare.
-3. La manutenzione limita la diffusione: prima contenuti IT/EN e correzioni,
-   poi eventuali canali ulteriori.
+1. A concrete problem leads to the course: a useful explanation and a link to
+   the relevant exercise, without pages created only to capture searches.
+2. Observable evidence precedes a claim: examples and feedback explain what
+   the course offers; independence and effectiveness remain hypotheses to test.
+3. Maintenance limits distribution: IT/EN content and corrections come first,
+   followed by any additional channels.
 
-Google raccomanda contenuti utili alle persone. La presenza organica non richiede
-pagamento, ma crawl, indicizzazione e ranking non sono garantiti.
+Google recommends content useful to people. Organic presence does not require
+payment, but crawling, indexing, and ranking are not guaranteed.
 [People-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content),
 [Search Essentials](https://developers.google.com/search/docs/essentials).
 
 ## Engine architecture
 
-E1: problema Git → spiegazione IT/EN verificata → programma → E2.
+E1: Git problem → verified IT/EN explanation → curriculum → E2.
 
-E2: esempio svolto → comprensione del metodo → scelta del livello → primo esercizio → E3.
+E2: worked example → understanding the method → tier choice → first exercise → E3.
 
-E3: difficoltà osservata → correzione motivata IT/EN → possibile ritorno volontario;
-i casi ricorrenti aggiornano E1 ed E2.
+E3: observed difficulty → reasoned IT/EN correction → possible voluntary return;
+recurring cases update E1 and E2.
 
-E1 sostiene scoperta; E2 valutazione e avvio; E3 aderenza e ritorno. Qualificazione
-significa capire per chi e per quali problemi il percorso funziona, senza valutare
-contatti commerciali. I motori sono attività ripetibili, non una lista di canali.
+E1 supports discovery; E2 evaluation and starting; E3 fit and return visits.
+Qualification means understanding whom the path serves and which problems it
+addresses, rather than evaluating sales leads. Engines are repeatable activities,
+not a channel list.
 
-### Screening dei candidati
+### Candidate screening
 
-| Candidato | Coerenza | Operatività | Primo segnale e scelta |
+| Candidate | Positioning fit | Operational viability | First signal and decision |
 | --- | --- | --- | --- |
-| Scenari pratici cercabili | allineati al posizionamento | revisione dei contenuti entro slot IT/EN | acquisizione non prevedibile; selezionato E1 |
-| Esempio svolto collegato al corso | mostra il metodo | riusa scenari verificati, riducendo duplicazioni | osservabile quando provabile; selezionato E2 |
-| Feedback → revisione → ritorno | sostiene apprendimento | owner di triage e priorità entro 1–2 ore/settimana | primo riscontro del pilota pianificabile; selezionato E3 |
-| Amplificazione a pagamento | può diffondere | incompatibile con costo zero | scartata |
-| Outreach continuativo | aderenza debole | richiede contatti, messaggi e ulteriore lavoro | scartato dal piano |
-| Newsletter continuativa | possibile ritorno | calendario e gestione iscritti oltre il minimo | scartata finché capacità non dimostrata |
-| Nuova community proprietaria | possibile confronto | moderazione continuativa non prevista | scartata; feedback su superficie circoscritta |
+| Searchable practical scenarios | Aligned with positioning. | Content review within the IT/EN time allowance. | Acquisition unpredictable; selected as E1. |
+| Worked example linked to the course | Shows the method. | Reuses verified scenarios, reducing duplication. | Observable once testable; selected as E2. |
+| Feedback → revision → return | Supports learning. | Triage owner and priorities within 1–2 hours/week. | First pilot feedback can be planned; selected as E3. |
+| Paid amplification | Can spread the message. | Incompatible with zero cost. | Rejected. |
+| Ongoing outreach | Weak fit. | Requires contacts, messages, and additional work. | Excluded from the plan. |
+| Ongoing newsletter | Possible return visits. | Editorial calendar and subscriber management beyond the minimum. | Rejected until capacity is demonstrated. |
+| New owned community | Possible discussion. | Ongoing moderation is not planned. | Rejected; use a limited feedback surface. |
 
-La capacità post-lancio è confermata come budget, non come garanzia di poter
-risolvere ogni problema. La produzione iniziale resta nel progetto di sviluppo.
+Post-launch capacity is confirmed as a budget, not a guarantee that every problem
+can be solved. Initial production remains part of the development project.
 
 ## Engine detail
 
-### E1 — Scenari pratici cercabili
+### E1 — Searchable practical scenarios
 
-Input: esercizi corretti, spiegazioni IT/EN, fonti e collegamenti al programma.
-Meccanismo: un problema genera una pagina utile; i dubbi osservati guidano le revisioni.
-Output: accessi pertinenti al percorso, se la pagina viene scoperta.
-Indicatori: impressioni, clic, pertinenza delle query, passaggi al programma se
-misurabili e correzioni richieste. Requisiti: revisione tecnica e linguistica,
-pagine accessibili. Primo segnale: impressione o clic dopo scoperta, senza data
-garantita. [Metriche Search Console](https://support.google.com/webmasters/answer/7576553?hl=en)
-definisce impressioni/clic/CTR; questi dati non provano apprendimento.
+Input: correct exercises, IT/EN explanations, sources, and links to the curriculum.
+Mechanism: a problem generates a useful page; observed questions guide revisions.
+Output: relevant visits to the path, if the page is discovered.
+Indicators: impressions, clicks, query relevance, curriculum visits where
+measurable, and requested corrections. Requirements: technical and linguistic
+review, accessible pages. First signal: an impression or click after discovery,
+without a guaranteed date. [Search Console metrics](https://support.google.com/webmasters/answer/7576553?hl=en)
+define impressions/clicks/CTR; these data do not demonstrate learning.
 
-### E2 — Esempio svolto → corso
+### E2 — Worked example → course
 
-Input: caso rappresentativo fra modifica, storia e revisione, con esito spiegato.
-Meccanismo: il partecipante valuta il metodo e trova il punto da cui iniziare.
-Output: avvio consapevole di un esercizio. Indicatori: comprensione del compito,
-avvii verificati, primo completamento, ostacoli di accesso e differenze IT/EN.
-Requisiti: esempio verificato e collegamento al percorso. Primo segnale: una
-persona prova l'esempio; prima del lancio solo come verifica privata.
+Input: a representative case spanning change, history, and review, with an
+explained outcome. Mechanism: the participant evaluates the method and finds a
+starting point. Output: an informed exercise start. Indicators: understanding
+of the task, verified starts, first completion, access barriers, and IT/EN
+differences. Requirements: verified example and a link to the path. First signal:
+a person tries the example; before launch, only during a private review.
 
-### E3 — Feedback → revisione → ritorno
+### E3 — Feedback → revision → return
 
-Input: osservazioni volontarie, errori riproducibili e risultati delle prove.
-Meccanismo: classificare difficoltà, correggere materiale/traduzioni e spiegare
-l'aggiornamento; il partecipante sceglie se tornare o condividere il corso.
-Output: percorso corretto e nuove occasioni volontarie di utilizzo.
-Indicatori: problemi riproducibili, risoluzioni, ricorrenza dopo correzione, prove
-autonome su casi nuovi e ritorni osservabili senza tracciamento aggiuntivo.
-Requisiti: owner del triage e capacità di revisione. Primo segnale pianificabile:
-riscontro del pilota nell'orizzonte iniziale di 90 giorni, se persone e materiale
-sono disponibili. Non è una promessa di ottenere utenti o risultati entro una data.
+Input: voluntary observations, reproducible errors, and test results.
+Mechanism: classify difficulties, correct material/translations, and explain
+the update; the participant chooses whether to return or share the course.
+Output: a corrected path and new voluntary opportunities to use it.
+Indicators: reproducible problems, resolutions, recurrence after correction,
+independent tests on new cases, and observable returns without extra tracking.
+Requirements: triage owner and revision capacity. First plannable signal: pilot
+feedback within the initial 90-day horizon, if people and material are available.
+This is not a promise to obtain users or results by a date.
 
 ## Channel mix
 
-| Canale candidato | Motore | Funzione primaria | Peso | Attivazione |
+| Candidate channel | Engine | Primary function | Weight | Activation |
 | --- | --- | --- | --- | --- |
-| Ricerca organica verso Pages | E1 | intercettare un bisogno | medio | rilascio completo |
-| Repository, README e spazio feedback | E2/E3 | valutazione | alto | stato del progetto già esplicito; corso dopo il rilascio |
-| Esempio e collegamenti interni | E2 | avvio | alto | privato prima; pubblico col corso completo |
-| Post organici in community esistenti | E1/E2 | scoperta | basso | solo successivamente, con autorizzazione e capacità |
+| Organic search leading to Pages | E1 | Capture an existing need. | Medium | Complete release. |
+| Repository, README, and feedback space | E2/E3 | Evaluation. | High | Project status already explicit; course after release. |
+| Example and internal links | E2 | Start. | High | Private first; public with the complete course. |
+| Organic posts in existing communities | E1/E2 | Discovery. | Low | Only later, with authorization and capacity. |
 
-Ogni canale è organico; spesa pubblicitaria e servizi aggiuntivi: **0 €**.
-Nessun acquisto o trial come requisito. Massimo tre canali attivi nel primo
-orizzonte di pianificazione; il quarto non si aggiunge se supera la manutenzione.
+Every channel is organic; advertising and additional service spend: **0 €**.
+No purchase or trial is a prerequisite. At most three channels are active in the
+first planning horizon; do not add the fourth if it exceeds maintenance capacity.
 
-- Ricerca/Pages: «Dalla modifica alla pull request: comprendi cosa cambia»;
-  controllare impressioni, clic, query pertinenti e passaggi al programma disponibili.
-- Repository: promessa confermata e stato reale; controllare ostacoli segnalati,
-  domande ricorrenti, riproducibilità e segnalazioni classificate/corrette.
-- Esempio/corso: «Inizia dal livello Base, in italiano o inglese»; controllare
-  avvii, primi completamenti, errori di accesso e comprensione dell'esito.
-- Community: caso utile e collegamento contestuale; feedback pertinente, accessi
-  attribuibili se disponibili e avvii osservabili, senza volumi attesi.
+- Search/Pages copy, IT: «Dalla modifica alla pull request: comprendi cosa cambia»;
+  EN: “From change to pull request: understand what changes.” Monitor impressions,
+  clicks, relevant queries, and available curriculum visits.
+- Repository: confirmed promise and actual status; monitor reported barriers,
+  recurring questions, reproducibility, and classified/corrected reports.
+- Example/course copy, IT: «Inizia dal livello Base, in italiano o inglese»;
+  EN: “Start at the Base tier, in Italian or English.” Monitor starts, first
+  completions, access errors, and understanding of the outcome.
+- Community: useful case and contextual link; relevant feedback, attributable
+  visits where available, and observable starts, without expected volumes.
 
-Pages è statico e non sostituisce API/archivio. README introduce utilità, inizio
-e assistenza; non prova traffico. Discussions richiede abilitazione e moderazione;
-Issues/Discussions su repository pubblica rendono il feedback pubblico. Non
-chiedere email, segreti, log privati o dati personali non necessari. Configurazione
-di moduli e apertura di canali sono attività operative successive da approvare.
+Pages is static and does not replace the API/store. README introduces usefulness,
+getting started, and support; it does not prove traffic. Discussions requires
+enabling and moderation; Issues/Discussions on a public repository make feedback
+public. Do not ask for email, secrets, private logs, or unnecessary personal data.
+Form configuration and channel opening are later operational tasks requiring
+approval.
 
 ## Activation sequence
 
-1. Dopo approvazione operativa: preparare esempio e raccolta minima del feedback,
-   assegnare il responsabile e verificarli privatamente.
-2. Prima del lancio: chiudere blocchi e verificare tre livelli e parità IT/EN.
-3. Al rilascio completo: collegare pagine, repository ed esempio, con massimo
-   tre canali nell'orizzonte iniziale dei 90 giorni.
-4. In seguito: valutare community solo se manutenzione e feedback sono sostenibili.
+1. After operational approval: prepare the example and minimal feedback
+   collection, assign the owner, and test them privately.
+2. Before launch: resolve blockers and verify all three tiers and IT/EN parity.
+3. At the complete release: connect pages, repository, and example, with no
+   more than three channels in the initial 90-day horizon.
+4. Later: consider community activity only if maintenance and feedback remain
+   sustainable.
 
-I 90 giorni sono un orizzonte, non una data di consegna né un impegno di traffico.
+The 90 days are a horizon, not a delivery date or traffic commitment.
 
 ## Operating requirements
 
-Responsabilità per contenuti, revisione IT/EN e triage, anche nella stessa persona;
-nessun incarico è assegnato automaticamente. Budget umano post-lancio confermato:
-**1–2 ore/settimana complessive** per lettura dei segnali, triage e piccole revisioni.
-Correzioni più ampie richiedono pianificazione e possono sospendere la diffusione
-aggiuntiva. Il budget non stima lo sviluppo e la traduzione prima del lancio.
+Responsibility for content, IT/EN review, and triage, possibly held by one person;
+no assignment is automatic. Confirmed post-launch human budget:
+**1–2 hours/week in total** to read signals, triage, and make small revisions.
+Larger corrections need planning and may pause additional distribution.
+The budget does not estimate pre-launch development or translation.
 
-Usare solo dati aggregati affidabili o osservazioni documentate del pilota;
-nessuna dashboard giustifica servizi a pagamento o nuova raccolta di dati personali.
-Il setup di Search Console e degli strumenti di feedback non è ancora avvenuto.
+Use only reliable aggregate data or documented pilot observations; no dashboard
+justifies paid services or collecting additional personal data.
+Search Console and feedback tools have not yet been set up.
 
 ## What this plan does not solve
 
-Non implementa simulatore, SSO, persistenza, misurazione o accessibilità. Non prova
-efficacia né stabilisce target di adozione. CPL e tassi commerciali non sono
-pertinenti: i meccanismi pubblicitari non sono selezionati. Le baseline di avvio,
-completamento e apprendimento sono da raccogliere, senza intervalli inventati.
+It does not implement the simulator, SSO, persistence, measurement, or accessibility.
+It does not prove effectiveness or set adoption targets. CPL and commercial
+conversion rates are not relevant: advertising mechanisms were not selected.
+Start, completion, and learning baselines must be collected without invented ranges.
 
 ## Open questions
 
-L’utente ha confermato i tre motori e le priorità il 15 novembre 2026. Anche il
-budget di manutenzione è confermato. Responsabili e capacità iniziale di sviluppo
-restano da assegnare prima di date impegnative. La scelta dei motori è una decisione
-di piano; la loro efficacia resta da osservare. Prossimo passo: roadmap e piano
-consolidato, da sottoporre all’approvazione prima dell’operatività.
+The user confirmed the three engines and priorities on 15 November 2026.
+The maintenance budget is also confirmed. Owners and initial development capacity
+still need assignment before binding dates. Engine selection is a planning
+decision; effectiveness remains to be observed. Next step: roadmap and consolidated
+plan, to be submitted for approval before operational work.
 
-## Fonti operative
+## Operational sources
 
 - [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
 - [README](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes)
 - [Discussions](https://docs.github.com/en/discussions/quickstart)
 - [Issue Forms](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository)
-- [Creazione Issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-an-issue)
+- [Creating issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-an-issue)
