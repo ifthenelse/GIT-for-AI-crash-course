@@ -21,11 +21,11 @@ const runtime: CourseRuntime = {
 };
 const cleanups: (() => void)[] = [];
 afterEach(() => { for (const cleanup of cleanups.splice(0)) cleanup(); });
-function fixture(path = ':memory:', development = true) {
+function fixture(path = ':memory:', development = true, courseRuntime = runtime) {
   const db = createSqliteDatabase(path);
   cleanups.push(() => { try { db.close(); } catch { /* closed by persistence test */ } });
   let clock = Date.UTC(2026, 10, 15, 10);
-  const app = createApp({ db, development, appOrigin: APP, runtime, now: () => clock });
+  const app = createApp({ db, development, appOrigin: APP, runtime: courseRuntime, now: () => clock });
   const call = async (path: string, method = 'GET', body?: unknown, token?: string, origin = APP) => {
     const response = await app.fetch(new Request(API + path, { method, headers: { Origin: origin, ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}), ...(token ? { Authorization: `Bearer ${token}` } : {}) }, ...(body !== undefined ? { body: JSON.stringify(body) } : {}) }));
     return { response, status: response.status, body: await response.json() };
@@ -121,6 +121,45 @@ describe('progress API trust boundaries', () => {
     expect((await f.call('/v1/me/progress', 'GET', undefined, token)).body.completedLessons).toEqual(['base-1']);
   });
 
+  it('rejects direct lesson skips until the preceding lesson has a server-confirmed completion', async () => {
+    const f = fixture();
+    const { token } = await f.signIn();
+    const startRequest = (lessonId: string) => f.call('/v1/attempts/start', 'POST', { lessonId, courseVersion: '1.0.0' }, token);
+    expect(await startRequest('base-12')).toMatchObject({ status: 403, body: { error: { code: 'LESSON_LOCKED' } } });
+    expect(await f.db.get<{ count: number }>('SELECT COUNT(*) AS count FROM attempts')).toEqual({ count: 0 });
+    const first = await f.start(token);
+    expect((await f.complete(token, first.id, 'incomplete-first-lesson', [])).status).toBe(422);
+    expect(await startRequest('base-2')).toMatchObject({ status: 403, body: { error: { code: 'LESSON_LOCKED' } } });
+    expect((await f.complete(token, first.id, 'complete-first-lesson')).status).toBe(200);
+    expect((await startRequest('base-2')).status).toBe(200);
+    expect(await startRequest('base-3')).toMatchObject({ status: 403, body: { error: { code: 'LESSON_LOCKED' } } });
+    expect((await startRequest('base-1')).status).toBe(200);
+  });
+
+  it('uses tier and numeric lesson order even when the catalog is shuffled', async () => {
+    const f = fixture(':memory:', true, { ...runtime, lessons: [...lessons].reverse() });
+    const { token } = await f.signIn();
+    for (let index = 1; index < 10; index++) {
+      const attempt = await f.start(token, `base-${index}`);
+      expect((await f.complete(token, attempt.id, `ordered-lesson-${index}`)).status).toBe(200);
+    }
+    expect((await f.call('/v1/attempts/start', 'POST', { lessonId: 'base-11', courseVersion: '1.0.0' }, token)).body.error.code).toBe('LESSON_LOCKED');
+    expect((await f.call('/v1/attempts/start', 'POST', { lessonId: 'base-10', courseVersion: '1.0.0' }, token)).status).toBe(200);
+  });
+
+  it('does not let a legacy pending attempt or out-of-order result bypass prerequisites', async () => {
+    const f = fixture();
+    const { token, user } = await f.signIn();
+    await f.db.run('INSERT INTO attempts(id, user_id, lesson_id, course_version, started_ms) VALUES (?, ?, ?, ?, ?)', ['legacy-attempt', user.id, 'base-2', '1.0.0', Date.UTC(2026, 10, 15, 10)]);
+    expect(await f.complete(token, 'legacy-attempt', 'legacy-completion-key')).toMatchObject({ status: 403, body: { error: { code: 'LESSON_LOCKED' } } });
+    await f.db.run('INSERT INTO lesson_results(user_id, course_version, lesson_id, tier, score, elapsed_ms, completed_at) VALUES (?, ?, ?, ?, ?, ?, ?)', [user.id, '1.0.0', 'base-2', 'base', 100, 1000, '2026-11-15T10:00:01.000Z']);
+    expect(await f.call('/v1/attempts/start', 'POST', { lessonId: 'base-3', courseVersion: '1.0.0' }, token)).toMatchObject({ status: 403, body: { error: { code: 'LESSON_LOCKED' } } });
+    expect((await f.call('/v1/attempts/start', 'POST', { lessonId: 'base-2', courseVersion: '1.0.0' }, token)).status).toBe(200);
+    const first = await f.start(token);
+    expect((await f.complete(token, first.id, 'legacy-fill-first-lesson')).status).toBe(200);
+    expect((await f.call('/v1/attempts/start', 'POST', { lessonId: 'base-3', courseVersion: '1.0.0' }, token)).status).toBe(200);
+  });
+
   it('unlocks tiers only after all twelve prior modules, preserves first results and hides leaderboard until opt-in', async () => {
     const f = fixture();
     const { token } = await f.signIn();
@@ -134,6 +173,8 @@ describe('progress API trust boundaries', () => {
     expect(before.completions).toHaveLength(1);
     expect(before.completions[0]).toMatchObject({ tier: 'base', score: 1200, elapsedMs: 12_000 });
     expect(before.unlockedTiers).toEqual(['base', 'intermediate']);
+    expect(await f.call('/v1/attempts/start', 'POST', { lessonId: 'intermediate-2', courseVersion: '1.0.0' }, token)).toMatchObject({ status: 403, body: { error: { code: 'LESSON_LOCKED' } } });
+    expect((await f.call('/v1/attempts/start', 'POST', { lessonId: 'intermediate-1', courseVersion: '1.0.0' }, token)).status).toBe(200);
     expect((await f.call('/v1/leaderboard?tier=base')).body.entries).toEqual([]);
     await f.call('/v1/me', 'PATCH', { alias: 'Learner 1', leaderboardOptIn: true }, token);
     expect((await f.call('/v1/leaderboard?tier=base')).body.entries[0]).toMatchObject({ rank: 1, alias: 'Learner 1', score: 1200, elapsedMs: 12000 });

@@ -48,6 +48,15 @@ function validateActions(input: unknown): asserts input is Action[] {
   }
 }
 
+function assertLessonUnlocked(course: CourseRuntime, lesson: Lesson, current: Progress) {
+  if (!current.unlockedTiers.includes(lesson.tier)) throw new ApiError(403, 'TIER_LOCKED', 'Complete the previous tier first.');
+  if (current.completedLessons.includes(lesson.id)) return;
+  const orderedLessons = [...course.lessons].sort((left, right) => tiers.indexOf(left.tier) - tiers.indexOf(right.tier) || left.order - right.order);
+  const lessonIndex = orderedLessons.findIndex(item => item.id === lesson.id);
+  // Check the full prefix so legacy out-of-order results cannot unlock new skips.
+  if (orderedLessons.slice(0, lessonIndex).some(item => !current.completedLessons.includes(item.id))) throw new ApiError(403, 'LESSON_LOCKED', 'Complete the previous lesson first.');
+}
+
 export function createApp(config: AppConfig) {
   const db = config.db;
   const now = config.now ?? Date.now;
@@ -107,6 +116,7 @@ export function createApp(config: AppConfig) {
     const course = await runtime();
     const lesson = course.lessons.find(item => item.id === attempt.lesson_id);
     if (!lesson || attempt.course_version !== COURSE_VERSION) throw new ApiError(409, 'COURSE_VERSION_MISMATCH', 'Reload the course.');
+    assertLessonUnlocked(course, lesson, await progress(userId));
     let passed = false;
     try {
       const state = course.replayActions(lesson.seed, body.actions);
@@ -183,9 +193,10 @@ export function createApp(config: AppConfig) {
     if (path === '/v1/attempts/start' && request.method === 'POST') {
       const body = await jsonBody(request, 4096);
       if (body.courseVersion !== COURSE_VERSION) throw new ApiError(409, 'COURSE_VERSION_MISMATCH', 'Reload the course.');
-      const lesson = (await runtime()).lessons.find(item => item.id === body.lessonId);
+      const course = await runtime();
+      const lesson = course.lessons.find(item => item.id === body.lessonId);
       if (!lesson) throw new ApiError(404, 'LESSON_NOT_FOUND', 'Lesson not found.');
-      if (!(await progress(user.id)).unlockedTiers.includes(lesson.tier)) throw new ApiError(403, 'TIER_LOCKED', 'Complete the previous tier first.');
+      assertLessonUnlocked(course, lesson, await progress(user.id));
       const id = randomToken();
       await db.run('INSERT OR IGNORE INTO attempts(id, user_id, lesson_id, course_version, started_ms) VALUES (?, ?, ?, ?, ?)', [id, user.id, lesson.id, COURSE_VERSION, now()]);
       const attempt = (await db.get<AttemptRow>('SELECT * FROM attempts WHERE user_id = ? AND lesson_id = ? AND course_version = ? AND completed_ms IS NULL', [user.id, lesson.id, COURSE_VERSION]))!;
