@@ -6,6 +6,8 @@ rather than editing several version sources by hand. Format: [Keep a Changelog](
 ## [Unreleased]
 
 ### Added
+- A skippable, restartable interface tour and persistent Light/Dark/System appearance preferences.
+- Sequential practical lessons with concepts above the lab, explicit previous/next navigation, and device-local practice completion.
 - Local IT/EN React/Vite application: 36 modules, a simulated Git terminal, DAG,
   editor and GitHub/Azure DevOps portal in accessible, stackable windows.
 - Zustand/Zundo state, IndexedDB drafts and final submissions with retries and idempotency.
@@ -19,6 +21,9 @@ rather than editing several version sources by hand. Format: [Keep a Changelog](
 - Confirmed market map, IT/EN positioning and demand plan; roadmap, consolidated GTM Plan and local scope approved after QA, with persistent journey state.
 
 ### Changed
+- Learner-facing levels are presented as three courses: Git foundations, Git collaboration, and Advanced Git and recovery.
+- Replaced sidebar quizzes with observable lab exercises; the API enforces preceding-lesson completion at start and submission.
+- Course cards scroll to their lesson lists, and the main timer is labelled Elapsed time.
 - Developer documentation and GTM HTML companions now use English; contributor and agent instructions require English PR metadata, comments, identifiers and commit messages. Learner content remains IT/EN.
 - Documentation and agent instructions dedicated exclusively to the independent public course.
 - Updated requirements: zero service costs, complete IT/EN content at launch, stackable windows and browser-estimated study pauses.

@@ -115,3 +115,18 @@ controls. CPU budget, free quotas, CORS and OAuth across deployed domains, D1
 recovery, retention, and personal-data deletion are gates before publishing.
 SQLite tests do not certify the Worker runtime. Sources, quotas, and criteria
 are in [deployment.md](deployment.md); evidence is in [testing.md](testing.md).
+
+## Sequential courses and onboarding
+
+The learner-facing curriculum uses courses, while existing `Tier` values remain
+internal storage identifiers for compatibility. The catalog contains practical
+objectives only. Concepts appear before the lab; navigation exposes completed
+lessons and the next eligible exercise. Server start and completion endpoints
+check the full preceding-lesson prefix, including legacy pending attempts.
+
+Guest practice uses a separate versioned local-storage progress record with zero
+verified score. Confirmed account progress is loaded independently after login.
+Neither completion record participates in Zundo history. The tutorial uses a
+native labelled dialog with keyboard dismissal and target highlighting, without
+a new runtime dependency. Theme preference is stored separately from its resolved
+light/dark appearance; System subscribes to OS colour-scheme changes.

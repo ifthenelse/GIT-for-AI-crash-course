@@ -15,7 +15,7 @@ a browser job to repeat E2E/axe alongside static checks.
 | `scripts/verify` | Type checking and 63 unit/integration tests |
 | `npm run build` | TypeScript, Vite, 10 static IT/EN pages |
 | `npm run audit:seo` | Unique titles/descriptions, canonical links, hreflang, content, JSON-LD, images, and sitemap |
-| `npm run test:e2e` | 16 scenarios: browser → local API → SQLite → response → UI; axe and keyboard checks |
+| `npm run test:e2e` | 20 scenarios: browser → local API → SQLite → response → UI; axe and keyboard checks |
 
 Playwright starts the API on port 8788 and the frontend on 4173, uses the isolated
 `.tmp/e2e.sqlite` database recreated by its setup, and detects `/usr/bin/chromium`.
@@ -62,3 +62,20 @@ charges; public backup/recovery, retention, and data deletion; a pilot with peop
 to check IT/EN comprehension and assistive technology. Google, Microsoft, and
 LinkedIn are later phases; Apple remains disabled. Local tests do not cover
 those services.
+
+## Guided-course update — 16 November 2026
+
+The curriculum now uses practical objectives instead of quiz answers. Sequential
+lesson gates are verified at both attempt start and completion, including legacy
+pending attempts. Browser coverage includes the skippable/restartable tour,
+System appearance responding to OS changes, repeated course-card navigation and
+scrolling, device-local guest progression, completion after reload, and a frozen
+completion timer. The full 20-scenario browser suite includes six axe scans.
+
+The native-dialog tour adds no dependency. Course labels are learner-facing copy;
+existing tier IDs remain stable storage/API identifiers. Anonymous practice uses
+a separate local record with no verified score and does not write API results.
+
+Development and browser tests use separate Vite caches under `.tmp/vite-dev` and
+`.tmp/vite-e2e`. This isolates dependency optimization when both servers run
+concurrently. The tour's reload regression is included in the browser suite.
