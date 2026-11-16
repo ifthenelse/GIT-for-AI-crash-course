@@ -61,3 +61,20 @@ Learner-facing UI and course material remain fully bilingual. Product promise ex
 
 - **IT:** «Collabora con Git sapendo cosa cambia e come recuperare il lavoro.»
 - **EN:** “Collaborate with Git knowing what changes and how to recover your work.”
+
+## Guided learning experience
+
+Start learning opens the first unfinished lesson; Browse the three courses opens
+the curriculum. Every lesson explains its concepts above the synchronized lab.
+Exercises are practical, with a checklist and completion feedback rather than
+sidebar quizzes. The next lesson unlocks after the current one is completed;
+previously completed lessons remain available for review.
+
+The first lesson offers an interface tour with Skip and Escape support. Use
+Interface tour in the header to restart it at any time. Appearance supports
+Light, Dark and System; System follows OS changes while the page is open.
+
+Anonymous practice completions are saved on the current device and carry no
+verified leaderboard score. Signing in loads the server-confirmed progress for
+that account; local practice does not fabricate verified results. The server
+also rejects direct attempts to skip unfinished lessons.

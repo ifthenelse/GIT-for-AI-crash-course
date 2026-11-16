@@ -1,16 +1,4 @@
-import { answer, c, cmd, commit, diverged, edit, FEATURE, files, gitRef, lesson, linear, MAIN, MERGE, platform, refs, ROOT, seed, t } from './helpers.ts';
-const quiz = (id: string, promptIt: string, promptEn: string, correctIt: string, correctEn: string, wrongIt: string, wrongEn: string) => ({
-  id,
-  prompt: t(promptIt, promptEn),
-  choices: [{
-    id: 'correct',
-    label: t(correctIt, correctEn)
-  }, {
-    id: 'wrong',
-    label: t(wrongIt, wrongEn)
-  }],
-  correct: 'correct'
-});
+import { c, cmd, commit, diverged, edit, FEATURE, files, gitRef, lesson, linear, MAIN, MERGE, platform, refs, ROOT, seed, t } from './helpers.ts';
 const mergeTree = {
   ...files,
   'README.md': '# Git Practice Lab\nReviewed catalog\n',
@@ -122,23 +110,12 @@ export const advancedLessons = [lesson({
   title: t('Reflog e recupero locale', 'Reflog and local recovery'),
   summary: t('Dai un nome a un commit abbandonato prima che diventi irraggiungibile.', 'Name an abandoned commit before it becomes unreachable.'),
   concepts: [c('Un registro locale dei riferimenti', 'A local record of references', 'Il reflog registra aggiornamenti locali a HEAD e altri riferimenti. HEAD@{1} identifica una voce del registro, non il parent del commit: HEAD~1 e HEAD@{1} possono indicare oggetti diversi. Usa git reflog e git show per verificare prima di recuperare.', 'Reflog records local updates to HEAD and other references. HEAD@{1} identifies a log entry, not a commit parent: HEAD~1 and HEAD@{1} may identify different objects. Use git reflog and git show to inspect before recovering.'), c('Recupero senza promesse illimitate', 'Recovery has limits', 'Reflog e oggetti non referenziati possono scadere ed essere rimossi dalla garbage collection. Il reflog non viene pubblicato dal push e non recupera file mai salvati in un oggetto. Crea un branch di recupero appena trovi il commit corretto; il backup rimane un tema distinto.', 'Reflog and unreferenced objects can expire and be removed by garbage collection. Reflog is not published by push and cannot recover files never stored in an object. Create a recovery branch as soon as you find the right commit; backups remain a separate concern.')],
-  task: t('Simula un reset hard al primo commit, ispeziona il reflog e conserva c3d4e5f nel branch rescue/catalog.', 'Simulate a hard reset to the first commit, inspect reflog, and preserve c3d4e5f in branch rescue/catalog.'),
+  task: t("Simula un reset hard ad a1b2c3d, ispeziona il reflog e conserva c3d4e5f nel branch rescue/catalog. Passa al branch recuperato e verifica che catalog.json contenga coffee.", "Simulate a hard reset to a1b2c3d, inspect reflog, and preserve c3d4e5f in branch rescue/catalog. Switch to the recovered branch and verify that catalog.json contains coffee."),
   hints: [t('Il commit c3d4e5f esiste ancora dopo il reset. git branch gli può dare un riferimento.', 'Commit c3d4e5f still exists after reset. git branch can give it a reference.')],
   seed: linear(),
-  objectives: [{
-    type: 'flag',
-    name: 'resetMode',
-    value: 'hard'
-  }, {
-    type: 'branch',
-    name: 'rescue/catalog'
-  }, {
-    type: 'answer',
-    questionId: 'A05-local',
-    value: 'correct'
-  }],
-  solution: [cmd(`git reset --hard ${ROOT}`), cmd('git reflog'), cmd(`git branch rescue/catalog ${FEATURE}`), answer('A05-local', 'correct')],
-  quiz: quiz('A05-local', 'Il reflog sostituisce un backup remoto?', 'Does reflog replace a remote backup?', 'No: è locale, può scadere e non registra ogni modifica ai file.', 'No: it is local, can expire, and does not record every file edit.', 'Sì: il push lo conserva per sempre.', 'Yes: push preserves it forever.'),
+  objectives: [{ type: 'flag', name: 'resetMode', value: 'hard' }, { type: 'branch', name: 'rescue/catalog', current: true }, { type: 'file', path: 'catalog.json', includes: 'coffee', tracked: true }, { type: 'clean' }],
+  solution: [cmd(`git reset --hard ${ROOT}`), cmd('git reflog'), cmd(`git branch rescue/catalog ${FEATURE}`), cmd('git switch rescue/catalog'), cmd('cat catalog.json')],
+
   reference: refs(gitRef('reflog'), gitRef('gc'))
 }), lesson({
   id: 'A06',
@@ -180,21 +157,14 @@ export const advancedLessons = [lesson({
 }), lesson({
   id: 'A08',
   title: t('Dentro .git: oggetti, index e refs', 'Inside .git: objects, index, and refs'),
-  summary: t('Segui un riferimento fino allo snapshot senza modificare file interni.', 'Follow a reference to its snapshot without modifying internal files.'),
+  summary: t("Ispeziona HEAD e gli oggetti, poi conserva lo snapshot con un riferimento Git.", "Inspect HEAD and its objects, then preserve the snapshot with a Git reference."),
   concepts: [c('I file di lavoro non sono la storia', 'Working files are not history', 'Nella working tree vedi i file correnti. L’index prepara il prossimo snapshot; gli oggetti conservano blob, tree e commit indirizzati dal contenuto. I branch sono riferimenti, HEAD indica il riferimento corrente o un commit direttamente. Compressione e packfile rendono inaffidabile cercare ogni file sorgente come file leggibile in .git/objects.', 'The working tree contains current files. The index prepares the next snapshot; objects store content-addressed blobs, trees, and commits. Branches are references, while HEAD points to a reference or directly to a commit. Compression and packfiles mean you cannot expect each source file to be readable in .git/objects.'), c('Usare i comandi di ispezione', 'Use inspection commands', 'git cat-file e git show leggono gli oggetti; git rev-parse --git-dir trova i metadati. In una linked worktree .git può essere un file che rimanda altrove, e i metadati comuni sono separati. Non correggere manualmente index o oggetti per recuperare il lavoro: usa i comandi Git e conserva prima una copia di sicurezza.', 'git cat-file and git show inspect objects; git rev-parse --git-dir locates metadata. In a linked worktree .git may be a file pointing elsewhere, and common metadata is separate. Do not manually patch index or objects to recover work: use Git commands and preserve a backup first.')],
-  task: t('Leggi .git/HEAD e ispeziona il tipo e il contenuto del commit HEAD con cat-file. Rispondi dove vive lo staging.', 'Read .git/HEAD and inspect the type and contents of commit HEAD using cat-file. Answer where staging lives.'),
-  hints: [t('cat .git/HEAD; git cat-file -t HEAD; git cat-file -p HEAD', 'cat .git/HEAD; git cat-file -t HEAD; git cat-file -p HEAD')],
+  task: t("Leggi .git/HEAD e ispeziona tipo e contenuto del commit HEAD con cat-file. Crea inspect/catalog sul commit osservato e verifica che il riferimento esista senza cambiare la working tree.", "Read .git/HEAD and inspect the type and contents of commit HEAD using cat-file. Create inspect/catalog at the inspected commit and verify the reference without changing the working tree."),
+  hints: [t("Usa cat .git/HEAD, git cat-file -t HEAD e git cat-file -p HEAD.", "Use cat .git/HEAD, git cat-file -t HEAD, and git cat-file -p HEAD."), t("git branch inspect/catalog HEAD crea un riferimento senza cambiare branch. Non modificare manualmente i file sotto .git.", "git branch inspect/catalog HEAD creates a reference without switching branches. Do not manually edit files under .git.")],
   seed: seed(),
-  objectives: [{
-    type: 'flag',
-    name: 'internalsInspected'
-  }, {
-    type: 'answer',
-    questionId: 'A08-index',
-    value: 'correct'
-  }],
-  solution: [cmd('cat .git/HEAD'), cmd('git cat-file -t HEAD'), cmd('git cat-file -p HEAD'), answer('A08-index', 'correct')],
-  quiz: quiz('A08-index', 'Quale componente prepara il prossimo commit?', 'Which component prepares the next commit?', 'L’index, distinto dai file della working tree.', 'The index, separate from working-tree files.', 'Una pull request nella cartella .github.', 'A pull request in the .github directory.'),
+  objectives: [{ type: 'flag', name: 'internalsInspected', value: true }, { type: 'branch', name: 'inspect/catalog' }, { type: 'file', path: 'catalog.json', content: files['catalog.json'] }, { type: 'clean' }],
+  solution: [cmd('cat .git/HEAD'), cmd('git cat-file -t HEAD'), cmd('git cat-file -p HEAD'), cmd('git branch inspect/catalog HEAD'), cmd('git branch')],
+
   reference: refs(gitRef('cat-file'), ['Git internals', 'https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain'])
 }), lesson({
   id: 'A09',
@@ -261,33 +231,12 @@ export const advancedLessons = [lesson({
   title: t('Strategie di branch e permessi', 'Branching strategies and permissions'),
   summary: t('Collega trunk-based development e Gitflow ai controlli applicati dal server.', 'Connect trunk-based development and Gitflow to server-enforced checks.'),
   concepts: [c('Scegliere per ritmo di integrazione', 'Choose for integration cadence', 'Trunk-based development privilegia integrazioni frequenti su una linea principale, con branch brevi e controlli rapidi. Gitflow distingue anche develop, release e hotfix e può adattarsi a cicli di rilascio separati, al costo di più integrazioni. GitHub flow usa branch brevi e PR sulla linea principale. Nessun modello rende superflui test e comunicazione.', 'Trunk-based development favors frequent integration into a main line with short-lived branches and fast checks. Gitflow also distinguishes develop, release, and hotfix and may suit separate release cycles at the cost of more integration. GitHub flow uses short-lived branches and PRs into the main line. No model removes the need for tests and communication.'), c('Policy e bypass', 'Policies and bypass', 'Su GitHub rulesets/protezioni e su Azure Repos branch policies configurano revisioni, build e restrizioni. Disponibilità e bypass dipendono da piano, permessi e tipo di repository. Qui il portale simula review obbligatoria e blocco push su main; non imposta policy reali e non riproduce tutti i permessi dei servizi.', 'GitHub rulesets/protections and Azure Repos branch policies configure reviews, builds, and restrictions. Availability and bypass depend on plan, permissions, and repository type. Here the portal simulates required review and blocked main pushes; it does not configure real policies or reproduce every service permission.')],
-  task: t('Passa al portale Azure DevOps, abilita le due protezioni e scegli un modello coerente con integrazioni frequenti.', 'Switch to the Azure DevOps portal, enable both protections, and choose a model consistent with frequent integration.'),
-  hints: [t('La scelta di modello non modifica automaticamente i branch esistenti.', 'Choosing a model does not automatically change existing branches.')],
+  task: t("Nel portale Azure DevOps abilita revisione obbligatoria e blocco push diretto. Crea hotfix/catalog-notes, registra README.md con “Hotfix reviewed”, pubblica il branch e integra la PR approvata “Review catalog hotfix” verso main. Torna a main.", "In the Azure DevOps portal require review and block direct pushes. Create hotfix/catalog-notes, commit README.md containing “Hotfix reviewed”, push the branch, and merge approved PR “Review catalog hotfix” into main. Return to main."),
+  hints: [t("Le protezioni si applicano a main: pubblica il branch hotfix, non un push diretto su main.", "Protections apply to main: publish the hotfix branch rather than pushing directly to main."), t("Il flusso termina con PR approvata e integrata; poi git switch main mostra il contenuto condiviso.", "The workflow ends with an approved and merged PR; git switch main then displays the shared contents.")],
   seed: seed(),
-  objectives: [{
-    type: 'platform',
-    key: 'provider',
-    value: 'azure'
-  }, {
-    type: 'platform',
-    key: 'reviewRequired',
-    value: true
-  }, {
-    type: 'platform',
-    key: 'blockDirectPush',
-    value: true
-  }, {
-    type: 'answer',
-    questionId: 'A11-model',
-    value: 'correct'
-  }],
-  solution: [platform('switch-provider', {
-    provider: 'azure'
-  }), platform('enable-policy', {
-    reviewRequired: 'true',
-    blockDirectPush: 'true'
-  }), answer('A11-model', 'correct')],
-  quiz: quiz('A11-model', 'Vuoi integrare ogni giorno cambi piccoli. Quale base valutare?', 'You want to integrate small changes daily. Which starting point should you consider?', 'Trunk-based con branch brevi e controlli veloci.', 'Trunk-based with short-lived branches and fast checks.', 'Branch personali permanenti mai integrati.', 'Permanent personal branches that never integrate.'),
+  objectives: [{ type: 'platform', key: 'provider', value: 'azure' }, { type: 'platform', key: 'reviewRequired', value: true }, { type: 'platform', key: 'blockDirectPush', value: true }, { type: 'platform', key: 'pullRequestApproved', value: true }, { type: 'platform', key: 'pullRequestMerged', value: true }, { type: 'branch', name: 'main', current: true }, { type: 'file', path: 'README.md', includes: 'Hotfix reviewed' }, { type: 'clean' }],
+  solution: [platform('switch-provider', { provider: 'azure' }), platform('enable-policy', { reviewRequired: 'true', blockDirectPush: 'true' }), cmd('git switch -c hotfix/catalog-notes'), edit('README.md', '# Git Practice Lab\nHotfix reviewed\n'), cmd('git add README.md'), cmd('git commit -m "Prepare catalog hotfix"'), cmd('git push -u origin hotfix/catalog-notes'), platform('open-pr', { source: 'hotfix/catalog-notes', target: 'main', title: 'Review catalog hotfix' }), platform('approve-pr', { id: '1' }), platform('merge-pr', { id: '1' }), cmd('git switch main')],
+
   reference: refs(['Azure branch policies', 'https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops'], ['GitHub rulesets', 'https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets'])
 }), lesson({
   id: 'A12',

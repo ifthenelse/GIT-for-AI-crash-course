@@ -33,7 +33,7 @@ export default defineConfig({
     {
       command: 'node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 4173 --strictPort',
       url: 'http://127.0.0.1:4173',
-      env: { API_PROXY_TARGET: 'http://127.0.0.1:8788', PUBLIC_BASE_PATH: '/' },
+      env: { VITE_CACHE_DIR: './.tmp/vite-e2e', API_PROXY_TARGET: 'http://127.0.0.1:8788', PUBLIC_BASE_PATH: '/' },
       reuseExistingServer: false,
       timeout: 60_000,
     },

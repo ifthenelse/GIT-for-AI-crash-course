@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const path = (value: string) => fileURLToPath(new URL(value, import.meta.url));
 export default defineConfig({
   root: 'apps/web',
+  cacheDir: path(process.env.VITE_CACHE_DIR || './.tmp/vite-dev'),
   base: process.env.PUBLIC_BASE_PATH || '/',
   plugins: [react()],
   resolve: { alias: {

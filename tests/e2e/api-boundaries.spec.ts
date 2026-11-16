@@ -14,8 +14,14 @@ test('API refuses anonymous writes, locked tiers and a fabricated completion', a
   });
   expect(locked.status()).toBe(403);
 
+  const sequential = await page.request.post('/v1/attempts/start', {
+    headers, data: { lessonId: 'B02', courseVersion: '1.0.0' },
+  });
+  expect(sequential.status()).toBe(403);
+  const before = await progress(page.request, token);
+
   const started = await page.request.post('/v1/attempts/start', {
-    headers, data: { lessonId: 'B12', courseVersion: '1.0.0' },
+    headers, data: { lessonId: 'B01', courseVersion: '1.0.0' },
   });
   expect(started.ok()).toBeTruthy();
   const attempt = await started.json();
@@ -25,7 +31,7 @@ test('API refuses anonymous writes, locked tiers and a fabricated completion', a
   });
   expect(rejected.status()).toBeGreaterThanOrEqual(400);
   expect(rejected.status()).toBeLessThan(500);
-  expect((await progress(page.request, token)).completedLessons).not.toContain('B12');
+  expect((await progress(page.request, token)).completedLessons).toEqual(before.completedLessons);
   const leaderboard = await page.request.get('/v1/leaderboard?tier=base&courseVersion=1.0.0');
   expect(leaderboard.ok()).toBeTruthy();
   expect((await leaderboard.json()).entries).toEqual([]);

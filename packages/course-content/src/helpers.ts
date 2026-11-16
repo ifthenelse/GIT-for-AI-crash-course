@@ -4,7 +4,6 @@ export const t = (it: string, en: string): Text => ({ it, en });
 export const c = (it: string, en: string, bodyIt: string, bodyEn: string) => ({ title: t(it, en), body: t(bodyIt, bodyEn) });
 export const cmd = (command: string): Action => ({ type: 'command', command });
 export const edit = (path: string, content: string): Action => ({ type: 'edit', path, content });
-export const answer = (questionId: string, value: string): Action => ({ type: 'answer', questionId, value });
 export const platform = (operation: Extract<Action, { type: 'platform' }>['operation'], payload?: Record<string, string>): Action => ({ type: 'platform', operation, payload });
 export const ROOT = 'a1b2c3d';
 export const MAIN = 'b2c3d4e';

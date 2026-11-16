@@ -1,13 +1,13 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
-import { openLesson, setLanguage } from './helpers';
+import { openLesson, setLanguage, setTheme } from './helpers';
 
 for (const theme of ['light', 'dark'] as const) {
   for (const screen of ['home', 'laboratory', 'leaderboard'] as const) {
     test(`${screen} has no automated WCAG A/AA violations in ${theme} theme`, async ({ page }, testInfo) => {
       await page.goto('/');
       await setLanguage(page, 'en');
-      if (theme === 'dark') await page.getByTestId('theme-toggle').click();
+      await setTheme(page, theme);
       if (screen === 'laboratory') await openLesson(page, 'B01');
       if (screen === 'leaderboard') await page.getByTestId('nav-leaderboard').click();
       const result = await new AxeBuilder({ page })
