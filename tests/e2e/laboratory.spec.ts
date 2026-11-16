@@ -1,12 +1,13 @@
 import { expect, test } from '@playwright/test';
-import { command, loginDevelopment, openLesson, progress, setLanguage } from './helpers';
+import { command, completePrerequisites, loginDevelopment, openLesson, progress, setLanguage, solveFirstLesson } from './helpers';
 
-test('a quiz is verified by the server and survives browser reload and a new login', async ({ page }) => {
+test('a practical snapshot is verified by the server and survives browser reload and a new login', async ({ page }) => {
   await page.goto('/');
   const token = await loginDevelopment(page);
   await openLesson(page, 'B01');
   await setLanguage(page, 'en');
-  await page.getByRole('radio', { name: 'A recorded snapshot with metadata and links to parents.' }).check();
+  await expect(page.getByRole('radio')).toHaveCount(0);
+  await solveFirstLesson(page);
   const saved = page.waitForResponse((response) => response.url().includes('/complete')
     && response.request().method() === 'POST');
   await page.getByTestId('exercise-submit').click();
@@ -29,6 +30,9 @@ test('a quiz is verified by the server and survives browser reload and a new log
 test('editor, staging, terminal and graph agree; undo cannot revoke a saved completion', async ({ page }) => {
   await page.goto('/');
   const token = await loginDevelopment(page);
+  await completePrerequisites(page.request, token, 'B07');
+  await page.reload();
+  const currentToken = await loginDevelopment(page);
   await openLesson(page, 'B07');
   const editor = page.getByTestId('editor-content');
   await expect(editor).toHaveValue(/Catalog introduction corrected\./);
@@ -46,7 +50,7 @@ test('editor, staging, terminal and graph agree; undo cannot revoke a saved comp
   await page.getByTestId('exercise-submit').click();
   expect((await saved).ok()).toBeTruthy();
   await expect(page.getByTestId('completed-badge')).toBeVisible();
-  const before = await progress(page.request, token);
+  const before = await progress(page.request, currentToken);
   expect(before.completedLessons).toContain('B07');
 
   await page.getByTestId('undo').click();
@@ -54,7 +58,7 @@ test('editor, staging, terminal and graph agree; undo cannot revoke a saved comp
   await expect(page.getByTestId('completed-badge')).toBeVisible();
   await page.getByTestId('redo').click();
   await expect(page.getByTestId('graph-window')).toContainText('Fix catalog introduction');
-  expect(await progress(page.request, token)).toEqual(before);
+  expect(await progress(page.request, currentToken)).toEqual(before);
   await command(page, 'git status');
   await expect(page.getByTestId('terminal-output')).toContainText('notes.txt');
 });

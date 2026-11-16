@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { COURSE_VERSION, type Action, type Attempt, type CompleteRequest, type CompleteResponse, type Lesson, type Locale, type Objective, type Progress, type Session, type VisibilityLedger } from '@gitcourse/contracts';
-import {referenceLabel} from '@gitcourse/content';
+import {lessons,referenceLabel} from '@gitcourse/content';
 import { evaluateObjectives } from '@gitcourse/engine';
 import { ApiError, request } from './api';
 import { readRecord, writeRecord } from './persistence';
@@ -10,6 +10,8 @@ import { duration, useStudyTiming } from './timing';
 import { WindowManager } from './WindowManager';
 import { Editor, Graph, Portal, Terminal } from './Panels';
 import { Icon } from './icons';
+import {completePractice,canOpenLesson} from './courseProgress';
+import {Tour} from './Tour';
 import { useEditingLease } from './ownership';
 interface Draft {
   confirmedElapsedMs?: number;
@@ -50,6 +52,7 @@ export default function Lab({
     hydrate,
     act
   } = useLab();
+  const practiceStarted=useRef(Date.now());
   const [attempt, setAttempt] = useState<Attempt>();
   const [acceptedElapsed,setAcceptedElapsed]=useState<number>();
   const acceptedElapsedRef=useRef<number|undefined>(undefined);
@@ -142,10 +145,11 @@ export default function Lab({
   }, [actions, key, loaded, pending, lease.owned]);
   const submit = useCallback(async (body?: CompleteRequest) => {
     if (!lease.owned) return;
-    if (!session || !attempt) {
-      setMessage(ready ? t('ready') : t('notReady'));
+    if (!session) {
+      if(ready){const elapsed=Date.now()-practiceStarted.current;acceptedElapsedRef.current=elapsed;setAcceptedElapsed(elapsed);onProgress(completePractice(progress,lesson.id,elapsed));setMessage(t('practiceCompleted'));}else setMessage(t('notReady'));
       return;
     }
+    if(!attempt){setMessage(t('attemptUnavailable'));return;}
     const payload = body ?? pendingRef.current ?? {
       courseVersion: COURSE_VERSION,
       actions: useLab.getState().actions,
@@ -198,7 +202,7 @@ export default function Lab({
     } finally {
       setBusy(false);
     }
-  }, [session, attempt, key, onProgress, onLogin, ready, t, timing, lease.owned]);
+  }, [session, attempt, key, onProgress, onLogin, ready, t, timing, lease.owned,progress,lesson.id]);
   const submitRef = useRef(submit);
   submitRef.current = submit;
   useEffect(() => {
@@ -218,7 +222,7 @@ export default function Lab({
 <Icon name="chevron" size={16} />{t('lessonList')}</a>
 <span className="tier-hud">{t(`tier_${lesson.tier}`)} <span> / </span> {lesson.id} · {lesson.order}/12</span>
 <span className="lab-sync">
-<span className="live-dot" />{pending ? t('pending') : completed ? t('synced') : t('localSaved')}</span>
+<span className="live-dot" />{pending ? t('pending') : completed && session ? t('synced') : t('localSaved')}</span>
 </div>
 <div className="lab-heading">
 <div>
@@ -229,24 +233,18 @@ export default function Lab({
 <p>{lesson.summary[locale]}</p>
 </div>
 <div className="lab-time">
-<small>{t(attempt ? 'officialTime' : 'estimatedTime')}</small>
-<strong>{duration(attempt ? (acceptedElapsed??(Date.now() - Date.parse(attempt.startedAt))) : timing.focusedMs)}</strong>
+<small>{t('elapsedTime')}</small>
+<strong>{duration(attempt ? (acceptedElapsed??(Date.now() - Date.parse(attempt.startedAt))) : (acceptedElapsed??Date.now()-practiceStarted.current))}</strong>
 <small>{t(attempt ? 'verified' : 'practice')}</small>
 </div>
 </div>{!lease.owned && <div className="global-notice" role="status">{t('otherTab')}<button onClick={lease.takeover}>{t('takeover')}</button>
-</div>}<div className="lab-layout" inert={!lease.owned}>
+</div>}<section className="lesson-introduction" aria-labelledby="lesson-concepts"><h2 id="lesson-concepts">{t('concepts')}</h2>{lesson.concepts.map((concept,index)=><article key={index}><h3>{concept.title[locale]}</h3><p>{concept.body[locale]}</p></article>)}</section><div className="lab-layout" inert={!lease.owned}>
 <aside className="lesson-sidebar">
 <div className="task-card">
 <span className="eyebrow">{t('objectives')}</span>
 <p>{lesson.task[locale]}</p>
 <ul className="objectives">{objectives.map((r, i) => <li key={i} className={r.passed ? 'is-passed' : ''}>
-<Icon name={r.passed ? 'check' : 'clock'} size={15} />{objectiveLabel(r.objective, t)}</li>)}</ul>{lesson.quiz && <fieldset className="quiz">
-<legend>{lesson.quiz.prompt[locale]}</legend>{lesson.quiz.choices.map(choice => <label key={choice.id}>
-<input type="radio" name={lesson.quiz!.id} value={choice.id} checked={repo.answers[lesson.quiz!.id] === choice.id} onChange={() => act({
-                type: 'answer',
-                questionId: lesson.quiz!.id,
-                value: choice.id
-              })} />{choice.label[locale]}</label>)}</fieldset>}{completed && <p className="completion-badge" data-testid="completed-badge">
+<Icon name={r.passed ? 'check' : 'clock'} size={15} />{objectiveLabel(r.objective, t)}</li>)}</ul>{completed && <p className="completion-badge" data-testid="completed-badge">
 <Icon name="check" size={17} />{t('completed')}</p>}<button className="button submit-button" data-testid="exercise-submit" disabled={busy} onClick={() => void submit()}>
 <Icon name="check" size={17} />{t(busy ? 'checking' : session && attempt ? 'check' : 'checkLocal')}</button>{completed && session && <button className="text-link" onClick={() => {
             void request<Attempt>('/v1/attempts/start', session.token, {
@@ -265,11 +263,6 @@ export default function Lab({
             }).catch(() => setMessage(t('requestFailed')));
           }}>{t('newAttempt')}</button>}{!session && <button className="text-link" onClick={onLogin}>{t('loginTitle')}</button>}{pending && <button className="button button-subtle" disabled={busy} onClick={() => void submit(pending)}>{t('retry')}</button>}<p className="attempt-note">{t(attempt ? 'startedNote' : 'practiceNote')}</p>{message && <p className="result-message" role="status">{message}</p>}{storageError && <p role="alert">{t('localSaveFailed')}</p>}</div>
 <div className="lesson-learning">
-<details open>
-<summary>{t('concepts')}</summary>{lesson.concepts.map((concept, i) => <section key={i}>
-<h3>{concept.title[locale]}</h3>
-<p>{concept.body[locale]}</p>
-</section>)}</details>
 <details>
 <summary>{t('hints')}</summary>{lesson.hints.slice(0, hint).map((h, i) => <p key={i}>{h[locale]}</p>)}<button onClick={() => setHint(v => v + 1)} disabled={hint >= lesson.hints.length}>{t('showHint')}</button>
 </details>
@@ -325,5 +318,5 @@ export default function Lab({
 <Icon name="info" size={14} />{t('simulationNote')}</p>
 </section>
 </div>
-</div>;
+<nav className="lesson-navigation" aria-label={t('lessonNavigation')}><a className="button button-subtle" href="#/course">{t('lessonList')}</a>{lessons.findIndex(item=>item.id===lesson.id)>0&&<a className="button button-subtle" href={`#/lesson/${lessons[lessons.findIndex(item=>item.id===lesson.id)-1].id}`}>{t('previous')}</a>}{lessons[lessons.findIndex(item=>item.id===lesson.id)+1]&&<button className="button" disabled={!completed||!canOpenLesson(lessons[lessons.findIndex(item=>item.id===lesson.id)+1].id,progress)} onClick={()=>{location.hash=`/lesson/${lessons[lessons.findIndex(item=>item.id===lesson.id)+1].id}`;}}>{t('next')}</button>}</nav><Tour autoStart={lesson.id==='B01'}/></div>;
 }

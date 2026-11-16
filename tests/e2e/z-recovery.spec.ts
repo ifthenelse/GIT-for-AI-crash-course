@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { loginDevelopment, openLesson, setLanguage } from './helpers';
+import { loginDevelopment, openLesson, setLanguage, solveFirstLesson } from './helpers';
 test('a final submission stays pending offline and syncs on reconnect', async ({
   page,
   context
@@ -8,9 +8,7 @@ test('a final submission stays pending offline and syncs on reconnect', async ({
   await loginDevelopment(page);
   await openLesson(page, 'B01');
   await setLanguage(page, 'en');
-  await page.getByRole('radio', {
-    name: 'A recorded snapshot with metadata and links to parents.'
-  }).check();
+  await solveFirstLesson(page);
   await context.setOffline(true);
   await page.getByTestId('exercise-submit').click();
   await expect(page.getByText('Waiting to sync', {

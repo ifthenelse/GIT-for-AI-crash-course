@@ -5,6 +5,9 @@ import { COURSE_VERSION, type Leaderboard, type Locale, type Progress, type Publ
 import { ApiError, beginOAuth, exchangeOAuth, request } from './api';
 import { duration } from './timing';
 import { Icon } from './icons';
+import {useTheme,type ThemePreference} from './useTheme';
+import {requestTour} from './Tour';
+import {canOpenLesson,loadPractice} from './courseProgress';
 const Lab = lazy(() => import('./Lab'));
 const emptyProgress: Progress = {
   courseVersion: COURSE_VERSION,
@@ -18,10 +21,10 @@ const publicPath=(locale:Locale,path='')=>`${import.meta.env.BASE_URL}${locale}/
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 const initialRoute = () => location.hash.slice(1) || (location.pathname.includes('/program/') || location.pathname.includes('/tier/') ? '/course' : '/');
 function useRoute() {
-  const [route, setRoute] = useState(initialRoute);
+  const [, setLocationKey] = useState(()=>location.href);
   useEffect(() => {
     const update = () => {
-      setRoute(initialRoute());
+      setLocationKey(location.href);
       window.scrollTo({
         top: 0
       });
@@ -29,7 +32,7 @@ function useRoute() {
     window.addEventListener('hashchange', update);window.addEventListener('popstate',update);
     return () => {window.removeEventListener('hashchange',update);window.removeEventListener('popstate',update);};
   }, []);
-  return route;
+  return initialRoute();
 }
 export function App() {
   const {
@@ -45,22 +48,13 @@ export function App() {
   const [profile, setProfile] = useState(false);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
-  const [theme, setTheme] = useState(() => {
-    try {
-      return localStorage.getItem('gitcourse:theme') === 'dark' ? 'dark' : 'light';
-    } catch {
-      return 'light';
-    }
-  });
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    try {
-      localStorage.setItem('gitcourse:theme', theme);
-    } catch {}
-  }, [theme]);
+  const {preference,setPreference,resolved:theme}=useTheme();
+  useEffect(()=>{if(!session)setProgress(loadPractice(emptyProgress));},[session]);
+  const updateProgress=useCallback((next:Progress)=>{setProgress(next);if(!session){try{localStorage.setItem('gitcourse:practice-progress',JSON.stringify(next));}catch{}}},[session]);
   const acceptSession = useCallback(async (s: Session) => {
+    const verifiedProgress=await request<Progress>('/v1/me/progress',s.token);
+    setProgress(verifiedProgress);
     setSession(s);
-    setProgress(await request<Progress>('/v1/me/progress', s.token));
     setLogin(false);
   }, []);
   useEffect(() => {
@@ -85,7 +79,7 @@ export function App() {
     setProfile(false);
   };
   const lesson = route.startsWith('/lesson/') ? getLesson(route.split('/')[2]) : undefined;
-  const locked = lesson && !progress.unlockedTiers.includes(lesson.tier);
+  const locked = lesson && !canOpenLesson(lesson.id,progress);
   useEffect(() => {
     document.title = lesson ? `${lesson.title[locale]} · Git Practice Lab` : route.startsWith('/course') ? `${location.pathname.includes('/tier/')?t(`tier_${location.pathname.match(/tier\/(base|intermediate|advanced)/)?.[1]}`)+' · ':''}${locale === 'it' ? 'Programma del corso Git' : 'Git course curriculum'} · Git Practice Lab` : route === '/leaderboard' ? `${t('leaderboard')} · Git Practice Lab` : `Git Practice Lab · ${locale === 'it' ? 'Corso interattivo di Git' : 'Interactive Git course'}`;
     const canonical=document.querySelector<HTMLLinkElement>('link[rel=canonical]');if(canonical){const url=new URL(canonical.href);url.pathname=location.pathname;canonical.href=url.href;const og=document.querySelector<HTMLMetaElement>('meta[property="og:url"]');if(og)og.content=url.href;}
@@ -115,9 +109,8 @@ export function App() {
 <option value="en">EN</option>
 </select>
 </label>
-<button className="icon-button" data-testid="theme-toggle" aria-label={t('theme')} onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-<Icon name={theme === 'light' ? 'moon' : 'sun'} />
-</button>{session ? <button className="button button-subtle button-small profile-button" onClick={() => setProfile(true)}>
+<label className="theme-control"><span className="sr-only">{t('theme')}</span><select data-testid="theme-select" value={preference} onChange={e=>setPreference(e.target.value as ThemePreference)}><option value="light">{t('themeLight')}</option><option value="dark">{t('themeDark')}</option><option value="system">{t('themeSystem')}</option></select></label>
+<button className="button button-subtle button-small" onClick={()=>{requestTour();if(!lesson)location.hash='/lesson/B01';}}>{t('tourRestart')}</button>{session ? <button className="button button-subtle button-small profile-button" onClick={() => setProfile(true)}>
 <Icon name="user" size={16} />
 <span>{session.user.displayName}</span>
 </button> : <button className="button button-small" onClick={() => setLogin(true)}>{t('login')}</button>}</div>
@@ -125,7 +118,7 @@ export function App() {
 {error && <div className="global-notice" role="alert">{error}<button aria-label={t('close')} onClick={() => setError('')}>×</button>
 </div>}
 <main id="main" tabIndex={-1}>
-<Suspense fallback={<div className="loading page-width" role="status">{t('loading')}</div>}>{lesson && !locked ? <Lab key={`${lesson.id}:${session?.user.id ?? 'guest'}`} lesson={lesson} session={session} progress={progress} onProgress={setProgress} onLogin={() => setLogin(true)} /> : route === '/leaderboard' ? <LeaderboardPage session={session} onProfile={() => session ? setProfile(true) : setLogin(true)} /> : route.startsWith('/course') || locked ? <Course progress={progress} locale={locale} /> : <Home progress={progress} locale={locale} />}</Suspense>
+<Suspense fallback={<div className="loading page-width" role="status">{t('loading')}</div>}>{lesson && !locked ? <Lab key={`${lesson.id}:${session?.user.id ?? 'guest'}`} lesson={lesson} session={session} progress={progress} onProgress={updateProgress} onLogin={() => setLogin(true)} /> : route === '/leaderboard' ? <LeaderboardPage session={session} onProfile={() => session ? setProfile(true) : setLogin(true)} /> : route.startsWith('/course') || locked ? <Course progress={progress} locale={locale} /> : <Home progress={progress} locale={locale} />}</Suspense>
 </main>
 {!lesson && <footer className="site-footer">
 <div>
@@ -179,7 +172,7 @@ function Modal({
 </button>
 </div>{children}</dialog>;
 }
-function TierCards({
+function CourseCards({
   progress
 }: {
   progress: Progress;
@@ -215,7 +208,7 @@ function TierCards({
             total: 12
           })}</small>
 <button className="tier-open" data-testid={`tier-${tier}`} disabled={!unlocked} onClick={() => {
-          navigatePublic(publicPath(i18n.language as Locale,`tier/${tier}/`));
+          navigatePublic(publicPath(i18n.language as Locale,`tier/${tier}/`));requestAnimationFrame(()=>document.getElementById(`course-${tier}`)?.scrollIntoView({behavior:'smooth',block:'start'}));
         }}>{t('viewLessons')} · {t(`tier_${tier}`)}<Icon name={unlocked ? 'arrow' : 'lock'} size={18} />
 </button>{!unlocked && <small>{t('completePrevious')}</small>}</article>;
     })}</div>;
@@ -308,10 +301,10 @@ function Home({
 <p className="hero-lead">{locale === 'it' ? 'Collabora con Git sapendo cosa cambia e come recuperare il lavoro.' : 'Collaborate with Git knowing what changes and how to recover your work.'}</p>
 <p>{t('heroBody')}</p>
 <div className="hero-actions">
-<a className="button" href={publicPath(locale,'program/')} onClick={e=>{e.preventDefault();navigatePublic(publicPath(locale,'program/'));}}>{t('explore')}<Icon name="arrow" size={18} />
+<a className="button" href={`#/lesson/${lessons.find(item=>!progress.completedLessons.includes(item.id))?.id??'B01'}`}>{t('startCourse')}<Icon name="arrow" size={18} />
 </a>
-<a className="text-link" href="#/lesson/B01">
-<Icon name="terminal" size={18} />{t('tryLab')}</a>
+<a className="text-link" href={publicPath(locale,'program/')} onClick={e=>{e.preventDefault();navigatePublic(publicPath(locale,'program/'));}}>
+<Icon name="book" size={18} />{t('browseCourses')}</a>
 </div>
 <div className="hero-facts">
 <span>36 {locale === 'it' ? 'scenari' : 'scenarios'}</span>
@@ -335,7 +328,7 @@ function Home({
 </div>
 <p>{t('levelsBody')}</p>
 </div>
-<TierCards progress={progress} />
+<CourseCards progress={progress} />
 </section>
 <section className="feature-section page-width">{[1, 2, 3].map(n => <article key={n}>
 <span className="feature-icon">
@@ -362,17 +355,17 @@ function Course({
   } = useTranslation();
   const tier = new URLSearchParams(location.hash.split('?')[1] ?? '').get('tier') ?? location.pathname.match(/tier\/(base|intermediate|advanced)/)?.[1];
   return <div className="page-width course-page">
-<span className="eyebrow">36 {locale === 'it' ? 'MODULI · 3 LIVELLI' : 'MODULES · 3 LEVELS'}</span>
+<span className="eyebrow">36 {locale === 'it' ? 'LEZIONI · 3 CORSI' : 'LESSONS · 3 COURSES'}</span>
 <h1>{t('allLessons')}</h1>
 <p className="page-intro">{t('allLessonsBody')}</p>
-<TierCards progress={progress} />{tiers.filter(item => !tier || tier === item).map(item => <section className="lesson-section" key={item}>
+<CourseCards progress={progress} />{tiers.filter(item => !tier || tier === item).map(item => <section className="lesson-section" id={`course-${item}`} key={item}>
 <div className="section-heading">
 <h2>{t(`tier_${item}`)}</h2>
 <span>{t('lessonsCount', {
             count: 12
           })}</span>
 </div>
-<div className="lesson-grid">{lessons.filter(l => l.tier === item).map(l => <button data-testid={`lesson-${l.id}`} className="lesson-card" key={l.id} disabled={!progress.unlockedTiers.includes(item)} onClick={() => {
+<div className="lesson-grid">{lessons.filter(l => l.tier === item).map(l => <button data-testid={`lesson-${l.id}`} className="lesson-card" key={l.id} disabled={!canOpenLesson(l.id,progress)} onClick={() => {
           location.hash = `/lesson/${l.id}`;
         }}>
 <span className="lesson-id">{l.id}</span>
