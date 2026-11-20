@@ -32,3 +32,8 @@ rather than editing several version sources by hand. Format: [Keep a Changelog](
 ### Removed
 - 88 unused skill directories, two Wrangler symlinks and the root SKILL.md template,
   at the user's request. The analysis lists the removed skills and explains which skills were retained.
+
+### Window clarity and beginner introduction
+- Add window shadows, active/background distinction and animated layout changes with reduced-motion support.
+- Align desktop header controls and render technical lesson fragments in monospace.
+- Explain Git fundamentals in Italian and English for learners without programming experience; record the audience review in `docs/analysis/beginner-audience-copy.md`.
