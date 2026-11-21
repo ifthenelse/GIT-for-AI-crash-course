@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 const en: Record<string, string> = {
-  readingTime: 'Reading time', readingMinutes: 'About {{count}} minutes. Read at your own pace.', startExercise: 'Start the practical exercise', practiceStarted: 'Exercise started', practiceStartHelp: 'Read the explanation, then start when you are ready to practise.', workspaceLocked: 'The workspace is read-only while you read. Start the exercise to make changes.',
+  readingTime: 'Reading time', readingMinutes_one: 'About {{count}} minute. Read at your own pace.', readingMinutes_other: 'About {{count}} minutes. Read at your own pace.', startExercise: 'Start the practical exercise', practiceStarted: 'Exercise started', practiceStartHelp: 'Read the explanation, then start when you are ready to practise.', workspaceLocked: 'The workspace is read-only while you read. Start the exercise to make changes.',
   aliasFormat:'Use 3–30 letters, digits, spaces, dots, hyphens or underscores.', newAttempt:'Start another attempt', pointsPerLesson:'100 points / lesson', safePlace:'A safe place to try.', brand: 'Git Practice Lab', tagline: 'Learn by doing. Understand every change.', home: 'Home', course: 'The course', leaderboard: 'Leaderboard', lab: 'Laboratory',
   language: 'Language', theme: 'Change colour theme', login: 'Sign in', logout: 'Sign out', account: 'Your profile', close: 'Close', back: 'Back',
   heroEyebrow: 'A hands-on course. A shared way of working.', heroLineOne: 'Learn Git.', heroLineTwo: 'Work as a team.',
@@ -75,7 +75,7 @@ const en: Record<string, string> = {
 };
 
 const it: Record<string, string> = {
-  readingTime: 'Tempo di lettura', readingMinutes: 'Circa {{count}} minuti. Leggi con calma.', startExercise: 'Inizia l’esercizio pratico', practiceStarted: 'Esercizio iniziato', practiceStartHelp: 'Leggi la spiegazione, poi inizia quando sei pronto a fare pratica.', workspaceLocked: 'Durante la lettura il laboratorio è in sola lettura. Inizia l’esercizio per apportare modifiche.',
+  readingTime: 'Tempo di lettura', readingMinutes_one: 'Circa {{count}} minuto. Leggi con calma.', readingMinutes_other: 'Circa {{count}} minuti. Leggi con calma.', startExercise: 'Inizia l’esercizio pratico', practiceStarted: 'Esercizio iniziato', practiceStartHelp: 'Leggi la spiegazione, poi inizia quando sei pronto a fare pratica.', workspaceLocked: 'Durante la lettura il laboratorio è in sola lettura. Inizia l’esercizio per apportare modifiche.',
   aliasFormat:'Usa 3–30 lettere, cifre, spazi, punti, trattini o underscore.', newAttempt:'Avvia un nuovo tentativo', pointsPerLesson:'100 punti / lezione', safePlace:'Uno spazio per provare.', brand: 'Git Practice Lab', tagline: 'Impara facendo. Comprendi ogni modifica.', home: 'Home', course: 'Il corso', leaderboard: 'Classifica', lab: 'Laboratorio',
   language: 'Lingua', theme: 'Cambia tema', login: 'Accedi', logout: 'Esci', account: 'Il tuo profilo', close: 'Chiudi', back: 'Indietro',
   heroEyebrow: 'Un corso pratico. Un modo condiviso di lavorare.', heroLineOne: 'Impara Git.', heroLineTwo: 'Lavora in squadra.',
