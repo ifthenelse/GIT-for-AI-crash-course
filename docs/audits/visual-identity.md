@@ -36,3 +36,29 @@ laboratory.
 
 Contrast measurements and checks of both themes are in the
 [accessibility report](accessibility.md).
+
+## Lesson illustration direction
+
+The generated [reference sheet](../design/lesson-illustration-reference.png) explores
+repository folders, snapshots, staging, branches, synchronization and conflict
+resolution. The shipped illustrations use native SVG and existing semantic color
+tokens so they remain crisp and adapt to both themes. Each concept paragraph has
+a complementary illustration; the prose remains the complete accessible explanation.
+
+The upstream UI/UX Pro Max design skill was consulted again for this extension
+(https://github.com/nextlevelbuilder/ui-ux-pro-max-skill). Its image accessibility,
+reserved layout space and performance guidance informed the implementation.
+## Lesson illustrations
+
+Each introductory lesson paragraph is paired with a native SVG illustration.
+Seven semantic motifs cover repositories, history, staging, branches, remotes,
+authentication and recovery/conflicts. Matching uses the canonical English topic,
+so Italian and English readers see the same visual. Existing design tokens supply
+all colors in both themes. Diagrams are decorative (`aria-hidden`) because the
+adjacent prose carries the complete explanation; they contain no untranslated
+labels, additional controls, external assets or network requests. A fixed viewBox
+reserves their aspect ratio. Mobile layouts stack the illustrations above text.
+
+Above 760 CSS pixels, the task sidebar stretches to the workspace height rather
+than clipping to the viewport. Its content remains naturally scrollable with the
+page, including expanded hints and solutions.

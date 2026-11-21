@@ -37,3 +37,8 @@ rather than editing several version sources by hand. Format: [Keep a Changelog](
 - Add window shadows, active/background distinction and animated layout changes with reduced-motion support.
 - Align desktop header controls and render technical lesson fragments in monospace.
 - Explain Git fundamentals in Italian and English for learners without programming experience; record the audience review in `docs/analysis/beginner-audience-copy.md`.
+
+### Illustrated lesson concepts
+- Add theme-aware SVG illustrations to every concept paragraph across all 36 lessons.
+- Match the sidebar height to the workspace above the mobile breakpoint and preserve mobile stacking.
+- Record the generated visual reference and verify diagram coverage and responsive geometry.
