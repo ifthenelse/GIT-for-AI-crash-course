@@ -66,3 +66,11 @@ describe('bilingual, solvable course catalog',()=>{
    expect(getHeadCommit(completed)?.tree['README.md']).toContain(id === 'M09' ? 'Small catalog change reviewed' : 'Hotfix reviewed');
  });
 });
+
+it('provides bilingual location-specific steps and expected results for every exercise', () => {
+  for (const item of lessons) for (const locale of ['it', 'en'] as const) {
+    expect(item.task[locale]).toContain(locale === 'it' ? 'Risultato atteso:' : 'Expected result:');
+    expect(item.task[locale]).toContain('1. ');
+    for (const action of item.solution) if (action.type === 'command') expect(item.task[locale]).toContain(`\n${action.command}\n`);
+  }
+});

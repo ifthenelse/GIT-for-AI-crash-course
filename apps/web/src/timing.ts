@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import type { VisibilityLedger, VisibilityEvent } from '@gitcourse/contracts';
 
-export function useStudyTiming(attemptId: string | undefined, previous?: VisibilityLedger, onChange?: (ledger: VisibilityLedger) => void) {
+export function useStudyTiming(attemptId: string | undefined, previous?: VisibilityLedger, onChange?: (ledger: VisibilityLedger) => void, enabled = true) {
   const ledgerRef = useRef<VisibilityLedger>({ version: 1, coverage: 'complete', droppedEvents: 0, segments: [] });
   const clock = useRef(0);
   const [revision, setRevision] = useState(0);
   const changeRef = useRef(onChange); changeRef.current = onChange;
   useEffect(() => {
+    if (!enabled) return;
     const ledger: VisibilityLedger = previous ? structuredClone(previous) : { version: 1, coverage: 'complete', droppedEvents: 0, segments: [] };
     if (ledger.segments.length && ledger.coverage !== 'truncated') ledger.coverage = 'partial';
     const segment = { documentId: crypto.randomUUID(), events: [] as VisibilityEvent[] };
@@ -34,7 +35,7 @@ export function useStudyTiming(attemptId: string | undefined, previous?: Visibil
     return () => { sample('finish'); document.removeEventListener('visibilitychange', visibility); window.removeEventListener('blur', blur); window.removeEventListener('focus', focus); window.removeEventListener('pagehide', hide); window.removeEventListener('pageshow', show); clearInterval(tick); };
     // A ledger segment belongs to one attempt and one document lifecycle.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [attemptId]);
+  }, [attemptId, enabled]);
   const ledger = ledgerRef.current;
   let focusedMs = 0;
   for (let s = 0; s < ledger.segments.length; s++) {

@@ -79,3 +79,9 @@ a separate local record with no verified score and does not write API results.
 Development and browser tests use separate Vite caches under `.tmp/vite-dev` and
 `.tmp/vite-e2e`. This isolates dependency optimization when both servers run
 concurrently. The tour's reload regression is included in the browser suite.
+
+The calm-practice regression tests cover reading-only entry (no attempt POST),
+explicit activation, an inert workspace, complete code-block clipboard payloads,
+and the hidden practice clock's two-minute inactivity cap and interaction resume.
+Clock unit tests cover restoration and stopped intervals. The existing server
+elapsed-time and idempotent completion checks remain independent of local timing.

@@ -23,11 +23,17 @@ export async function loginDevelopment(page: Page): Promise<string> {
   return session.token;
 }
 
-export async function openLesson(page: Page, lessonId: string) {
+export async function openLesson(page: Page, lessonId: string, options: { start?: boolean } = {}) {
   await page.getByTestId('tier-base').click();
   await page.getByTestId(`lesson-${lessonId}`).click();
   await expect(page.getByTestId('terminal-input')).toBeVisible();
   if (lessonId === 'B01') await skipTour(page);
+  if (options.start !== false) await startPractice(page);
+}
+
+export async function startPractice(page: Page) {
+  await page.getByTestId('start-practice').click();
+  await expect(page.locator('.practice-overlay')).toBeHidden();
 }
 
 export async function skipTour(page: Page) {

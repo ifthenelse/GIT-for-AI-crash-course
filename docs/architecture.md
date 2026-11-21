@@ -130,3 +130,23 @@ Neither completion record participates in Zundo history. The tutorial uses a
 native labelled dialog with keyboard dismissal and target highlighting, without
 a new runtime dependency. Theme preference is stored separately from its resolved
 light/dark appearance; System subscribes to OS colour-scheme changes.
+
+## Reading and practice timing
+
+Lessons open in reading mode. A localized reading-time estimate describes the
+introductory material; it is not a deadline. The learner explicitly starts the
+exercise before the workspace becomes editable or a new server attempt starts.
+An inert workspace and a translucent overlay prevent pointer and keyboard edits
+while leaving the reading material available.
+
+Practice duration is hidden. The browser records active practice, pauses after
+two minutes without interaction, and resumes on interaction or returning to the
+exercise tab. Local persistence retains this estimate with the draft. Hidden
+practice estimates are not a trustworthy anti-cheat signal. Server elapsed time
+remains the authoritative start-to-completion interval for existing results and
+leaderboard ordering; visibility telemetry does not subtract time from it.
+
+Objective checkboxes reflect evaluated repository state and cannot be manually
+marked complete. Completion and submit-ready animations respect reduced-motion
+preferences. Technical prose supports escaped inline code, keyboard shortcuts
+and fenced code blocks with copy controls; no learner HTML is executed.

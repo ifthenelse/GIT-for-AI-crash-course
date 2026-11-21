@@ -42,3 +42,8 @@ rather than editing several version sources by hand. Format: [Keep a Changelog](
 - Add theme-aware SVG illustrations to every concept paragraph across all 36 lessons.
 - Match the sidebar height to the workspace above the mobile breakpoint and preserve mobile stacking.
 - Record the generated visual reference and verify diagram coverage and responsive geometry.
+
+### Calm reading and practical exercises
+- Separate reading from explicit practice activation; hide timer displays and persist an inactivity-aware local practice estimate.
+- Add reading-time estimates, a locked workspace overlay, automatic objective checkboxes and reduced-motion-aware completion feedback.
+- Rewrite all 36 bilingual exercise instructions with numbered actions and expected results; add copyable code blocks and keyboard notation.
