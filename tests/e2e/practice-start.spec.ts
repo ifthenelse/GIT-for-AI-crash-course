@@ -37,3 +37,34 @@ test('exercise code blocks copy their full content', async ({ page }) => {
   await expect.poll(() => page.evaluate(() => (window as unknown as { copiedCode: string }).copiedCode)).toBe(expected);
   await expect(block.locator('pre code')).toHaveCSS('font-family', /JetBrains/);
 });
+
+test('hidden practice timing caps inactivity and resumes on interaction', async ({ page }) => {
+  await page.clock.install();
+  await page.goto('/');
+  await openLesson(page, 'B01');
+  const storedTime = () => page.evaluate(async () => {
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      const request = indexedDB.open('gitcourse-drafts');
+      request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error);
+    });
+    return await new Promise<number>((resolve, reject) => {
+      const request = db.transaction('records', 'readonly').objectStore('records').getAll();
+      request.onsuccess = () => resolve(request.result.find((record: { key: string }) => record.key.startsWith('draft:guest:'))?.value.activePracticeMs ?? 0);
+      request.onerror = () => reject(request.error);
+    });
+  });
+  await page.clock.fastForward(180_000);
+  await page.getByTestId('dock-terminal').click();
+  await page.getByTestId('terminal-input').fill('git status');
+  await page.getByTestId('terminal-input').press('Enter');
+  await page.clock.runFor(200);
+  await expect.poll(storedTime).toBeGreaterThanOrEqual(120_000);
+  expect(await storedTime()).toBeLessThan(121_000);
+  await page.clock.runFor(5_000);
+  await page.getByTestId('terminal-input').fill('git status');
+  await page.getByTestId('terminal-input').press('Enter');
+  await page.clock.runFor(200);
+  await expect.poll(storedTime).toBeGreaterThan(124_000);
+  expect(await storedTime()).toBeLessThan(127_000);
+  await expect(page.locator('.lab-time')).toHaveCount(0);
+});
