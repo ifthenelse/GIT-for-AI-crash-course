@@ -9,7 +9,7 @@ test('reading does not start an attempt and the workspace stays inert until prac
     if (request.method() === 'POST' && request.url().endsWith('/v1/attempts/start')) starts.push(request.url());
   });
   await openLesson(page, 'B01', { start: false });
-  await expect(page.getByTestId('start-exercise')).toBeVisible();
+  await expect(page.getByTestId('start-practice')).toBeVisible();
   await expect(page.locator('.lab-time')).toHaveCount(0);
   expect(starts).toHaveLength(0);
   const editor = page.getByTestId('editor-content');
@@ -66,5 +66,17 @@ test('hidden practice timing caps inactivity and resumes on interaction', async 
   await page.clock.runFor(200);
   await expect.poll(storedTime).toBeGreaterThan(124_000);
   expect(await storedTime()).toBeLessThan(127_000);
+  await page.clock.fastForward(180_000);
+  await page.evaluate(() => document.dispatchEvent(new Event('visibilitychange')));
+  await page.clock.runFor(5_000);
+  await page.getByTestId('terminal-input').fill('git status');
+  await page.getByTestId('terminal-input').press('Enter');
+  await page.clock.runFor(200);
+  await expect.poll(storedTime).toBeGreaterThan(249_000);
+  const beforeReload = await storedTime();
+  await page.reload();
+  await expect(page.getByTestId('start-practice')).toBeDisabled();
+  await expect(page.locator('.practice-overlay')).toBeHidden();
+  await expect.poll(storedTime).toBeGreaterThanOrEqual(beforeReload);
   await expect(page.locator('.lab-time')).toHaveCount(0);
 });

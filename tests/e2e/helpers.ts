@@ -32,7 +32,7 @@ export async function openLesson(page: Page, lessonId: string, options: { start?
 }
 
 export async function startPractice(page: Page) {
-  await page.getByTestId('start-exercise').click();
+  await page.getByTestId('start-practice').click();
   await expect(page.locator('.practice-overlay')).toBeHidden();
 }
 

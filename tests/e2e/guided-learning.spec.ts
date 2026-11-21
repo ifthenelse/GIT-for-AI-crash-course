@@ -12,11 +12,13 @@ test('the first lesson starts a skippable tour that can be restarted and complet
   await page.getByRole('button', { name: 'Skip tour', exact: true }).focus();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('dialog')).toBeHidden();
-  await expect(page.getByTestId('start-exercise')).toBeVisible();
+  await expect(page.getByTestId('start-practice')).toBeVisible();
   await expect(page.getByRole('radio')).toHaveCount(0);
-  const explanation = await page.locator('.lesson-introduction').boundingBox();
-  const laboratory = await page.locator('.lab-layout').boundingBox();
-  expect(explanation!.y + explanation!.height).toBeLessThanOrEqual(laboratory!.y);
+  await expect.poll(() => page.evaluate(() => {
+    const explanation = document.querySelector('.lesson-introduction')!.getBoundingClientRect();
+    const laboratory = document.querySelector('.lab-layout')!.getBoundingClientRect();
+    return explanation.bottom <= laboratory.top;
+  })).toBe(true);
 
   await page.getByRole('button', { name: 'Interface tour', exact: true }).focus();
   await page.keyboard.press('Enter');
@@ -45,7 +47,10 @@ test('guest practice unlocks only the next lesson and survives reload without a 
   const next = page.getByRole('button', { name: 'Next lesson', exact: true });
   await expect(next).toBeDisabled();
   await startPractice(page);
+  await expect(page.locator('.objective-checkbox[aria-checked="false"]')).not.toHaveCount(0);
   await solveFirstLesson(page);
+  await expect(page.locator('.objective-checkbox[aria-checked="false"]')).toHaveCount(0);
+  await expect(page.getByTestId('exercise-submit')).toHaveClass(/is-ready/);
   await page.getByTestId('exercise-submit').click();
   await expect(page.getByTestId('completed-badge')).toBeVisible();
   await expect(page.getByText('Lesson completed on this device. Continue to the next lesson.', { exact: true })).toBeVisible();
