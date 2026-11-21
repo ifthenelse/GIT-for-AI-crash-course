@@ -5,7 +5,7 @@ test('paragraph illustrations adapt and desktop sidebar matches workspace height
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto('/');
   await openLesson(page, 'B01');
-  const paragraphs = page.locator('.lesson-introduction article p');
+  const paragraphs = page.locator('.illustrated-concept>.lesson-prose');
   await expect(page.locator('.concept-illustration')).toHaveCount(await paragraphs.count());
   for (const width of [1440, 900, 761]) {
     await page.setViewportSize({ width, height: 1000 });

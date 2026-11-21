@@ -21,3 +21,19 @@ test('reading does not start an attempt and the workspace stays inert until prac
   await expect.poll(() => editor.evaluate(element => !!element.closest('[inert]'))).toBe(false);
   await expect(page.locator('.lab-time')).toHaveCount(0);
 });
+
+test('exercise code blocks copy their full content', async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: {
+      writeText: async (value: string) => { (window as unknown as { copiedCode: string }).copiedCode = value; },
+    } });
+  });
+  await page.goto('/');
+  await openLesson(page, 'B01', { start: false });
+  const block = page.locator('.task-card .lesson-code-block').first();
+  const expected = await block.locator('pre code').textContent();
+  expect(expected).toBeTruthy();
+  await block.getByRole('button').click();
+  await expect.poll(() => page.evaluate(() => (window as unknown as { copiedCode: string }).copiedCode)).toBe(expected);
+  await expect(block.locator('pre code')).toHaveCSS('font-family', /JetBrains/);
+});
