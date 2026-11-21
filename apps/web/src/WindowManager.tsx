@@ -26,6 +26,7 @@ export function WindowManager({ userId, children }: { userId: string; children: 
   const [size, setSize] = useState({ width: 1200, height: 700 });
   const [layout, setLayout] = useState<Layout>(() => defaultLayout(window.innerWidth));
   const [menu, setMenu] = useState<WindowId | null>(null); const [mode, setMode] = useState<{ id: WindowId; type: 'move' | 'resize'; original: Rect } | null>(null);
+  const [dragging, setDragging] = useState(false);
   const [overview, setOverview] = useState(false); const [announcement, setAnnouncement] = useState('');
   const dialog = useRef<HTMLDialogElement>(null); const lastFocus = useRef<Partial<Record<WindowId, HTMLElement>>>({});
   const drag = useRef<{ id: WindowId; type: 'move' | 'resize'; x: number; y: number; rect: Rect } | null>(null);
@@ -65,7 +66,7 @@ export function WindowManager({ userId, children }: { userId: string; children: 
   const preset = (name: string) => { setLayout(defaultLayout(size.width, name)); setMenu(null); setAnnouncement(t('moved')); };
   const startDrag = (event: ReactPointerEvent<HTMLElement>, id: WindowId, type: 'move' | 'resize') => {
     if (event.button !== 0 || layout[id].maximized || (type === 'move' && (event.target as HTMLElement).closest('button,input'))) return;
-    activate(id); drag.current = { id, type, x: event.clientX, y: event.clientY, rect: layout[id] }; event.currentTarget.setPointerCapture(event.pointerId);
+    setDragging(true); activate(id); drag.current = { id, type, x: event.clientX, y: event.clientY, rect: layout[id] }; event.currentTarget.setPointerCapture(event.pointerId);
   };
   const pointerMove = (event: ReactPointerEvent<HTMLElement>) => {
     const current = drag.current; if (!current) return;
@@ -82,7 +83,8 @@ export function WindowManager({ userId, children }: { userId: string; children: 
     else if (event.key === 'Escape') { update(id, mode.original); setMode(null); }
   };
   const maximized = ids.find((id) => layout[id].maximized && !layout[id].minimized);
-  return <div className="window-manager">
+  const active = ids.filter(id => !layout[id].minimized).reduce<WindowId | undefined>((best, id) => !best || layout[id].z > layout[best].z ? id : best, undefined);
+  return <div className={`window-manager ${dragging ? 'is-dragging' : ''}`}>
     <div className="workspace-controls">
       <span className="workspace-caption"><span className="live-dot" />{t('sharedView')}</span>
       <div className="layout-actions"><span className="small-label">{t('arrange')}</span>
@@ -95,11 +97,11 @@ export function WindowManager({ userId, children }: { userId: string; children: 
     <div className="desktop-area" ref={area} aria-label={t('learningWorkspace')}>
       {ids.map((id) => {
         const rect = layout[id]; const hidden = rect.minimized || !!maximized && maximized !== id;
-        return <section key={id} className={`sim-window ${id}-window ${rect.maximized ? 'is-maximized' : ''} ${mode?.id === id ? 'is-moving' : ''}`} hidden={hidden}
+        return <section key={id} className={`sim-window ${id}-window ${active === id ? 'is-active' : 'is-background'} ${rect.maximized ? 'is-maximized' : ''} ${mode?.id === id ? 'is-moving' : ''}`} hidden={hidden}
           style={{ left: `${rect.maximized ? 0 : rect.x * 100}%`, top: `${rect.maximized ? 0 : rect.y * 100}%`, width: `${rect.maximized ? 100 : rect.w * 100}%`, height: `${rect.maximized ? 100 : rect.h * 100}%`, zIndex: rect.z }}
           aria-labelledby={`window-title-${id}`} data-testid={`${id}-window`} onPointerDown={() => activate(id)} onFocusCapture={(event) => { lastFocus.current[id] = event.target as HTMLElement; activate(id); }}>
           <header className="window-titlebar" id={`titlebar-${id}`} tabIndex={0} onKeyDown={(event) => moveKeys(event, id)}
-            onPointerDown={(event) => startDrag(event, id, 'move')} onPointerMove={pointerMove} onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }}>
+            onPointerDown={(event) => startDrag(event, id, 'move')} onPointerMove={pointerMove} onPointerUp={() => { drag.current = null; setDragging(false); }} onPointerCancel={() => { drag.current = null; setDragging(false); }}>
             <span className={`window-app-icon ${id}`}><Icon name={id} size={15} /></span><h2 id={`window-title-${id}`}>{t(id)}</h2>
             {id === 'terminal' && <span className="window-subtitle">bash</span>}
             <div className="window-chrome">
@@ -120,7 +122,7 @@ export function WindowManager({ userId, children }: { userId: string; children: 
             <button className="button button-small" onClick={() => setMode(null)}>{t('apply')}</button><button className="button button-subtle button-small" onClick={() => { update(id, mode.original); setMode(null); }}>{t('cancel')}</button>
           </div>}
           <div className="window-content">{children[id]}</div>
-          {!rect.maximized && <button className="resize-handle" tabIndex={-1} aria-label={t('resize')} onPointerDown={(event) => startDrag(event, id, 'resize')} onPointerMove={pointerMove} onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }} />}
+          {!rect.maximized && <button className="resize-handle" tabIndex={-1} aria-label={t('resize')} onPointerDown={(event) => startDrag(event, id, 'resize')} onPointerMove={pointerMove} onPointerUp={() => { drag.current = null; setDragging(false); }} onPointerCancel={() => { drag.current = null; setDragging(false); }} />}
         </section>;
       })}
     </div>

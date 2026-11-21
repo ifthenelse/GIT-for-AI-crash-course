@@ -1,3 +1,4 @@
+import { LessonText } from './LessonText';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { COURSE_VERSION, type Action, type Attempt, type CompleteRequest, type CompleteResponse, type Lesson, type Locale, type Objective, type Progress, type Session, type VisibilityLedger } from '@gitcourse/contracts';
@@ -230,7 +231,7 @@ export default function Lab({
             count: lesson.estimatedMinutes
           })}</span>
 <h1>{lesson.title[locale]}</h1>
-<p>{lesson.summary[locale]}</p>
+<p><LessonText>{lesson.summary[locale]}</LessonText></p>
 </div>
 <div className="lab-time">
 <small>{t('elapsedTime')}</small>
@@ -238,11 +239,11 @@ export default function Lab({
 <small>{t(attempt ? 'verified' : 'practice')}</small>
 </div>
 </div>{!lease.owned && <div className="global-notice" role="status">{t('otherTab')}<button onClick={lease.takeover}>{t('takeover')}</button>
-</div>}<section className="lesson-introduction" aria-labelledby="lesson-concepts"><h2 id="lesson-concepts">{t('concepts')}</h2>{lesson.concepts.map((concept,index)=><article key={index}><h3>{concept.title[locale]}</h3><p>{concept.body[locale]}</p></article>)}</section><div className="lab-layout" inert={!lease.owned}>
+</div>}<section className="lesson-introduction" aria-labelledby="lesson-concepts"><h2 id="lesson-concepts">{t('concepts')}</h2>{lesson.concepts.map((concept,index)=><article key={index}><h3>{concept.title[locale]}</h3><p><LessonText>{concept.body[locale]}</LessonText></p></article>)}</section><div className="lab-layout" inert={!lease.owned}>
 <aside className="lesson-sidebar">
 <div className="task-card">
 <span className="eyebrow">{t('objectives')}</span>
-<p>{lesson.task[locale]}</p>
+<p><LessonText>{lesson.task[locale]}</LessonText></p>
 <ul className="objectives">{objectives.map((r, i) => <li key={i} className={r.passed ? 'is-passed' : ''}>
 <Icon name={r.passed ? 'check' : 'clock'} size={15} />{objectiveLabel(r.objective, t)}</li>)}</ul>{completed && <p className="completion-badge" data-testid="completed-badge">
 <Icon name="check" size={17} />{t('completed')}</p>}<button className="button submit-button" data-testid="exercise-submit" disabled={busy} onClick={() => void submit()}>
@@ -264,7 +265,7 @@ export default function Lab({
           }}>{t('newAttempt')}</button>}{!session && <button className="text-link" onClick={onLogin}>{t('loginTitle')}</button>}{pending && <button className="button button-subtle" disabled={busy} onClick={() => void submit(pending)}>{t('retry')}</button>}<p className="attempt-note">{t(attempt ? 'startedNote' : 'practiceNote')}</p>{message && <p className="result-message" role="status">{message}</p>}{storageError && <p role="alert">{t('localSaveFailed')}</p>}</div>
 <div className="lesson-learning">
 <details>
-<summary>{t('hints')}</summary>{lesson.hints.slice(0, hint).map((h, i) => <p key={i}>{h[locale]}</p>)}<button onClick={() => setHint(v => v + 1)} disabled={hint >= lesson.hints.length}>{t('showHint')}</button>
+<summary>{t('hints')}</summary>{lesson.hints.slice(0, hint).map((h, i) => <p key={i}><LessonText>{h[locale]}</LessonText></p>)}<button onClick={() => setHint(v => v + 1)} disabled={hint >= lesson.hints.length}>{t('showHint')}</button>
 </details>
 <details>
 <summary>{t('solution')}</summary>

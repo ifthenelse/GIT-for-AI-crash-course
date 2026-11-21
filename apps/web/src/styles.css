@@ -39,3 +39,14 @@ button:not(.icon-button):not(.window-chrome-button):not(.tier-open):not(.resize-
 .commit-graph li{height:6.25em;min-height:6.25em}
 .theme-control select{font-size:12px;max-width:105px}.lesson-introduction{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:28px;margin-bottom:24px}.lesson-introduction h2{font-size:24px}.lesson-introduction article{max-width:85ch;margin-top:24px}.lesson-introduction h3{font-size:18px;line-height:1.5}.lesson-introduction p{font-size:16px;line-height:1.85;white-space:pre-line}.lesson-navigation{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:12px;padding:24px 0}.lesson-navigation>a:first-child{margin-right:auto}.tour-dialog{position:fixed;inset:auto 20px 20px auto;margin:0;max-width:calc(100vw - 40px)}.tour-dialog::backdrop{background:#10232c38;backdrop-filter:none}.tour-target{outline:4px solid var(--accent)!important;outline-offset:5px}.tour-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.lesson-section{scroll-margin-top:24px}
 @media(max-width:760px){.site-header{height:auto;min-height:82px;padding-top:12px;padding-bottom:12px}.header-actions{flex-wrap:wrap}.lesson-introduction{padding:20px}.lesson-introduction p{font-size:16px}.tour-dialog{inset:auto 12px 12px;max-width:calc(100vw - 24px)}.lesson-navigation .button{font-size:12px}.theme-control select{max-width:85px}}
+
+/* Window depth and layout changes preserve direct pointer manipulation. */
+.sim-window{box-shadow:0 8px 22px #0002;transition:left .24s ease,top .24s ease,width .24s ease,height .24s ease,box-shadow .18s ease}
+.sim-window.is-active{box-shadow:0 14px 32px #0003}
+.sim-window.is-background:after{content:"";position:absolute;inset:0;background:#07121b12;pointer-events:none;z-index:100;border-radius:inherit}
+:root[data-theme=dark] .sim-window.is-background:after{background:#0002}
+.is-dragging .sim-window{transition:none}
+.header-actions,.language-control,.theme-control{display:flex;align-items:center}
+.header-actions select,.header-actions button{margin-top:0;vertical-align:middle}
+.lesson-introduction code,.task-card code,.lab-heading code{font-family:JetBrains,monospace;overflow-wrap:anywhere}
+@media(prefers-reduced-motion:reduce){.sim-window{transition:none}}
