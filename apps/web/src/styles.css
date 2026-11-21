@@ -50,3 +50,10 @@ button:not(.icon-button):not(.window-chrome-button):not(.tier-open):not(.resize-
 .header-actions select,.header-actions button{margin-top:0;vertical-align:middle}
 .lesson-introduction code,.task-card code,.lab-heading code{font-family:JetBrains,monospace;overflow-wrap:anywhere}
 @media(prefers-reduced-motion:reduce){.sim-window{transition:none}}
+
+/* Reserved SVG space avoids layout shifts; diagrams reuse both theme palettes. */
+.lesson-introduction .illustrated-concept{max-width:none;display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;align-items:center}
+.concept-illustration{display:block;width:100%;height:auto;max-width:240px}
+.illustrated-concept>p{min-width:0}.illustrated-concept p:last-child{margin-bottom:0}
+@media(min-width:761px){.lab-layout{align-items:stretch}.lesson-sidebar{align-self:stretch;max-height:none;overflow:visible;display:flex;flex-direction:column}.lesson-sidebar>.task-card{flex:1}}
+@media(max-width:760px){.lesson-introduction .illustrated-concept{grid-template-columns:1fr;gap:14px}.concept-illustration{width:160px;margin:auto}}

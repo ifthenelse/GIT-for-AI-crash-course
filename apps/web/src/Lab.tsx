@@ -1,3 +1,4 @@
+import { ConceptIllustration } from './ConceptIllustration';
 import { LessonText } from './LessonText';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -239,7 +240,7 @@ export default function Lab({
 <small>{t(attempt ? 'verified' : 'practice')}</small>
 </div>
 </div>{!lease.owned && <div className="global-notice" role="status">{t('otherTab')}<button onClick={lease.takeover}>{t('takeover')}</button>
-</div>}<section className="lesson-introduction" aria-labelledby="lesson-concepts"><h2 id="lesson-concepts">{t('concepts')}</h2>{lesson.concepts.map((concept,index)=><article key={index}><h3>{concept.title[locale]}</h3><p><LessonText>{concept.body[locale]}</LessonText></p></article>)}</section><div className="lab-layout" inert={!lease.owned}>
+</div>}<section className="lesson-introduction" aria-labelledby="lesson-concepts"><h2 id="lesson-concepts">{t('concepts')}</h2>{lesson.concepts.map((concept,index)=><article key={index}><h3>{concept.title[locale]}</h3>{concept.body[locale].split(/\n\s*\n/).map((paragraph, paragraphIndex) => <div className="illustrated-concept" key={paragraphIndex}><ConceptIllustration topic={`${concept.title.en} ${concept.body.en}`} /><p><LessonText>{paragraph}</LessonText></p></div>)}</article>)}</section><div className="lab-layout" inert={!lease.owned}>
 <aside className="lesson-sidebar">
 <div className="task-card">
 <span className="eyebrow">{t('objectives')}</span>
