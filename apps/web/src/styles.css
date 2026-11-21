@@ -68,3 +68,4 @@ button:not(.icon-button):not(.window-chrome-button):not(.tier-open):not(.resize-
 .lesson-code-block code{font:inherit;background:none;padding:0}
 .lesson-prose code{font-family:JetBrains,monospace}
 kbd{display:inline-block;border:1px solid var(--control-border);border-bottom-width:3px;border-radius:4px;padding:1px 5px;background:var(--surface);color:var(--text);font: .85em JetBrains,monospace;white-space:nowrap}
+.illustrated-concept>.lesson-prose{min-width:0;font-size:16px;line-height:1.85}
