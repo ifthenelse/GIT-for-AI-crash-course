@@ -36,3 +36,15 @@ laboratory.
 
 Contrast measurements and checks of both themes are in the
 [accessibility report](accessibility.md).
+
+## Lesson illustration direction
+
+The generated [reference sheet](../design/lesson-illustration-reference.png) explores
+repository folders, snapshots, staging, branches, synchronization and conflict
+resolution. The shipped illustrations use native SVG and existing semantic color
+tokens so they remain crisp and adapt to both themes. Each concept paragraph has
+a complementary illustration; the prose remains the complete accessible explanation.
+
+The upstream UI/UX Pro Max design skill was consulted again for this extension
+(https://github.com/nextlevelbuilder/ui-ux-pro-max-skill). Its image accessibility,
+reserved layout space and performance guidance informed the implementation.
