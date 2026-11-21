@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { setLanguage, solveFirstLesson } from './helpers';
+import { setLanguage, solveFirstLesson, startPractice } from './helpers';
 
 test('the first lesson starts a skippable tour that can be restarted and completed', async ({ page }) => {
   await page.goto('/');
@@ -12,7 +12,7 @@ test('the first lesson starts a skippable tour that can be restarted and complet
   await page.getByRole('button', { name: 'Skip tour', exact: true }).focus();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('dialog')).toBeHidden();
-  await expect(page.getByTestId('dock-terminal')).toBeFocused();
+  await expect(page.getByTestId('start-exercise')).toBeVisible();
   await expect(page.getByRole('radio')).toHaveCount(0);
   const explanation = await page.locator('.lesson-introduction').boundingBox();
   const laboratory = await page.locator('.lab-layout').boundingBox();
@@ -44,13 +44,13 @@ test('guest practice unlocks only the next lesson and survives reload without a 
   await page.getByRole('dialog').getByRole('button', { name: 'Skip tour', exact: true }).click();
   const next = page.getByRole('button', { name: 'Next lesson', exact: true });
   await expect(next).toBeDisabled();
+  await startPractice(page);
   await solveFirstLesson(page);
   await page.getByTestId('exercise-submit').click();
   await expect(page.getByTestId('completed-badge')).toBeVisible();
   await expect(page.getByText('Lesson completed on this device. Continue to the next lesson.', { exact: true })).toBeVisible();
-  const completedDuration = await page.locator('.lab-time strong').textContent();
   await page.clock.fastForward(5000);
-  await expect(page.locator('.lab-time strong')).toHaveText(completedDuration!);
+  await expect(page.locator('.lab-time')).toHaveCount(0);
   await expect(next).toBeEnabled();
   await next.click();
   await expect(page).toHaveURL(/#\/lesson\/B02$/);
