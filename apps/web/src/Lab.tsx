@@ -1,5 +1,5 @@
 import { ConceptIllustration } from './ConceptIllustration';
-import { LessonText } from './LessonText';
+import { CodeBlock, LessonText } from './LessonText';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { COURSE_VERSION, type Action, type Attempt, type CompleteRequest, type CompleteResponse, type Lesson, type Locale, type Objective, type Progress, type Session, type VisibilityLedger } from '@gitcourse/contracts';
@@ -8,7 +8,8 @@ import { evaluateObjectives } from '@gitcourse/engine';
 import { ApiError, request } from './api';
 import { readRecord, writeRecord } from './persistence';
 import { useLab } from './store';
-import { duration, useStudyTiming } from './timing';
+import { usePracticeTiming } from './practiceTiming';
+import { useStudyTiming } from './timing';
 import { WindowManager } from './WindowManager';
 import { Editor, Graph, Portal, Terminal } from './Panels';
 import { Icon } from './icons';
@@ -17,6 +18,8 @@ import {Tour} from './Tour';
 import { useEditingLease } from './ownership';
 interface Draft {
   confirmedElapsedMs?: number;
+  practiceStarted?: boolean;
+  activePracticeMs?: number;
   actions: Action[];
   attempt?: Attempt;
   visibility?: VisibilityLedger;
@@ -54,9 +57,10 @@ export default function Lab({
     hydrate,
     act
   } = useLab();
-  const practiceStarted=useRef(Date.now());
+  const [practiceStarted, setPracticeStarted] = useState(false);
+  const practiceStartedRef = useRef(false);
   const [attempt, setAttempt] = useState<Attempt>();
-  const [acceptedElapsed,setAcceptedElapsed]=useState<number>();
+  const [,setAcceptedElapsed]=useState<number>();
   const acceptedElapsedRef=useRef<number|undefined>(undefined);
   const [loaded, setLoaded] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -82,10 +86,24 @@ export default function Lab({
   const onLedger = useCallback((ledger: VisibilityLedger) => {
     ledgerRef.current = ledger;
   }, []);
-  const timing = useStudyTiming(attempt?.id, previousLedger, onLedger);
+  const timing = useStudyTiming(attempt?.id, previousLedger, onLedger, practiceStarted);
   const objectives = evaluateObjectives(repo, lesson.objectives);
   const ready = objectives.every(o => o.passed);
   const completed = progress.completedLessons.includes(lesson.id);
+  const activeClock = usePracticeTiming(practiceStarted && !completed && lease.owned);
+  const previousPassed = useRef<boolean[]>([]);
+  const previousReady = useRef(false);
+  const [newlyCompleted, setNewlyCompleted] = useState<number[]>([]);
+  const [celebrateReady, setCelebrateReady] = useState(false);
+  useEffect(() => {
+    const passed = objectives.map(o => o.passed);
+    if (loaded && practiceStarted && previousPassed.current.length) {
+      setNewlyCompleted(passed.flatMap((value, i) => value && !previousPassed.current[i] ? [i] : []));
+      setCelebrateReady(ready && !previousReady.current);
+    }
+    previousPassed.current = passed; previousReady.current = ready;
+  }, [actions, loaded, practiceStarted, ready]);
+  const readingMinutes = Math.max(1, Math.ceil(lesson.concepts.map(c => c.body[locale]).join(" ").split(/\s+/).length / 200));
   useEffect(() => {
     let live = true;
     void (async () => {
@@ -109,19 +127,11 @@ export default function Lab({
       if (draft?.attempt) {
         setAttempt(draft.attempt);
         attemptRef.current = draft.attempt;
-      } else if (session) {
-        try {
-          const a = await request<Attempt>('/v1/attempts/start', session.token, {
-            lessonId: lesson.id,
-            courseVersion: COURSE_VERSION
-          });
-          if (!live) return;
-          setAttempt(a);
-          attemptRef.current = a;
-        } catch {
-          if (live) setMessage(t('requestFailed'));
-        }
       }
+      const started = !!draft?.practiceStarted || !!draft?.attempt || !!draft?.actions?.length;
+      practiceStartedRef.current = started;
+      activeClock.current.restore(draft?.activePracticeMs);
+      setPracticeStarted(started);
       if (live) setLoaded(true);
     })();
     return () => {
@@ -132,6 +142,8 @@ export default function Lab({
     if (!loaded || !lease.owned) return;
     const save = () => void writeRecord(key, {
       actions: useLab.getState().actions,
+      practiceStarted: practiceStartedRef.current,
+      activePracticeMs: activeClock.current.sample(performance.now()),
       confirmedElapsedMs:acceptedElapsedRef.current,
       attempt: attemptRef.current,
       visibility: ledgerRef.current,
@@ -145,10 +157,24 @@ export default function Lab({
       window.removeEventListener('pagehide', save);
     };
   }, [actions, key, loaded, pending, lease.owned]);
+  const startPractice = async () => {
+    if (!lease.owned || busy) return;
+    setBusy(true);
+    try {
+      if (session && !attemptRef.current) {
+        const a = await request<Attempt>('/v1/attempts/start', session.token, { lessonId: lesson.id, courseVersion: COURSE_VERSION });
+        attemptRef.current = a; setAttempt(a);
+      }
+      practiceStartedRef.current = true; setPracticeStarted(true);
+      await writeRecord(key, { actions: useLab.getState().actions, attempt: attemptRef.current, practiceStarted: true, activePracticeMs: activeClock.current.sample(performance.now()) } satisfies Draft);
+      setMessage('');
+    } catch { setMessage(t('requestFailed')); }
+    finally { setBusy(false); }
+  };
   const submit = useCallback(async (body?: CompleteRequest) => {
-    if (!lease.owned) return;
+    if (!lease.owned || !practiceStartedRef.current) return;
     if (!session) {
-      if(ready){const elapsed=Date.now()-practiceStarted.current;acceptedElapsedRef.current=elapsed;setAcceptedElapsed(elapsed);onProgress(completePractice(progress,lesson.id,elapsed));setMessage(t('practiceCompleted'));}else setMessage(t('notReady'));
+      if(ready){const elapsed=activeClock.current.sample(performance.now());acceptedElapsedRef.current=elapsed;setAcceptedElapsed(elapsed);onProgress(completePractice(progress,lesson.id,elapsed));setMessage(t('practiceCompleted'));}else setMessage(t('notReady'));
       return;
     }
     if(!attempt){setMessage(t('attemptUnavailable'));return;}
@@ -164,6 +190,8 @@ export default function Lab({
     try {
       await writeRecord(key, {
         actions: payload.actions,
+        practiceStarted: true,
+        activePracticeMs: activeClock.current.sample(performance.now()),
         attempt,
         visibility: payload.visibility,
         pending: payload
@@ -177,6 +205,8 @@ export default function Lab({
       setPending(undefined);
       await writeRecord(key, {
         actions: useLab.getState().actions,
+        practiceStarted: true,
+        activePracticeMs: activeClock.current.sample(performance.now()),
         confirmedElapsedMs:acceptedElapsedRef.current,
         attempt,
         visibility: payload.visibility
@@ -197,6 +227,8 @@ export default function Lab({
       }
       if (!pendingRef.current) await writeRecord(key, {
         actions: useLab.getState().actions,
+        practiceStarted: true,
+        activePracticeMs: activeClock.current.sample(performance.now()),
         confirmedElapsedMs:acceptedElapsedRef.current,
         attempt,
         visibility: payload.visibility
@@ -232,27 +264,24 @@ export default function Lab({
             count: lesson.estimatedMinutes
           })}</span>
 <h1>{lesson.title[locale]}</h1>
-<p><LessonText>{lesson.summary[locale]}</LessonText></p>
+<div className="lesson-prose"><LessonText>{lesson.summary[locale]}</LessonText></div>
 </div>
-<div className="lab-time">
-<small>{t('elapsedTime')}</small>
-<strong>{duration(attempt ? (acceptedElapsed??(Date.now() - Date.parse(attempt.startedAt))) : (acceptedElapsed??Date.now()-practiceStarted.current))}</strong>
-<small>{t(attempt ? 'verified' : 'practice')}</small>
-</div>
+
 </div>{!lease.owned && <div className="global-notice" role="status">{t('otherTab')}<button onClick={lease.takeover}>{t('takeover')}</button>
-</div>}<section className="lesson-introduction" aria-labelledby="lesson-concepts"><h2 id="lesson-concepts">{t('concepts')}</h2>{lesson.concepts.map((concept,index)=><article key={index}><h3>{concept.title[locale]}</h3>{concept.body[locale].split(/\n\s*\n/).map((paragraph, paragraphIndex) => <div className="illustrated-concept" key={paragraphIndex}><ConceptIllustration topic={`${concept.title.en} ${concept.body.en}`} /><p><LessonText>{paragraph}</LessonText></p></div>)}</article>)}</section><div className="lab-layout" inert={!lease.owned}>
+</div>}<section className="lesson-reading-time"><strong>{t("readingTime")}</strong><p>{t("readingMinutes", { count: readingMinutes })}</p></section><section className="lesson-introduction" aria-labelledby="lesson-concepts"><h2 id="lesson-concepts">{t('concepts')}</h2>{lesson.concepts.map((concept,index)=><article key={index}><h3>{concept.title[locale]}</h3>{concept.body[locale].split(/\n\s*\n/).map((paragraph, paragraphIndex) => <div className="illustrated-concept" key={paragraphIndex}><ConceptIllustration topic={`${concept.title.en} ${concept.body.en}`} /><div className="lesson-prose"><LessonText>{paragraph}</LessonText></div></div>)}</article>)}</section><div className="practice-start"><p>{t("practiceStartHelp")}</p><button className="button" data-testid="start-practice" disabled={busy || practiceStarted || !lease.owned} onClick={() => void startPractice()}>{t(practiceStarted ? "practiceStarted" : "startExercise")}</button></div><div className="lab-layout" inert={!lease.owned}>
 <aside className="lesson-sidebar">
 <div className="task-card">
 <span className="eyebrow">{t('objectives')}</span>
-<p><LessonText>{lesson.task[locale]}</LessonText></p>
-<ul className="objectives">{objectives.map((r, i) => <li key={i} className={r.passed ? 'is-passed' : ''}>
-<Icon name={r.passed ? 'check' : 'clock'} size={15} />{objectiveLabel(r.objective, t)}</li>)}</ul>{completed && <p className="completion-badge" data-testid="completed-badge">
-<Icon name="check" size={17} />{t('completed')}</p>}<button className="button submit-button" data-testid="exercise-submit" disabled={busy} onClick={() => void submit()}>
+<div className="lesson-prose"><LessonText>{lesson.task[locale]}</LessonText></div>
+<ul className="objectives">{objectives.map((r, i) => <li key={i} className={`${r.passed ? 'is-passed' : ''} ${newlyCompleted.includes(i) ? 'just-completed' : ''}`}>
+<span className="objective-checkbox" role="checkbox" aria-checked={r.passed} aria-readonly="true" aria-label={objectiveLabel(r.objective, t)}>{r.passed && <Icon name="check" size={15} />}</span>{objectiveLabel(r.objective, t)}</li>)}</ul>{completed && <p className="completion-badge" data-testid="completed-badge">
+<Icon name="check" size={17} />{t('completed')}</p>}<button className={`button submit-button ${celebrateReady && practiceStarted && !completed ? "is-ready" : ""}`} data-testid="exercise-submit" disabled={busy || !practiceStarted || !ready} onClick={() => void submit()}>
 <Icon name="check" size={17} />{t(busy ? 'checking' : session && attempt ? 'check' : 'checkLocal')}</button>{completed && session && <button className="text-link" onClick={() => {
             void request<Attempt>('/v1/attempts/start', session.token, {
               lessonId: lesson.id,
               courseVersion: COURSE_VERSION
             }).then(a => {
+              activeClock.current.restore(); activeClock.current.activity(performance.now());
               attemptRef.current = a;
               acceptedElapsedRef.current=undefined;setAcceptedElapsed(undefined);
               setAttempt(a);
@@ -266,13 +295,13 @@ export default function Lab({
           }}>{t('newAttempt')}</button>}{!session && <button className="text-link" onClick={onLogin}>{t('loginTitle')}</button>}{pending && <button className="button button-subtle" disabled={busy} onClick={() => void submit(pending)}>{t('retry')}</button>}<p className="attempt-note">{t(attempt ? 'startedNote' : 'practiceNote')}</p>{message && <p className="result-message" role="status">{message}</p>}{storageError && <p role="alert">{t('localSaveFailed')}</p>}</div>
 <div className="lesson-learning">
 <details>
-<summary>{t('hints')}</summary>{lesson.hints.slice(0, hint).map((h, i) => <p key={i}><LessonText>{h[locale]}</LessonText></p>)}<button onClick={() => setHint(v => v + 1)} disabled={hint >= lesson.hints.length}>{t('showHint')}</button>
+<summary>{t('hints')}</summary>{lesson.hints.slice(0, hint).map((h, i) => <div className="lesson-prose" key={i}><LessonText>{h[locale]}</LessonText></div>)}<button onClick={() => setHint(v => v + 1)} disabled={hint >= lesson.hints.length}>{t('showHint')}</button>
 </details>
 <details>
 <summary>{t('solution')}</summary>
 <p>{t('solutionHelp')}</p>
 <ol className="solution-list">{lesson.solution.map((a, i) => <li key={i}>
-<code>{a.type === 'command' ? a.command : a.type === 'edit' ? `${a.path}\n${a.content}` : a.type === 'answer' ? `${a.questionId}: ${a.value}` : a.type === 'platform' ? `${a.operation} ${JSON.stringify(a.payload ?? {})}` : a.type}</code>
+<CodeBlock>{a.type === 'command' ? a.command : a.type === 'edit' ? `${a.path}\n${a.content}` : a.type === 'answer' ? `${a.questionId}: ${a.value}` : a.type === 'platform' ? `${a.operation} ${JSON.stringify(a.payload ?? {})}` : a.type}</CodeBlock>
 </li>)}</ol>
 </details>
 <details>
@@ -282,15 +311,11 @@ export default function Lab({
 </a>
 </li>)}</ul>
 </details>
-<details>
-<summary>{t('estimatedTime')}: {duration(timing.focusedMs)}</summary>
-<p>{t('timingHelp')}</p>
-<p>{t('estimatePartial')}</p>
-</details>
+
 </div>
 </aside>
 <section className="lab-workspace" aria-label={t('learningWorkspace')}>
-<div className="lab-toolbar">
+<div className="workspace-interactions" inert={!practiceStarted}><div className="lab-toolbar">
 <span>
 <Icon name="folder" size={16} /> git-lab <span className="pill">sandbox</span>
 </span>
@@ -315,7 +340,7 @@ export default function Lab({
 </button>
 </div>
 </div>
-<WindowManager userId={session?.user.id ?? 'guest'}>{panels}</WindowManager>
+<WindowManager userId={session?.user.id ?? 'guest'}>{panels}</WindowManager></div>{!practiceStarted && <div className="workspace-reading-overlay practice-overlay"><p>{t("workspaceLocked")}</p><button className="button" disabled={busy || !lease.owned} onClick={() => void startPractice()}>{t("startExercise")}</button></div>}
 <p className="simulation-footnote">
 <Icon name="info" size={14} />{t('simulationNote')}</p>
 </section>
