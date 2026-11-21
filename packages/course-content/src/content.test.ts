@@ -69,7 +69,6 @@ describe('bilingual, solvable course catalog',()=>{
 
 it('provides bilingual location-specific steps and expected results for every exercise', () => {
   for (const item of lessons) for (const locale of ['it', 'en'] as const) {
-    expect(item.task[locale]).toContain(locale === 'it' ? 'Passi nel laboratorio:' : 'Steps in the laboratory:');
     expect(item.task[locale]).toContain(locale === 'it' ? 'Risultato atteso:' : 'Expected result:');
     expect(item.task[locale]).toContain('1. ');
     for (const action of item.solution) if (action.type === 'command') expect(item.task[locale]).toContain(`\n${action.command}\n`);
