@@ -21,7 +21,7 @@ export function Terminal() {
   }, [lines]);
   return <div className="terminal-shell">
 <div className="terminal-output" data-testid="terminal-output" ref={output} role="log" aria-label={t('terminal')}>
-<p className="terminal-welcome">Git Practice Lab · Bash simulator<br />{t('terminalHelp')}</p>{lines.map(line => <div key={line.id}>{line.command && <p className="prompt-line">
+<p className="terminal-welcome">Git by doing · Bash simulator<br />{t('terminalHelp')}</p>{lines.map(line => <div key={line.id}>{line.command && <p className="prompt-line">
 <span>❯</span> {line.command}</p>}<pre className={line.error ? 'terminal-error' : ''}>{line.output}</pre>
 </div>)}</div>
 <form className="terminal-form" onSubmit={e => {
@@ -300,7 +300,7 @@ export function Portal() {
         operation: 'agent-change',
         payload: {
           path: 'README.md',
-          content: '# Git Practice Lab\nAgent-reviewed guide\n',
+          content: '# Git by doing\nAgent-reviewed guide\n',
           branch: 'agent/catalog'
         }
       })}>{t('agentChange')}</button>

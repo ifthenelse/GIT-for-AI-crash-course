@@ -8,6 +8,7 @@ import { Icon } from './icons';
 import {useTheme,type ThemePreference} from './useTheme';
 import {requestTour} from './Tour';
 import {canOpenLesson,loadPractice} from './courseProgress';
+import { getPublicMetadata, publicKinds, publicOrigin, type PublicKind } from './publicMetadata';
 const Lab = lazy(() => import('./Lab'));
 const emptyProgress: Progress = {
   courseVersion: COURSE_VERSION,
@@ -19,7 +20,12 @@ const emptyProgress: Progress = {
 function navigatePublic(path:string){history.pushState(history.state,'',path);window.dispatchEvent(new PopStateEvent('popstate'));}
 const publicPath=(locale:Locale,path='')=>`${import.meta.env.BASE_URL}${locale}/${path}`;
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
-const initialRoute = () => location.hash.slice(1) || (location.pathname.includes('/program/') || location.pathname.includes('/tier/') ? '/course' : '/');
+const initialRoute = () => {
+  if (location.hash) return location.hash.slice(1);
+  const suffix = location.pathname.slice(import.meta.env.BASE_URL.length).replace(/^(it|en)\/?/, '');
+  if (!publicKinds.includes(suffix as PublicKind)) return '/not-found';
+  return suffix ? '/course' : '/';
+};
 function useRoute() {
   const [, setLocationKey] = useState(()=>location.href);
   useEffect(() => {
@@ -41,6 +47,7 @@ export function App() {
   } = useTranslation();
   const locale = i18n.language as Locale;
   const route = useRoute();
+  const pagePath = location.pathname;
   const [session, setSession] = useState<Session | null>(null);
   const [progress, setProgress] = useState<Progress>(emptyProgress);
   const [config, setConfig] = useState<PublicConfig>();
@@ -81,9 +88,39 @@ export function App() {
   const lesson = route.startsWith('/lesson/') ? getLesson(route.split('/')[2]) : undefined;
   const locked = lesson && !canOpenLesson(lesson.id,progress);
   useEffect(() => {
-    document.title = lesson ? `${lesson.title[locale]} · Git Practice Lab` : route.startsWith('/course') ? `${location.pathname.includes('/tier/')?t(`tier_${location.pathname.match(/tier\/(base|intermediate|advanced)/)?.[1]}`)+' · ':''}${locale === 'it' ? 'Programma del corso Git' : 'Git course curriculum'} · Git Practice Lab` : route === '/leaderboard' ? `${t('leaderboard')} · Git Practice Lab` : `Git Practice Lab · ${locale === 'it' ? 'Corso interattivo di Git' : 'Interactive Git course'}`;
-    const canonical=document.querySelector<HTMLLinkElement>('link[rel=canonical]');if(canonical){const url=new URL(canonical.href);url.pathname=location.pathname;canonical.href=url.href;const og=document.querySelector<HTMLMetaElement>('meta[property="og:url"]');if(og)og.content=url.href;}
-  }, [lesson, locale, route, t]);
+    const suffix = location.pathname.replace(import.meta.env.BASE_URL, '').replace(/^(it|en)\/?/, '');
+    const kind: PublicKind = publicKinds.includes(suffix as PublicKind) ? suffix as PublicKind : '';
+    const metadata = getPublicMetadata(locale, kind);
+    document.title = lesson ? `${lesson.title[locale]} · Git by doing` : route === '/not-found' ? '404 · Git by doing' : route === '/leaderboard' ? `${t('leaderboard')} · Git by doing` : metadata.title;
+    const existing = document.querySelector<HTMLLinkElement>('link[rel=canonical]');
+    const site = existing ? new URL(import.meta.env.BASE_URL, existing.href).href : publicOrigin;
+    const url = new URL(`${locale}/${kind}`, site).href;
+    const setMeta = (key: string, value: string, property = false) => {
+      const attribute = property ? 'property' : 'name';
+      let element = document.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
+      if (!element) { element = document.createElement('meta'); element.setAttribute(attribute, key); document.head.append(element); }
+      element.content = value;
+    };
+    const setLink = (rel: string, href: string, language?: string) => {
+      let element = document.querySelector<HTMLLinkElement>(`link[rel="${rel}"]${language ? `[hreflang="${language}"]` : ''}`);
+      if (!element) { element = document.createElement('link'); element.rel = rel; if (language) element.hreflang = language; document.head.append(element); }
+      element.href = href;
+    };
+    setLink('canonical', url);
+    for (const language of ['it', 'en', 'x-default']) setLink('alternate', new URL(`${language === 'x-default' ? 'it' : language}/${kind}`, site).href, language);
+    setMeta('description', metadata.description);
+    setMeta('og:title', document.title, true); setMeta('og:description', metadata.description, true);
+    setMeta('og:url', url, true); setMeta('og:site_name', 'Git by doing', true);
+    setMeta('og:locale', locale === 'it' ? 'it_IT' : 'en_US', true);
+    setMeta('og:locale:alternate', locale === 'it' ? 'en_US' : 'it_IT', true);
+    const image = new URL(locale === 'it' ? 'social-it.png' : 'social.png', site).href;
+    setMeta('og:image', image, true); setMeta('twitter:image', image);
+    setMeta('twitter:title', document.title); setMeta('twitter:description', metadata.description);
+    setMeta('robots', lesson || route === '/not-found' || route === '/leaderboard' || ['localhost', '127.0.0.1'].includes(location.hostname) || location.pathname.endsWith('/404.html') ? 'noindex,follow' : 'index,follow');
+    let schema = document.querySelector<HTMLScriptElement>('script[type="application/ld+json"]');
+    if (!schema) { schema = document.createElement('script'); schema.type = 'application/ld+json'; document.head.append(schema); }
+    schema.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'Course', name: metadata.title, description: metadata.description, inLanguage: locale, url, provider: { '@type': 'Organization', name: 'Git by doing', url: site } });
+  }, [lesson, locale, route, t, pagePath]);
   return <>
 <a className="skip-link" href="#main" onClick={e => {
       e.preventDefault();
@@ -92,9 +129,7 @@ export function App() {
 <header className="site-header">
 <a className="brand" href={publicPath(locale)} onClick={e=>{e.preventDefault();navigatePublic(publicPath(locale));}}>
 <img src={asset(theme === 'dark' ? 'logo-dark.svg' : 'logo.svg')} width="34" height="34" alt="" />
-<span>git<span className="brand-light">practice</span>
-<small>LAB</small>
-</span>
+<span>Git by <span className="brand-doing">doing</span></span>
 </a>
 <nav className="main-nav" aria-label={locale === 'it' ? 'Navigazione principale' : 'Main navigation'}>
 <a href={publicPath(locale,'program/')} onClick={e=>{e.preventDefault();navigatePublic(publicPath(locale,'program/'));}} className={route === '/course' ? 'active' : ''}>{t('course')}</a>
@@ -118,15 +153,14 @@ export function App() {
 {error && <div className="global-notice" role="alert">{error}<button aria-label={t('close')} onClick={() => setError('')}>×</button>
 </div>}
 <main id="main" tabIndex={-1}>
-<Suspense fallback={<div className="loading page-width" role="status">{t('loading')}</div>}>{lesson && !locked ? <Lab key={`${lesson.id}:${session?.user.id ?? 'guest'}`} lesson={lesson} session={session} progress={progress} onProgress={updateProgress} onLogin={() => setLogin(true)} /> : route === '/leaderboard' ? <LeaderboardPage session={session} onProfile={() => session ? setProfile(true) : setLogin(true)} /> : route.startsWith('/course') || locked ? <Course progress={progress} locale={locale} /> : <Home progress={progress} locale={locale} />}</Suspense>
+<Suspense fallback={<div className="loading page-width" role="status">{t('loading')}</div>}>{route === '/not-found' ? <div className="page-width"><h1>404</h1><p>{locale === 'it' ? 'Pagina non trovata.' : 'Page not found.'}</p><a href={publicPath(locale)}>{t('home')}</a></div> : lesson && !locked ? <Lab key={`${lesson.id}:${session?.user.id ?? 'guest'}`} lesson={lesson} session={session} progress={progress} onProgress={updateProgress} onLogin={() => setLogin(true)} /> : route === '/leaderboard' ? <LeaderboardPage session={session} onProfile={() => session ? setProfile(true) : setLogin(true)} /> : route.startsWith('/course') || locked ? <Course progress={progress} locale={locale} /> : <Home progress={progress} locale={locale} />}</Suspense>
 </main>
 {!lesson && <footer className="site-footer">
 <div>
-<strong>gitpractice <span>LAB</span>
-</strong>
+<strong>Git by <span className="brand-doing">doing</span></strong>
 <p>{t('footer')}</p>
 </div>
-<p>{t('platformNote')}<br />© {new Date().getFullYear()} Git Practice Lab · <a href="#/course">{t('course')}</a>
+<p>{t('platformNote')}<br />© {new Date().getFullYear()} Git by doing · <a href="#/course">{t('course')}</a>
 </p>
 </footer>}
 {login && <Modal title={t('loginTitle')} onClose={() => setLogin(false)}>
@@ -356,7 +390,7 @@ function Course({
   const tier = new URLSearchParams(location.hash.split('?')[1] ?? '').get('tier') ?? location.pathname.match(/tier\/(base|intermediate|advanced)/)?.[1];
   return <div className="page-width course-page">
 <span className="eyebrow">36 {locale === 'it' ? 'LEZIONI · 3 CORSI' : 'LESSONS · 3 COURSES'}</span>
-<h1>{t('allLessons')}</h1>
+<h1>{tier ? t(`tier_${tier}`) : locale === 'it' ? 'Programma del corso Git' : 'Git course curriculum'}</h1>
 <p className="page-intro">{t('allLessonsBody')}</p>
 <CourseCards progress={progress} />{tiers.filter(item => !tier || tier === item).map(item => <section className="lesson-section" id={`course-${item}`} key={item}>
 <div className="section-heading">

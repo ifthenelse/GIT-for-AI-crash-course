@@ -38,3 +38,38 @@ HTTPS and canonical URLs on the deployed site, check that the bundle contains no
 secrets and verify indexability. Search Console registration and field
 measurements remain external activities requiring authorization. Course JSON-LD
 does not guarantee rich results or rankings.
+
+## Git by doing alignment, 22 November 2026
+
+Scope: repository implementation and a production-domain build, not a live-site
+or ranking audit. No Search Console or field Core Web Vitals data was available.
+
+| Finding | Impact | Resolution |
+| --- | --- | --- |
+| Old product name in UI, page metadata and social previews | High | Git by doing across the header, footer, terminal, translations, page titles, provider and social assets |
+| Public configuration examples pointed to the repository URL | High | Documented `https://gitbydoing.com/` with `/` as base; explicit public build remains required |
+| Client navigation left descriptions, locale alternates and JSON-LD stale | High | Shared bilingual metadata for prerendering and React; update canonical, alternates, social metadata and Course JSON-LD on navigation |
+| Generic course headings after hydration | Medium | Curriculum and tier headings now identify the selected page |
+| 404 artifact duplicated the indexable home page | Medium | Dedicated noindex 404 artifact and client-side missing-page view |
+| Existing symbol did not match the supplied identity | Medium | Native transparent SVG branch-and-arrow reconstruction, light/dark pictograms and wordmarks, adaptive favicon and bilingual PNG social previews |
+
+The supplied raster is a visual reference. SVG geometry is reconstructed, not an
+exact tracing, and avoids the visible raster halos. Teal is used as a brand
+accent; small text uses darker teal on light surfaces for contrast. Wordmarks
+use Inter with system fallbacks; they are editable SVG text, not font outlines.
+Social PNGs are generated with ImageMagick; `BRAND_RASTER_FONT` can override the
+local Arial font path when regenerating on another operating system.
+
+Validation: `scripts/verify` passed 85 tests in 11 files; production build with
+`PUBLIC_BASE_PATH=/ SITE_URL=https://gitbydoing.com/` and `npm run audit:seo`
+passed for all ten public IT/EN pages. Browser inspection through the available
+Chrome connection verified rendered Course JSON-LD, language/navigation metadata,
+light/dark logo selection, no broken images and no horizontal overflow at 320px.
+The standalone Playwright suite could not start Chrome in this environment
+(SIGABRT before test execution); its five tests are not reported as passing.
+
+A direct HTTPS request to the purchased domain was reset by the connection, so
+no conclusion about public TLS or server availability is justified. DNS,
+custom-domain binding, live HTTP status codes and redirects, Search Console and
+field performance remain unverified. No Cloudflare account or access policy was
+modified. Buying the domain does not configure hosting or make the site public.

@@ -9,7 +9,7 @@ export const ROOT = 'a1b2c3d';
 export const MAIN = 'b2c3d4e';
 export const FEATURE = 'c3d4e5f';
 export const MERGE = 'd4e5f6a';
-export const files = { 'README.md': '# Git Practice Lab\n', 'catalog.json': '{"items":["tea"]}\n' };
+export const files = { 'README.md': '# Git by doing\n', 'catalog.json': '{"items":["tea"]}\n' };
 export const commit = (id: string, parents: string[], message: string, tree: Record<string, string>): Commit => ({ id, parents, message, tree: { ...tree } });
 export function seed(overrides: RepoSeed = {}): RepoSeed {
   return {
@@ -21,9 +21,9 @@ export function seed(overrides: RepoSeed = {}): RepoSeed {
   };
 }
 export function diverged(conflict = false): RepoSeed {
-  const main = { ...files, 'README.md': '# Git Practice Lab\nReviewed catalog\n' };
+  const main = { ...files, 'README.md': '# Git by doing\nReviewed catalog\n' };
   const feature = conflict
-    ? { ...files, 'README.md': '# Git Practice Lab\nExpanded catalog\n' }
+    ? { ...files, 'README.md': '# Git by doing\nExpanded catalog\n' }
     : { ...files, 'catalog.json': '{"items":["tea","coffee"]}\n' };
   return seed({
     files: main, trackedFiles: main,
@@ -32,7 +32,7 @@ export function diverged(conflict = false): RepoSeed {
   });
 }
 export function linear(): RepoSeed {
-  const first = { ...files, 'README.md': '# Git Practice Lab\nDraft catalog guide\n' };
+  const first = { ...files, 'README.md': '# Git by doing\nDraft catalog guide\n' };
   const second = { ...first, 'catalog.json': '{"items":["tea","coffee"]}\n' };
   return seed({
     files: second, trackedFiles: second,

@@ -36,7 +36,7 @@ test('editor, staging, terminal and graph agree; undo cannot revoke a saved comp
   await openLesson(page, 'B07');
   const editor = page.getByTestId('editor-content');
   await expect(editor).toHaveValue(/Catalog introduction corrected\./);
-  await editor.fill('# Git Practice Lab\nCatalog introduction corrected.\nEdited in the laboratory.\n');
+  await editor.fill('# Git by doing\nCatalog introduction corrected.\nEdited in the laboratory.\n');
   await command(page, 'git diff');
   await expect(page.getByTestId('terminal-output')).toContainText('Edited in the laboratory.');
   await command(page, 'git add README.md');

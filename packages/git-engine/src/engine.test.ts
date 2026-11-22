@@ -88,7 +88,7 @@ describe('Git state semantics and execution boundary', () => {
     git('add', '.');
     git('commit', '-m', 'Expand catalog');
     git('switch', 'main');
-    writeFileSync(join(path, 'README.md'), '# Git Practice Lab\nReviewed catalog\n');
+    writeFileSync(join(path, 'README.md'), '# Git by doing\nReviewed catalog\n');
     git('add', '.');
     git('commit', '-m', 'Review README');
     let s = run(createRepository(diverged()), 'git merge feature');

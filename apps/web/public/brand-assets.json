@@ -1,26 +1,26 @@
 {
-  "productName": "Git Practice Lab",
-  "geometry": "Original native SVG: two paths and three commit nodes, branch and merge. No embedded raster.",
-  "concept": "image_gen concept inspected; final paths drawn independently. Generated raster not shipped.",
+  "productName": "Git by doing",
+  "domain": "gitbydoing.com",
+  "geometry": "Native SVG reconstruction of the approved three-node branching arrow. Transparent pictograms and wordmarks, no raster artifacts.",
   "colors": {
-    "light": "#086F6B",
-    "dark": "#5EEAD4"
+    "ink": "#0F172A",
+    "inverse": "#F8FAFC",
+    "teal": "#14B8A6"
   },
-  "logoViewBox": "0 0 64 64",
   "socialSize": [
     1200,
     630
   ],
-  "socialTypeOutlines": {
-    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz,wght%5D.ttf",
-    "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
-    "license": "fonts/Inter-OFL.txt"
-  },
   "files": [
     "logo.svg",
     "logo-dark.svg",
+    "wordmark.svg",
+    "wordmark-dark.svg",
     "favicon.svg",
     "social.svg",
-    "social-it.svg"
-  ]
+    "social-it.svg",
+    "social.png",
+    "social-it.png"
+  ],
+  "fontLicense": "fonts/Inter-OFL.txt"
 }

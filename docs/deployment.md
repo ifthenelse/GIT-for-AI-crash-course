@@ -150,8 +150,8 @@ variables → Actions → Variables**, prepare:
 
 | Name | Value |
 | --- | --- |
-| `PUBLIC_BASE_PATH` | `/GIT-for-AI-crash-course/` |
-| `SITE_URL` | `https://ifthenelse.github.io/GIT-for-AI-crash-course/` |
+| `PUBLIC_BASE_PATH` | `/` |
+| `SITE_URL` | `https://gitbydoing.com/` |
 | `VITE_API_URL` | Actual HTTPS Worker origin, without a trailing `/v1` or `/auth` |
 
 The CI workflow reads these variables for the build only. If they are unset,
@@ -171,8 +171,8 @@ public environment has been authorized and prepared:
 
 | Type | Name | Value |
 | --- | --- | --- |
-| Variable | `APP_ORIGIN` | `https://ifthenelse.github.io/GIT-for-AI-crash-course/` |
-| Variable | `ALLOW_ORIGINS` | `https://ifthenelse.github.io` |
+| Variable | `APP_ORIGIN` | `https://gitbydoing.com/` |
+| Variable | `ALLOW_ORIGINS` | `https://gitbydoing.com` |
 | Variable | `GITHUB_CLIENT_ID` | Client ID of the registered GitHub OAuth app |
 | Secret | `GITHUB_CLIENT_SECRET` | OAuth app client secret |
 | Secret | `AUTH_SECRET` | Strong random value, for example 32 random bytes encoded as base64 |
@@ -197,3 +197,13 @@ They will be needed only if automated deployment is introduced; permissions
 and names will be defined with that workflow. A future Pages deployment using
 official actions can use the automatically provided token with specific
 permissions; there is no need to prepare a general-purpose PAT in advance.
+
+## Purchased public domain
+
+The product is Git by doing and the purchased domain is `gitbydoing.com`.
+Use `PUBLIC_BASE_PATH=/ SITE_URL=https://gitbydoing.com/ npm run build` for
+the public artifact. Domain ownership does not establish a working deployment.
+Cloudflare Registrar manages registration; Cloudflare One is an access and
+network security product. DNS, Pages custom-domain setup, HTTPS, and redirects
+from www to the apex must be verified in the live account before launch.
+Public course pages must remain accessible to unauthenticated visitors and crawlers.

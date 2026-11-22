@@ -1,4 +1,4 @@
-# Git Practice Lab
+# Git by doing
 
 Collaborate with Git knowing what changes and how to recover your work.
 
