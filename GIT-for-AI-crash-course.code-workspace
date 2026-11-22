@@ -53,7 +53,12 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" },
-    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+    ],
     "eslint.useFlatConfig": true,
     "eslint.workingDirectories": [{ "mode": "auto" }],
     "js/ts.tsdk.path": "node_modules/typescript/lib",
@@ -75,8 +80,19 @@
   "tasks": {
     "version": "2.0.0",
     "tasks": [
-      { "label": "verify", "type": "shell", "command": "bash scripts/verify", "group": "test" },
-      { "label": "dev", "type": "npm", "script": "dev", "isBackground": true, "problemMatcher": [] },
+      {
+        "label": "verify",
+        "type": "shell",
+        "command": "bash scripts/verify",
+        "group": "test",
+      },
+      {
+        "label": "dev",
+        "type": "npm",
+        "script": "dev",
+        "isBackground": true,
+        "problemMatcher": [],
+      },
       { "label": "build", "type": "npm", "script": "build", "group": "build" },
       { "label": "lint", "type": "npm", "script": "lint" },
     ],
