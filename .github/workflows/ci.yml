@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -23,6 +27,11 @@ jobs:
           SITE_URL: ${{ vars.SITE_URL }}
           VITE_API_URL: ${{ vars.VITE_API_URL }}
       - run: npm run audit:seo
+      - uses: actions/upload-artifact@v6
+        with:
+          name: web-${{ github.sha }}
+          path: dist
+          retention-days: 7
 
   browser:
     runs-on: ubuntu-latest
